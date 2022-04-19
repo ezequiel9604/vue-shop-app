@@ -1,0 +1,477 @@
+.modal-wind-background{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    z-index: 80;
+
+    display: none; /* this will change */
+}
+
+@keyframes modal-wind-animation {
+    from{transform: scale(0.2);}
+    to{transform: scale(1);}
+}
+
+.modal-wind{
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 20%;
+    background-color: #ffffff;
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+
+    transform: scale(0.2);
+
+    animation-name: modal-wind-animation;
+    animation-duration: 0.4s;
+    animation-fill-mode: forwards;
+}
+.modal-wind-close-button{
+    width: fit-content;
+    box-sizing: border-box;
+
+    position: absolute;
+    top: 10px;
+    right:10px;
+}
+.modal-wind-close-button button{
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid transparent;
+    background-color: transparent;
+
+    font-size: 20px;
+}
+.modal-wind-header{
+    width: fit-content;
+    margin:40px auto;
+
+    font-family: "raleway-semibold", sans-serif;
+    font-size: 20px;
+    color: #333333;
+}
+.modal-wind-content{
+    margin: 40px auto;
+    box-sizing: border-box;
+}
+
+
+/* ////////////////////////////////////////////////////// */
+/* ///               modal wind checkout              /// */ 
+/* ////////////////////////////////////////////////////// */
+.modal-wind-checkout{
+    width: 80%;
+}
+.modal-wind-checkout-content{
+    width: 90%;
+    margin: 10px auto;
+    box-sizing: border-box;
+}
+.modal-wind-checkout-content label{
+    display: block;
+    width: 95%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    font-family: "raleway-regular", sans-serif;
+    font-size: 18px;
+    color: #333333;
+}
+.modal-wind-checkout-content input{
+    width: 90%;
+    margin-left: 10px;
+
+    font-family: "raleway-regular", sans-serif;
+    font-size: 18px;
+    color: #333333;
+    padding: 4px 10px;
+
+    border-radius: 4px;
+    border: 1px solid #dddddd;
+}
+.modal-wind-checkout-action{
+    width: 60%;
+    margin: 10px auto;
+    margin-top: 40px;
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.modal-wind-checkout-action button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: "raleway-regular", sans-serif;
+    font-size: 16px;
+    color: #333333;
+
+    padding: 6px 8px;
+    border: 1px solid #dddddd;
+    background-color: #fafafa;
+    border-radius: 4px;
+}
+.modal-wind-checkout-action button:first-child{
+    border-color: tomato;
+    background-color: tomato;
+    color: #ffffff;
+}
+
+
+/* ////////////////////////////////////////////////////// */
+/* ///           modal wind item details              /// */ 
+/* ////////////////////////////////////////////////////// */
+.modal-wind-itemDetails{
+    width: 90%;
+    margin:40px auto;
+    overflow: hidden;
+}
+.modal-wind-itemDetails p{
+    width: fit-content;
+    box-sizing: border-box;
+    margin: 30px auto;
+    font-family: "raleway-semibold", sans-serif;
+    font-size: 20px;
+    color: #333333;
+}
+.modal-wind-itemDetails-action{
+    width: 80%;
+    margin: 0 auto;
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.modal-wind-itemDetails-action a,
+.modal-wind-itemDetails-action button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: "raleway-regular", sans-serif;
+    font-size: 16px;
+    color: #333333;
+
+    padding: 6px 8px;
+    border: 1px solid #dddddd;
+    background-color: #fafafa;
+    border-radius: 4px;
+}
+.modal-wind-itemDetails-action a{
+    border-color: tomato;
+    background-color: tomato;
+    color: #ffffff;
+}
+
+/* ////////////////////////////////////////////////////// */
+/* ///             modal wind order details           /// */ 
+/* ////////////////////////////////////////////////////// */
+.modal-wind-orderDetails{
+    width: fit-content;
+    margin:40px auto;
+    overflow: hidden;
+}
+.modal-wind-orderDetails p{
+    width: fit-content;
+    box-sizing: border-box;
+    margin: 30px auto;
+    font-family: "raleway-semibold", sans-serif;
+    font-size: 20px;
+    color: #333333;
+}
+.modal-wind-orderDetails select{
+    display: block;
+    width: fit-content;
+    margin: 20px auto;
+    box-sizing: border-box;
+
+    font-family: "raleway-regular", sans-serif;
+    font-size: 18px;
+    color: #333333;
+    padding: 6px 8px;
+
+    border: 1px solid #dddddd;
+    background-color: #ffffff;
+    border-radius: 4px;
+}
+.modal-wind-orderDetails-action{
+    width: 80%;
+    margin: 0 auto;
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.modal-wind-orderDetails-action a,
+.modal-wind-orderDetails-action button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: "raleway-regular", sans-serif;
+    font-size: 16px;
+    color: #333333;
+
+    padding: 6px 8px;
+    border: 1px solid #dddddd;
+    background-color: #fafafa;
+    border-radius: 4px;
+}
+.modal-wind-orderDetails-action a{
+    border-color: tomato;
+    background-color: tomato;
+    color: #ffffff;
+}
+
+/* ////////////////////////////////////////////////////// */
+/* ///            modal wind shopping cart            /// */ 
+/* ////////////////////////////////////////////////////// */
+.modal-wind-shoppingCart{
+    width: fit-content;
+    margin:40px auto;
+    overflow: hidden;
+}
+.modal-wind-shoppingCart p{
+    width: fit-content;
+    box-sizing: border-box;
+    margin: 30px auto;
+    font-family: "raleway-semibold", sans-serif;
+    font-size: 20px;
+    color: #333333;
+}
+.modal-wind-shoppingCart-action{
+    width: 80%;
+    margin: 0 auto;
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.modal-wind-shoppingCart-action button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: "raleway-regular", sans-serif;
+    font-size: 16px;
+    color: #333333;
+
+    padding: 6px 8px;
+    border: 1px solid #dddddd;
+    background-color: #fafafa;
+    border-radius: 4px;
+}
+.modal-wind-shoppingCart-action button:first-child{
+    border-color: tomato;
+    background-color: tomato;
+    color: #ffffff;
+}
+
+@media screen and (max-width: 834px) {
+    
+    .modal-wind{
+        width: 50%;
+        margin-top: 25%;
+        background-color: #ffffff;
+        border-radius: 6px;
+    }   
+    .modal-wind-close-button button{
+        font-size: 18px;
+    }  
+    .modal-wind-header{
+        width: fit-content;
+        margin:30px auto;
+        font-size: 14px;
+    }   
+
+    /* ////////////////////////////////////////////////////// */
+    /* ///               modal wind checkout              /// */ 
+    /* ////////////////////////////////////////////////////// */
+    .modal-wind-checkout{
+        width: 95%;
+        margin: 40px auto;
+    }
+    .modal-wind-checkout-content label{
+        display: block;
+        width: 95%;
+        margin: 0 auto;
+        margin-bottom: 10px;
+        font-size: 14px;
+    }
+    .modal-wind-checkout-content input{
+        width: 90%;
+        margin-left: 10px;
+        font-size: 14px;
+        padding: 4px 10px;
+    }   
+    .modal-wind-checkout-action{
+        width: 80%;
+        margin-top: 20px;
+    }
+    .modal-wind-checkout-action button{
+        font-size: 14px;
+        padding: 4px 8px;
+    }
+
+    /* ////////////////////////////////////////////////////// */
+    /* ///             modal wind item details            /// */ 
+    /* ////////////////////////////////////////////////////// */
+    .modal-wind-itemDetails{
+        margin:30px auto;
+    }
+    .modal-wind-itemDetails p{
+        margin: 20px auto;
+        font-size: 14px;
+    }
+    .modal-wind-itemDetails-action a,
+    .modal-wind-itemDetails-action button{
+        font-size: 14px;
+        padding: 6px 8px;
+    }
+    .modal-wind-orderDetails select{
+        margin: 20px auto;
+        font-size: 14px;
+        padding: 6px 8px;
+    }
+
+    /* ////////////////////////////////////////////////////// */
+    /* ///             modal wind shopping cart           /// */ 
+    /* ////////////////////////////////////////////////////// */
+    .modal-wind-shoppingCart{
+        margin:30px auto;
+    }
+    .modal-wind-shoppingCart p{
+        margin: 20px auto;
+        font-size: 14px;
+    }
+    .modal-wind-shoppingCart select{
+        margin: 20px auto;
+        font-size: 14px;
+        padding: 6px 8px;
+    }
+    .modal-wind-shoppingCart-action button{
+        font-size: 14px;
+        padding: 6px 8px;
+    }
+    .modal-wind-shoppingCart{
+        margin:30px auto;
+    }
+    .modal-wind-shoppingCart p{
+        margin: 20px auto;
+        font-size: 14px;
+    }
+    .modal-wind-shoppingCart-action{
+        width: 100%;
+    }
+    .modal-wind-shoppingCart-action a,
+    .modal-wind-shoppingCart-action button{
+        font-size: 14px;
+        padding: 6px 8px;
+    }
+
+}
+
+
+@media screen and (max-width: 414px) {
+    
+    .modal-wind{
+        width: 80%;
+        margin-top: 40%;
+    }
+    .modal-wind-close-button button{
+        font-size: 14px;
+        top: 8px;
+        right:5px;
+    }
+    .modal-wind-header{
+        margin: 30px auto;
+        font-size: 13px;
+    }
+
+    /* ////////////////////////////////////////////////////// */
+    /* ///               modal wind checkout              /// */ 
+    /* ////////////////////////////////////////////////////// */
+    .modal-wind-checkout{
+        width: 95%;
+        margin: 20px auto;
+    }
+    .modal-wind-checkout-content label{
+        font-size: 12px;
+    }
+    .modal-wind-checkout-content input{
+        margin-left: 5px;
+        font-size: 12px;
+        padding: 4px 8px;
+    }   
+    .modal-wind-checkout-action{
+        width: 80%;
+        margin-top: 20px;
+    }
+    .modal-wind-checkout-action button{
+        font-size: 12px;
+        padding: 4px 8px;
+    }
+
+    /* ////////////////////////////////////////////////////// */
+    /* ///            modal wind order details            /// */ 
+    /* ////////////////////////////////////////////////////// */
+    .modal-wind-orderDetails{
+        margin:20px auto;
+    }
+    .modal-wind-orderDetails p{
+        margin: 20px auto;
+        font-size: 12px;
+    }
+    .modal-wind-orderDetails select{
+        margin: 15px auto;
+        font-size: 12px;
+        padding: 4px 6px;
+    }
+    .modal-wind-orderDetails-action a,
+    .modal-wind-orderDetails-action button{
+        font-size: 12px;
+        padding: 4px 6px;
+    }
+
+    /* ////////////////////////////////////////////////////// */
+    /* ///              modal wind item details           /// */ 
+    /* ////////////////////////////////////////////////////// */
+    .modal-wind-itemDetails{
+        margin:20px auto;
+    }
+    .modal-wind-itemDetails p{
+        margin: 10px auto;
+        font-size: 12px;
+    }
+    .modal-wind-itemDetails-action a,
+    .modal-wind-itemDetails-action button{
+        font-size: 12px;
+        padding: 4px 6px;
+    }
+
+    /* ////////////////////////////////////////////////////// */
+    /* ///            modal wind shopping cart            /// */ 
+    /* ////////////////////////////////////////////////////// */
+    .modal-wind-shoppingCart{
+        margin:20px auto;
+    }
+    .modal-wind-shoppingCart p{
+        margin: 10px auto;
+        font-size: 12px;
+    }
+    .modal-wind-shoppingCart-action button{
+        font-size: 12px;
+        padding: 4px 6px;
+    }
+
+
+}
