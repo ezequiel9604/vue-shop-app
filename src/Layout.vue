@@ -1,15 +1,27 @@
 <script setup>
 import { RouterView } from "vue-router";
+import { ref } from "vue";
 import PromoBannerView from "./views/PromoBannerView.vue";
 import HeaderView from "./views/HeaderView.vue";
-import HomeView from "./views/HomeView.vue";
+import HeaderHiddenNav from "./views/HeaderHiddenNav.vue";
+
+const isHeaderHiddenNavOpen = ref(false);
+
+const changeHeaderHiddenNavStatus = () => {
+    isHeaderHiddenNavOpen.value = !isHeaderHiddenNavOpen.value;
+}
 
 </script>
 
 <template>
 
+    <HeaderHiddenNav 
+        :onHeaderHiddenNavStatus="isHeaderHiddenNavOpen"
+        :onChangeHeaderHiddenNavStatus="changeHeaderHiddenNavStatus" />
+
     <PromoBannerView />
-    <HeaderView />
+
+    <HeaderView :onChangeHeaderHiddenNavStatus="changeHeaderHiddenNavStatus" />
 
     <main>
         <RouterView />
@@ -18,4 +30,5 @@ import HomeView from "./views/HomeView.vue";
 
 </template>
 
-<style></style>
+<style>
+</style>

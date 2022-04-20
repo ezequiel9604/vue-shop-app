@@ -1,15 +1,24 @@
 <script setup>
+import { RouterLink } from 'vue-router';
+import { ref, computed } from 'vue';
+
+const props = defineProps({
+    onChangeHeaderHiddenNavStatus: Function
+});
 
 const departments = [
     "clothing", "Accessories", "Shoes", "Offices", "Home", "Technology"
 ];
 
 
+
 </script>
+
 <template>
     <div class="main-header-content-bottom">
 
-        <button class="main-header-content-bottom-hidden-menu">
+        <button @click="onChangeHeaderHiddenNavStatus"
+             class="main-header-content-bottom-hidden-menu">
             <i class="bi bi-justify"></i>
         </button>
 
@@ -97,6 +106,7 @@ const departments = [
     font-family: "raleway-semibold", sans-serif;
     font-size: 30px;
     color: #0099ff;
+    outline: none;
 }
 
 .main-header-content-bottom-search {

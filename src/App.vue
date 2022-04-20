@@ -8,7 +8,9 @@ import Layout from './Layout.vue';
 <template>
 
 
-  <Layout />
+  <div>
+    <Layout />
+  </div>
 
 
 </template>

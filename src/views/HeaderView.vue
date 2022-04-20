@@ -3,6 +3,9 @@ import { RouterLink } from 'vue-router';
 import HeaderTop from '../components/HeaderComponents/HeaderTop.vue';
 import HeaderBottom from '../components/HeaderComponents/HeaderBottom.vue';
 
+const props = defineProps({
+    onChangeHeaderHiddenNavStatus: Function
+});
 
 </script>
 <template>
@@ -10,7 +13,7 @@ import HeaderBottom from '../components/HeaderComponents/HeaderBottom.vue';
     <header class="main-header">
         <div class="main-header-content">
             <HeaderTop />
-            <HeaderBottom />
+            <HeaderBottom :onChangeHeaderHiddenNavStatus="onChangeHeaderHiddenNavStatus" />
         </div>
     </header>
 
@@ -19,7 +22,6 @@ import HeaderBottom from '../components/HeaderComponents/HeaderBottom.vue';
 <style>
 
 .main-header {
-    
     width: 100%;
     box-sizing: border-box;
     background-color: #ffffff;
@@ -32,5 +34,4 @@ import HeaderBottom from '../components/HeaderComponents/HeaderBottom.vue';
     box-sizing: border-box;
     margin: 0px auto;
 }
-
 </style>

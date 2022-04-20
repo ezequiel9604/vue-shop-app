@@ -94,7 +94,7 @@ onMounted(() => {
 @media screen and (max-width: 414px) {
 
     .promotion-slides{
-        font-size: 13px;
+        font-size: 12px;
     }
 }
 

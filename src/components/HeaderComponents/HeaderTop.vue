@@ -1,5 +1,7 @@
 <script setup>
 import { RouterLink } from 'vue-router';
+import { reactive } from 'vue';
+
 
 
 </script>
@@ -180,6 +182,39 @@ import { RouterLink } from 'vue-router';
     font-size: 14px;
     font-style: italic;
     color: #333333;
+}
+
+.selection-language{
+    width: 85%;
+    box-sizing: border-box;
+    margin: 15px auto;
+}
+.selection-language label{
+    display: block;
+    margin-bottom: 5px;
+    font-family: "raleway-regular", sans-serif;
+    font-size: 12px;
+    color: #333333;
+}
+.selection-language select{
+    border: 1px solid #dddddd ;
+    display: block;
+    width: 100%;
+    padding: 5px 0;
+    font-family: "raleway-regular", sans-serif;
+    font-size: 12px;
+    color: #333333;
+    border-radius: 4px;
+}
+.selection-language button{
+    width: 100%;
+    padding: 5px 0;
+    font-family: "raleway-regular", sans-serif;
+    font-size: 12px;
+    color: #333333;
+    border: 1px solid #dddddd;
+    background-color: #ffffff;
+    border-radius: 4px;
 }
 
 .main-header-content-top-dropdowns-content-sign-btns {
