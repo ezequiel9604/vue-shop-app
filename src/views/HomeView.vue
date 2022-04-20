@@ -1,10 +1,18 @@
 <script setup>
-
+import CategorySlider from '../components/HomeComponents/CategorySlider.vue';
 
 </script>
 
 <template>
+
   <div>
-    <h2>Home page</h2>
+    
+    <CategorySlider />
+
   </div>
+
 </template>
+<style>
+
+
+</style>

@@ -61,6 +61,7 @@ const departments = [
     </div>
 </template>
 <style>
+
 /* ////////////////////////////////////////////////////// */
 /* ///          main header content bottom            /// */
 /* ////////////////////////////////////////////////////// */
@@ -76,6 +77,7 @@ const departments = [
     flex-wrap: wrap;
 
     border-top: 1px solid #dddddd;
+    z-index: 0;
 }
 
 .main-header-content-bottom-hidden-menu {
@@ -130,7 +132,7 @@ const departments = [
 
     position: relative;
     cursor: default;
-    z-index: 0;
+    z-index: 40;
 
     border-right: 1px solid #dddddd;
 }
@@ -176,7 +178,7 @@ const departments = [
     animation-duration: 0.3s;
     animation-fill-mode: forwards;
 
-    z-index: 10;
+    z-index: 50;
 }
 
 .main-header-content-bottom-search-dropdown-content-links {
