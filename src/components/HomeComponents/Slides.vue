@@ -29,7 +29,7 @@ const props = defineProps({
 /* ////////////////////////////////////////////////////// */
 .category-slides{
     width: 100%;
-    height: 400px;
+    height: 450px;
     box-sizing: border-box;
     flex-shrink: 0;
 

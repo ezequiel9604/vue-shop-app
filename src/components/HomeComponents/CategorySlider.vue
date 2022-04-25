@@ -17,7 +17,7 @@ const sliderCounter = ref(0);
 
 onMounted(() => {
 
-    sliderTimer.value= setInterval(function(){
+    sliderTimer.value= setInterval(() => {
         if(categorySlider.value.scrollLeft == 0){
             categorySlider.value.style.scrollBehavior= "smooth";
             categorySlider.value.scrollTo(categorySlider.value.offsetWidth, 0);
