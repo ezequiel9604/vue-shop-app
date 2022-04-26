@@ -41,7 +41,7 @@ const departments = [
             <input type="text" class="main-header-content-bottom-search-field"
                 placeholder="What are you looking for?" />
 
-            <RouterLink to="/search" class="main-header-content-bottom-search-btn">
+            <RouterLink to="/searchResults" class="main-header-content-bottom-search-btn">
                 <i class="bi bi-search"></i>
             </RouterLink>
         </div>

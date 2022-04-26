@@ -3,7 +3,8 @@ import { RouterView } from "vue-router";
 import { ref } from "vue";
 import PromoBannerView from "./views/PromoBannerView.vue";
 import HeaderView from "./views/HeaderView.vue";
-import HeaderHiddenNav from "./views/HeaderHiddenNav.vue";
+import HeaderHiddenNavView from "./views/HeaderHiddenNavView.vue";
+import FooterView from "./views/FooterView.vue";
 
 const isHeaderHiddenNavOpen = ref(false);
 
@@ -15,20 +16,23 @@ const changeHeaderHiddenNavStatus = () => {
 
 <template>
 
-    <HeaderHiddenNav 
+    <HeaderHiddenNavView 
         :onHeaderHiddenNavStatus="isHeaderHiddenNavOpen"
         :onChangeHeaderHiddenNavStatus="changeHeaderHiddenNavStatus" />
 
     <PromoBannerView />
 
-    <HeaderView :onChangeHeaderHiddenNavStatus="changeHeaderHiddenNavStatus" />
+    <HeaderView 
+        :onChangeHeaderHiddenNavStatus="changeHeaderHiddenNavStatus" />
 
     <main>
         <RouterView />
     </main>
 
+    <FooterView />
 
 </template>
 
 <style>
+
 </style>
