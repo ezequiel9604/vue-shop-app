@@ -1,6 +1,6 @@
 <script setup>
 import { RouterLink } from 'vue-router';
-import AccordionPanel from './AccordionPanel.vue';
+import AccordionPanel from "../HeaderHiddenNavComponents/AccordionPanel.vue";
 
 import brandImage1 from "../../assets/imgs/brands/brand-1.png";
 import brandImage2 from "../../assets/imgs/brands/brand-2.png";
@@ -241,6 +241,7 @@ console.log(props.hiddenSidebarStatus);
     color: #333333;
     padding: 15px 0;
     padding-right: 20px;
+    margin-left: 20px;
     background-color: #ffffff;
 }
 .accordion-panel .accordion-links:hover{
@@ -249,10 +250,10 @@ console.log(props.hiddenSidebarStatus);
 
 .accordion-panel-checkbox{
     display: inline-block;
-    width: 45%;
+    width: fit-content;
     box-sizing: border-box;
-    margin-bottom: 30px;
-
+    margin: 0 30px;
+    margin-bottom: 20px;
     font-family: "raleway-regular", sans-serif;
     font-size: 14px;
     color: #333333;
@@ -271,7 +272,7 @@ console.log(props.hiddenSidebarStatus);
     flex-wrap: wrap;
 }
 .accordion-panel-selection-brands{
-    border: 2px solid #ddd;
+    border: 2px solid #dddddd;
     width: 40%;
     height: 35px;
     box-sizing: border-box;
@@ -335,6 +336,7 @@ console.log(props.hiddenSidebarStatus);
     width: 50px;
     height: 25px;
     padding: 4px;
+    margin-left: 30px;
 
     position: relative;
 
@@ -386,6 +388,10 @@ console.log(props.hiddenSidebarStatus);
 /* ////////////////////////////////////////////////////// */
 /* ///            accordion panel price               /// */ 
 /* ////////////////////////////////////////////////////// */
+.accordion-panel-price{
+    width: 80%;
+    margin: 10px auto;
+}
 .accordion-panel-price input{
     border: 1px solid #ddd;
     width: 60px;
@@ -414,6 +420,10 @@ console.log(props.hiddenSidebarStatus);
 /* ////////////////////////////////////////////////////// */
 /* ///         accordion panel quality button         /// */ 
 /* ////////////////////////////////////////////////////// */
+.accordion-panel-quality {
+    width: 80%;
+    margin: 10px auto;
+}
 .accordion-panel-quality button{
     display: inline-flex;
     justify-content: center;
@@ -431,6 +441,10 @@ console.log(props.hiddenSidebarStatus);
 /* ////////////////////////////////////////////////////// */
 /* ///         accordion panel color toggle           /// */ 
 /* ////////////////////////////////////////////////////// */
+.accordion-panel-color{
+    width: 80%;
+    margin: 10px auto;
+}
 .accordion-panel-color-toggle{
     box-sizing: border-box;
     display: inline-block;
@@ -482,7 +496,6 @@ console.log(props.hiddenSidebarStatus);
         from {left: -75%;}
         to {left: 0}
     }
-
     
     .accordion-panel .accordion-links{
         font-size: 13px;

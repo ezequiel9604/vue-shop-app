@@ -12,8 +12,6 @@ const departments = [
     "clothing", "Accessories", "Shoes", "Offices", "Home", "Technology"
 ];
 
-
-
 </script>
 <template>
 
@@ -82,6 +80,7 @@ const departments = [
 
 </template>
 <style>
+
 .header-hidden-menu {
     width: 100%;
     height: 100%;
@@ -89,20 +88,15 @@ const departments = [
     box-sizing: border-box;
     background-color: rgba(0, 0, 0, 0.2);
     z-index: 80;
-    display: none;
+    display: none; /* this will change  */
 }
 
 /* ////////////////////////////////////////////////////// */
 /* ///            header hidden menu content          /// */
 /* ////////////////////////////////////////////////////// */
 @keyframes header-hidden-menu-content-animation {
-    from {
-        left: -50%;
-    }
-
-    to {
-        left: 0
-    }
+    from {left: -50%;}
+    to {left: 0;}
 }
 
 .header-hidden-menu-content {
@@ -156,17 +150,17 @@ const departments = [
     margin: 20px auto;
 }
 
-.header-hidden-menu-content-bottom-accordion-panel p {
+.accordion-panel p {
     width: 90%;
     box-sizing: border-box;
     margin: 20px auto;
     padding-left: 10px;
     font-family: "raleway-semibold", sans-serif;
-    font-size: 13px;
-    color: #666;
+    font-size: 14px;
+    color: #333333;
 }
 
-.header-hidden-menu-content-bottom-accordion-panel p strong {
+.accordion-panel p strong {
     font-size: 14px;
     font-style: italic;
     color: #333333;
@@ -189,7 +183,7 @@ const departments = [
 
     text-align: center;
     font-family: "raleway-semibold", sans-serif;
-    font-size: 13px;
+    font-size: 14px;
     color: #333333;
     border-radius: 3px;
 }
@@ -207,7 +201,7 @@ const departments = [
     display: block;
 
     font-family: "raleway-medium", sans-serif;
-    font-size: 13px;
+    font-size: 14px;
     color: #333333;
     padding: 10px 0;
     padding-left: 20px;
@@ -264,20 +258,62 @@ const departments = [
 
 
 @media screen and (max-width: 414px) {
+    
     @keyframes header-hidden-menu-content-animation {
-        from {
-            left: -75%;
-        }
-
-        to {
-            left: 0
-        }
+        from {left: -75%;}
+        to {left: 0;}
     }
 
     .header-hidden-menu-content {
         width: 75%;
         left: -75%;
     }
+
+    .accordion-panel p {
+        width: 90%;
+        margin: 15x auto;
+        padding-left: 10px;
+        font-size: 12px;
+    }
+
+    .accordion-panel p strong {
+        font-size: 12px;
+    }
+
+    .header-hidden-menu-content-bottom-accordion-panel-sign-btn .sign-btn {
+        width: 45%;
+        padding: 4px 0;
+        font-size: 12px;
+    }
+
+    .header-hidden-menu-content-bottom-accordion-panel-links {
+        width: 100%;
+        font-size: 12px;
+        padding: 10px 0;
+        padding-left: 15px;
+    }
+
+    .accordion-language {
+        width: 100%;
+        margin: 10px auto;
+    }
+
+    .accordion-language label {
+        margin-bottom: 5px;
+        font-size: 12px;
+    }
+
+    .accordion-language select {
+        padding: 5px 0;
+        font-size: 11px;
+    }
+
+    .accordion-language button {
+        padding: 5px 0;
+        font-size: 11px;
+    }
+
+
 }
 
 

@@ -10,7 +10,7 @@ import Items from "../assets/data/Items";
 
 const colors = ["gray","blue","purple"];
 
-const isHiddenSidebarOpen = ref(true);
+const isHiddenSidebarOpen = ref(false);
 
 const changeHiddenSidebarStatus = () => {
     isHiddenSidebarOpen.value = !isHiddenSidebarOpen.value;

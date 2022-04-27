@@ -6,42 +6,43 @@ const props = defineProps({
     icon: String
 });
 
-const IsAccordionPanelOpen = ref(false);
+const isAccordionPanelOpen = ref(false);
 
+const getAccordionPanelStatus = computed(() => {
 
+    if (isAccordionPanelOpen.value)
+        return "accordion-panel accordion-panel-open";
 
-const GetAccordionPanelStatus = computed(() => {
-
-    if (IsAccordionPanelOpen.value)
-        return "header-hidden-menu-content-bottom-accordion-panel accordion-panel-open";
-
-    return "header-hidden-menu-content-bottom-accordion-panel";
+    return "accordion-panel";
 })
 
-const  ChangeAccordionPanelStatus = () => {
-    IsAccordionPanelOpen.value = !IsAccordionPanelOpen.value;
+const  changeAccordionPanelStatus = () => {
+    isAccordionPanelOpen.value = !isAccordionPanelOpen.value;
 }
 
 </script>
 
 <template>
 
-    <button @click="ChangeAccordionPanelStatus" 
-        class="header-hidden-menu-content-bottom-accordion-btn">
+    <button @click="changeAccordionPanelStatus" class="accordion-button">
         <figure>
             <i :class="'bi ' + props.icon"></i>
             <p>{{ props.title }}</p>
         </figure>
         <i class="bi bi-caret-down-fill"></i>
     </button>
-    <div :class="GetAccordionPanelStatus">
+    <div :class="getAccordionPanelStatus" >
         <slot></slot>
     </div>
 
 </template>
 
 <style>
-.header-hidden-menu-content-bottom-accordion-btn {
+
+/* ////////////////////////////////////////////////////// */
+/* ///                  accordion button              /// */ 
+/* ////////////////////////////////////////////////////// */
+.accordion-button{
     border: 1px solid #ffffff;
     background-color: #ffffff;
     width: 100%;
@@ -52,30 +53,34 @@ const  ChangeAccordionPanelStatus = () => {
     justify-content: space-between;
     align-items: center;
 }
-
-.header-hidden-menu-content-bottom-accordion-btn figure {
+.accordion-button figure{
     width: fit-content;
     display: flex;
     align-items: center;
 }
-
-.header-hidden-menu-content-bottom-accordion-btn figure i {
+.accordion-button i {
+    font-size: 16px;
+    color: #333333;
+}
+.accordion-button figure p{
+    font-family: "raleway-semibold", sans-serif;
+    font-size: 14px;
+    color: #333333;
+    padding: 0 10px;
+}
+.accordion-btn figure i {
     font-size: 16px;
     color: #333333;
 }
 
-.header-hidden-menu-content-bottom-accordion-btn figure p {
-    font-family: "raleway-semibold", sans-serif;
-    font-size: 12px;
-    color: #333333;
-    padding: 0 10px;
-}
-
-.header-hidden-menu-content-bottom-accordion-panel {
-    width: 100%;
+/* ////////////////////////////////////////////////////// */
+/* ///                 accordion panel                /// */ 
+/* ////////////////////////////////////////////////////// */
+.accordion-panel{
+    width: 90%;
     box-sizing: border-box;
     max-height: 0;
-
+    
     margin: 0px auto;
     margin-bottom: 10px;
     background-color: transparent;
@@ -83,8 +88,30 @@ const  ChangeAccordionPanelStatus = () => {
 
     transition: max-height 0.3s ease-in-out;
 }
-
-.accordion-panel-open {
-    max-height: 200px;
+.accordion-panel-open{
+    max-height: 350px;
 }
+
+@media screen and (max-width: 414px) {
+    
+    /* ////////////////////////////////////////////////////// */
+    /* ///                 accordion panel                /// */ 
+    /* ////////////////////////////////////////////////////// */
+    .accordion-panel{
+        width: 80%;
+    }
+
+    .accordion-button i {
+        font-size: 14px;
+    }
+    .accordion-button figure p{
+        font-size: 12px;
+        padding: 0 8px;
+    }
+    .accordion-btn figure i {
+        font-size: 16px;
+    }
+
+}
+
 </style>

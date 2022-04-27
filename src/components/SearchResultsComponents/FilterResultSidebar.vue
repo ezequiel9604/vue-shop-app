@@ -96,8 +96,9 @@ const brandImages = [
 .filter-results-sidebar{
     width: 20%;
     box-sizing: border-box;
+    margin-bottom: 20px;
 
-    position: -webkit-sticky; /* Safari */
+    position: -webkit-sticky; 
     position: sticky;
     top: 0;
 
