@@ -24,7 +24,7 @@ const calculateDescountPrice = computed(() => {
         <div class="descount">
             {{ props.descount}}%
         </div>
-        <RouterLink to="#" class="column-large-samples-img">
+        <RouterLink to="/itemDetails" class="column-large-samples-img">
             <img 
                 @mouseenter="selectedImage=1" 
                 @mouseleave="selectedImage=0" 

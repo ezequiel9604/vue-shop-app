@@ -1,3 +1,6 @@
+import ItemImage1 from "../imgs/samples/tablet.png";
+import ItemImage2 from "../imgs/samples/tablet-2.png";
+
 
 const Items = [
     { 
@@ -6,8 +9,7 @@ const Items = [
                 Quis quae vel recusandae dolorem velit delectus unde facere 
                 libero maiores inventore.`,
         price: 1400,
-        images: ["http://localhost:3000/src/assets/imgs/samples/tablet.png", 
-                "http://localhost:3000/src/assets/imgs/samples/tablet-2.png"],
+        images: [ItemImage1,ItemImage2],
         descount: 25,
         quality: 3.2
     },
@@ -17,8 +19,7 @@ const Items = [
                 Quis quae vel recusandae dolorem velit delectus unde facere 
                 libero maiores inventore.`,
         price: 1400,
-        images: ["http://localhost:3000/src/assets/imgs/samples/tablet.png", 
-                "http://localhost:3000/src/assets/imgs/samples/tablet-2.png"],
+        images: [ItemImage1,ItemImage2],
         descount: 25,
         quality: 2.8
     },
@@ -28,8 +29,7 @@ const Items = [
                 Quis quae vel recusandae dolorem velit delectus unde facere 
                 libero maiores inventore.`,
         price: 1400,
-        images: ["http://localhost:3000/src/assets/imgs/samples/tablet.png", 
-                "http://localhost:3000/src/assets/imgs/samples/tablet-2.png"],
+        images: [ItemImage1,ItemImage2],
         descount: 25,
         quality: 5.0
     },
@@ -39,8 +39,7 @@ const Items = [
                 Quis quae vel recusandae dolorem velit delectus unde facere 
                 libero maiores inventore.`,
         price: 1400,
-        images: ["http://localhost:3000/src/assets/imgs/samples/tablet.png", 
-                "http://localhost:3000/src/assets/imgs/samples/tablet-2.png"],
+        images: [ItemImage1,ItemImage2],
         descount: 25,
         quality: 4.1
     },
@@ -50,8 +49,7 @@ const Items = [
                 Quis quae vel recusandae dolorem velit delectus unde facere 
                 libero maiores inventore.`,
         price: 1400,
-        images: ["http://localhost:3000/src/assets/imgs/samples/tablet.png", 
-                "http://localhost:3000/src/assets/imgs/samples/tablet-2.png"],
+        images: [ItemImage1,ItemImage2],
         descount: 25,
         quality: 2.7
     },
@@ -61,8 +59,7 @@ const Items = [
                 Quis quae vel recusandae dolorem velit delectus unde facere 
                 libero maiores inventore.`,
         price: 1400,
-        images: ["http://localhost:3000/src/assets/imgs/samples/tablet.png", 
-                "http://localhost:3000/src/assets/imgs/samples/tablet-2.png"],
+        images: [ItemImage1,ItemImage2],
         descount: 25,
         quality: 3.9
     },
@@ -72,8 +69,7 @@ const Items = [
                 Quis quae vel recusandae dolorem velit delectus unde facere 
                 libero maiores inventore.`,
         price: 1400,
-        images: ["http://localhost:3000/src/assets/imgs/samples/tablet.png", 
-                "http://localhost:3000/src/assets/imgs/samples/tablet-2.png"],
+        images: [ItemImage1,ItemImage2],
         descount: 0,
         quality: 4.0
     },
