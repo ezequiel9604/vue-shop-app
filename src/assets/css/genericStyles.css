@@ -108,6 +108,31 @@
     border-radius: 6px;
 }
 
+/* //////////////////////////////////////////////////// */
+/* ///                 sections                     /// */ 
+/* /////////////////////////////////////////// //////// */
+
+.sections{
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.sections-headers{
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 40px;
+    margin-bottom: 0px;
+}
+.sections-headers h2{
+    width: 100%;
+    padding-bottom: 30px;
+    text-align: center;
+    font-family: "raleway-semibold", sans-serif;
+    font-weight: bold;
+    font-size: 36px;
+    color: #333333;
+}
 
 /* ////////////////////////////////////////////////////// */
 /* ///         order summary right sidebar            /// */ 
@@ -310,7 +335,6 @@
     background-color: #0099ff;
     border: 1px solid #007acc;
 }
-
 
 /* //////////////////////////////////////////////////// */
 /* ///                 pagination                   /// */ 

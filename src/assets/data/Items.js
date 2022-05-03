@@ -4,74 +4,81 @@ import ItemImage2 from "../imgs/samples/tablet-2.png";
 
 const Items = [
     { 
-        id: 1,
+        id: "item-0001",
         title: `1 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Quis quae vel recusandae dolorem velit delectus unde facere 
                 libero maiores inventore.`,
         price: 1400,
         images: [ItemImage1,ItemImage2],
         descount: 25,
-        quality: 3.2
+        quality: 3.2,
+        stock: 6,
     },
     { 
-        id: 2,
+        id: "item-0002",
         title: `2 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Quis quae vel recusandae dolorem velit delectus unde facere 
                 libero maiores inventore.`,
         price: 1400,
         images: [ItemImage1,ItemImage2],
         descount: 25,
-        quality: 2.8
+        quality: 2.8,
+        stock: 6,
     },
     { 
-        id: 3,
+        id: "item-0003",
         title: `3Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Quis quae vel recusandae dolorem velit delectus unde facere 
                 libero maiores inventore.`,
         price: 1400,
         images: [ItemImage1,ItemImage2],
         descount: 25,
-        quality: 5.0
+        quality: 5.0,
+        stock: 6,
     },
     { 
-        id: 4,
+        id: "item-0004",
         title: `4 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Quis quae vel recusandae dolorem velit delectus unde facere 
                 libero maiores inventore.`,
         price: 1400,
         images: [ItemImage1,ItemImage2],
         descount: 25,
-        quality: 4.1
+        quality: 4.1,
+        stock: 6,
     },
     { 
-        id: 5,
+        id: "item-0005",
         title: `5 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Quis quae vel recusandae dolorem velit delectus unde facere 
                 libero maiores inventore.`,
         price: 1400,
         images: [ItemImage1,ItemImage2],
         descount: 25,
-        quality: 2.7
+        quality: 2.7,
+        stock: 6,
     },
     { 
-        id: 6,
+        id: "item-0006",
         title: `6 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Quis quae vel recusandae dolorem velit delectus unde facere 
                 libero maiores inventore.`,
         price: 1400,
         images: [ItemImage1,ItemImage2],
         descount: 25,
-        quality: 3.9
+        quality: 3.9,
+        stock: 6,
     },
     { 
-        id: 7,
+        id: "item-0007",
         title: `7 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Quis quae vel recusandae dolorem velit delectus unde facere 
                 libero maiores inventore.`,
         price: 1400,
         images: [ItemImage1,ItemImage2],
         descount: 0,
-        quality: 4.0
+        quality: 4.0,
+        stock: 6,
     },
 ];
 

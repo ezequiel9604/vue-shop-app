@@ -80,14 +80,16 @@ const changeSelectedSection = (num) => {
                             <button>Comment</button>
                         </div>
 
-                        <div v-for="comment in Comments" class="item-details-comment-content-comments" :key="comment.id">
+                        <div v-for="comment in Comments" 
+                            class="item-details-comment-content-comments" 
+                            :key="comment.id">
                             <figure>
                                 <img :src="comment.image" alt="" />
                             </figure>
-                            <hgroup>
+                            <div>
                                 <h5>{{ comment.name }}</h5>
                                 <h6>{{ comment.pubdate.toLocaleDateString() }}</h6>
-                            </hgroup>
+                            </div>
                             <p>{{ comment.text }}</p>
                         </div>
 
@@ -326,7 +328,7 @@ const changeSelectedSection = (num) => {
     border-radius: 50%;
     overflow: hidden;
 }
-.item-details-comment-content-comments hgroup{
+.item-details-comment-content-comments div{
     width: 90%;
     box-sizing: border-box;
 
@@ -334,8 +336,8 @@ const changeSelectedSection = (num) => {
     flex-wrap: wrap;
     align-items: center;
 }
-.item-details-comment-content-comments hgroup h5,
-.item-details-comment-content-comments hgroup h6{
+.item-details-comment-content-comments div h5,
+.item-details-comment-content-comments div h6{
     width: 70%;
     box-sizing: border-box;
 
@@ -344,7 +346,7 @@ const changeSelectedSection = (num) => {
     color: #333333;
     cursor: default;
 }
-.item-details-comment-content-comments hgroup h5{
+.item-details-comment-content-comments div h5{
    
     font-family: "raleway-semibold", sans-serif;
 }
@@ -450,8 +452,8 @@ const changeSelectedSection = (num) => {
         width: 40px;
         height: 40px;
     }
-    .item-details-comment-content-comments hgroup h5,
-    .item-details-comment-content-comments hgroup h6{
+    .item-details-comment-content-comments div h5,
+    .item-details-comment-content-comments div h6{
         width: 70%;
         font-size: 13px;
     }
@@ -540,8 +542,8 @@ const changeSelectedSection = (num) => {
         width: 25px;
         height: 25px;
     }
-    .item-details-comment-content-comments hgroup h5,
-    .item-details-comment-content-comments hgroup h6{
+    .item-details-comment-content-comments div h5,
+    .item-details-comment-content-comments div h6{
         width: 70%;
         font-size: 12px;
     }

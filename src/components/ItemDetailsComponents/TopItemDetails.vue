@@ -63,7 +63,9 @@ const capacity ={
                 <ItemDetailsSelection :title="capacity.title" :sets="capacity.sets" />
 
                 <div class="top-item-details-details-amount">
-                    <button>-</button> <span>1</span> <button>+</button>
+                    <button>-</button> 
+                    <span>1</span> 
+                    <button>+</button>
                     <p>Quedan 6 disponible</p>
                 </div>
 

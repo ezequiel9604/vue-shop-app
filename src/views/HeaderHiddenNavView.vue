@@ -32,15 +32,15 @@ const departments = [
                     <!-- <p>Welcome back <strong>John Doe</strong></p> -->
                     <div class="header-hidden-menu-content-bottom-accordion-panel-sign-btn">
 
-                        <RouterLink to="/login" class="sign-btn">Log in</RouterLink>
-                        <RouterLink to="/signup" class="sign-btn">Sign up</RouterLink>
+                        <RouterLink to="" class="sign-btn">Log in</RouterLink>
+                        <RouterLink to="" class="sign-btn">Sign up</RouterLink>
                         <!-- <RouterLink to="/signout" class="sign-btn sign-out-btn">Sign out</RouterLink> -->
                     </div>
-                    <RouterLink to="/profile" class="header-hidden-menu-content-bottom-accordion-panel-links">My Profile
+                    <RouterLink to="" class="header-hidden-menu-content-bottom-accordion-panel-links">My Profile
                     </RouterLink>
-                    <RouterLink to="/orders" class="header-hidden-menu-content-bottom-accordion-panel-links">My Orders
+                    <RouterLink to="" class="header-hidden-menu-content-bottom-accordion-panel-links">My Orders
                     </RouterLink>
-                    <RouterLink to="/helpCenter" class="header-hidden-menu-content-bottom-accordion-panel-links">Help
+                    <RouterLink to="" class="header-hidden-menu-content-bottom-accordion-panel-links">Help
                         Center</RouterLink>
 
                 </AccordionPanel>

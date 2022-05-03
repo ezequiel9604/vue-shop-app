@@ -47,11 +47,11 @@ const departments = [
         </div>
 
         <div class="main-header-content-bottom-shop">
-            <RouterLink to="/cart" class="main-header-content-bottom-shop-icons shop-cart">
+            <RouterLink to="/shoppingCart" class="main-header-content-bottom-shop-icons shop-cart">
                 <i class="bi bi-cart3"></i>
                 <span class="shop-icons-indicators">8</span>
             </RouterLink>
-            <RouterLink to="/favorite" class="main-header-content-bottom-shop-icons shop-favorite">
+            <RouterLink to="" class="main-header-content-bottom-shop-icons shop-favorite">
                 <i class="bi bi-heart"></i>
                 <span class="shop-icons-indicators">10</span>
             </RouterLink>

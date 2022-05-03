@@ -74,7 +74,7 @@ import { reactive } from 'vue';
 /* ///            main header content top             /// */
 /* ////////////////////////////////////////////////////// */
 .main-header-content-top {
-    width: 100%;
+    width: 95%;
     box-sizing: border-box;
     margin: 10px auto;
 
