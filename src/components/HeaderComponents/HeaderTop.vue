@@ -54,7 +54,7 @@ import { reactive } from 'vue';
                         <!-- <a href="#" class="sign-btn sign-out-btn">Sign out</a> -->
                     </div>
                     
-                    <RouterLink to="/profile" 
+                    <RouterLink to="/myProfile" 
                         class="main-header-content-top-dropdowns-content-option-links">My profile</RouterLink>
                     <RouterLink to="/orders" 
                         class="main-header-content-top-dropdowns-content-option-links">My orders</RouterLink>

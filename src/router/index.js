@@ -2,7 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
 import SearchResultsView from '../views/SearchResultsView.vue';
 import ItemDetailsView from '../views/ItemDetailsView.vue';
-import ShoppingCartView from '../views/ShoppingCartView.vue'
+import ShoppingCartView from '../views/ShoppingCartView.vue';
+import ProfileView from '../views/ProfileView.vue'
 
 
 const router = createRouter({
@@ -27,6 +28,11 @@ const router = createRouter({
       path: '/shoppingCart',
       name: 'shoppingCart',
       component: ShoppingCartView
+    },
+    {
+      path: '/myProfile',
+      name: 'myProfile',
+      component: ProfileView
     }
 
   ]

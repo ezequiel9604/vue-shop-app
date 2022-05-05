@@ -22,12 +22,10 @@ import Items from '../assets/data/Items';
             <div class="shopping-cart-content-left">
 
                 <div class="shopping-cart-content-checkall">
-
                     <label for="selectallitems">
                         <input type="checkbox" id="selectallitems" />
                         Select all items.
                     </label>
-
                 </div>
 
                 <div v-if="Items.length > 0" class="shopping-cart-content-samples">
@@ -154,14 +152,6 @@ import Items from '../assets/data/Items';
 
 @media screen and (max-width: 834px) {
     
-    .shopping-cart-header{
-        width: 70%;
-        margin-top: 30px;
-    }
-    .shopping-cart-header h2{
-        padding-bottom: 20px;
-        font-size: 28px;
-    }
     .shopping-cart-content{
         width: 90%;
         margin: 20px auto;
@@ -221,14 +211,6 @@ import Items from '../assets/data/Items';
 
 @media screen and (max-width: 414px) {
     
-    .shopping-cart-header{
-        margin-top: 20px;
-    }
-    .shopping-cart-header h2{
-        padding-bottom: 15px;
-        padding-top: 10px;
-        font-size: 20px;
-    }
     .shopping-cart-content{
         width: 90%;
         margin: 10px auto;

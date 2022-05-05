@@ -27,7 +27,8 @@ const props = defineProps({
     box-sizing: border-box;
     background-color: #ffffff;
     border-bottom: 1px solid #dddddd;
-    z-index: 0;
+    border-top: 1px solid #dddddd;
+    z-index: 60;
 }
 
 .main-header-content {
