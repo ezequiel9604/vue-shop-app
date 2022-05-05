@@ -1,3 +1,68 @@
+<script setup>
+import { RouterLink } from 'vue-router';
+
+const props = defineProps({
+    title: String,
+    images: Array,
+    descount: Number,
+    quality: Number,
+    price: Number,
+    stock: Number,
+});
+
+const calculateDescount = (price, descount) => {
+    return price - (price * (descount/100));
+}
+
+</script>
+<template>
+
+    <div class="row-extra-large-samples">
+        <RouterLink to="" class="row-extra-large-samples-image">
+            <div class="descount">{{ props.descount }}%</div>
+            <img :src="props.images[0]" alt="" />
+        </RouterLink>
+        <div class="row-extra-large-samples-details">
+            <h5>{{ props.title }}</h5>
+            <div class="row-extra-large-samples-details-quality">
+                <i class="bi bi-star"></i>
+                <i class="bi bi-star"></i>
+                <i class="bi bi-star"></i>
+                <i class="bi bi-star"></i>
+                <i class="bi bi-star"></i>
+                -
+                <span>{{ props.quality }}</span>
+            </div>
+            <div class="row-extra-large-samples-added-date">
+                <label>Item added on February 7 2022</label>
+            </div>
+            <div class="row-extra-large-samples-details-price">
+                <span>${{ calculateDescount(props.price, props.descount) }}</span>
+                <span>${{ props.price }}</span>
+            </div>
+            <div class="row-extra-large-samples-details-actions">
+                <button>Buy now</button>
+                <button>Add to cart</button>
+                <label>Only {{ props.stock }} available</label>
+                <button><i class="bi bi-trash"></i></button>
+            </div>
+            <div class="row-extra-large-samples-details-amount">
+                <div>
+                    <label>Only {{ props.stock }} available</label>
+                </div>
+                <button><i class="bi bi-trash"></i></button>
+            </div>
+
+        </div>
+        <div class="row-extra-large-samples-actions">
+            <label>Item added on February 7 2022</label>
+            <button>Buy now</button>
+            <button>Add to cart</button>
+        </div>
+    </div>
+
+</template>
+<style>
 
 /* ////////////////////////////////////////////////////// */
 /* ///            row extra large samples             /// */ 
@@ -215,7 +280,6 @@
     box-shadow: 0px 0px 5px #e6e6e6;
 }
 
-
 @media screen and (max-width: 834px) {
     
      /* ////////////////////////////////////////////////////// */
@@ -338,7 +402,6 @@
 
 }
 
-
 @media screen and (max-width: 414px) {
     
     /* ////////////////////////////////////////////////////// */
@@ -413,5 +476,6 @@
     .row-extra-large-samples-actions{
         display: none;
     }
-
 }
+
+</style>
