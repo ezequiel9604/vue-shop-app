@@ -13,9 +13,9 @@ const props = defineProps({
 
 const selectedImage = ref(0);
 
-const calculateDescountPrice = computed(() => {
-    return props.price - props.price * (props.descount / 100);
-});
+const calculateDescountPrice = (price, descount) => {
+    return price - price * (descount / 100);
+};
 
 </script>
 <template>
@@ -30,7 +30,7 @@ const calculateDescountPrice = computed(() => {
         <div class="row-large-samples-details">
             <h5>{{ props.title }}</h5>
             <div class="row-large-samples-details-price">
-                <span>${{ calculateDescountPrice }}</span>
+                <span>${{ calculateDescountPrice(props.price, props.descount) }}</span>
                 <span>${{ props.price }}</span>
             </div>
             <div class="row-large-samples-details-quality">
