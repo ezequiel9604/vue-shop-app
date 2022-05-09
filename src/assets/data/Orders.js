@@ -9,7 +9,7 @@ const Orders = [
     shippingCost: 150,
     total: 5155.91,
     client: {
-      name: "John Doe",
+      name: "John Smith Doe",
       email: "johndoe0102@gmail.com",
       phone: "809-111-0000",
       address:
@@ -32,6 +32,11 @@ const Orders = [
         condition: "None",
         subtotal: 1400,
         amount: 1,
+        specifications:{
+          size: '17"',
+          capacity: "4Gb",
+          color: "Black"
+      }
       },
       {
         id: "ITEM-0002",
@@ -46,6 +51,11 @@ const Orders = [
         condition: "None",
         subtotal: 3400,
         amount: 2,
+        specifications:{
+          size: '17"',
+          capacity: "4Gb",
+          color: "Black"
+      }
       },
     ],
   },
@@ -56,7 +66,7 @@ const Orders = [
     shippingCost: 150,
     total: 5155.91,
     client: {
-      name: "John Doe",
+      name: "John Smith Doe",
       email: "johndoe0102@gmail.com",
       phone: "809-111-0000",
       address:
@@ -79,6 +89,11 @@ const Orders = [
         condition: "None",
         subtotal: 1400,
         amount: 1,
+        specifications:{
+            size: '17"',
+            capacity: "4Gb",
+            color: "Black"
+        }
       },
     ],
   },
@@ -89,7 +104,7 @@ const Orders = [
     shippingCost: 150,
     total: 5155.91,
     client: {
-      name: "John Doe",
+      name: "John Smith Doe",
       email: "johndoe0102@gmail.com",
       phone: "809-111-0000",
       address:
@@ -112,6 +127,11 @@ const Orders = [
         condition: "None",
         subtotal: 1400,
         amount: 1,
+        specifications:{
+          size: '17"',
+          capacity: "4Gb",
+          color: "Black"
+      }
       },
       {
         id: "ITEM-0002",
@@ -126,6 +146,11 @@ const Orders = [
         condition: "None",
         subtotal: 3400,
         amount: 2,
+        specifications:{
+          size: '17"',
+          capacity: "4Gb",
+          color: "Black"
+      }
       },
     ],
   },

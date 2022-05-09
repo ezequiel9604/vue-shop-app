@@ -30,7 +30,7 @@ const props = defineProps({
                 <p><strong>Order date:</strong> {{ props.orderDate }}</p>
             </div>
             <div>
-                <RouterLink to="">See details order</RouterLink>
+                <RouterLink to="/orderDetails">See details order</RouterLink>
             </div>
             <div>
                 <p class="total"><strong>Total:</strong> ${{ props.total }}</p>
