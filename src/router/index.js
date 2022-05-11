@@ -7,7 +7,7 @@ import ProfileView from '../views/ProfileView.vue';
 import WishListView from '../views/WishListView.vue';
 import OrderView from '../views/OrderView.vue';
 import OrderDetailsView from '../views/OrderDetailsView.vue';
-
+import CheckOutView from '../views/CheckOutView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -51,6 +51,11 @@ const router = createRouter({
       path: '/orderDetails',
       name: 'orderDetails',
       component: OrderDetailsView
+    },
+    {
+      path: '/checkout',
+      name: 'checkout',
+      component: CheckOutView
     }
 
   ]
