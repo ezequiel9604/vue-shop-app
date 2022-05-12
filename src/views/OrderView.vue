@@ -202,7 +202,6 @@ import Orders from '../assets/data/Orders';
     .myorder-content-samples-header label:nth-child(1){
         width: 40%;
     }
-    
 }
 
 @media screen and (max-width: 414px) {

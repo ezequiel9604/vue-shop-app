@@ -11,18 +11,15 @@ const props = defineProps({
     <div class="top-item-details-details-selection">
         <p>{{ props.title }}:</p>
         <div>
-
             <label v-for="set in sets" class="top-item-details-details-selection-toggle" :key="set">
                 <input type="radio" :name="'details-selection-'+props.title.toLowerCase()" checked />
                 <span class="top-item-details-details-selection-slider">{{ set }}</span>
             </label>
-
         </div>
     </div>
 
 </template>
 <style>
-
 
 .top-item-details-details-selection{
     width: 60%;

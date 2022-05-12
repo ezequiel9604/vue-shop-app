@@ -70,7 +70,6 @@ const handleRightSliderButton = () => {
 }
 
 </script>
-
 <template>
 
     <div class="category-slider-content">
@@ -98,7 +97,6 @@ const handleRightSliderButton = () => {
     </div>
 
 </template>
-
 <style>
 
 .category-slider-content{

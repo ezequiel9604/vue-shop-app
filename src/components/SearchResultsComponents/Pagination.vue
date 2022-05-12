@@ -1,6 +1,8 @@
 <script setup>
 
-const props = defineProps(["sets"]);
+const props = defineProps({
+    sets: Number
+});
 
 </script>
 <template>
@@ -8,10 +10,8 @@ const props = defineProps(["sets"]);
     <div class="pagination">
 
         <div class="pagination-content">
-            <button>Previous</button>
-            
+            <button>Previous</button>    
             <button v-for="set in sets" :key="set">{{ set }}</button>
-
             <button>Next</button>
         </div>
 

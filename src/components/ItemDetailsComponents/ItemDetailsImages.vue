@@ -11,7 +11,6 @@ const changeSeletedImg = (number) => {
     selectedImg.value = number;
 }
 
-
 </script>
 <template>
 
@@ -45,9 +44,6 @@ const changeSeletedImg = (number) => {
 </template>
 <style>
 
-/* ////////////////////////////////////////////////////// */
-/* ///            top item details image              /// */ 
-/* ////////////////////////////////////////////////////// */
 .top-item-details-images{
     width: 49%;
     box-sizing: border-box;
@@ -130,7 +126,6 @@ img#item-details-min-img-active{
         width: 15%;
         height: 40px;
     }
-
 }
 
 @media screen and (max-width: 414px) {
@@ -157,7 +152,6 @@ img#item-details-min-img-active{
         width: 15%;
         height: 35px;
     }
-
 
 }
 

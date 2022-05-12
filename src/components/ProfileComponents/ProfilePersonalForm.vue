@@ -1,14 +1,22 @@
 <script setup>
-import UserImage from '../../assets/imgs/users/user-image.jpg';
+
+const props = defineProps({
+    name: String,
+    image: String,
+    phone: String,
+    dateOfBirth: Date,
+    genre: String,
+    address: String
+});
 
 </script>
 <template>
 
     <div>
         <div class="right-my-profile-content-form-header">
-            <h2>Sarah Smith Doe</h2>
+            <h2>{{ props.name }}</h2>
             <figure>
-                <img :src="UserImage" alt="" />
+                <img :src="props.image" alt="" />
             </figure>
             <label for="image-file">
                 <input type="file" id="image-file" />
@@ -20,13 +28,13 @@ import UserImage from '../../assets/imgs/users/user-image.jpg';
 
             <div class="right-my-profile-content-form-double-box">
                 <h6>Full name:</h6>
-                <input type="text" value="Sarah" />
+                <input type="text" :value="props.name" />
                 <input type="text" value="Smith Doe" />
             </div>
             <div class="right-my-profile-content-form-double-box">
                 <h6>Phone:</h6>
-                <input type="text" value="458-963-7410" />
-                <input type="text" value="458-210-4789" />
+                <input type="text" :value="props.phone" />
+                <input type="text" :value="props.phone" />
             </div>
             <div class="right-my-profile-content-form-triple-box">
                 <h6>Date of birth:</h6>
@@ -136,9 +144,6 @@ import UserImage from '../../assets/imgs/users/user-image.jpg';
 
 @media screen and (max-width: 834px) {
     
-    /* ////////////////////////////////////////////////////// */
-    /* ///          right my profile content form         /// */ 
-    /* ////////////////////////////////////////////////////// */
     .right-my-profile-content-form-header{
         width: 50%;
         margin: 0 auto;
@@ -162,9 +167,6 @@ import UserImage from '../../assets/imgs/users/user-image.jpg';
 
 @media screen and (max-width: 414px) {
     
-    /* ////////////////////////////////////////////////////// */
-    /* ///          right my profile content form         /// */ 
-    /* ////////////////////////////////////////////////////// */
     .right-my-profile-content-form-header{
         width: 60%;
         margin-bottom: 20px;
@@ -183,6 +185,5 @@ import UserImage from '../../assets/imgs/users/user-image.jpg';
         font-size: 13px;
     }
 }
-
 
 </style>

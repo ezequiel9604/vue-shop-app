@@ -4,7 +4,6 @@ import { ref, onMounted } from 'vue';
 
 const promotionSlider = ref(null);
 
-
 onMounted(() => {
 
     setInterval(function(){

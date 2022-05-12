@@ -32,8 +32,8 @@ const departments = [
                     <!-- <p>Welcome back <strong>John Doe</strong></p> -->
                     <div class="header-hidden-menu-content-bottom-accordion-panel-sign-btn">
 
-                        <RouterLink to="" class="sign-btn">Log in</RouterLink>
-                        <RouterLink to="" class="sign-btn">Sign up</RouterLink>
+                        <RouterLink to="/login" class="sign-btn">Log in</RouterLink>
+                        <RouterLink to="/signup" class="sign-btn">Sign up</RouterLink>
                         <!-- <RouterLink to="/signout" class="sign-btn sign-out-btn">Sign out</RouterLink> -->
                     </div>
                     <RouterLink to="" class="header-hidden-menu-content-bottom-accordion-panel-links">My Profile
@@ -67,7 +67,7 @@ const departments = [
 
                 <AccordionPanel title="Categories" icon="bi-list">
 
-                    <RouterLink v-for="d in departments" :to="'/' + d.toLowerCase()" :key="d"
+                    <RouterLink v-for="d in departments" to="" :key="d"
                         class="header-hidden-menu-content-bottom-accordion-panel-links">{{ d }}</RouterLink>
 
                 </AccordionPanel>

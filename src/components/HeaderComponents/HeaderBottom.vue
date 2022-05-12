@@ -32,7 +32,7 @@ const departments = [
                 <i class="bi bi-caret-down-fill"></i>
                 <div class="main-header-content-bottom-search-dropdown-content">
 
-                    <RouterLink v-for="d in departments" :to="'/'+d.toLowerCase()" :key="d" 
+                    <RouterLink v-for="d in departments" to="" :key="d" 
                         class="main-header-content-bottom-search-dropdown-content-links" >{{ d }}</RouterLink>
 
                 </div>

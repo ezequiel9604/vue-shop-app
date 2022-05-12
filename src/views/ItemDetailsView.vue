@@ -12,7 +12,6 @@ const changeSelectedSection = (num) => {
     selectedSection.value = num;
 }
 
-
 </script>
 <template>
 
@@ -120,7 +119,6 @@ const changeSelectedSection = (num) => {
 
 </template>
 <style>
-
 
 .bottom-item-details{
     width: 100%;
@@ -361,7 +359,6 @@ const changeSelectedSection = (num) => {
     line-height: 20px;
 }
 
-
 @media screen and (max-width: 834px) {
     
     .bottom-item-details-content{
@@ -552,7 +549,6 @@ const changeSelectedSection = (num) => {
         font-size: 11px;
         line-height: 16px;
     }
-
 }
 
 </style>

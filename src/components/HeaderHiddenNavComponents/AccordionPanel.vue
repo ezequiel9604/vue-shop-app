@@ -14,7 +14,7 @@ const getAccordionPanelStatus = computed(() => {
         return "accordion-panel accordion-panel-open";
 
     return "accordion-panel";
-})
+});
 
 const  changeAccordionPanelStatus = () => {
     isAccordionPanelOpen.value = !isAccordionPanelOpen.value;
@@ -39,9 +39,6 @@ const  changeAccordionPanelStatus = () => {
 
 <style>
 
-/* ////////////////////////////////////////////////////// */
-/* ///                  accordion button              /// */ 
-/* ////////////////////////////////////////////////////// */
 .accordion-button{
     border: 1px solid #ffffff;
     background-color: #ffffff;

@@ -13,8 +13,7 @@ const props = defineProps({
     <header class="main-header">
         <div class="main-header-content">
             <HeaderTop />
-            <HeaderBottom 
-                :onChangeHeaderHiddenNavStatus="onChangeHeaderHiddenNavStatus" />
+            <HeaderBottom :onChangeHeaderHiddenNavStatus="onChangeHeaderHiddenNavStatus" />
         </div>
     </header>
 

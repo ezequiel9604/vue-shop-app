@@ -26,7 +26,6 @@ const capacity ={
     sets: ["4GB","6GB","8GB", "16GB"]
 }
 
-
 </script>
 <template>
 
@@ -295,7 +294,6 @@ const capacity ={
         font-size: 11px;
     }
    
-
 }
 
 </style>

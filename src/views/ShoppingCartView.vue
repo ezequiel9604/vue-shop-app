@@ -7,7 +7,6 @@ import HiddenOrderSummary from '../components/ShoppingCartComponents/HiddenOrder
 import ShoppingCartContentEmpty from '../components/ShoppingCartComponents/ShoppingCartContentEmpty.vue';
 import Items from '../assets/data/Items';
 
-
 </script>
 <template>
     
@@ -75,7 +74,7 @@ import Items from '../assets/data/Items';
 <style>
 
 .shopping-cart-content{
-    width: 90%;
+    width: 80%;
     box-sizing: border-box;
     margin: 40px auto;
 

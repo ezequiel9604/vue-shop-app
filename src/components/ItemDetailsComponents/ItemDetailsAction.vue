@@ -1,4 +1,6 @@
 <script setup>
+import { RouterLink } from 'vue-router';
+
 </script>
 <template>
 
@@ -76,10 +78,7 @@
     border: 1px solid tomato;
     transition: 0.4s;
 }
-/* .top-item-details-details-action-addtocart-button-active{
-    background-color: tomato;
-    color: #ffffff;
-} */
+
 .top-item-details-details-action-addtolist-button{
     width: fit-content;
     box-sizing: border-box;
@@ -92,10 +91,6 @@
     border: 0;
     background-color: transparent;
 }
-/* .top-item-details-details-action-addtolist-button-active{
-    color: tomato;
-} */
-
 
 @keyframes details-action-tooltip-animation {
     from{ transform: scale(0);}
@@ -163,12 +158,11 @@
         font-size: 11px;
         padding: 4px 8px;
     }
-
 }
 
 @media screen and (max-width: 414px) {
     
-     .top-item-details-details-action{
+    .top-item-details-details-action{
         width: 70%;
         margin: 10px auto;
     }

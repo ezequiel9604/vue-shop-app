@@ -17,9 +17,6 @@ import CartImage from '../../assets/imgs/samples/shopping_cart.png';
 </template>
 <style>
 
-/* ////////////////////////////////////////////////////// */
-/* ///          shopping cart content empty           /// */ 
-/* ////////////////////////////////////////////////////// */
 .shopping-cart-content-empty{
     width: 90%;
     margin: 20px auto;
@@ -62,9 +59,6 @@ import CartImage from '../../assets/imgs/samples/shopping_cart.png';
 
 @media screen and (max-width: 834px) {
     
-    /* ////////////////////////////////////////////////////// */
-    /* ///          shopping cart content empty           /// */ 
-    /* ////////////////////////////////////////////////////// */
     .shopping-cart-content-empty figure{
         width: 60%;
         height: 250px;
@@ -84,9 +78,6 @@ import CartImage from '../../assets/imgs/samples/shopping_cart.png';
 
 @media screen and (max-width: 414px) {
     
-    /* ////////////////////////////////////////////////////// */
-    /* ///          shopping cart content empty           /// */ 
-    /* ////////////////////////////////////////////////////// */
     .shopping-cart-content-empty{
         margin: 20px auto;
         margin-bottom: 40px;

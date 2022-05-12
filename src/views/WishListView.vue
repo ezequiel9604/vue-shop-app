@@ -46,7 +46,7 @@ import Items from '../assets/data/Items';
 
 
 .wish-list-content{
-    width: 90%;
+    width: 80%;
     box-sizing: border-box;
     margin: 60px auto;
 }

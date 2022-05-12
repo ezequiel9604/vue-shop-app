@@ -29,14 +29,12 @@ const getItemsInOffer = computed(() => {
                 :descount="i.descount"
                 :key="i.id" />
         </div>
-        <RouterLink to="#" 
-            class="items-in-offer-see-more-button">See more</RouterLink>
+        <RouterLink to="" class="items-in-offer-see-more-button">See more</RouterLink>
     </div>
 
 </template>
 
 <style>
-
 
 .items-in-offer{
     width: 100%;
@@ -68,7 +66,6 @@ const getItemsInOffer = computed(() => {
     flex-wrap: wrap;
 }
 
-
 @media screen and (max-width: 834px) {
     
     .items-in-offer-subtitles{
@@ -82,7 +79,6 @@ const getItemsInOffer = computed(() => {
     .items-in-offer-content{
         width: 80%;
     }
-    
 }
 
 @media screen and (max-width: 414px) {
@@ -103,6 +99,5 @@ const getItemsInOffer = computed(() => {
     }
 
 }
-
 
 </style>

@@ -64,9 +64,6 @@ const calculateDescount = (price, descount) => {
 </template>
 <style>
 
-/* ////////////////////////////////////////////////////// */
-/* ///            row extra large samples             /// */ 
-/* ////////////////////////////////////////////////////// */
 .row-extra-large-samples{
     width: 95%;
     margin: 20px auto;
@@ -282,9 +279,6 @@ const calculateDescount = (price, descount) => {
 
 @media screen and (max-width: 834px) {
     
-     /* ////////////////////////////////////////////////////// */
-    /* ///            row extra large samples             /// */ 
-    /* ////////////////////////////////////////////////////// */
     .row-extra-large-samples{
         width: 100%;
         margin: 20px auto;
@@ -399,14 +393,10 @@ const calculateDescount = (price, descount) => {
         padding: 4px 0;
         font-size: 12px;
     }
-
 }
 
 @media screen and (max-width: 414px) {
-    
-    /* ////////////////////////////////////////////////////// */
-    /* ///            row extra large samples             /// */ 
-    /* ////////////////////////////////////////////////////// */
+
     .row-extra-large-samples{
         width: 100%;
         margin: 20px auto;
@@ -470,12 +460,8 @@ const calculateDescount = (price, descount) => {
         margin-right: 50%;
         margin-top: 10px;
     }
-    .row-extra-large-samples-details-amount{
-        display: none;
-    }
-    .row-extra-large-samples-actions{
-        display: none;
-    }
+    .row-extra-large-samples-details-amount{display: none;}
+    .row-extra-large-samples-actions{display: none;}
 }
 
 </style>

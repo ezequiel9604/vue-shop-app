@@ -31,10 +31,6 @@ const props = defineProps({
 </template>
 <style>
 
-
-/* ////////////////////////////////////////////////////// */
-/* ///        right my profile content sidebar        /// */ 
-/* ////////////////////////////////////////////////////// */
 .right-my-profile-content-sidebar{
     border: 1px solid #dddddd;
     width: 100%;
@@ -138,9 +134,6 @@ const props = defineProps({
 
 @media screen and (max-width: 834px) {
     
-    /* ////////////////////////////////////////////////////// */
-    /* ///        right my profile content sidebar        /// */ 
-    /* ////////////////////////////////////////////////////// */
     .right-my-profile-content-sidebar{
         margin-bottom: 40px;
         display: flex; /* this will change */
@@ -150,9 +143,6 @@ const props = defineProps({
 
 @media screen and (max-width: 414px) {
     
-    /* ////////////////////////////////////////////////////// */
-    /* ///        right my profile content sidebar        /// */ 
-    /* ////////////////////////////////////////////////////// */
     .right-my-profile-content-sidebar{
         margin-bottom: 20px;
         display: block; /* this will change */
@@ -197,7 +187,6 @@ const props = defineProps({
         -ms-transform: translateX(16px);
         transform: translateX(16px);
     }
-    
     
 }
 

@@ -7,12 +7,11 @@ const props = defineProps({
 });
 
 </script>
-
 <template>
 
     <div class="category-slides" :style="{ backgroundColor : props.color }">
         <div class="category-slides-links-content">
-            <RouterLink to="/clothing" class="category-slides-content-links">
+            <RouterLink to="" class="category-slides-content-links">
                 {{ "Buy "+props.title }}
             </RouterLink>
             <span class="category-slides-content-bkg"></span>
@@ -20,13 +19,8 @@ const props = defineProps({
     </div>
 
 </template>
-
 <style>
 
-
-/* ////////////////////////////////////////////////////// */
-/* ///               category slides                  /// */ 
-/* ////////////////////////////////////////////////////// */
 .category-slides{
     width: 100%;
     height: 450px;
@@ -123,7 +117,6 @@ const props = defineProps({
     .category-slides-content-links{
         font-size: 12px;
     }
-
 }
 
 </style>

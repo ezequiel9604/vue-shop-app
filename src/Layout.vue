@@ -13,7 +13,6 @@ const changeHeaderHiddenNavStatus = () => {
 }
 
 </script>
-
 <template>
 
     <HeaderHiddenNavView 
@@ -32,7 +31,4 @@ const changeHeaderHiddenNavStatus = () => {
     <FooterView />
 
 </template>
-
-<style>
-
-</style>
+<style></style>

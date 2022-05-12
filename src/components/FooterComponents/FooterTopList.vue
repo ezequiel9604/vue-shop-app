@@ -10,14 +10,11 @@ const props = defineProps({
 <template>
 
     <ul>
-        <h6>{{ title }}:</h6>
-        <RouterLink v-for="link in links" to="" :key="link">
+        <h6>{{ props.title }}:</h6>
+        <RouterLink v-for="link in props.links" to="" :key="link">
             {{ link }}
         </RouterLink>
     </ul>
 
 </template>
-<style>
-
-
-</style>
+<style></style>

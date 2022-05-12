@@ -13,7 +13,6 @@ const getMostSoldItems = (number) => {
     return arr;
 }
 
-
 const handleLeftSliderButton = () => {
     if (sliderCounter.value == 1) {
         sliderCounter.value--;
@@ -27,7 +26,6 @@ const handleRightSliderButton = () => {
         slider.value.scrollTo(slider.value.offsetWidth * sliderCounter.value, 0);
     }
 }
-
 
 </script>
 <template>
@@ -49,8 +47,13 @@ const handleRightSliderButton = () => {
 
                 <div v-for="s in sets" class="most-sold-items-content-slider-slides" :key="s">
 
-                    <ColumnLargeSample v-for="i in getMostSoldItems(s)" :title="i.title" :price="i.price"
-                        :images="i.images" :descount="i.descount" :key="i.id" />
+                    <ColumnLargeSample v-for="i in getMostSoldItems(s)" 
+                        :title="i.title" 
+                        :price="i.price"
+                        :images="i.images" 
+                        :descount="i.descount" 
+                        :key="i.id" 
+                        />
 
                 </div>
 
@@ -63,6 +66,7 @@ const handleRightSliderButton = () => {
 
 </template>
 <style>
+
 .most-sold-items {
     width: 100%;
     box-sizing: border-box;

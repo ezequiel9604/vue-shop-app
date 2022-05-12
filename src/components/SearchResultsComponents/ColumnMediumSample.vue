@@ -1,5 +1,4 @@
 <script setup>
-
 import { RouterLink } from 'vue-router';
 import { ref } from 'vue';
 
@@ -15,7 +14,6 @@ const selectedImage = ref(0);
 const calculateDescountPrice = (price, descount) => {
     return price - price * (descount / 100);
 };
-
 
 </script>
 <template>

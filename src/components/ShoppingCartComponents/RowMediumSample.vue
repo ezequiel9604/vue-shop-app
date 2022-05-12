@@ -199,9 +199,6 @@ const calculateDescount = (price, descount) => {
     
 @media screen and (max-width: 834px) {
     
-    /* ////////////////////////////////////////////////////// */
-    /* ///               row medium samples               /// */ 
-    /* ////////////////////////////////////////////////////// */
     .row-medium-samples{
         width: 90%;
         margin: 20px auto;
@@ -274,9 +271,6 @@ const calculateDescount = (price, descount) => {
 
 @media screen and (max-width: 414px) {
     
-    /* ////////////////////////////////////////////////////// */
-    /* ///               row medium samples               /// */ 
-    /* ////////////////////////////////////////////////////// */
     .row-medium-samples{
         width: 100%;
         margin: 20px auto;

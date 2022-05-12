@@ -1,5 +1,9 @@
 <script setup>
 
+const props = defineProps({
+    email: String,
+});
+
 </script>
 <template>
 
@@ -7,7 +11,7 @@
 
         <div class="right-my-profile-content-form-single-box">
             <h6>Email address:</h6>
-            <input type="text" value="Sarah Smith Doe" />
+            <input type="text" :value="props.email" />
         </div>
         <div class="right-my-profile-content-form-single-box">
             <h6>Password:</h6>

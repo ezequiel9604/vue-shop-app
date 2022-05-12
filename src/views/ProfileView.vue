@@ -5,6 +5,7 @@ import RightProfileContentSidebar from '../components/ProfileComponents/RightPro
 import ProfilePersonalForm from '../components/ProfileComponents/ProfilePersonalForm.vue';
 import ProfileAccountForm from '../components/ProfileComponents/ProfileAccountForm.vue';
 import ProfileMyWalletForm from '../components/ProfileComponents/ProfileMyWalletForm.vue';
+import Clients from '../assets/data/Clients';
 
 const selectedProfileForm = ref(0);
 
@@ -32,15 +33,29 @@ const changeSelectedProfileForm = (num) => {
                     :onChangeSelectedProfileForm="changeSelectedProfileForm" />
 
                 <div v-if="selectedProfileForm === 0" class="right-my-profile-content-form">
-                    <ProfilePersonalForm />
+                    <ProfilePersonalForm 
+                        :name="Clients[1].name" 
+                        :image="Clients[1].image" 
+                        :phone="Clients[1].phone"
+                        :dateOfBirth="Clients[1].dateOfBirth" 
+                        :genre="Clients[1].genre" 
+                        :address="Clients[1].address"  
+                        />
                 </div>
 
                 <div v-else-if="selectedProfileForm === 1" class="right-my-profile-content-form-accountInfo">
-                    <ProfileAccountForm />
+                    <ProfileAccountForm
+                        :email="Clients[1].email" 
+                        />
                 </div>
 
                 <div v-else-if="selectedProfileForm === 2" class="right-my-profile-content-form-myWallet">
-                    <ProfileMyWalletForm />
+                    <ProfileMyWalletForm
+                     :creditCardNumber="Clients[1].wallets[0].creditCardNumber"
+                     :creditCardOwner="Clients[1].wallets[0].creditCardOwner"
+                     :expirationDate="Clients[1].wallets[0].expirationDate"
+                     :securityCode="Clients[1].wallets[0].securityCode" 
+                     />
                 </div>
 
             </div>
@@ -53,7 +68,7 @@ const changeSelectedProfileForm = (num) => {
 <style>
 
 .my-profile-content {
-    width: 90%;
+    width: 80%;
     box-sizing: border-box;
     margin: 60px auto;
 
@@ -245,9 +260,6 @@ const changeSelectedProfileForm = (num) => {
 
 @media screen and (max-width: 834px) {
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///             left my profile content            /// */
-    /* ////////////////////////////////////////////////////// */
     .left-my-profile-content {
         display: none;
     }
@@ -325,9 +337,6 @@ const changeSelectedProfileForm = (num) => {
 
 @media screen and (max-width: 414px) {
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///          right my profile content form         /// */
-    /* ////////////////////////////////////////////////////// */
     .right-my-profile-content-form-content,
     .right-my-profile-content-form-accountInfo-content,
     .right-my-profile-content-form-myWallet-content {

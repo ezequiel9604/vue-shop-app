@@ -1,5 +1,4 @@
 <script setup>
-
 import { RouterLink } from 'vue-router';
 import { ref } from 'vue';
 
@@ -223,9 +222,6 @@ const calculateDescountPrice = (price, descount) => {
 
 @media screen and (max-width: 834px) {
     
-    /* ////////////////////////////////////////////////////// */
-    /* ///               row large samples                /// */ 
-    /* ////////////////////////////////////////////////////// */
     .row-large-samples{
         width: 90%;
         margin: 20px auto;
@@ -288,9 +284,6 @@ const calculateDescountPrice = (price, descount) => {
 
 @media screen and (max-width: 414px) {
     
-    /* ////////////////////////////////////////////////////// */
-    /* ///               row large samples                /// */ 
-    /* ////////////////////////////////////////////////////// */
     .row-large-samples{
         width: 90%;
         margin: 20px auto;

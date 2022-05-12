@@ -1,5 +1,4 @@
 <script setup>
-import { RouterLink } from 'vue-router';
 
 const props = defineProps({
     onChangeSelectedProfileForm: Function
@@ -34,9 +33,7 @@ const props = defineProps({
 
 </template>
 <style>
-/* ////////////////////////////////////////////////////// */
-/* ///         left my profile content sidebar        /// */ 
-/* ////////////////////////////////////////////////////// */
+
 .left-my-profile-content-sidebar{
     border: 1px solid #dddddd;
     width: 100%;
@@ -131,7 +128,5 @@ const props = defineProps({
     -ms-transform: translateX(24px);
     transform: translateX(24px);
 }
-
-
 
 </style>

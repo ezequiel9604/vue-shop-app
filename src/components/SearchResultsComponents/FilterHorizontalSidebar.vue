@@ -28,9 +28,9 @@ const props = defineProps({
         <div class="filter-results-horizontal-sidebar-color">
             <h4>Color:</h4>
 
-            <label v-for="color in colors" class="filter-results-horizontal-sidebar-color-toggle" :key="color">
+            <label v-for="c in colors" class="filter-results-horizontal-sidebar-color-toggle" :key="c">
                 <input type="checkbox" />
-                <span :style="{ backgroundColor: color }" class="filter-results-horizontal-sidebar-color-slider"></span>
+                <span :style="{ backgroundColor: c }" class="filter-results-horizontal-sidebar-color-slider"></span>
             </label>
 
         </div>
@@ -47,10 +47,6 @@ const props = defineProps({
 </template>
 <style>
 
-
-/* ////////////////////////////////////////////////////// */
-/* ///          filter results horizontal             /// */ 
-/* ////////////////////////////////////////////////////// */
 .filter-results-horizontal-sidebar{
     width: 100%;
     box-sizing: border-box;
@@ -134,15 +130,6 @@ const props = defineProps({
 
     transition: color 0.3s ease-in-out;
 }
-
-/* .filter-results-horizontal-sidebar-quality span{
-    display: inline-block;
-    font-family: "raleway-regular", sans-serif;
-    font-size: 14px;
-    font-weight: bold;
-    color: #333333;
-    margin-left: 3px;
-} */
 
 /* ////////////////////////////////////////////////////////// */
 /* ///  filter results horizontal sidebar color toggle    /// */ 
@@ -250,7 +237,6 @@ const props = defineProps({
     .filter-results-horizontal-sidebar{
         display: none;
     }
-
 
 }
 

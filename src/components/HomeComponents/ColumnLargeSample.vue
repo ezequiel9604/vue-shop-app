@@ -15,9 +15,7 @@ const calculateDescountPrice = (price, descount) => {
     return price - price * (descount / 100);
 };
 
-
 </script>
-
 <template>
 
     <div class="column-large-samples">
@@ -38,7 +36,6 @@ const calculateDescountPrice = (price, descount) => {
     </div>
 
 </template>
-
 <style>
 
 .column-large-samples{

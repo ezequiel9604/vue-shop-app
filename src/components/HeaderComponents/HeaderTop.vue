@@ -50,7 +50,7 @@ import { reactive } from 'vue';
                     <div class="main-header-content-top-dropdowns-content-sign-btns">
                         
                         <RouterLink to="/login" class="sign-btn">Log in</RouterLink>
-                        <RouterLink to="/signin" class="sign-btn">Sign up</RouterLink>
+                        <RouterLink to="/signup" class="sign-btn">Sign up</RouterLink>
                         <!-- <a href="#" class="sign-btn sign-out-btn">Sign out</a> -->
                     </div>
                     
@@ -58,7 +58,7 @@ import { reactive } from 'vue';
                         class="main-header-content-top-dropdowns-content-option-links">My profile</RouterLink>
                     <RouterLink to="/myOrders" 
                         class="main-header-content-top-dropdowns-content-option-links">My orders</RouterLink>
-                    <RouterLink to="/help" 
+                    <RouterLink to="" 
                         class="main-header-content-top-dropdowns-content-option-links">Help center</RouterLink>
 
                 </div>

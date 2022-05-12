@@ -8,25 +8,17 @@ import Items from '../assets/data/Items';
 
 const items = reactive(Items);
 
-
 </script>
-
 <template>
 
-  <div>
-    
-    <CategorySlider />
+  <CategorySlider />
 
-    <ItemsInOffer :items="items" />
+  <ItemsInOffer :items="items" />
 
-    <Poster />
+  <Poster />
 
-    <MostSoldItems :items="items" />
-
-  </div>
+  <MostSoldItems :items="items" />
 
 </template>
 <style>
-
-
 </style>

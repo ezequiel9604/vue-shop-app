@@ -73,10 +73,6 @@ const changeHiddenSidebarStatus = () => {
 </template>
 <style>
 
-
-/* ////////////////////////////////////////////////////// */
-/* ///            category search results             /// */ 
-/* ////////////////////////////////////////////////////// */
 .category-search-results{
     width: 100%;
     box-sizing: border-box;
@@ -157,8 +153,6 @@ const changeHiddenSidebarStatus = () => {
     flex-wrap: wrap;
 }
 
-
-
 @media screen and (max-width: 834px) {
 
     /* ////////////////////////////////////////////////////// */
@@ -167,7 +161,6 @@ const changeHiddenSidebarStatus = () => {
     .filter-results-hidden-sidebar-button{
         display: flex; /*this will change*/
     }
-
     
     /* ////////////////////////////////////////////////////// */
     /* ///            category search results             /// */ 
@@ -189,8 +182,6 @@ const changeHiddenSidebarStatus = () => {
     .category-search-results-most-sold-samples-content{
         margin: 15px auto;
     }
-
-    
 
 }
 
@@ -241,7 +232,6 @@ const changeHiddenSidebarStatus = () => {
         width: 85%;
         margin: 10px auto;
     }
-
 
 }
 
