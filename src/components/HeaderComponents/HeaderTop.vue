@@ -58,8 +58,8 @@ import { reactive } from 'vue';
                         class="main-header-content-top-dropdowns-content-option-links">My profile</RouterLink>
                     <RouterLink to="/myOrders" 
                         class="main-header-content-top-dropdowns-content-option-links">My orders</RouterLink>
-                    <RouterLink to="" 
-                        class="main-header-content-top-dropdowns-content-option-links">Help center</RouterLink>
+                    <RouterLink to="/chatCenter" 
+                        class="main-header-content-top-dropdowns-content-option-links">Chat center</RouterLink>
 
                 </div>
             </li>

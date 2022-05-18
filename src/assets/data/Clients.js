@@ -1,7 +1,10 @@
 import userImage from '../imgs/users/user-image.jpg';
+import ManImage from '../imgs/users/placeholder-man.png';
+import WomanImage from '../imgs/users/placeholder-woman.png';
 
 const Clients =[
-    {
+    {   
+        id: "USR-025671",
         name: "John Smith Doe",
         email: "johndoe1@gmail.com",
         phone: "809-000-0000",
@@ -20,10 +23,11 @@ const Clients =[
         ]
     },
     {
+        id: "USR-025641",
         name: "Sarah Doe",
         email: "sarahdoe1@gmail.com",
         phone: "809-000-0000",
-        image: userImage,
+        image: ManImage,
         dateOfBirth: new Date(1996, 5, 4),
         genre: "female",
         address: "123 main street, apt 4-b, Miami, Florida, 23548",

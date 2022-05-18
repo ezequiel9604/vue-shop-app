@@ -9,6 +9,7 @@ import WishListView from '../views/WishListView.vue';
 import OrderView from '../views/OrderView.vue';
 import OrderDetailsView from '../views/OrderDetailsView.vue';
 import CheckOutView from '../views/CheckOutView.vue';
+import ChatCenterView from '../views/ChatCenter.vue';
 import SignUpView from '../views/SignUpView.vue';
 import LogInView from '../views/LogInView.vue';
 
@@ -68,6 +69,12 @@ const router = createRouter({
       name: 'checkout',
       component: Layout,
       children: [{ path: "", component: CheckOutView }]
+    },
+    {
+      path: '/chatCenter',
+      name: 'chatCenter',
+      component: Layout,
+      children: [{ path: "", component: ChatCenterView }]
     },
     {
       path: '/signup',
