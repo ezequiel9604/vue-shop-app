@@ -13,9 +13,18 @@ const departments = [
     "clothing", "Accessories", "Shoes", "Offices", "Home", "Technology"
 ];
 
-const languageInput = ref(props.client.characteristics.language); // default value = "english"
-const currancyInput = ref(props.client.characteristics.currancy); // default value = "dollar"
-const isClientLoggedIn = ref(true);
+const languageInput = ref(
+    props.client != null? props.client.characteristics.language : "english"
+);
+
+const currancyInput = ref(
+    props.client != null? props.client.characteristics.curranty : "dollar"
+);
+
+const isClientLoggedIn = ref(
+    props.client != null? true : false
+);
+
 
 const changeLanguageInput = (ev) => {
     languageInput.value = ev.target.value;
@@ -44,22 +53,22 @@ const submitClientsLanguageCurrancy = () => {
             <div class="header-hidden-menu-content-bottom">
 
                 <AccordionPanel title="Account" icon="bi-person">
-                    <p v-if="isClientLoggedIn">Welcome to <strong>John Doe</strong></p>
+                    <p v-if="isClientLoggedIn">Welcome <strong>{{ props.client.name }}</strong></p>
                     <p v-else>Welcome to ShopApp</p>
-                    
+
                     <div v-if="isClientLoggedIn" class="main-header-content-top-dropdowns-content-sign-btns">
                         <RouterLink to="" class="sign-btn sign-out-btn">Sign out</RouterLink>
                     </div>
-                    <div v-else class="main-header-content-top-dropdowns-content-sign-btns">                      
+                    <div v-else class="main-header-content-top-dropdowns-content-sign-btns">
                         <RouterLink to="/login" class="sign-btn">Log in</RouterLink>
                         <RouterLink to="/signup" class="sign-btn">Sign up</RouterLink>
                     </div>
-                    <RouterLink to="/myProfile" 
-                        class="header-hidden-menu-content-bottom-accordion-panel-links">My Profile</RouterLink>
-                    <RouterLink to="/myOrders" 
-                        class="header-hidden-menu-content-bottom-accordion-panel-links">My Orders</RouterLink>
-                    <RouterLink to="/chatCenter" 
-                        class="header-hidden-menu-content-bottom-accordion-panel-links">Help Center</RouterLink>
+                    <RouterLink to="/myProfile" class="header-hidden-menu-content-bottom-accordion-panel-links">My
+                        Profile</RouterLink>
+                    <RouterLink to="/myOrders" class="header-hidden-menu-content-bottom-accordion-panel-links">My Orders
+                    </RouterLink>
+                    <RouterLink to="/chatCenter" class="header-hidden-menu-content-bottom-accordion-panel-links">Help
+                        Center</RouterLink>
 
                 </AccordionPanel>
 
@@ -67,7 +76,7 @@ const submitClientsLanguageCurrancy = () => {
                     <div class="selection-language">
                         <label>Choose language:</label>
                         <select @change="changeLanguageInput" v-if="languageInput == 'english'">
-                            <option  value="english" selected>English</option>
+                            <option value="english" selected>English</option>
                             <option value="spanish">Spanish</option>
                         </select>
                         <select @change="changeLanguageInput" v-else>
@@ -107,7 +116,6 @@ const submitClientsLanguageCurrancy = () => {
 
 </template>
 <style>
-
 .header-hidden-menu {
     width: 100%;
     height: 100%;
@@ -115,12 +123,18 @@ const submitClientsLanguageCurrancy = () => {
     box-sizing: border-box;
     background-color: rgba(0, 0, 0, 0.2);
     z-index: 80;
-    display: none; /* this will change  */
+    display: none;
+    /* this will change  */
 }
 
 @keyframes header-hidden-menu-content-animation {
-    from {left: -50%;}
-    to {left: 0;}
+    from {
+        left: -50%;
+    }
+
+    to {
+        left: 0;
+    }
 }
 
 .header-hidden-menu-content {
@@ -280,10 +294,15 @@ const submitClientsLanguageCurrancy = () => {
 }
 
 @media screen and (max-width: 414px) {
-    
+
     @keyframes header-hidden-menu-content-animation {
-        from {left: -75%;}
-        to {left: 0;}
+        from {
+            left: -75%;
+        }
+
+        to {
+            left: 0;
+        }
     }
 
     .header-hidden-menu-content {
@@ -336,5 +355,4 @@ const submitClientsLanguageCurrancy = () => {
     }
 
 }
-
 </style>

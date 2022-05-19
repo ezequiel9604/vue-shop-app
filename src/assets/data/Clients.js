@@ -28,7 +28,7 @@ const Clients =[
     },
     {
         id: "USR-025641",
-        name: "Sarah Doe",
+        name: "Sarah Smith Doe",
         email: "sarahdoe1@gmail.com",
         phone: "809-000-0000",
         image: ManImage,

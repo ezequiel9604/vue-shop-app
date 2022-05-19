@@ -6,7 +6,7 @@ import WishLists from '../../assets/data/WishLists';
 
 const props = defineProps({
     onChangeHeaderHiddenNavStatus: Function,
-    clientId: String
+    client: Object
 });
 
 const departments = [
@@ -14,14 +14,17 @@ const departments = [
     "Offices", "Home", "Technology"
 ];
 
-const cartLength = ref([...ShoppingCarts.filter((current) => {
-    return current.clientId == props.clientId
-})].length);
+const cartLength = ref(
+    props.client != null? [...ShoppingCarts.filter((current) => {
+        return current.clientId == props.client.id
+    })].length : 0
+);
 
-const wishListLength = ref([...WishLists.filter((current) => {
-    return current.clientId == props.clientId
-})].length);
-
+const wishListLength = ref(
+    props.client != null? [...WishLists.filter((current) => {
+        return current.clientId == props.client.id
+    })].length : 0
+);
 
 </script>
 <template>
@@ -342,6 +345,5 @@ const wishListLength = ref([...WishLists.filter((current) => {
     }
 
 }
-
 
 </style>

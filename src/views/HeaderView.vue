@@ -13,15 +13,14 @@ const props = defineProps({
 
     <header class="main-header">
         <div class="main-header-content">
-            <HeaderTop :clientLanguage="props.client.characteristics.language"
-                :clientCurrancy="props.client.characteristics.currancy" />
-
-            <HeaderBottom :onChangeHeaderHiddenNavStatus="onChangeHeaderHiddenNavStatus" :clientId="props.client.id" />
+            <HeaderTop :client="client" />
+            <HeaderBottom :onChangeHeaderHiddenNavStatus="onChangeHeaderHiddenNavStatus" :client="client" />
         </div>
     </header>
 
 </template>
 <style>
+
 .main-header {
     width: 100%;
     box-sizing: border-box;

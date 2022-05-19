@@ -3,13 +3,20 @@ import { RouterLink } from 'vue-router';
 import { ref } from 'vue';
 
 const props = defineProps({
-    clientLanguage: String,
-    clientCurrancy: String,
+    client: Object
 });
 
-const languageInput = ref(props.clientLanguage); // default value = "english"
-const currancyInput = ref(props.clientCurrancy); // default value = "dollar"
-const isClientLoggedIn = ref(true);
+const languageInput = ref(
+    props.client != null? props.client.characteristics.language : "english"
+);
+
+const currancyInput = ref(
+    props.client != null? props.client.characteristics.currancy : "dollar"
+);
+
+const isClientLoggedIn = ref(
+    props.client != null? true : false
+);
 
 const changeLanguageInput = (ev) => {
     languageInput.value = ev.target.value;
@@ -78,7 +85,7 @@ const submitClientsLanguageCurrancy = () => {
 
                 <div class="main-header-content-top-dropdowns-content">
                     
-                    <p v-if="isClientLoggedIn">Welcome to <strong>John Doe</strong></p>
+                    <p v-if="isClientLoggedIn">Welcome <strong>{{ props.client.name }}</strong></p>
                     <p v-else>Welcome to ShopApp</p>
                     
                     <div v-if="isClientLoggedIn" class="main-header-content-top-dropdowns-content-sign-btns">
