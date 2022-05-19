@@ -1,16 +1,32 @@
 <script setup>
 import { RouterLink } from 'vue-router';
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import AccordionPanel from '../components/HeaderHiddenNavComponents/AccordionPanel.vue';
 
 const props = defineProps({
     onHeaderHiddenNavStatus: Boolean,
-    onChangeHeaderHiddenNavStatus: Function
+    onChangeHeaderHiddenNavStatus: Function,
+    client: Object,
 });
 
 const departments = [
     "clothing", "Accessories", "Shoes", "Offices", "Home", "Technology"
 ];
+
+const languageInput = ref(props.client.characteristics.language); // default value = "english"
+const currancyInput = ref(props.client.characteristics.currancy); // default value = "dollar"
+const isClientLoggedIn = ref(true);
+
+const changeLanguageInput = (ev) => {
+    languageInput.value = ev.target.value;
+}
+const changeCurrancyInput = (ev) => {
+    currancyInput.value = ev.target.value;
+}
+
+const submitClientsLanguageCurrancy = () => {
+    console.log(languageInput.value, currancyInput.value)
+}
 
 </script>
 <template>
@@ -28,40 +44,51 @@ const departments = [
             <div class="header-hidden-menu-content-bottom">
 
                 <AccordionPanel title="Account" icon="bi-person">
-                    <p>Welcome to ShopApp</p>
-                    <!-- <p>Welcome back <strong>John Doe</strong></p> -->
-                    <div class="header-hidden-menu-content-bottom-accordion-panel-sign-btn">
-
+                    <p v-if="isClientLoggedIn">Welcome to <strong>John Doe</strong></p>
+                    <p v-else>Welcome to ShopApp</p>
+                    
+                    <div v-if="isClientLoggedIn" class="main-header-content-top-dropdowns-content-sign-btns">
+                        <RouterLink to="" class="sign-btn sign-out-btn">Sign out</RouterLink>
+                    </div>
+                    <div v-else class="main-header-content-top-dropdowns-content-sign-btns">                      
                         <RouterLink to="/login" class="sign-btn">Log in</RouterLink>
                         <RouterLink to="/signup" class="sign-btn">Sign up</RouterLink>
-                        <!-- <RouterLink to="/signout" class="sign-btn sign-out-btn">Sign out</RouterLink> -->
                     </div>
-                    <RouterLink to="" class="header-hidden-menu-content-bottom-accordion-panel-links">My Profile
-                    </RouterLink>
-                    <RouterLink to="" class="header-hidden-menu-content-bottom-accordion-panel-links">My Orders
-                    </RouterLink>
-                    <RouterLink to="" class="header-hidden-menu-content-bottom-accordion-panel-links">Help
-                        Center</RouterLink>
+                    <RouterLink to="/myProfile" 
+                        class="header-hidden-menu-content-bottom-accordion-panel-links">My Profile</RouterLink>
+                    <RouterLink to="/myOrders" 
+                        class="header-hidden-menu-content-bottom-accordion-panel-links">My Orders</RouterLink>
+                    <RouterLink to="/chatCenter" 
+                        class="header-hidden-menu-content-bottom-accordion-panel-links">Help Center</RouterLink>
 
                 </AccordionPanel>
 
                 <AccordionPanel title="English / Dollar" icon="bi-flag">
-                    <div class="accordion-language">
+                    <div class="selection-language">
                         <label>Choose language:</label>
-                        <select>
-                            <option value="english">English</option>
+                        <select @change="changeLanguageInput" v-if="languageInput == 'english'">
+                            <option  value="english" selected>English</option>
                             <option value="spanish">Spanish</option>
                         </select>
+                        <select @change="changeLanguageInput" v-else>
+                            <option value="english">English</option>
+                            <option value="spanish" selected>Spanish</option>
+                        </select>
                     </div>
-                    <div class="accordion-language">
+
+                    <div class="selection-language">
                         <label>Choose currancy:</label>
-                        <select>
+                        <select @change="changeCurrancyInput" v-if="currancyInput == 'dollar'">
+                            <option value="dollar" selected>USA / Dollar</option>
+                            <option value="pesos">DOM / Pesos</option>
+                        </select>
+                        <select @change="changeCurrancyInput" v-else>
                             <option value="dollar">USA / Dollar</option>
-                            <option value="dom">DOM / Pesos</option>
+                            <option value="pesos" selected>DOM / Pesos</option>
                         </select>
                     </div>
                     <div class="accordion-language">
-                        <button>Save Changes</button>
+                        <button @click="submitClientsLanguageCurrancy" type="button">Save Changes</button>
                     </div>
                 </AccordionPanel>
 
@@ -91,9 +118,6 @@ const departments = [
     display: none; /* this will change  */
 }
 
-/* ////////////////////////////////////////////////////// */
-/* ///            header hidden menu content          /// */
-/* ////////////////////////////////////////////////////// */
 @keyframes header-hidden-menu-content-animation {
     from {left: -50%;}
     to {left: 0;}
@@ -248,14 +272,12 @@ const departments = [
     border-radius: 3px;
 }
 
-
 @media screen and (max-width: 834px) {
 
     .header-hidden-menu {
         display: flex;
     }
 }
-
 
 @media screen and (max-width: 414px) {
     
@@ -313,8 +335,6 @@ const departments = [
         font-size: 11px;
     }
 
-
 }
-
 
 </style>

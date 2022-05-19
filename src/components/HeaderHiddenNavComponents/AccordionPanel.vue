@@ -90,10 +90,7 @@ const  changeAccordionPanelStatus = () => {
 }
 
 @media screen and (max-width: 414px) {
-    
-    /* ////////////////////////////////////////////////////// */
-    /* ///                 accordion panel                /// */ 
-    /* ////////////////////////////////////////////////////// */
+
     .accordion-panel{
         width: 80%;
     }

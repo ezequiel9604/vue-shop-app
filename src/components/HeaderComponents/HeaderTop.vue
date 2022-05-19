@@ -1,8 +1,26 @@
 <script setup>
 import { RouterLink } from 'vue-router';
-import { reactive } from 'vue';
+import { ref } from 'vue';
 
+const props = defineProps({
+    clientLanguage: String,
+    clientCurrancy: String,
+});
 
+const languageInput = ref(props.clientLanguage); // default value = "english"
+const currancyInput = ref(props.clientCurrancy); // default value = "dollar"
+const isClientLoggedIn = ref(true);
+
+const changeLanguageInput = (ev) => {
+    languageInput.value = ev.target.value;
+}
+const changeCurrancyInput = (ev) => {
+    currancyInput.value = ev.target.value;
+}
+
+const submitClientsLanguageCurrancy = () => {
+    console.log(languageInput.value, currancyInput.value)
+}
 
 </script>
 <template>
@@ -13,27 +31,41 @@ import { reactive } from 'vue';
 
             <li class="main-header-content-top-dropdowns-links language-link">
                 <i class="bi bi-flag"></i>
-                <p>English / Dollars</p>
+                <p v-if="languageInput == 'english' && currancyInput == 'dollar'">English / Dollars</p>
+                <p v-else-if="languageInput == 'spanish' && currancyInput == 'dollar'">Spanish / Dollars</p>
+                <p v-else-if="languageInput == 'spanish' && currancyInput == 'pesos'">Spanish / Pesos</p>
+                <p v-else-if="languageInput == 'english' && currancyInput == 'pesos'">English / Pesos</p>
+
                 <i class="bi bi-caret-down-fill"></i>
 
                 <div class="main-header-content-top-dropdowns-content">
 
                     <div class="selection-language">
                         <label>Choose language:</label>
-                        <select>
-                            <option value="english">English</option>
+                        <select @change="changeLanguageInput" v-if="languageInput == 'english'">
+                            <option  value="english" selected>English</option>
                             <option value="spanish">Spanish</option>
                         </select>
-                    </div>
-                    <div class="selection-language">
-                        <label>Choose currancy:</label>
-                        <select>
-                            <option value="dollar">USA / Dollar</option>
-                            <option value="dom">DOM / Pesos</option>
+                        <select @change="changeLanguageInput" v-else>
+                            <option value="english">English</option>
+                            <option value="spanish" selected>Spanish</option>
                         </select>
                     </div>
+
                     <div class="selection-language">
-                        <button>Save Changes</button>
+                        <label>Choose currancy:</label>
+                        <select @change="changeCurrancyInput" v-if="currancyInput == 'dollar'">
+                            <option value="dollar" selected>USA / Dollar</option>
+                            <option value="pesos">DOM / Pesos</option>
+                        </select>
+                        <select @change="changeCurrancyInput" v-else>
+                            <option value="dollar">USA / Dollar</option>
+                            <option value="pesos" selected>DOM / Pesos</option>
+                        </select>
+                    </div>
+
+                    <div class="selection-language">
+                        <button @click="submitClientsLanguageCurrancy" type="button">Save Changes</button>
                     </div>
                 </div>
 
@@ -45,13 +77,16 @@ import { reactive } from 'vue';
                 <i class="bi bi-caret-down-fill"></i>
 
                 <div class="main-header-content-top-dropdowns-content">
-                    <p>Welcome to ShopApp</p>
-                    <!-- <p>Welcome to <strong>John Doe</strong></p> -->
-                    <div class="main-header-content-top-dropdowns-content-sign-btns">
-                        
+                    
+                    <p v-if="isClientLoggedIn">Welcome to <strong>John Doe</strong></p>
+                    <p v-else>Welcome to ShopApp</p>
+                    
+                    <div v-if="isClientLoggedIn" class="main-header-content-top-dropdowns-content-sign-btns">
+                        <RouterLink to="" class="sign-btn sign-out-btn">Sign out</RouterLink>
+                    </div>
+                    <div v-else class="main-header-content-top-dropdowns-content-sign-btns">                      
                         <RouterLink to="/login" class="sign-btn">Log in</RouterLink>
                         <RouterLink to="/signup" class="sign-btn">Sign up</RouterLink>
-                        <!-- <a href="#" class="sign-btn sign-out-btn">Sign out</a> -->
                     </div>
                     
                     <RouterLink to="/myProfile" 
@@ -70,9 +105,6 @@ import { reactive } from 'vue';
 </template>
 <style>
 
-/* ////////////////////////////////////////////////////// */
-/* ///            main header content top             /// */
-/* ////////////////////////////////////////////////////// */
 .main-header-content-top {
     width: 95%;
     box-sizing: border-box;
@@ -127,15 +159,8 @@ import { reactive } from 'vue';
 }
 
 @keyframes main-header-content-top-dropdowns-content-animation {
-    from {
-        top: 140%;
-        opacity: 0;
-    }
-
-    to {
-        top: 100%;
-        opacity: 1;
-    }
+    from {top: 140%; opacity: 0;}
+    to {top: 100%;opacity: 1;}
 }
 
 .main-header-content-top-dropdowns-content {
@@ -263,12 +288,8 @@ import { reactive } from 'vue';
     background-color: #f1f1f1;
 }
 
-
 @media screen and (max-width: 834px) {
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///            main header content top             /// */
-    /* ////////////////////////////////////////////////////// */
     .main-header-content-top {
         display: none;
     }

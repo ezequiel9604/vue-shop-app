@@ -11,6 +11,10 @@ const Clients =[
         image: userImage,
         dateOfBirth: new Date(1996, 5, 4),
         genre: "male",
+        characteristics:{
+            language: "english",
+            currancy: "dollar"
+        },
         address: "123 main street, apt 4-b, Miami, Florida, 23548",
         note: "to the delivery guy, once he arrives please ring the door bell.",
         wallets: [
@@ -30,6 +34,10 @@ const Clients =[
         image: ManImage,
         dateOfBirth: new Date(1996, 5, 4),
         genre: "female",
+        characteristics:{
+            language: "spanish",
+            currancy: "pesos"
+        },
         address: "123 main street, apt 4-b, Miami, Florida, 23548",
         note: "to the delivery guy, once he arrives please ring the door bell",
         wallets: [

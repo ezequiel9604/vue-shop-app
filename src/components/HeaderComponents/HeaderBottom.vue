@@ -1,19 +1,29 @@
 <script setup>
 import { RouterLink } from 'vue-router';
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
+import ShoppingCarts from '../../assets/data/ShoppingCarts';
+import WishLists from '../../assets/data/WishLists';
 
 const props = defineProps({
-    onChangeHeaderHiddenNavStatus: Function
+    onChangeHeaderHiddenNavStatus: Function,
+    clientId: String
 });
 
 const departments = [
-    "clothing", "Accessories", "Shoes", "Offices", "Home", "Technology"
+    "clothing", "Accessories", "Shoes", 
+    "Offices", "Home", "Technology"
 ];
 
+const cartLength = ref([...ShoppingCarts.filter((current) => {
+    return current.clientId == props.clientId
+})].length);
+
+const wishListLength = ref([...WishLists.filter((current) => {
+    return current.clientId == props.clientId
+})].length);
 
 
 </script>
-
 <template>
     <div class="main-header-content-bottom">
 
@@ -36,7 +46,6 @@ const departments = [
                         class="main-header-content-bottom-search-dropdown-content-links" >{{ d }}</RouterLink>
 
                 </div>
-
             </ul>
             <input type="text" class="main-header-content-bottom-search-field"
                 placeholder="What are you looking for?" />
@@ -49,11 +58,11 @@ const departments = [
         <div class="main-header-content-bottom-shop">
             <RouterLink to="/shoppingCart" class="main-header-content-bottom-shop-icons shop-cart">
                 <i class="bi bi-cart3"></i>
-                <span class="shop-icons-indicators">8</span>
+                <span class="shop-icons-indicators">{{ cartLength }}</span>
             </RouterLink>
             <RouterLink to="/wishList" class="main-header-content-bottom-shop-icons shop-favorite">
                 <i class="bi bi-heart"></i>
-                <span class="shop-icons-indicators">10</span>
+                <span class="shop-icons-indicators">{{ wishListLength }}</span>
             </RouterLink>
 
         </div>
@@ -62,9 +71,6 @@ const departments = [
 </template>
 <style>
 
-/* ////////////////////////////////////////////////////// */
-/* ///          main header content bottom            /// */
-/* ////////////////////////////////////////////////////// */
 .main-header-content-bottom {
     width: 95%;
     box-sizing: border-box;
@@ -254,12 +260,8 @@ const departments = [
     right: -50%;
 }
 
-
 @media screen and (max-width: 834px) {
 
-     /* ////////////////////////////////////////////////////// */
-    /* ///           main header content bottom           /// */
-    /* ////////////////////////////////////////////////////// */
     .main-header-content-bottom {
         width: 90%;
         padding: 15px 0;
@@ -315,9 +317,6 @@ const departments = [
 
 @media screen and (max-width: 414px) {
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///           main header content bottom           /// */
-    /* ////////////////////////////////////////////////////// */
     .main-header-content-bottom-logo a {
         font-size: 25px;
     }

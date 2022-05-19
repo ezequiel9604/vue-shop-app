@@ -4,7 +4,8 @@ import HeaderTop from '../components/HeaderComponents/HeaderTop.vue';
 import HeaderBottom from '../components/HeaderComponents/HeaderBottom.vue';
 
 const props = defineProps({
-    onChangeHeaderHiddenNavStatus: Function
+    onChangeHeaderHiddenNavStatus: Function,
+    client: Object,
 });
 
 </script>
@@ -12,15 +13,15 @@ const props = defineProps({
 
     <header class="main-header">
         <div class="main-header-content">
-            <HeaderTop />
-            <HeaderBottom :onChangeHeaderHiddenNavStatus="onChangeHeaderHiddenNavStatus" />
+            <HeaderTop :clientLanguage="props.client.characteristics.language"
+                :clientCurrancy="props.client.characteristics.currancy" />
+
+            <HeaderBottom :onChangeHeaderHiddenNavStatus="onChangeHeaderHiddenNavStatus" :clientId="props.client.id" />
         </div>
     </header>
 
 </template>
-
 <style>
-
 .main-header {
     width: 100%;
     box-sizing: border-box;

@@ -4,7 +4,7 @@ import ItemImage2 from "../imgs/samples/tablet-2.png";
 
 const Items = [
     { 
-        id: "item-0001",
+        id: "ART-0001",
         title: `1 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Quis quae vel recusandae dolorem velit delectus unde facere 
                 libero maiores inventore.`,
@@ -15,7 +15,7 @@ const Items = [
         stock: 6,
     },
     { 
-        id: "item-0002",
+        id: "ART-0002",
         title: `2 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Quis quae vel recusandae dolorem velit delectus unde facere 
                 libero maiores inventore.`,
@@ -26,7 +26,7 @@ const Items = [
         stock: 6,
     },
     { 
-        id: "item-0003",
+        id: "ART-0003",
         title: `3Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Quis quae vel recusandae dolorem velit delectus unde facere 
                 libero maiores inventore.`,
@@ -37,7 +37,7 @@ const Items = [
         stock: 6,
     },
     { 
-        id: "item-0004",
+        id: "ART-0004",
         title: `4 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Quis quae vel recusandae dolorem velit delectus unde facere 
                 libero maiores inventore.`,
@@ -48,7 +48,7 @@ const Items = [
         stock: 6,
     },
     { 
-        id: "item-0005",
+        id: "ART-0005",
         title: `5 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Quis quae vel recusandae dolorem velit delectus unde facere 
                 libero maiores inventore.`,
@@ -59,7 +59,7 @@ const Items = [
         stock: 6,
     },
     { 
-        id: "item-0006",
+        id: "ART-0006",
         title: `6 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Quis quae vel recusandae dolorem velit delectus unde facere 
                 libero maiores inventore.`,
@@ -70,7 +70,7 @@ const Items = [
         stock: 6,
     },
     { 
-        id: "item-0007",
+        id: "ART-0007",
         title: `7 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Quis quae vel recusandae dolorem velit delectus unde facere 
                 libero maiores inventore.`,
