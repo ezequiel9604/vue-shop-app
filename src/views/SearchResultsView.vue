@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, reactive } from 'vue';
 import FilterResultSidebar from '../components/SearchResultsComponents/FilterResultSidebar.vue';
 import RowLargeSample from '../components/SearchResultsComponents/RowLargeSample.vue';
 import Pagination from '../components/SearchResultsComponents/Pagination.vue';
@@ -8,14 +8,52 @@ import FilterHorizontalSidebar from '../components/SearchResultsComponents/Filte
 import FilterResultHiddenSidebar from '../components/SearchResultsComponents/FilterResultHiddenSidebar.vue';
 import Items from "../assets/data/Items";
 
-const colors = ["gray","blue","purple"];
-
 const isHiddenSidebarOpen = ref(false);
+
+const getItemsColors = (items) => {
+    let colors = new Set();
+    items.forEach((current) => {
+        colors.add(current.color);
+    });
+    return Array.from(colors);
+} 
+
+const state = reactive({
+    items: Items,
+    minPrice: null,
+    maxPrice: null,
+    quality: 2,
+    selectedColors: [],
+    isOffered: false
+});
+
+const changeMaxAndMinPrice = (min, max) => {
+    state.minPrice = min;
+    state.maxPrice = max;
+}
+
+const changeSelectedColors = (isChecked, value) => {
+    let newSet = new Set(state.selectedColors);
+    if(isChecked)
+        newSet.add(value);
+    else
+        newSet.delete(value);
+    
+    state.selectedColors = Array.from(newSet);
+}
+
+const changeQuality = (value) => {
+    state.quality= value;
+}
+
+const changeIsOffered = () => {
+    state.isOffered = !state.isOffered;
+}
 
 const changeHiddenSidebarStatus = () => {
     isHiddenSidebarOpen.value = !isHiddenSidebarOpen.value;
-    
 }
+
 
 </script>
 <template>
@@ -35,7 +73,16 @@ const changeHiddenSidebarStatus = () => {
             </div>
 
             <FilterHorizontalSidebar 
-                :colors="colors" />
+                :minPrice="state.minPrice" 
+                :maxPrice="state.maxPrice" 
+                :colors="getItemsColors(state.items)"
+                :offered="state.isOffered" 
+                :quality="state.quality" 
+                :onChangeMaxAndMinPrice="changeMaxAndMinPrice"
+                :onChangeIsOffered="changeIsOffered"
+                :onChangeSelectedColors="changeSelectedColors"
+                :onChangeQuality="changeQuality"
+                />
 
             <div class="category-search-results-content-sample-content">
 
@@ -45,7 +92,8 @@ const changeHiddenSidebarStatus = () => {
                     :title="item.title"
                     :price="item.price"
                     :quality="item.quality"
-                    :key="item.id" />
+                    :key="item.id" 
+                    />
 
                 <Pagination :sets="4" />
 
@@ -60,7 +108,8 @@ const changeHiddenSidebarStatus = () => {
                         :title="item.title"
                         :price="item.price"
                         :images="item.images" 
-                        :key="item.id" />
+                        :key="item.id" 
+                        />
             
                 </div>
 

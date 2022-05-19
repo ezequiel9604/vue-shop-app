@@ -1,8 +1,27 @@
 <script setup>
+import { reactive } from 'vue';
 
 const props = defineProps({
-    colors: Array
+    minPrice: Number,
+    maxPrice: Number,
+    colors: Array,
+    quality: Number,
+    isOffered: Boolean,
+    onChangeMaxAndMinPrice: Function,
+    onChangeIsOffered: Function,
+    onChangeSelectedColors: Function,
+    onChangeQuality: Function
 });
+
+const state = reactive({
+   minPriceInput: props.minPrice,
+   maxPriceInput: props.maxPrice, 
+});
+
+const changeMinAndMaxPrice = () => {
+    props.onChangeMaxAndMinPrice(parseInt(state.minPriceInput), 
+        parseInt(state.maxPriceInput));
+}
 
 </script>
 <template>
@@ -11,25 +30,22 @@ const props = defineProps({
 
         <div class="filter-results-horizontal-sidebar-price">
             <h4>Price:</h4>
-            <input type="text" placeholder="$Min" /> - 
-            <input type="text" placeholder="$Max" />
-            <button type="button">Ok</button>
+            <input v-model="state.minPriceInput" type="text" placeholder="$Min" /> - 
+            <input v-model="state.maxPriceInput" type="text" placeholder="$Max" />
+            <button @click="changeMinAndMaxPrice" type="button">Ok</button>
         </div>
 
         <div class="filter-results-horizontal-sidebar-quality">
             <h4>Quality:</h4>
-            <i class="bi bi-star"></i>
-            <i class="bi bi-star"></i>
-            <i class="bi bi-star"></i>
-            <i class="bi bi-star"></i>
-            <i class="bi bi-star"></i>
+            <i v-for="n in 5" @click="() => props.onChangeQuality(n)" 
+                :class="n <= props.quality? 'bi bi-star-fill':'bi bi-star'" :key="n"></i>
         </div>
         
         <div class="filter-results-horizontal-sidebar-color">
             <h4>Color:</h4>
 
             <label v-for="c in colors" class="filter-results-horizontal-sidebar-color-toggle" :key="c">
-                <input type="checkbox" />
+                <input @change="(ev) => props.onChangeSelectedColors(ev.target.checked, ev.target.value)" type="checkbox" :value="c" />
                 <span :style="{ backgroundColor: c }" class="filter-results-horizontal-sidebar-color-slider"></span>
             </label>
 
@@ -37,7 +53,7 @@ const props = defineProps({
         <div class="filter-results-horizontal-sidebar-offer">
             <h4>Offer:</h4>
             <label class="filter-results-horizontal-sidebar-offer-toggle">
-                <input type="checkbox"  />
+                <input @change="() => props.onChangeIsOffered()"  type="checkbox" />
                 <span class="filter-results-horizontal-sidebar-offer-toggle-slider"></span>
             </label>
         </div>
