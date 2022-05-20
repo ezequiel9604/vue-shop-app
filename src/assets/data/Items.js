@@ -1,6 +1,10 @@
 import ItemImage1 from "../imgs/samples/tablet.png";
 import ItemImage2 from "../imgs/samples/tablet-2.png";
 
+const departments = [
+    "clothing", "Accessories", "Shoes", 
+    "Offices", "Home", "Technology"
+];
 
 const Items = [
     { 
@@ -12,6 +16,7 @@ const Items = [
         images: [ItemImage1,ItemImage2],
         descount: 25,
         color: "gray",
+        category: "clothing",
         quality: 3.2,
         stock: 6,
     },
@@ -24,6 +29,7 @@ const Items = [
         images: [ItemImage1,ItemImage2],
         descount: 25,
         color: "blue",
+        category: "accessories",
         quality: 2.8,
         stock: 6,
     },
@@ -36,6 +42,7 @@ const Items = [
         images: [ItemImage1,ItemImage2],
         descount: 25,
         color: "green",
+        category: "shoes",
         quality: 5.0,
         stock: 6,
     },
@@ -48,6 +55,7 @@ const Items = [
         images: [ItemImage1,ItemImage2],
         descount: 25,
         color: "purple",
+        category: "technology",
         quality: 4.1,
         stock: 6,
     },
@@ -60,6 +68,7 @@ const Items = [
         images: [ItemImage1,ItemImage2],
         descount: 25,
         color: "gray",
+        category: "office",
         quality: 2.7,
         stock: 6,
     },
@@ -72,6 +81,7 @@ const Items = [
         images: [ItemImage1,ItemImage2],
         descount: 25,
         color: "brown",
+        category: "home",
         quality: 3.9,
         stock: 6,
     },
@@ -84,6 +94,7 @@ const Items = [
         images: [ItemImage1,ItemImage2],
         descount: 0,
         color: "green",
+        category: "technology",
         quality: 4.0,
         stock: 6,
     },

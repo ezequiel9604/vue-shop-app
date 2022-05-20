@@ -1,5 +1,6 @@
 <script setup>
 import { RouterLink } from 'vue-router';
+import { reactive } from 'vue';
 import AccordionPanel from "../HeaderHiddenNavComponents/AccordionPanel.vue";
 import brandImage1 from "../../assets/imgs/brands/brand-1.png";
 import brandImage2 from "../../assets/imgs/brands/brand-2.png";
@@ -7,8 +8,69 @@ import brandImage3 from "../../assets/imgs/brands/brand-3.png";
 
 const props = defineProps({
     onIsHiddenSidebarOpen: Boolean,
-    onChangeHiddenSidebarStatus: Function
+    onChangeHiddenSidebarStatus: Function,
+
+    category: String,
+    subCategory: Array,
+    state: Array,
+    size: Array,
+    capacity: Array,
+    department: Array,
+    onChangeState: Function,
+    onChangeSize: Function,
+    onChangeDepartment: Function,
+    onChangeCapacity: Function,
+
+    minPrice: Number,
+    maxPrice: Number,
+    colors: Array,
+    quality: Number,
+    offered: Boolean,
+    onChangeMaxAndMinPrice: Function,
+    onChangeOffered: Function,
+    onChangeSelectedColors: Function,
+    onChangeQuality: Function
 });
+
+const state = reactive({
+   minPriceInput: props.minPrice,
+   maxPriceInput: props.maxPrice, 
+});
+
+const changeMinAndMaxPrice = () => {
+    props.onChangeMaxAndMinPrice(parseInt(state.minPriceInput), 
+        parseInt(state.maxPriceInput));
+}
+
+const changeInputs = (ev, input) =>{
+    
+    let arr;
+    if(input == "state")
+        arr = new Set([...props.state]);
+    else if(input == "size")
+        arr = new Set([...props.size]);
+    else if(input == "capacity")
+        arr = new Set([...props.capacity]);
+    else if(input == "department")
+        arr = new Set([...props.department]);
+    
+    if(ev.target.checked)
+        arr.add(ev.target.value);
+    else
+        arr.delete(ev.target.value);
+
+    console.log(Array.from(arr))
+
+    if(input == "state")
+        props.onChangeState(Array.from(arr));
+    else if(input == "size")
+        props.onChangeSize(Array.from(arr));
+    else if(input == "capacity")
+        props.onChangeCapacity(Array.from(arr));
+    else if(input == "department")
+        props.onChangeDepartment(Array.from(arr));
+
+}
 
 </script>
 <template>
@@ -23,7 +85,7 @@ const props = defineProps({
 
             <div class="bottom-filter-results-hidden-sidebar">
 
-                <AccordionPanel title="Clothing" icon="">
+                <AccordionPanel :title="props.category" icon="">
                     <RouterLink to="" class="accordion-links">T-Shirts</RouterLink>
                     <RouterLink to="" class="accordion-links">Pants</RouterLink>
                     <RouterLink to="" class="accordion-links">Jackets</RouterLink>
@@ -56,88 +118,94 @@ const props = defineProps({
 
                 <AccordionPanel title="State" icon="">
                     <label for="state-new" class="accordion-panel-checkbox">
-                        <input type="checkbox" id="state-new" /> New
-                    </label>
+                        <input @change="(ev) => changeInputs(ev, 'state')" value="new" type="checkbox" id="state-new" /> New
+                    </label> 
                     <label for="state-used" class="accordion-panel-checkbox">
-                        <input type="checkbox" id="state-used" /> Used
-                    </label>
+                        <input @change="(ev) => changeInputs(ev, 'state')" value="used" type="checkbox" id="state-used" /> Used
+                    </label> 
+                    <label for="state-repair" class="accordion-panel-checkbox">
+                        <input @change="(ev) => changeInputs(ev, 'state')" value="repair" type="checkbox" id="state-repair" /> Repair
+                    </label> 
                 </AccordionPanel>
 
-                <AccordionPanel title="Size" icon="">
-                    <label for="state-new" class="accordion-panel-checkbox">
-                        <input type="checkbox" id="state-new" /> S
-                    </label>
-                    <label for="state-used" class="accordion-panel-checkbox">
-                        <input type="checkbox" id="state-used" /> M
-                    </label>
-                    <label for="state-new" class="accordion-panel-checkbox">
-                        <input type="checkbox" id="state-new" /> L
-                    </label>
-                    <label for="state-used" class="accordion-panel-checkbox">
-                        <input type="checkbox" id="state-used" /> XL
-                    </label>
-                    <label for="state-used" class="accordion-panel-checkbox">
-                        <input type="checkbox" id="state-used" /> XXL
-                    </label>
+                <AccordionPanel v-if="props.category == 'clothing'" title="Size" icon="">
+                    <label for="size-small" class="accordion-panel-checkbox">
+                        <input @change="(ev) => changeInputs(ev, 'size')" value="small" type="checkbox" id="size-small" /> S
+                    </label> 
+                    <label for="size-medium" class="accordion-panel-checkbox">
+                        <input @change="(ev) => changeInputs(ev, 'size')" value="medium" type="checkbox" id="size-medium" /> M
+                    </label> 
+                    <label for="size-large" class="accordion-panel-checkbox">
+                        <input @change="(ev) => changeInputs(ev, 'size')" value="large" type="checkbox" id="size-large" /> L
+                    </label> 
+                    <label for="size-extraLarge" class="accordion-panel-checkbox">
+                        <input @change="(ev) => changeInputs(ev, 'size')" value="extraLarge" type="checkbox" id="size-extraLarge" /> XL
+                    </label> 
+                    <label for="size-extraExtraLarge" class="accordion-panel-checkbox">
+                        <input @change="(ev) => changeInputs(ev, 'size')" value="extraExtraLarge" type="checkbox" id="size-extraExtraLarge" /> XXL
+                    </label> 
                 </AccordionPanel>
 
-                <AccordionPanel title="Gender" icon="">
-                    <label for="state-new" class="accordion-panel-checkbox">
-                        <input type="checkbox" id="state-new" /> Men
-                    </label>
-                    <label for="state-used" class="accordion-panel-checkbox">
-                        <input type="checkbox" id="state-used" /> Women
-                    </label>
-                    <label for="state-new" class="accordion-panel-checkbox">
-                        <input type="checkbox" id="state-new" /> Boys
-                    </label>
-                    <label for="state-used" class="accordion-panel-checkbox">
-                        <input type="checkbox" id="state-used" /> Girls
-                    </label>
+                <AccordionPanel v-if="props.category == 'clothing'" title="Department" icon="">
+                    <label for="department-men" class="accordion-panel-checkbox">
+                        <input @change="(ev) => changeInputs(ev, 'department')" value="men" type="checkbox" id="department-men" /> Men
+                    </label> 
+                    <label for="department-women" class="accordion-panel-checkbox">
+                        <input @change="(ev) => changeInputs(ev, 'department')" value="women" type="checkbox" id="department-women" /> Women
+                    </label> 
+                    <label for="department-boys" class="accordion-panel-checkbox">
+                        <input @change="(ev) => changeInputs(ev, 'department')" value="boys" type="checkbox" id="department-boys" /> Boys
+                    </label> 
+                    <label for="department-girls" class="accordion-panel-checkbox">
+                        <input @change="(ev) => changeInputs(ev, 'department')" value="girls" type="checkbox" id="department-girls" /> Girls
+                    </label> 
+                </AccordionPanel>
+
+                 <AccordionPanel v-if="props.category == 'technology'" title="Capacity" icon="">
+                    <label for="capacity-2g" class="accordion-panel-checkbox">
+                        <input @click="(ev) => changeInputs(ev, 'capacity')" value="2g" type="checkbox" id="capacity-2g" /> 2Gb
+                    </label> 
+                    <label for="capacity-4g" class="accordion-panel-checkbox">
+                        <input @click="(ev) => changeInputs(ev, 'capacity')" value="4g" type="checkbox" id="capacity-4g" /> 4Gb
+                    </label> 
+                    <label for="capacity-8g" class="accordion-panel-checkbox">
+                        <input @click="(ev) => changeInputs(ev, 'capacity')" value="8g" type="checkbox" id="capacity-8g" /> 8Gb
+                    </label> 
+                    <label for="capacity-16g" class="accordion-panel-checkbox">
+                        <input @click="(ev) => changeInputs(ev, 'capacity')" value="16g" type="checkbox" id="capacity-16g" /> 16Gb
+                    </label> 
                 </AccordionPanel>
 
                 <AccordionPanel title="Price" icon="">
                     <div class="accordion-panel-price">
-                        <input type="text" placeholder="$Min" /> -
-                        <input type="text" placeholder="$Max" />
-                        <button type="button">Ok</button>
+                        <input v-model="state.minPriceInput" type="text" placeholder="$Min" /> - 
+                        <input v-model="state.maxPriceInput" type="text" placeholder="$Max" />
+                        <button @click="changeMinAndMaxPrice" type="button">Ok</button>
                     </div>
                 </AccordionPanel>
 
                 <AccordionPanel title="Offer" icon="">
                     <label id="accordion-panel-offer" class="accordion-panel-offer-toggle">
-                        <input type="checkbox" name="accordion-panel-offer" />
+                        <input @change="() => props.onChangeOffered()" :checked="props.offered" type="checkbox" />
                         <span class="accordion-panel-offer-slider"></span>
                     </label>
                 </AccordionPanel>
 
                 <AccordionPanel title="Quality" icon="">
                     <div class="accordion-panel-quality">
-                        <button><i class="bi bi-star"></i></button>
-                        <button><i class="bi bi-star"></i></button>
-                        <button><i class="bi bi-star"></i></button>
-                        <button><i class="bi bi-star"></i></button>
-                        <button><i class="bi bi-star"></i></button>
+                        <button>
+                            <i v-for="n in 5" @click="() => props.onChangeQuality(n)" 
+                                :class="n <= props.quality? 'bi bi-star-fill':'bi bi-star'" :key="n"></i>
+                        </button>
                     </div>
                 </AccordionPanel>
 
                 <AccordionPanel title="Color" icon="">
                     <div class="accordion-panel-color">
-                        <label class="accordion-panel-color-toggle">
-                            <input type="checkbox" />
-                            <span style="background-color: green;" class="accordion-panel-color-slider"></span>
-                        </label>
-                        <label class="accordion-panel-color-toggle">
-                            <input type="checkbox" />
-                            <span style="background-color: green;" class="accordion-panel-color-slider"></span>
-                        </label>
-                        <label class="accordion-panel-color-toggle">
-                            <input type="checkbox" />
-                            <span style="background-color: green;" class="accordion-panel-color-slider"></span>
-                        </label>
-                        <label class="accordion-panel-color-toggle">
-                            <input type="checkbox" />
-                            <span style="background-color: green;" class="accordion-panel-color-slider"></span>
+
+                        <label v-for="c in colors" class="accordion-panel-color-toggle" :key="c">
+                            <input @change="(ev) => props.onChangeSelectedColors(ev.target.checked, ev.target.value)" type="checkbox" :value="c" />
+                            <span :style="{ backgroundColor: c }" class="accordion-panel-color-slider"></span>
                         </label>
                     </div>
                 </AccordionPanel>

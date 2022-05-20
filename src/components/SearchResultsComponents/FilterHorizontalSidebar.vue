@@ -6,9 +6,9 @@ const props = defineProps({
     maxPrice: Number,
     colors: Array,
     quality: Number,
-    isOffered: Boolean,
+    offered: Boolean,
     onChangeMaxAndMinPrice: Function,
-    onChangeIsOffered: Function,
+    onChangeOffered: Function,
     onChangeSelectedColors: Function,
     onChangeQuality: Function
 });
@@ -22,6 +22,7 @@ const changeMinAndMaxPrice = () => {
     props.onChangeMaxAndMinPrice(parseInt(state.minPriceInput), 
         parseInt(state.maxPriceInput));
 }
+
 
 </script>
 <template>
@@ -43,17 +44,15 @@ const changeMinAndMaxPrice = () => {
         
         <div class="filter-results-horizontal-sidebar-color">
             <h4>Color:</h4>
-
             <label v-for="c in colors" class="filter-results-horizontal-sidebar-color-toggle" :key="c">
                 <input @change="(ev) => props.onChangeSelectedColors(ev.target.checked, ev.target.value)" type="checkbox" :value="c" />
                 <span :style="{ backgroundColor: c }" class="filter-results-horizontal-sidebar-color-slider"></span>
             </label>
-
         </div>
         <div class="filter-results-horizontal-sidebar-offer">
             <h4>Offer:</h4>
             <label class="filter-results-horizontal-sidebar-offer-toggle">
-                <input @change="() => props.onChangeIsOffered()"  type="checkbox" />
+                <input @change="() => props.onChangeOffered()" :checked="props.offered"  type="checkbox" />
                 <span class="filter-results-horizontal-sidebar-offer-toggle-slider"></span>
             </label>
         </div>
@@ -246,10 +245,7 @@ const changeMinAndMaxPrice = () => {
 }
 
 @media screen and (max-width: 834px) {
-    
-    /* ////////////////////////////////////////////////////// */
-    /* ///       filter results horizontal sidebar        /// */ 
-    /* ////////////////////////////////////////////////////// */
+
     .filter-results-horizontal-sidebar{
         display: none;
     }

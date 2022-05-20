@@ -10,6 +10,20 @@ import Items from "../assets/data/Items";
 
 const isHiddenSidebarOpen = ref(false);
 
+const state = reactive({
+    items: Items,
+    minPrice: null,
+    maxPrice: null,
+    quality: 2,
+    selectedColors: [],
+    isOffered: false,
+
+    states: [],
+    sizes: [],
+    capacities: [],
+    departments: []
+});
+
 const getItemsColors = (items) => {
     let colors = new Set();
     items.forEach((current) => {
@@ -17,15 +31,6 @@ const getItemsColors = (items) => {
     });
     return Array.from(colors);
 } 
-
-const state = reactive({
-    items: Items,
-    minPrice: null,
-    maxPrice: null,
-    quality: 2,
-    selectedColors: [],
-    isOffered: false
-});
 
 const changeMaxAndMinPrice = (min, max) => {
     state.minPrice = min;
@@ -50,21 +55,66 @@ const changeIsOffered = () => {
     state.isOffered = !state.isOffered;
 }
 
+const changeStates = (value) => {
+    state.states = value;
+}
+
+const changeSizes = (value) => {
+    state.sizes = value;
+}
+
+const changeCapacities = (value) => {
+    state.capacities = value;
+}
+
+const changeDepartments = (value) => {
+    state.departments = value;
+}
+
 const changeHiddenSidebarStatus = () => {
     isHiddenSidebarOpen.value = !isHiddenSidebarOpen.value;
 }
-
 
 </script>
 <template>
 
     <FilterResultHiddenSidebar 
         :onIsHiddenSidebarOpen="isHiddenSidebarOpen" 
-        :onChangeHiddenSidebarStatus="changeHiddenSidebarStatus"  />
+        :onChangeHiddenSidebarStatus="changeHiddenSidebarStatus"
+        :category="state.items[3].category" 
+        :state="state.states" 
+        :size="state.sizes" 
+        :capacity="state.capacities" 
+        :department="state.departments"
+        :onChangeState="changeStates"
+        :onChangeSize="changeSizes"
+        :onChangeDepartment="changeDepartments"
+        :onChangeCapacity="changeCapacities"  
+
+        :minPrice="state.minPrice" 
+        :maxPrice="state.maxPrice" 
+        :colors="getItemsColors(state.items)"
+        :offered="state.isOffered" 
+        :quality="state.quality" 
+        :onChangeMaxAndMinPrice="changeMaxAndMinPrice"
+        :onChangeOffered="changeIsOffered"
+        :onChangeSelectedColors="changeSelectedColors"
+        :onChangeQuality="changeQuality"
+        />
 
     <div class="category-search-results">
 
-        <FilterResultSidebar />
+        <FilterResultSidebar 
+            :category="state.items[0].category" 
+            :state="state.states" 
+            :size="state.sizes" 
+            :capacity="state.capacities" 
+            :department="state.departments"
+            :onChangeState="changeStates"
+            :onChangeSize="changeSizes"
+            :onChangeDepartment="changeDepartments"
+            :onChangeCapacity="changeCapacities"
+            />
 
         <div class="category-search-results-content">
 
@@ -79,7 +129,7 @@ const changeHiddenSidebarStatus = () => {
                 :offered="state.isOffered" 
                 :quality="state.quality" 
                 :onChangeMaxAndMinPrice="changeMaxAndMinPrice"
-                :onChangeIsOffered="changeIsOffered"
+                :onChangeOffered="changeIsOffered"
                 :onChangeSelectedColors="changeSelectedColors"
                 :onChangeQuality="changeQuality"
                 />
