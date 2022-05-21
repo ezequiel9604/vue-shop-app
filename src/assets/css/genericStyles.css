@@ -335,38 +335,6 @@
     border: 1px solid #007acc;
 }
 
-/* //////////////////////////////////////////////////// */
-/* ///                 pagination                   /// */ 
-/* /////////////////////////////////////////// //////// */
-.pagination{
-    width: 95%;
-    margin: 20px auto;
-    box-sizing: border-box;
-    overflow: hidden;
-}
-.pagination-content{
-    width: fit-content;
-    margin: 0px auto;
-    box-sizing: border-box;
-    display: flex;
-}
-.pagination-content button{
-    box-sizing: border-box;
-    border: 1px solid #ddd;
-    background-color: #ffffff;
-    color: #333333;
-    border-radius: 3px;
-    font-family: "raleway-medium", sans-serif;
-    font-size: 14px;
-    padding: 4px 6px;
-    margin: 0 6px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-
 /* ////////////////////////////////////////////////////// */
 /* ///           signup-login form header             /// */ 
 /* ////////////////////////////////////////////////////// */
@@ -614,17 +582,6 @@
     }
 
     /* ////////////////////////////////////////////////////// */
-    /* ///           myorder content pagination           /// */ 
-    /* ////////////////////////////////////////////////////// */
-    .pagination{
-        margin: 15px auto;
-    }  
-    .pagination-content button{
-        font-size: 12px;
-        padding: 4px 6px;
-    }
-
-    /* ////////////////////////////////////////////////////// */
     /* ///             signup-login form header           /// */ 
     /* ////////////////////////////////////////////////////// */
     .signup-login-form-header{
@@ -800,19 +757,6 @@
         padding: 6px 0;
         font-size: 13px;
     }
-
-    /* ////////////////////////////////////////////////////// */
-    /* ///         myorder content pagination           /// */ 
-    /* ////////////////////////////////////////////////////// */
-    .pagination{
-        margin: 15px auto;
-    }  
-    .pagination-content button{
-        font-size: 12px;
-        font-weight: bold;
-        padding: 4px 8px;
-    }
-
 
     /* ////////////////////////////////////////////////////// */
     /* ///             signup-login form header           /// */ 

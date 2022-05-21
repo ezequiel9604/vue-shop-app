@@ -45,14 +45,14 @@ const changeMinAndMaxPrice = () => {
         <div class="filter-results-horizontal-sidebar-color">
             <h4>Color:</h4>
             <label v-for="c in colors" class="filter-results-horizontal-sidebar-color-toggle" :key="c">
-                <input @change="(ev) => props.onChangeSelectedColors(ev.target.checked, ev.target.value)" type="checkbox" :value="c" />
+                <input @change="(ev) => props.onChangeSelectedColors(ev.target.checked, ev.target.value)" :value="c" type="checkbox" />
                 <span :style="{ backgroundColor: c }" class="filter-results-horizontal-sidebar-color-slider"></span>
             </label>
         </div>
         <div class="filter-results-horizontal-sidebar-offer">
             <h4>Offer:</h4>
             <label class="filter-results-horizontal-sidebar-offer-toggle">
-                <input @change="() => props.onChangeOffered()" :checked="props.offered"  type="checkbox" />
+                <input @change="() => props.onChangeOffered()" :checked="props.offered" type="checkbox" />
                 <span class="filter-results-horizontal-sidebar-offer-toggle-slider"></span>
             </label>
         </div>

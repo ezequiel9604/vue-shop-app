@@ -38,8 +38,6 @@ const changeInputs = (ev, input) =>{
     else
         arr.delete(ev.target.value);
 
-    console.log(Array.from(arr))
-
     if(input == "state")
         props.onChangeState(Array.from(arr));
     else if(input == "size")
@@ -49,6 +47,17 @@ const changeInputs = (ev, input) =>{
     else if(input == "department")
         props.onChangeDepartment(Array.from(arr));
 
+}
+
+const checkInputValues = (arr, value) => {
+    let result = false;
+    for (let i = 0; i < arr.length; i++) {
+        
+        if(arr[i] == value)
+            return true;
+
+    }
+    return result;
 }
 
 </script>
@@ -83,64 +92,80 @@ const changeInputs = (ev, input) =>{
         <div class="filter-results-sidebar-checkbox">  
             <h4>State:</h4>
             <label for="state-new">
-                <input @change="(ev) => changeInputs(ev, 'state')" value="new" type="checkbox" id="state-new" /> New
+                <input @change="(ev) => changeInputs(ev, 'state')" value="new" 
+                    :checked="checkInputValues(props.state, 'new')" type="checkbox" id="state-new" /> New
             </label> 
             <label for="state-used">
-                <input @change="(ev) => changeInputs(ev, 'state')" value="used" type="checkbox" id="state-used" /> Used
+                <input @change="(ev) => changeInputs(ev, 'state')" value="used" 
+                    :checked="checkInputValues(props.state, 'used')" type="checkbox" id="state-used" /> Used
             </label> 
             <label for="state-repair">
-                <input @change="(ev) => changeInputs(ev, 'state')" value="repair" type="checkbox" id="state-repair" /> Repair
+                <input @change="(ev) => changeInputs(ev, 'state')" value="repair"
+                    :checked="checkInputValues(props.state, 'repair')" type="checkbox" id="state-repair" /> Repair
             </label> 
         </div>
 
         <div v-if="props.category == 'clothing'" class="filter-results-sidebar-checkbox">  
             <h4>Size:</h4>
             <label for="size-small">
-                <input @change="(ev) => changeInputs(ev, 'size')" value="small" type="checkbox" id="size-small" /> S
+                <input @change="(ev) => changeInputs(ev, 'size')" value="small"
+                    :checked="checkInputValues(props.size, 'small')" type="checkbox" id="size-small" /> S
             </label> 
             <label for="size-medium">
-                <input @change="(ev) => changeInputs(ev, 'size')" value="medium" type="checkbox" id="size-medium" /> M
+                <input @change="(ev) => changeInputs(ev, 'size')" value="medium"
+                    :checked="checkInputValues(props.size, 'medium')" type="checkbox" id="size-medium" /> M
             </label> 
             <label for="size-large">
-                <input @change="(ev) => changeInputs(ev, 'size')" value="large" type="checkbox" id="size-large" /> L
+                <input @change="(ev) => changeInputs(ev, 'size')" value="large"
+                    :checked="checkInputValues(props.size, 'large')" type="checkbox" id="size-large" /> L
             </label> 
             <label for="size-extraLarge">
-                <input @change="(ev) => changeInputs(ev, 'size')" value="extraLarge" type="checkbox" id="size-extraLarge" /> XL
+                <input @change="(ev) => changeInputs(ev, 'size')" value="extraLarge"
+                    :checked="checkInputValues(props.size, 'extraLarge')" type="checkbox" id="size-extraLarge" /> XL
             </label> 
             <label for="size-extraExtraLarge">
-                <input @change="(ev) => changeInputs(ev, 'size')" value="extraExtraLarge" type="checkbox" id="size-extraExtraLarge" /> XXL
+                <input @change="(ev) => changeInputs(ev, 'size')" value="extraExtraLarge"
+                    :checked="checkInputValues(props.size, 'extraExtraLarge')" type="checkbox" id="size-extraExtraLarge" /> XXL
             </label> 
         </div>
 
         <div v-if="props.category == 'clothing'" class="filter-results-sidebar-checkbox">  
             <h4>Department:</h4>
             <label for="department-men">
-                <input @change="(ev) => changeInputs(ev, 'department')" value="men" type="checkbox" id="department-men" /> Men
+                <input @change="(ev) => changeInputs(ev, 'department')" value="men"
+                    :checked="checkInputValues(props.department, 'men')" type="checkbox" id="department-men" /> Men
             </label> 
             <label for="department-women">
-                <input @change="(ev) => changeInputs(ev, 'department')" value="women" type="checkbox" id="department-women" /> Women
+                <input @change="(ev) => changeInputs(ev, 'department')" value="women"
+                    :checked="checkInputValues(props.department, 'women')" type="checkbox" id="department-women" /> Women
             </label> 
             <label for="department-boys">
-                <input @change="(ev) => changeInputs(ev, 'department')" value="boys" type="checkbox" id="department-boys" /> Boys
+                <input @change="(ev) => changeInputs(ev, 'department')" value="boys"
+                    :checked="checkInputValues(props.department, 'boys')" type="checkbox" id="department-boys" /> Boys
             </label> 
             <label for="department-girls">
-                <input @change="(ev) => changeInputs(ev, 'department')" value="girls" type="checkbox" id="department-girls" /> Girls
+                <input @change="(ev) => changeInputs(ev, 'department')" value="girls"
+                    :checked="checkInputValues(props.department, 'girls')" type="checkbox" id="department-girls" /> Girls
             </label> 
         </div>
 
         <div v-if="props.category == 'technology'" class="filter-results-sidebar-checkbox">  
             <h4>Capacity:</h4>
             <label for="capacity-2g">
-                <input @click="(ev) => changeInputs(ev, 'capacity')" value="2g" type="checkbox" id="capacity-2g" /> 2Gb
+                <input @click="(ev) => changeInputs(ev, 'capacity')" value="2g"
+                    :checked="checkInputValues(props.capacity, '2g')" type="checkbox" id="capacity-2g" /> 2Gb
             </label> 
             <label for="capacity-4g">
-                <input @click="(ev) => changeInputs(ev, 'capacity')" value="4g" type="checkbox" id="capacity-4g" /> 4Gb
+                <input @click="(ev) => changeInputs(ev, 'capacity')" value="4g"
+                    :checked="checkInputValues(props.capacity, '4g')" type="checkbox" id="capacity-4g" /> 4Gb
             </label> 
             <label for="capacity-8g">
-                <input @click="(ev) => changeInputs(ev, 'capacity')" value="8g" type="checkbox" id="capacity-8g" /> 8Gb
+                <input @click="(ev) => changeInputs(ev, 'capacity')" value="8g"
+                    :checked="checkInputValues(props.capacity, '8g')" type="checkbox" id="capacity-8g" /> 8Gb
             </label> 
             <label for="capacity-16g">
-                <input @click="(ev) => changeInputs(ev, 'capacity')" value="16g" type="checkbox" id="capacity-16g" /> 16Gb
+                <input @click="(ev) => changeInputs(ev, 'capacity')" value="16g"
+                    :checked="checkInputValues(props.capacity, '16g')" type="checkbox" id="capacity-16g" /> 16Gb
             </label> 
         </div>
 
