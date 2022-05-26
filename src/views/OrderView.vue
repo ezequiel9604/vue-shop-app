@@ -3,6 +3,8 @@ import OrderSample from '../components/OrderComponents/OrderSample.vue';
 import PaginationVue from '../components/SearchResultsComponents/Pagination.vue';
 import Orders from '../assets/data/Orders';
 
+
+
 </script>
 <template>
 

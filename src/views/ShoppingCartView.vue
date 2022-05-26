@@ -35,7 +35,8 @@ import Items from '../assets/data/Items';
                         :descount="i.descount"
                         :stock="i.stock"
                         :images="i.images"  
-                        :key="i.id" />
+                        :key="i.id" 
+                        />
 
                 </div>
 
@@ -58,7 +59,8 @@ import Items from '../assets/data/Items';
                         :price="i.price"
                         :images="i.images"
                         :descount="i.descount" 
-                        :key="i.id" />
+                        :key="i.id" 
+                        />
 
                 </div>       
 

@@ -1,5 +1,6 @@
 import ItemImage1 from "../imgs/samples/tablet.png";
 import ItemImage2 from "../imgs/samples/tablet-2.png";
+import Clients from "./Clients";
 
 const Orders = [
   {
@@ -8,16 +9,7 @@ const Orders = [
     deliveredDate: "2021-05-08",
     shippingCost: 150,
     total: 5155.91,
-    client: {
-      name: "John Smith Doe",
-      email: "johndoe0102@gmail.com",
-      phone: "809-111-0000",
-      address:
-        "Casa 8, Francisco Henriquez y Carvajal, Brisas del Este, Santo Domingo Este",
-      indications:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium quaerat " +
-        "suscipit esse voluptate! Odit quia id possimus.",
-    },
+    client: Clients[0],
     items: [
       {
         id: "ITEM-0001",
@@ -32,11 +24,11 @@ const Orders = [
         condition: "None",
         subtotal: 1400,
         amount: 1,
-        specifications:{
+        specifications: {
           size: '17"',
           capacity: "4Gb",
-          color: "Black"
-      }
+          color: "Black",
+        },
       },
       {
         id: "ITEM-0002",
@@ -51,11 +43,11 @@ const Orders = [
         condition: "None",
         subtotal: 3400,
         amount: 2,
-        specifications:{
+        specifications: {
           size: '17"',
           capacity: "4Gb",
-          color: "Black"
-      }
+          color: "Black",
+        },
       },
     ],
   },
@@ -65,16 +57,7 @@ const Orders = [
     deliveredDate: "2021-05-08",
     shippingCost: 150,
     total: 5155.91,
-    client: {
-      name: "John Smith Doe",
-      email: "johndoe0102@gmail.com",
-      phone: "809-111-0000",
-      address:
-        "Casa 8, Francisco Henriquez y Carvajal, Brisas del Este, Santo Domingo Este",
-      indications:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium quaerat " +
-        "suscipit esse voluptate! Odit quia id possimus.",
-    },
+    client: Clients[1],
     items: [
       {
         id: "ITEM-0001",
@@ -89,11 +72,11 @@ const Orders = [
         condition: "None",
         subtotal: 1400,
         amount: 1,
-        specifications:{
-            size: '17"',
-            capacity: "4Gb",
-            color: "Black"
-        }
+        specifications: {
+          size: '17"',
+          capacity: "4Gb",
+          color: "Black",
+        },
       },
     ],
   },
@@ -103,16 +86,7 @@ const Orders = [
     deliveredDate: "2021-05-08",
     shippingCost: 150,
     total: 5155.91,
-    client: {
-      name: "John Smith Doe",
-      email: "johndoe0102@gmail.com",
-      phone: "809-111-0000",
-      address:
-        "Casa 8, Francisco Henriquez y Carvajal, Brisas del Este, Santo Domingo Este",
-      indications:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium quaerat " +
-        "suscipit esse voluptate! Odit quia id possimus.",
-    },
+    client: Clients[0],
     items: [
       {
         id: "ITEM-0001",
@@ -127,11 +101,11 @@ const Orders = [
         condition: "None",
         subtotal: 1400,
         amount: 1,
-        specifications:{
+        specifications: {
           size: '17"',
           capacity: "4Gb",
-          color: "Black"
-      }
+          color: "Black",
+        },
       },
       {
         id: "ITEM-0002",
@@ -146,11 +120,11 @@ const Orders = [
         condition: "None",
         subtotal: 3400,
         amount: 2,
-        specifications:{
+        specifications: {
           size: '17"',
           capacity: "4Gb",
-          color: "Black"
-      }
+          color: "Black",
+        },
       },
     ],
   },

@@ -1,33 +1,30 @@
 <script setup>
+import { reactive, computed } from 'vue';
 import { RouterLink } from 'vue-router';
-import { computed } from 'vue';
+import { languages, currancies } from '../../assets/data/DummyData';
 
 const props = defineProps({
-    client: Object
+    clientId: String,
+    firstName: String,
+    lastName: String,
+    currancy: String,
+    language: String
+});
+
+const state = reactive({
+    firstname: props.firstName,
+    lastname: props.lastName,
+    currancy: props.currancy,
+    language: props.language
 });
 
 
-const getCurrancyValue = computed(() => {
-    return props.client != null? props.client.characteristics.currancy : "dollar";
-})
-
-const getLanguageValue = computed(() => {
-    return props.client != null? props.client.characteristics.language : "english";
-})
-
 const isClientLoggedIn = computed(()=>{
-    return props.client != null? true : false;
+    return props.clientId != "00000"? true : false;
 })
 
-const changeLanguageInput = (ev) => {
-    languageInput.value = ev.target.value;
-}
-const changeCurrancyInput = (ev) => {
-    currancyInput.value = ev.target.value;
-}
-
-const submitClientsLanguageCurrancy = () => {
-    console.log(languageInput.value, currancyInput.value)
+const handleSubmitForm = () => {
+    // TODO: submit form
 }
 
 </script>
@@ -39,10 +36,10 @@ const submitClientsLanguageCurrancy = () => {
 
             <li class="main-header-content-top-dropdowns-links language-link">
                 <i class="bi bi-flag"></i>
-                <p v-if="getLanguageValue == 'english' && getCurrancyValue == 'dollar'">English / Dollars</p>
-                <p v-else-if="getLanguageValue == 'spanish' && getCurrancyValue == 'dollar'">Spanish / Dollars</p>
-                <p v-else-if="getLanguageValue == 'spanish' && getCurrancyValue == 'pesos'">Spanish / Pesos</p>
-                <p v-else-if="getLanguageValue == 'english' && getCurrancyValue == 'pesos'">English / Pesos</p>
+                <p v-if="state.language == 'ENGLISH' && state.currancy == 'USA / DOLLARS'">English / Dollars</p>
+                <p v-else-if="state.language == 'SPANISH' && state.currancy == 'USA / DOLLARS'">Spanish / Dollars</p>
+                <p v-else-if="state.language == 'SPANISH' && state.currancy == 'DOM / PESOS'">Spanish / Pesos</p>
+                <p v-else-if="state.language == 'ENGLISH' && state.currancy == 'DOM / PESOS'">English / Pesos</p>
 
                 <i class="bi bi-caret-down-fill"></i>
 
@@ -50,30 +47,22 @@ const submitClientsLanguageCurrancy = () => {
 
                     <div class="selection-language">
                         <label>Choose language:</label>
-                        <select @change="changeLanguageInput" v-if="getLanguageValue == 'english'">
-                            <option  value="english" selected>English</option>
-                            <option value="spanish">Spanish</option>
-                        </select>
-                        <select @change="changeLanguageInput" v-else>
-                            <option value="english">English</option>
-                            <option value="spanish" selected>Spanish</option>
+                        <select v-model="state.language" >
+                            <option v-for="l in languages" :selected="l == state.language" 
+                                :key="l">{{ l }}</option>
                         </select>
                     </div>
 
                     <div class="selection-language">
                         <label>Choose currancy:</label>
-                        <select @change="changeCurrancyInput" v-if="getCurrancyValue == 'dollar'">
-                            <option value="dollar" selected>USA / Dollar</option>
-                            <option value="pesos">DOM / Pesos</option>
-                        </select>
-                        <select @change="changeCurrancyInput" v-else>
-                            <option value="dollar">USA / Dollar</option>
-                            <option value="pesos" selected>DOM / Pesos</option>
+                        <select v-model="state.currancy">
+                            <option v-for="c in currancies" :selected="c == state.currancy" 
+                                :key="c">{{ c }}</option>
                         </select>
                     </div>
 
                     <div class="selection-language">
-                        <button @click="submitClientsLanguageCurrancy" type="button">Save Changes</button>
+                        <button @click="handleSubmitForm">Save Changes</button>
                     </div>
                 </div>
 
@@ -87,7 +76,7 @@ const submitClientsLanguageCurrancy = () => {
                 <div class="main-header-content-top-dropdowns-content">
                     
                     <p v-if="isClientLoggedIn">Welcome 
-                        <strong>{{ props.client.firstname+" "+props.client.lastname }}</strong></p>
+                        <strong>{{ state.firstname+" "+state.lastname }}</strong></p>
                     <p v-else>Welcome to ShopApp</p>
                     
                     <div v-if="isClientLoggedIn" class="main-header-content-top-dropdowns-content-sign-btns">

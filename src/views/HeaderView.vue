@@ -4,8 +4,8 @@ import HeaderTop from '../components/HeaderComponents/HeaderTop.vue';
 import HeaderBottom from '../components/HeaderComponents/HeaderBottom.vue';
 
 const props = defineProps({
-    onChangeHeaderHiddenNavStatus: Function,
     client: Object,
+    onChangeHeaderHiddenNavStatus: Function,
 });
 
 </script>
@@ -13,8 +13,25 @@ const props = defineProps({
 
     <header class="main-header">
         <div class="main-header-content">
-            <HeaderTop :client="client" />
-            <HeaderBottom :onChangeHeaderHiddenNavStatus="onChangeHeaderHiddenNavStatus" :client="client" />
+            <HeaderTop 
+                v-if="props.client != null"
+                :clientId="props.client.id"
+                :firstName="props.client.firstname"
+                :lastName="props.client.lastname" 
+                :currancy="props.client.characteristics.currancy"
+                :language="props.client.characteristics.language"
+                />
+
+            <HeaderTop 
+                v-else
+                :clientId="props.client.id"
+                :currancy="props.client.characteristics.currancy"
+                :language="props.client.characteristics.language"
+                />
+
+            <HeaderBottom 
+                :clientId="props.client.id"
+                :onChangeHeaderHiddenNavStatus="onChangeHeaderHiddenNavStatus" />
         </div>
     </header>
 
@@ -35,4 +52,5 @@ const props = defineProps({
     box-sizing: border-box;
     margin: 0px auto;
 }
+
 </style>

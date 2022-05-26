@@ -14,9 +14,9 @@ const Clients =[
         dateOfBirth: new Date(1996, 5, 10),
         genre: "male",
         characteristics:{
-            language: "english",
+            language: "ENGLISH",
             appearance: "light",
-            currancy: "dollar"
+            currancy: "USA / DOLLARS"
         },
         address: {
             streetName: "123 main street",
@@ -33,10 +33,10 @@ const Clients =[
                 expirationDate: "11/2022",
                 securityCode: "458"
             }
-        ]
+        ],
     },
     {
-        id: "USR-025641",
+        id: "USR-025642",
         firstname: "Sarah",
         lastname: "Johnson",
         email: "sarahdoe1@gmail.com",
@@ -46,9 +46,9 @@ const Clients =[
         dateOfBirth: new Date(1996, 5, 4),
         genre: "female",
         characteristics:{
-            language: "spanish",
+            language: "SPANISH",
             appearance: "dark",
-            currancy: "pesos"
+            currancy: "DOM / PESOS"
         },
         address: {
             streetname: "123 main street",
@@ -65,7 +65,7 @@ const Clients =[
                 expirationDate: "11/2022",
                 securityCode: "458"
             }
-        ]
+        ],
     },
 ];
 

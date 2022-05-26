@@ -16,3 +16,15 @@ export const states = [
 export const cities = [
     "Miami", "Manhattan", "Atlanta", "Dallas"
 ]
+
+export const languages = [
+    "ENGLISH", "SPANISH"
+]
+
+export const currancies = [
+    "USA / DOLLARS", "DOM / PESOS"
+]
+
+export const departments = [
+    "clothing", "Accessories", "Shoes", "Offices", "Home", "Technology"
+];

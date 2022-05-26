@@ -1,30 +1,28 @@
 <script setup>
+import { computed } from 'vue';
 import { RouterLink } from 'vue-router';
-import { ref } from 'vue';
-import ShoppingCarts from '../../assets/data/ShoppingCarts';
-import WishLists from '../../assets/data/WishLists';
+import { departments } from '../../assets/data/DummyData';
+import { shoppingCart } from '../../assets/data/ShoppingCarts';
+import { wishList } from '../../assets/data/WishLists';
 
 const props = defineProps({
+    clientId: String,
     onChangeHeaderHiddenNavStatus: Function,
-    client: Object
 });
 
-const departments = [
-    "clothing", "Accessories", "Shoes", 
-    "Offices", "Home", "Technology"
-];
+const cartListLength = computed(() => {
+    const arr = shoppingCart.filter((current) => {
+        return current.clientId == props.clientId;
+    });
+    return arr.length;
+})
 
-const cartLength = ref(
-    props.client != null? [...ShoppingCarts.filter((current) => {
-        return current.clientId == props.client.id
-    })].length : 0
-);
-
-const wishListLength = ref(
-    props.client != null? [...WishLists.filter((current) => {
-        return current.clientId == props.client.id
-    })].length : 0
-);
+const wishListLength = computed(() => {
+    const arr = wishList.filter((current) => {
+        return current.clientId == props.clientId;
+    });
+    return arr.length;
+})
 
 </script>
 <template>
@@ -45,8 +43,8 @@ const wishListLength = ref(
                 <i class="bi bi-caret-down-fill"></i>
                 <div class="main-header-content-bottom-search-dropdown-content">
 
-                    <RouterLink v-for="d in departments" to="" :key="d" 
-                        class="main-header-content-bottom-search-dropdown-content-links" >{{ d }}</RouterLink>
+                    <RouterLink v-for="item in departments" to="" :key="item" 
+                        class="main-header-content-bottom-search-dropdown-content-links" >{{ item }}</RouterLink>
 
                 </div>
             </ul>
@@ -61,7 +59,7 @@ const wishListLength = ref(
         <div class="main-header-content-bottom-shop">
             <RouterLink to="/shoppingCart" class="main-header-content-bottom-shop-icons shop-cart">
                 <i class="bi bi-cart3"></i>
-                <span class="shop-icons-indicators">{{ cartLength }}</span>
+                <span class="shop-icons-indicators">{{ cartListLength }}</span>
             </RouterLink>
             <RouterLink to="/wishList" class="main-header-content-bottom-shop-icons shop-favorite">
                 <i class="bi bi-heart"></i>

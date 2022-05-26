@@ -5,18 +5,43 @@ import PromoBannerView from "./views/PromoBannerView.vue";
 import HeaderView from "./views/HeaderView.vue";
 import HeaderHiddenNavView from "./views/HeaderHiddenNavView.vue";
 import FooterView from "./views/FooterView.vue";
-
 import Clients from "./assets/data/Clients";
 
 
+const getCurrentClient = () => {
+
+    if(JSON.parse(localStorage.getItem("loggedClient"))){
+        return JSON.parse(localStorage.getItem("loggedClient"));
+    }
+    else if(JSON.parse(localStorage.getItem("guestClient"))){
+        return JSON.parse(localStorage.getItem("guestClient"));
+    }
+    else{
+        localStorage.setItem("guestClient", JSON.stringify({   
+            id: "00000",
+            characteristics:{
+                language: "SPANISH",
+                appearance: "light",
+                currancy: "USA / DOLLARS"
+            }
+        }));
+
+        return JSON.parse(localStorage.getItem("guestClient"));
+    }
+
+}
+
 const state = reactive({
-    client: JSON.parse(localStorage.getItem("loggedClient")),
+    client: getCurrentClient(),
     isHeaderHiddenNavOpen: false
 })
+
+console.log(state.client)
 
 onMounted(()=>{
 
     //localStorage.setItem("loggedClient", JSON.stringify(Clients[0]));
+
 
 });
 
@@ -28,17 +53,24 @@ const changeHeaderHiddenNavStatus = () => {
 <template>
 
     <div>
-        <HeaderHiddenNavView :onHeaderHiddenNavStatus="state.isHeaderHiddenNavOpen"
-        :onChangeHeaderHiddenNavStatus="changeHeaderHiddenNavStatus" :client="state.client" />
+        <HeaderHiddenNavView 
+            :client="state.client" 
+            :onHeaderHiddenNavStatus="state.isHeaderHiddenNavOpen"
+            :onChangeHeaderHiddenNavStatus="changeHeaderHiddenNavStatus" 
+            />
 
         <PromoBannerView />
-        <HeaderView :onChangeHeaderHiddenNavStatus="changeHeaderHiddenNavStatus" :client="state.client" />
+        <HeaderView 
+            :client="state.client"
+            :onChangeHeaderHiddenNavStatus="changeHeaderHiddenNavStatus" 
+            />
 
         <main>
             <RouterView />
         </main>
 
         <FooterView />
+
     </div>
 
 </template>
