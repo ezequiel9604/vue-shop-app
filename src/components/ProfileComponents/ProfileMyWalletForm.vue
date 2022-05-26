@@ -1,11 +1,24 @@
 <script setup>
+import { reactive } from 'vue';
 
 const props = defineProps({
+    clientID: String,
     creditCardNumber: String,
     creditCardOwner: String,
     expirationDate: String,
     securityCode: String
-})
+});
+
+const state = reactive({
+    ccnumber: props.creditCardNumber,
+    ccowner: props.creditCardOwner,
+    expdate: props.expirationDate,
+    cvv: props.securityCode 
+});
+
+const handleSubmitForm = () => {
+    // TODO: submit form
+}
 
 </script>
 <template>
@@ -13,15 +26,14 @@ const props = defineProps({
         <div class="payment-credit-card-content">
 
             <div class="payment-credit-card-content-front">
-                <input type="text" placeholder="0000-0000-0000-0000" :value="props.creditCardNumber" readonly />
-                <input type="text" placeholder="SARAH SMITH DOE" :value="props.creditCardOwner" readonly />
-                <input type="text" placeholder="00/0000" :value="props.expirationDate" readonly />
+                <input type="text" placeholder="0000-0000-0000-0000" :value="state.ccnumber" readonly />
+                <input type="text" placeholder="SARAH SMITH DOE" :value="state.ccowner" readonly />
+                <input type="text" placeholder="00/0000" :value="state.expdate" readonly />
             </div>
             <div class="payment-credit-card-content-back">
                 <article></article>
                 <article></article>
-
-                <input type="text" placeholder="000" :value="props.securityCode" readonly />
+                <input type="text" placeholder="000" :value="state.cvv" readonly />
             </div>
 
         </div>
@@ -29,19 +41,19 @@ const props = defineProps({
 
             <div class="right-my-profile-content-form-single-box">
                 <h6>Credit card number:</h6>
-                <input type="text" :value="props.creditCardNumber" />
+                <input type="text" v-model="state.ccnumber" />
             </div>
             <div class="right-my-profile-content-form-single-box">
                 <h6>Credit card owner number:</h6>
-                <input type="text" :value="props.creditCardOwner" />
+                <input type="text" v-model="state.ccowner" />
             </div>
             <div class="right-my-profile-content-form-single-box">
                 <h6>Experation date:</h6>
-                <input type="text" :value="props.expirationDate" />
+                <input type="text" v-model="state.expdate" />
             </div>
             <div class="right-my-profile-content-form-single-box">
                 <h6>Security code:</h6>
-                <input type="text" :value="props.securityCode" />
+                <input type="text" v-model="state.cvv" />
             </div>
             <div class="right-my-profile-content-form-button-box">
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.

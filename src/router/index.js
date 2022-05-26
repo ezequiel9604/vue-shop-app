@@ -18,76 +18,76 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
       component: Layout,
       children: [{ path: "", component: HomeView }]
     },
     {
       path: '/searchResults',
-      name: 'searchresults',
       component: Layout,
       children: [{ path: "", component: SearchResultsView }]
     },
     {
       path: '/itemDetails',
-      name: 'itemDetails',
       component: Layout,
       children: [{ path: "", component: ItemDetailsView }]
     },
     {
       path: '/shoppingCart',
-      name: 'shoppingCart',
       component: Layout,
       children: [{ path: "", component: ShoppingCartView }]
     },
     {
       path: '/myProfile',
-      name: 'myProfile',
       component: Layout,
       children: [{ path: "", component: ProfileView }]
     },
     {
       path: '/wishList',
-      name: 'wishList',
       component: Layout,
       children: [{ path: "", component: WishListView }]
     },
     {
       path: '/myOrders',
-      name: 'myOrders',
       component: Layout,
       children: [{ path: "", component: OrderView }]
     },
     {
       path: '/orderDetails',
-      name: 'orderDetails',
       component: Layout,
       children: [{ path: "", component: OrderDetailsView }]
     },
     {
       path: '/checkout',
-      name: 'checkout',
       component: Layout,
       children: [{ path: "", component: CheckOutView }]
     },
     {
       path: '/chatCenter',
-      name: 'chatCenter',
       component: Layout,
       children: [{ path: "", component: ChatCenterView }]
     },
     {
       path: '/signup',
-      name: 'signup',
       component: SignUpView,
     },
     {
       path: '/login',
-      name: 'login',
       component: LogInView,
     }
-
   ]
+});
+
+router.beforeEach((to, from, next) => {
+  
+  const isClientLoggedIn = (JSON.parse(localStorage.getItem("loggedClient")) != null)? true:false; 
+  
+  if(isClientLoggedIn == false && to.path == "/myProfile"){
+    next({ path : "/login" });
+  }
+  else{
+    next();
+  }
+
 })
 
 export default router

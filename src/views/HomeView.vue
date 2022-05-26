@@ -11,13 +11,15 @@ const items = reactive(Items);
 </script>
 <template>
 
-  <CategorySlider />
+  <div>
+    <CategorySlider />
 
-  <ItemsInOffer :items="items" />
+    <ItemsInOffer :items="items" />
 
-  <Poster />
+    <Poster />
 
-  <MostSoldItems :items="items" />
+    <MostSoldItems :items="items" />
+  </div>
 
 </template>
 <style>

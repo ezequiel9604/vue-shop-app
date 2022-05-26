@@ -1,22 +1,23 @@
 <script setup>
 import { RouterLink } from 'vue-router';
-import { ref } from 'vue';
+import { computed } from 'vue';
 
 const props = defineProps({
     client: Object
 });
 
-const languageInput = ref(
-    props.client != null? props.client.characteristics.language : "english"
-);
 
-const currancyInput = ref(
-    props.client != null? props.client.characteristics.currancy : "dollar"
-);
+const getCurrancyValue = computed(() => {
+    return props.client != null? props.client.characteristics.currancy : "dollar";
+})
 
-const isClientLoggedIn = ref(
-    props.client != null? true : false
-);
+const getLanguageValue = computed(() => {
+    return props.client != null? props.client.characteristics.language : "english";
+})
+
+const isClientLoggedIn = computed(()=>{
+    return props.client != null? true : false;
+})
 
 const changeLanguageInput = (ev) => {
     languageInput.value = ev.target.value;
@@ -38,10 +39,10 @@ const submitClientsLanguageCurrancy = () => {
 
             <li class="main-header-content-top-dropdowns-links language-link">
                 <i class="bi bi-flag"></i>
-                <p v-if="languageInput == 'english' && currancyInput == 'dollar'">English / Dollars</p>
-                <p v-else-if="languageInput == 'spanish' && currancyInput == 'dollar'">Spanish / Dollars</p>
-                <p v-else-if="languageInput == 'spanish' && currancyInput == 'pesos'">Spanish / Pesos</p>
-                <p v-else-if="languageInput == 'english' && currancyInput == 'pesos'">English / Pesos</p>
+                <p v-if="getLanguageValue == 'english' && getCurrancyValue == 'dollar'">English / Dollars</p>
+                <p v-else-if="getLanguageValue == 'spanish' && getCurrancyValue == 'dollar'">Spanish / Dollars</p>
+                <p v-else-if="getLanguageValue == 'spanish' && getCurrancyValue == 'pesos'">Spanish / Pesos</p>
+                <p v-else-if="getLanguageValue == 'english' && getCurrancyValue == 'pesos'">English / Pesos</p>
 
                 <i class="bi bi-caret-down-fill"></i>
 
@@ -49,7 +50,7 @@ const submitClientsLanguageCurrancy = () => {
 
                     <div class="selection-language">
                         <label>Choose language:</label>
-                        <select @change="changeLanguageInput" v-if="languageInput == 'english'">
+                        <select @change="changeLanguageInput" v-if="getLanguageValue == 'english'">
                             <option  value="english" selected>English</option>
                             <option value="spanish">Spanish</option>
                         </select>
@@ -61,7 +62,7 @@ const submitClientsLanguageCurrancy = () => {
 
                     <div class="selection-language">
                         <label>Choose currancy:</label>
-                        <select @change="changeCurrancyInput" v-if="currancyInput == 'dollar'">
+                        <select @change="changeCurrancyInput" v-if="getCurrancyValue == 'dollar'">
                             <option value="dollar" selected>USA / Dollar</option>
                             <option value="pesos">DOM / Pesos</option>
                         </select>
@@ -85,7 +86,8 @@ const submitClientsLanguageCurrancy = () => {
 
                 <div class="main-header-content-top-dropdowns-content">
                     
-                    <p v-if="isClientLoggedIn">Welcome <strong>{{ props.client.name }}</strong></p>
+                    <p v-if="isClientLoggedIn">Welcome 
+                        <strong>{{ props.client.firstname+" "+props.client.lastname }}</strong></p>
                     <p v-else>Welcome to ShopApp</p>
                     
                     <div v-if="isClientLoggedIn" class="main-header-content-top-dropdowns-content-sign-btns">

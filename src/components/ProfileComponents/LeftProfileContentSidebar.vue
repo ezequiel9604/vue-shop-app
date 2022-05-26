@@ -1,8 +1,25 @@
 <script setup>
+import { reactive } from 'vue';
 
 const props = defineProps({
+    clientId: String,
+    appearance: String,
     onChangeSelectedProfileForm: Function
 });
+
+const state = reactive({
+    appearance: props.appearance
+});
+
+const changeAppearanceState = () => {
+    if(state.appearance == 'light')
+        state.appearance = 'dark';
+    else
+        state.appearance = 'light';
+        
+    console.log(state.appearance);
+}
+
 
 </script>
 <template>
@@ -24,7 +41,7 @@ const props = defineProps({
             <p><i class="bi bi-palette"></i><strong>Appearance</strong></p>
             <p>
                 <label class="left-my-profile-content-sidebar-toggle">
-                    <input type="checkbox" />
+                    <input type="checkbox" @change="changeAppearanceState" :checked="state.appearance == 'dark'" />
                     <span class="left-my-profile-content-sidebar-toggle-slider"></span>
                 </label>
             </p>

@@ -5,17 +5,26 @@ import WomanImage from '../imgs/users/placeholder-woman.png';
 const Clients =[
     {   
         id: "USR-025671",
-        name: "John Smith Doe",
+        firstname: "John",
+        lastname: "Smith Doe",
         email: "johndoe1@gmail.com",
-        phone: "809-000-0000",
-        image: userImage,
-        dateOfBirth: new Date(1996, 5, 4),
+        firstphone: "809-111-0000",
+        secondphone: "809-222-0000",
+        image: ManImage,
+        dateOfBirth: new Date(1996, 5, 10),
         genre: "male",
         characteristics:{
             language: "english",
+            appearance: "light",
             currancy: "dollar"
         },
-        address: "123 main street, apt 4-b, Miami, Florida, 23548",
+        address: {
+            streetName: "123 main street",
+            apartment: "apt 4-b",
+            city: "Miami",
+            state: "Florida",
+            zipCode: "56810"
+        },
         note: "to the delivery guy, once he arrives please ring the door bell.",
         wallets: [
             {
@@ -28,17 +37,26 @@ const Clients =[
     },
     {
         id: "USR-025641",
-        name: "Sarah Smith Doe",
+        firstname: "Sarah",
+        lastname: "Johnson",
         email: "sarahdoe1@gmail.com",
-        phone: "809-000-0000",
+        firstphone: "809-111-0000",
+        secondphone: "809-222-0000",
         image: ManImage,
         dateOfBirth: new Date(1996, 5, 4),
         genre: "female",
         characteristics:{
             language: "spanish",
+            appearance: "dark",
             currancy: "pesos"
         },
-        address: "123 main street, apt 4-b, Miami, Florida, 23548",
+        address: {
+            streetname: "123 main street",
+            apartment: "apt 4-b",
+            city: "Miami",
+            state: "Florida",
+            zipcode: "56810"
+        },
         note: "to the delivery guy, once he arrives please ring the door bell",
         wallets: [
             {

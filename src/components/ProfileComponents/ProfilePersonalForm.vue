@@ -1,13 +1,42 @@
 <script setup>
+import { reactive } from 'vue';
+import { days, months, years, states, cities } from '../../assets/data/DummyData';
 
 const props = defineProps({
-    name: String,
-    image: String,
-    phone: String,
-    dateOfBirth: Date,
+    clientId: String,
+    firstname: String,
+    lastname: String,
+    image: String,  
+    firstphone: String,
+    secondphone: String,
+    dateofbirth: Date,
     genre: String,
-    address: String
+    address: Object
 });
+
+const state = reactive({
+    firstname: props.firstname,
+    lastname: props.lastname,
+    image: props.image,
+    firstphone: props.firstphone,
+    secondphone: props.secondphone,
+    genre: props.genre,
+    streetname: props.address.streetName,
+    apartment: props.address.apartment,
+    city: props.address.city,
+    state: props.address.state,
+    zipcode: props.address.zipCode,
+    yearofbirth: props.dateofbirth.getFullYear(),
+    monthofbirth: props.dateofbirth.getMonth(),
+    dayofbirth: props.dateofbirth.getDay()
+});
+
+
+const handleSubmitForm = () => {
+    // TODO: submit form values
+    
+}
+
 
 </script>
 <template>
@@ -16,7 +45,7 @@ const props = defineProps({
         <div class="right-my-profile-content-form-header">
             <h2>{{ props.name }}</h2>
             <figure>
-                <img :src="props.image" alt="" />
+                <img :src="state.image" alt="" />
             </figure>
             <label for="image-file">
                 <input type="file" id="image-file" />
@@ -28,55 +57,49 @@ const props = defineProps({
 
             <div class="right-my-profile-content-form-double-box">
                 <h6>Full name:</h6>
-                <input type="text" :value="props.name" />
-                <input type="text" value="Smith Doe" />
+                <input type="text" v-model="state.firstname" />
+                <input type="text" v-model="state.lastname" />
             </div>
             <div class="right-my-profile-content-form-double-box">
                 <h6>Phone:</h6>
-                <input type="text" :value="props.phone" />
-                <input type="text" :value="props.phone" />
+                <input type="text" v-model="state.firstphone" />
+                <input type="text" v-model="state.secondphone" />
             </div>
             <div class="right-my-profile-content-form-triple-box">
                 <h6>Date of birth:</h6>
-                <select>
-                    <option value="">01</option>
-                    <option value="">02</option>
-                    <option value="">03</option>
+                <select v-model="state.dayofbirth">
+                    <option v-for="d in days" :value="d" :selected="d === state.dayofbirth" :key="d">{{ d }}</option>
                 </select>
-                <select>
-                    <option value="">January</option>
-                    <option value="">February</option>
-                    <option value="">March</option>
+                <select v-model="state.monthofbirth">
+                    <option v-for="[n, m] in months" :value="n" :selected="n === state.monthofbirth" :key="n">{{ m }}</option>
                 </select>
-                <select>
-                    <option value="">2022</option>
-                    <option value="">2021</option>
-                    <option value="">2020</option>
+                <select v-model="state.yearofbirth">
+                    <option v-for="y in years" :value="y" :selected="y === state.yearofbirth" :key="y">{{ y }}</option>
                 </select>
             </div>
             <div class="right-my-profile-content-form-mix-box">
                 <h6>Address:</h6>
-                <input type="text" style="width:68%" value="1234 main street" />
-                <input type="text" style="width:30%" value="apt-2b" />
+                <input type="text" style="width:68%" v-model="state.streetname" />
+                <input type="text" style="width:30%" v-model="state.apartment" />
                 <select>
-                    <option value="">Miami</option>
+                    <option v-for="c in cities" :value="c" :selected="c == state.city" :key="c">{{ c }}</option>
                 </select>
                 <select>
-                    <option value="">Florida</option>
+                    <option v-for="s in states" :value="s" :selected="s == state.state" :key="s">{{ s }}</option>
                 </select>
-                <input type="text" style="width:20%" value="45687" />
+                <input type="text" style="width:20%" v-model="state.zipcode" />
             </div>
             <div class="right-my-profile-content-form-radio-box">
                 <h6>Gender:</h6>
-                <label> <input type="radio" name="radio" checked />&nbsp; Female</label>
-                <label> <input type="radio" name="radio" />&nbsp; Male</label>
+                <label> <input type="radio" v-model="state.genre" value="female" :checked="state.genre == 'female'" />&nbsp; Female</label>
+                <label> <input type="radio" v-model="state.genre" value="male" :checked="state.genre == 'male'" />&nbsp; Male</label>
             </div>
             <div class="right-my-profile-content-form-button-box">
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Laboriosam neque vero sequi culpa nulla quis magnam sunt voluptatibus perspiciatis,
                     ex rem error omnis ea? Quisquam itaque impedit facilis! Commodi, facere.</p>
 
-                <button>Save changes</button>
+                <button @click="handleSubmitForm">Save changes</button>
 
             </div>
 

@@ -1,16 +1,18 @@
 <script setup>
-import { ref } from 'vue';
+import { reactive } from 'vue';
 import LeftProfileContentSidebar from '../components/ProfileComponents/LeftProfileContentSidebar.vue';
 import RightProfileContentSidebar from '../components/ProfileComponents/RightProfileContentSidebar.vue';
 import ProfilePersonalForm from '../components/ProfileComponents/ProfilePersonalForm.vue';
 import ProfileAccountForm from '../components/ProfileComponents/ProfileAccountForm.vue';
 import ProfileMyWalletForm from '../components/ProfileComponents/ProfileMyWalletForm.vue';
-import Clients from '../assets/data/Clients';
 
-const selectedProfileForm = ref(0);
+const state = reactive({
+    client: JSON.parse(localStorage.getItem("loggedClient")),
+    selectedProfileForm: 0
+});
 
-const changeSelectedProfileForm = (num) => {
-    selectedProfileForm.value = num;
+const changeSelectedProfileForm = (value) => {
+    state.selectedProfileForm = value;
 }
 
 </script>
@@ -23,39 +25,45 @@ const changeSelectedProfileForm = (num) => {
             <div class="left-my-profile-content">
 
                 <LeftProfileContentSidebar 
+                    :clientId="state.client.id"
+                    :appearance="state.client.characteristics.appearance"
                     :onChangeSelectedProfileForm="changeSelectedProfileForm" />
 
             </div>
 
             <div class="right-my-profile-content">
 
-                <RightProfileContentSidebar
-                    :onChangeSelectedProfileForm="changeSelectedProfileForm" />
+                <RightProfileContentSidebar :onChangeSelectedProfileForm="changeSelectedProfileForm" />
 
-                <div v-if="selectedProfileForm === 0" class="right-my-profile-content-form">
+                <div v-if="state.selectedProfileForm === 0" class="right-my-profile-content-form">
                     <ProfilePersonalForm 
-                        :name="Clients[1].name" 
-                        :image="Clients[1].image" 
-                        :phone="Clients[1].phone"
-                        :dateOfBirth="Clients[1].dateOfBirth" 
-                        :genre="Clients[1].genre" 
-                        :address="Clients[1].address"  
+                        :clientId="state.client.id"
+                        :firstname="state.client.firstname"
+                        :lastname="state.client.lastname"
+                        :image="state.client.image" 
+                        :firstphone="state.client.firstphone"
+                        :secondphone="state.client.secondphone"
+                        :dateofbirth="new Date(state.client.dateOfBirth)" 
+                        :genre="state.client.genre"
+                        :address="state.client.address" 
                         />
                 </div>
 
-                <div v-else-if="selectedProfileForm === 1" class="right-my-profile-content-form-accountInfo">
-                    <ProfileAccountForm
-                        :email="Clients[1].email" 
+                <div v-else-if="state.selectedProfileForm === 1" class="right-my-profile-content-form-accountInfo">
+                    <ProfileAccountForm 
+                        :clientId="state.client.id"
+                        :email="state.client.email" 
                         />
                 </div>
 
-                <div v-else-if="selectedProfileForm === 2" class="right-my-profile-content-form-myWallet">
+                <div v-else-if="state.selectedProfileForm === 2" class="right-my-profile-content-form-myWallet">
                     <ProfileMyWalletForm
-                     :creditCardNumber="Clients[1].wallets[0].creditCardNumber"
-                     :creditCardOwner="Clients[1].wallets[0].creditCardOwner"
-                     :expirationDate="Clients[1].wallets[0].expirationDate"
-                     :securityCode="Clients[1].wallets[0].securityCode" 
-                     />
+                        :clientId="state.client.id"
+                        :creditCardNumber="state.client.wallets[0].creditCardNumber"
+                        :creditCardOwner="state.client.wallets[0].creditCardOwner"
+                        :expirationDate="state.client.wallets[0].expirationDate"
+                        :securityCode="state.client.wallets[0].securityCode" 
+                        />
                 </div>
 
             </div>
@@ -66,7 +74,6 @@ const changeSelectedProfileForm = (num) => {
 
 </template>
 <style>
-
 .my-profile-content {
     width: 80%;
     box-sizing: border-box;
@@ -77,25 +84,16 @@ const changeSelectedProfileForm = (num) => {
     align-items: flex-start;
 }
 
-/* ////////////////////////////////////////////////////// */
-/* ///             left my profile content            /// */
-/* ////////////////////////////////////////////////////// */
 .left-my-profile-content {
     width: 27%;
     box-sizing: border-box;
 }
 
-/* ////////////////////////////////////////////////////// */
-/* ///           right my profile content             /// */
-/* ////////////////////////////////////////////////////// */
 .right-my-profile-content {
     width: 68%;
     box-sizing: border-box;
 }
 
-/* ////////////////////////////////////////////////////// */
-/* ///          right my profile content form         /// */
-/* ////////////////////////////////////////////////////// */
 .right-my-profile-content-form,
 .right-my-profile-content-form-accountInfo,
 .right-my-profile-content-form-myWallet {
@@ -103,9 +101,6 @@ const changeSelectedProfileForm = (num) => {
     box-sizing: border-box;
 }
 
-/* ////////////////////////////////////////////////////// */
-/* ///          right my profile content form         /// */
-/* ////////////////////////////////////////////////////// */
 .right-my-profile-content-form-content,
 .right-my-profile-content-form-accountInfo-content,
 .right-my-profile-content-form-myWallet-content {
@@ -113,8 +108,10 @@ const changeSelectedProfileForm = (num) => {
     box-sizing: border-box;
 }
 
-.right-my-profile-content-form-single-box, .right-my-profile-content-form-double-box,
-.right-my-profile-content-form-triple-box, .right-my-profile-content-form-mix-box,
+.right-my-profile-content-form-single-box,
+.right-my-profile-content-form-double-box,
+.right-my-profile-content-form-triple-box,
+.right-my-profile-content-form-mix-box,
 .right-my-profile-content-form-button-box {
     width: 100%;
     box-sizing: border-box;
@@ -125,8 +122,10 @@ const changeSelectedProfileForm = (num) => {
     flex-wrap: wrap;
 }
 
-.right-my-profile-content-form-single-box h6, .right-my-profile-content-form-double-box h6,
-.right-my-profile-content-form-triple-box h6, .right-my-profile-content-form-mix-box h6,
+.right-my-profile-content-form-single-box h6,
+.right-my-profile-content-form-double-box h6,
+.right-my-profile-content-form-triple-box h6,
+.right-my-profile-content-form-mix-box h6,
 .right-my-profile-content-form-radio-box h6 {
     display: block;
     width: 100%;
@@ -136,8 +135,10 @@ const changeSelectedProfileForm = (num) => {
     color: #333333;
 }
 
-.right-my-profile-content-form-single-box input, .right-my-profile-content-form-double-box input,
-.right-my-profile-content-form-triple-box select, .right-my-profile-content-form-mix-box select,
+.right-my-profile-content-form-single-box input,
+.right-my-profile-content-form-double-box input,
+.right-my-profile-content-form-triple-box select,
+.right-my-profile-content-form-mix-box select,
 .right-my-profile-content-form-mix-box input {
     display: block;
     margin-top: 10px;
@@ -164,7 +165,6 @@ const changeSelectedProfileForm = (num) => {
 .right-my-profile-content-form-mix-box select {
     width: 38%;
 }
-
 .right-my-profile-content-form-radio-box label {
     width: fit-content;
     display: inline-flex;
@@ -264,21 +264,22 @@ const changeSelectedProfileForm = (num) => {
         display: none;
     }
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///           right my profile content             /// */
-    /* ////////////////////////////////////////////////////// */
     .right-my-profile-content {
         width: 100%;
     }
 
-    .right-my-profile-content-form-single-box h6, .right-my-profile-content-form-double-box h6,
-    .right-my-profile-content-form-triple-box h6, .right-my-profile-content-form-mix-box h6,
+    .right-my-profile-content-form-single-box h6,
+    .right-my-profile-content-form-double-box h6,
+    .right-my-profile-content-form-triple-box h6,
+    .right-my-profile-content-form-mix-box h6,
     .right-my-profile-content-form-radio-box h6 {
         font-size: 14px;
     }
 
-    .right-my-profile-content-form-single-box input, .right-my-profile-content-form-double-box input,
-    .right-my-profile-content-form-triple-box select, .right-my-profile-content-form-mix-box select,
+    .right-my-profile-content-form-single-box input,
+    .right-my-profile-content-form-double-box input,
+    .right-my-profile-content-form-triple-box select,
+    .right-my-profile-content-form-mix-box select,
     .right-my-profile-content-form-mix-box input {
         margin-top: 10px;
         font-size: 14px;
@@ -289,21 +290,27 @@ const changeSelectedProfileForm = (num) => {
     .right-my-profile-content-form-single-box input {
         width: 100%;
     }
+
     .right-my-profile-content-form-double-box input {
         width: 49%;
     }
+
     .right-my-profile-content-form-triple-box select {
         width: 32%;
     }
+
     .right-my-profile-content-form-mix-box select {
         width: 38%;
     }
+
     .right-my-profile-content-form-radio-box label {
         font-size: 14px;
     }
+
     .right-my-profile-content-form-button-box {
         margin-top: 30px;
     }
+
     .right-my-profile-content-form-button-box p {
         width: 70%;
         font-size: 12px;
@@ -344,20 +351,26 @@ const changeSelectedProfileForm = (num) => {
         margin: 0 auto;
     }
 
-    .right-my-profile-content-form-single-box, .right-my-profile-content-form-double-box,
-    .right-my-profile-content-form-triple-box, .right-my-profile-content-form-mix-box,
+    .right-my-profile-content-form-single-box,
+    .right-my-profile-content-form-double-box,
+    .right-my-profile-content-form-triple-box,
+    .right-my-profile-content-form-mix-box,
     .right-my-profile-content-form-button-box {
         margin-bottom: 20px;
     }
 
-    .right-my-profile-content-form-single-box h6, .right-my-profile-content-form-double-box h6,
-    .right-my-profile-content-form-triple-box h6, .right-my-profile-content-form-mix-box h6,
+    .right-my-profile-content-form-single-box h6,
+    .right-my-profile-content-form-double-box h6,
+    .right-my-profile-content-form-triple-box h6,
+    .right-my-profile-content-form-mix-box h6,
     .right-my-profile-content-form-radio-box h6 {
         font-size: 13px;
     }
 
-    .right-my-profile-content-form-single-box input, .right-my-profile-content-form-double-box input,
-    .right-my-profile-content-form-triple-box select, .right-my-profile-content-form-mix-box select,
+    .right-my-profile-content-form-single-box input,
+    .right-my-profile-content-form-double-box input,
+    .right-my-profile-content-form-triple-box select,
+    .right-my-profile-content-form-mix-box select,
     .right-my-profile-content-form-mix-box input {
         margin-top: 10px;
         font-size: 12px;
@@ -367,18 +380,23 @@ const changeSelectedProfileForm = (num) => {
     .right-my-profile-content-form-single-box input {
         width: 100%;
     }
+
     .right-my-profile-content-form-double-box input {
         width: 49%;
     }
+
     .right-my-profile-content-form-triple-box select {
         width: 32%;
     }
+
     .right-my-profile-content-form-mix-box select {
         width: 38%;
     }
+
     .right-my-profile-content-form-radio-box label {
         font-size: 13px;
     }
+
     .right-my-profile-content-form-button-box {
         margin-top: 30px;
     }

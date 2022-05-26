@@ -1,6 +1,6 @@
 <script setup>
 import { RouterView } from "vue-router";
-import { onMounted, ref } from "vue";
+import { reactive, onMounted } from "vue";
 import PromoBannerView from "./views/PromoBannerView.vue";
 import HeaderView from "./views/HeaderView.vue";
 import HeaderHiddenNavView from "./views/HeaderHiddenNavView.vue";
@@ -8,30 +8,38 @@ import FooterView from "./views/FooterView.vue";
 
 import Clients from "./assets/data/Clients";
 
-const isHeaderHiddenNavOpen = ref(false);
+
+const state = reactive({
+    client: JSON.parse(localStorage.getItem("loggedClient")),
+    isHeaderHiddenNavOpen: false
+})
+
+onMounted(()=>{
+
+    //localStorage.setItem("loggedClient", JSON.stringify(Clients[0]));
+
+});
 
 const changeHeaderHiddenNavStatus = () => {
-    isHeaderHiddenNavOpen.value = !isHeaderHiddenNavOpen.value;
+    state.isHeaderHiddenNavOpen = !state.isHeaderHiddenNavOpen;
 }
-
-const client = ref(Clients[0]);
-
 
 </script>
 <template>
 
-    <HeaderHiddenNavView :onHeaderHiddenNavStatus="isHeaderHiddenNavOpen"
-        :onChangeHeaderHiddenNavStatus="changeHeaderHiddenNavStatus" :client="client" />
+    <div>
+        <HeaderHiddenNavView :onHeaderHiddenNavStatus="state.isHeaderHiddenNavOpen"
+        :onChangeHeaderHiddenNavStatus="changeHeaderHiddenNavStatus" :client="state.client" />
 
-    <PromoBannerView />
+        <PromoBannerView />
+        <HeaderView :onChangeHeaderHiddenNavStatus="changeHeaderHiddenNavStatus" :client="state.client" />
 
-    <HeaderView :onChangeHeaderHiddenNavStatus="changeHeaderHiddenNavStatus" :client="client" />
+        <main>
+            <RouterView />
+        </main>
 
-    <main>
-        <RouterView />
-    </main>
-
-    <FooterView />
+        <FooterView />
+    </div>
 
 </template>
 <style>
