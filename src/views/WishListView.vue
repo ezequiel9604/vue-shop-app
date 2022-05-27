@@ -1,7 +1,7 @@
 <script setup>
 import Pagination from '../components/SearchResultsComponents/Pagination.vue';
 import RowExtraLargeSample from '../components/WishListComponents/RowExtraLargeSample.vue';
-import Items from '../assets/data/Items';
+import { Items } from '../assets/data/Items';
 
 </script>
 <template>

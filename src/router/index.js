@@ -84,6 +84,9 @@ router.beforeEach((to, from, next) => {
   if(isClientLoggedIn == false && to.path == "/myProfile"){
     next({ path : "/login" });
   }
+  else if(isClientLoggedIn == false && to.path == "/myOrders"){
+    next({ path: "/login"});
+  }
   else{
     next();
   }

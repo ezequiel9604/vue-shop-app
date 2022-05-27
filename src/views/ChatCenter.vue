@@ -4,7 +4,7 @@ import ColumnMediumSample from '../components/SearchResultsComponents/ColumnMedi
 import ChatCenterToggleButton from '../components/ChatCenterComponents/ChatCenterToggleButton.vue';
 import ChatCenterMessage from '../components/ChatCenterComponents/ChatCenterMessage.vue';
 import ChatCenterSubmit from '../components/ChatCenterComponents/ChatCenterSubmit.vue';
-import Items from '../assets/data/Items';
+import { Items } from '../assets/data/Items';
 import Admins from '../assets/data/Admins';
 import Clients from '../assets/data/Clients';
 import Chats from '../assets/data/Chats';

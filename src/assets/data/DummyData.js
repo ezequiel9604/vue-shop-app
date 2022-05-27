@@ -26,5 +26,9 @@ export const currancies = [
 ]
 
 export const departments = [
-    "clothing", "Accessories", "Shoes", "Offices", "Home", "Technology"
+    "Clothing", "Accessories", "Shoes", "Offices", "Home", "Technology"
 ];
+
+export const status = [
+    "All", "Received", "On its way", "Getting out", "Canceled"
+]

@@ -8,8 +8,14 @@ const props = defineProps({
     shippingCost: Number,
     orderDate: String,
     total: Number,
-    items: Array
+    purchases: Array,
+    status: String
 });
+
+const calculateSubtotal = (price, amount, descount) => {
+    let subtotal = price * amount;
+    return subtotal - subtotal * (descount / 100)
+}
 
 </script>
 <template>
@@ -37,24 +43,22 @@ const props = defineProps({
             </div>
         </div>
 
-        <OrderMiniSample v-for="i in items" 
-            :images="i.images"
-            :title="i.title"
-            :price="i.price"
-            :amount="i.amount"
-            :condition="i.condition"
-            :status="i.status"
-            :subtotal="i.subtotal" 
-            :key="i.id"/>
+        <OrderMiniSample v-for="p in props.purchases" 
+            :images="p.item.images"
+            :title="p.item.title"
+            :price="p.item.price"
+            :amount="p.amount"
+            :condition="p.condition"
+            :status="props.status"
+            :subtotal="calculateSubtotal(p.item.price, p.amount, p.item.descount)" 
+            :key="p.id"
+            />
 
     </div>
 
 </template>
 <style>
 
-/* ////////////////////////////////////////////////////// */
-/* ///                myorder samples                 /// */ 
-/* ////////////////////////////////////////////////////// */
 .myorder-samples{
     width: 100%;
     margin-bottom: 20px;
@@ -97,9 +101,6 @@ const props = defineProps({
 
 @media screen and (max-width: 834px) {
     
-    /* ////////////////////////////////////////////////////// */
-    /* ///                myorder samples                 /// */ 
-    /* ////////////////////////////////////////////////////// */
     .myorder-samples{
         margin-bottom: 15px;
     }
@@ -121,9 +122,6 @@ const props = defineProps({
 
 @media screen and (max-width: 414px) {
     
-    /* ////////////////////////////////////////////////////// */
-    /* ///                myorder samples                 /// */ 
-    /* ////////////////////////////////////////////////////// */
     .myorder-samples{
         margin-bottom: 15px;
     }

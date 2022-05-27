@@ -2,22 +2,22 @@
 
 const props = defineProps({
     sets: Number,
-    selectedPage: Number,
-    onChangeSelectedSet: Function
+    selectedset: Number,
+    onchangeselectedset: Function
 });
 
 </script>
 <template>
     <div class="pagination">
         <div class="pagination-content">
-            <button @click="() => props.onChangeSelectedSet(props.selectedPage-1)"
-                :disabled="props.selectedPage == 1">Previous</button>    
+            <button @click="() => props.onchangeselectedset(props.selectedset-1)"
+                :disabled="props.selectedset == 1">Previous</button>    
             <button v-for="n in sets"
-                @click="() => props.onChangeSelectedSet(n)" 
-                :class=" props.selectedPage == n? 'pagination-content-button-active':''" 
+                @click="() => props.onchangeselectedset(n)" 
+                :class=" props.selectedset == n? 'pagination-content-button-active':''" 
                 :key="n">{{ n }}</button>
-            <button @click="() => props.onChangeSelectedSet(props.selectedPage+1)"
-                :disabled="props.selectedPage == props.sets" >Next</button>
+            <button @click="() => props.onchangeselectedset(props.selectedset+1)"
+                :disabled="props.selectedset == props.sets" >Next</button>
         </div>
     </div>
 </template>

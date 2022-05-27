@@ -1,8 +1,7 @@
 import ItemImage1 from "../imgs/samples/tablet.png";
 import ItemImage2 from "../imgs/samples/tablet-2.png";
 
-
-const Items = [
+export const Items = [
     { 
         id: "ART-0001",
         title: `1 Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -244,5 +243,3 @@ const Items = [
         stock: 4,
     },
 ];
-
-export default Items;

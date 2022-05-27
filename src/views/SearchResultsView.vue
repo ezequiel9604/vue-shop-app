@@ -6,9 +6,9 @@ import Pagination from '../components/SearchResultsComponents/Pagination.vue';
 import ColumnMediumSample from '../components/SearchResultsComponents/ColumnMediumSample.vue';
 import FilterHorizontalSidebar from '../components/SearchResultsComponents/FilterHorizontalSidebar.vue';
 import FilterResultHiddenSidebar from '../components/SearchResultsComponents/FilterResultHiddenSidebar.vue';
-import Items from "../assets/data/Items";
+import { Items } from "../assets/data/Items";
 
-const isHiddenSidebarOpen = ref(false);
+const props = defineProps({ clientid: String });
 
 const state = reactive({
     items: Items,
@@ -23,7 +23,8 @@ const state = reactive({
     capacities: [],
     departments: [],
 
-    selectedSet: 1
+    selectedSet: 1,
+    isHiddenSidebarOpen: false
 });
 
 
@@ -79,7 +80,7 @@ const changeSelectedSet = (value) => {
 }
 
 const changeHiddenSidebarStatus = () => {
-    isHiddenSidebarOpen.value = !isHiddenSidebarOpen.value;
+    state.isHiddenSidebarOpen = !state.isHiddenSidebarOpen;
 }
 
 const getFilteredItems = computed(() => {
@@ -147,7 +148,7 @@ const getItemsSets = computed(() => {
 <template>
 
     <FilterResultHiddenSidebar 
-        :onIsHiddenSidebarOpen="isHiddenSidebarOpen" 
+        :onIsHiddenSidebarOpen="state.isHiddenSidebarOpen" 
         :onChangeHiddenSidebarStatus="changeHiddenSidebarStatus"
         :category="state.items[3].category" 
         :state="state.states" 
@@ -173,7 +174,7 @@ const getItemsSets = computed(() => {
     <div class="category-search-results">
 
         <FilterResultSidebar 
-            :category="state.items[0].category" 
+            :category="state.items[3].category" 
             :state="state.states" 
             :size="state.sizes" 
             :capacity="state.capacities" 
@@ -215,8 +216,8 @@ const getItemsSets = computed(() => {
 
                 <Pagination 
                     :sets="getItemsSets" 
-                    :selectedPage="state.selectedSet"
-                    :onChangeSelectedSet="changeSelectedSet" />
+                    :selectedset="state.selectedSet"
+                    :onchangeselectedset="changeSelectedSet" />
 
             </div>
 
@@ -253,9 +254,6 @@ const getItemsSets = computed(() => {
     background-color: #e6e6e6;
 }
 
-/* ////////////////////////////////////////////////////// */
-/* ///      right category search results             /// */ 
-/* ////////////////////////////////////////////////////// */
 .category-search-results-content{
     width: 76%;
     box-sizing: border-box;
@@ -263,9 +261,6 @@ const getItemsSets = computed(() => {
     background-color: transparent;
 }
 
-/* ////////////////////////////////////////////////////// */
-/* ///     filter results hidden sidebar button       /// */ 
-/* ////////////////////////////////////////////////////// */
 .filter-results-hidden-sidebar-button{
     width: 100%;
     margin: 10px auto;
@@ -286,9 +281,6 @@ const getItemsSets = computed(() => {
     border-radius: 50px;
 }
 
-/* ////////////////////////////////////////////////////// */
-/* ///       category search results sidebar          /// */ 
-/* ////////////////////////////////////////////////////// */
 .category-search-results-content-sample-content{
     width: 100%;
     margin: 10px auto;
@@ -299,9 +291,6 @@ const getItemsSets = computed(() => {
     border-radius: 6px;
 }
 
-/* ////////////////////////////////////////////////////// */
-/* ///   category search results most sold samples    /// */ 
-/* ////////////////////////////////////////////////////// */
 .category-search-results-most-sold-samples{
     width: 100%;
     margin: 10px auto;
@@ -325,16 +314,10 @@ const getItemsSets = computed(() => {
 
 @media screen and (max-width: 834px) {
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///     filter results hidden sidebar button       /// */ 
-    /* ////////////////////////////////////////////////////// */
     .filter-results-hidden-sidebar-button{
         display: flex; /*this will change*/
     }
     
-    /* ////////////////////////////////////////////////////// */
-    /* ///            category search results             /// */ 
-    /* ////////////////////////////////////////////////////// */
     .category-search-results{
         justify-content: center;
     }
@@ -343,9 +326,6 @@ const getItemsSets = computed(() => {
         margin-right: 0%;
     }
     
-    /* ////////////////////////////////////////////////////// */
-    /* ///   category search results most sold samples    /// */ 
-    /* ////////////////////////////////////////////////////// */
     .category-search-results-most-sold-samples{
         margin-bottom: 15px;
     }
@@ -357,16 +337,10 @@ const getItemsSets = computed(() => {
 
 @media screen and (max-width: 414px) {
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///          filter results sidebar                /// */ 
-    /* ////////////////////////////////////////////////////// */
     .filter-results-sidebar{
         display: none;
     }
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///     filter results hidden sidebar button       /// */ 
-    /* ////////////////////////////////////////////////////// */
     .filter-results-hidden-sidebar-button{
         display: flex; /*this will change*/
     }
@@ -375,16 +349,10 @@ const getItemsSets = computed(() => {
         padding: 6px 15px;
     }
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///       filter results horizontal sidebar        /// */ 
-    /* ////////////////////////////////////////////////////// */
     .filter-results-horizontal-sidebar{
         display: none;
     }
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///            category search results             /// */ 
-    /* ////////////////////////////////////////////////////// */
     .category-search-results{
         justify-content: center;
     }
@@ -392,9 +360,6 @@ const getItemsSets = computed(() => {
         width: 95%;
     }
     
-    /* ////////////////////////////////////////////////////// */
-    /* ///   category search results most sold samples    /// */ 
-    /* ////////////////////////////////////////////////////// */
     .category-search-results-most-sold-samples{
         margin-bottom: 15px;
     }

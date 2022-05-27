@@ -5,7 +5,7 @@ import ColumnMediumSample from '../components/SearchResultsComponents/ColumnMedi
 import OrderSummaryRightSidebar from '../components/ShoppingCartComponents/OrderSummaryRightSidebar.vue';
 import HiddenOrderSummary from '../components/ShoppingCartComponents/HiddenOrderSummary.vue';
 import ShoppingCartContentEmpty from '../components/ShoppingCartComponents/ShoppingCartContentEmpty.vue';
-import Items from '../assets/data/Items';
+import { Items } from '../assets/data/Items';
 
 </script>
 <template>

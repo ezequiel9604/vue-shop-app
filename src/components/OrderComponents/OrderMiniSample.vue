@@ -11,6 +11,7 @@ const props = defineProps({
     subtotal: Number
 });
 
+
 </script>
 <template>
 
@@ -44,10 +45,6 @@ const props = defineProps({
 </template>
 <style>
 
-
-/* ////////////////////////////////////////////////////// */
-/* ///           myorder samples content              /// */ 
-/* ////////////////////////////////////////////////////// */
 .myorder-samples-content{
     width: 100%;
     box-sizing: border-box;

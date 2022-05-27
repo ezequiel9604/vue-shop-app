@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import TopItemDetails from '../components/ItemDetailsComponents/TopItemDetails.vue';
 import ColumnMediumSample from '../components/SearchResultsComponents/ColumnMediumSample.vue';
 import ManImage from '../assets/imgs/users/placeholder-man.png';
-import Items from '../assets/data/Items';
+import { Items } from '../assets/data/Items';
 import Comments from '../assets/data/Comments';
 
 const selectedSection = ref(0);

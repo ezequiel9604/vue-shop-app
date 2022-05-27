@@ -36,12 +36,10 @@ const state = reactive({
     isHeaderHiddenNavOpen: false
 })
 
-console.log(state.client)
 
 onMounted(()=>{
 
     //localStorage.setItem("loggedClient", JSON.stringify(Clients[0]));
-
 
 });
 
@@ -66,7 +64,7 @@ const changeHeaderHiddenNavStatus = () => {
             />
 
         <main>
-            <RouterView />
+            <RouterView :clientid="state.client.id" />
         </main>
 
         <FooterView />

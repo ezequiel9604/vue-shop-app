@@ -1,8 +1,98 @@
 <script setup>
+import { reactive, computed } from 'vue';
 import OrderSample from '../components/OrderComponents/OrderSample.vue';
-import PaginationVue from '../components/SearchResultsComponents/Pagination.vue';
-import Orders from '../assets/data/Orders';
+import OrderFilterBar from '../components/OrderComponents/OrderFilterBar.vue';
+import Pagination from '../components/SearchResultsComponents/Pagination.vue';
+import { Orders, Purchases } from '../assets/data/Orders';
+import { Items } from '../assets/data/Items';
 
+const props = defineProps({clientid: String});
+
+const state = reactive({
+    orderNumber: "",
+    orderDate: "",
+    orderStatus: "All",
+
+    selectedSet: 1
+});
+
+const changeOrderNumber = (value) => {
+    state.orderNumber= value.toUpperCase();
+    console.log(state.orderNumber)
+}
+
+const changeOrderStatus = (value) => {
+    state.orderStatus= value;
+}
+
+const changeSelectedSet = (value) => {
+    state.selectedSet = value;
+}
+
+const getClientsOrders = computed(() => {
+
+    // returns all orders made by this client
+    let ords = Orders.filter((current) => {
+        if(current.clientId == props.clientid){
+            return current;
+        }
+    })
+
+    // adds an array field called 'purchases'
+    ords.forEach((current) => {
+        current['purchases'] = [];
+    })
+
+    // fill the array 'purchases' with objects that contains 'id', 'amount', 'condition', 'item'
+    ords.forEach((current) => {  
+        for (let i = 0; i < Purchases.length; i++) {     
+            if(Purchases[i].orderId == current.id){
+                let item;
+                Items.forEach((element) => {
+                    if(element.id == Purchases[i].itemId)
+                        item = element;
+                });
+
+                current.purchases.push({
+                    id: Purchases[i].id,
+                    amount: Purchases[i].amount,
+                    condition: Purchases[i].condition,
+                    item: item
+                });
+            }    
+        }
+    });
+
+    // filter orders by order number
+    if(state.orderNumber != ""){
+        ords = [...ords.filter((current) => {
+            if(current.id == state.orderNumber)
+                return current;    
+        })];
+    }
+
+    // filter orders by order status
+    if(state.orderStatus != "All"){
+        ords = [...ords.filter((current) => {
+            if(current.status == state.orderStatus)
+                return current;    
+        })]; 
+    }
+
+    return ords;
+});
+
+const getOrdersSets = computed(() => {
+    let sets = getClientsOrders.value.length / 3;
+
+    if(sets < 1)
+        return 1;
+
+    if(sets > parseInt(sets))
+        return parseInt(sets) + 1;
+    
+    return parseInt(sets);
+});
 
 
 </script>
@@ -16,27 +106,14 @@ import Orders from '../assets/data/Orders';
 
         <div class="myorder-content">
 
-            <div class="myorder-content-filter">
-                <div>
-                    <label>Order number:</label>
-                    <input type="text" placeholder="ORD-025456813" />
-                    <button>Search</button>
-                </div>
-
-                <div>
-                    <label>Status:</label>
-                    <select>
-                        <option value="received">Received</option>
-                        <option value="gettingout">Getting out</option>
-                        <option value="onitsway">On its way</option>
-                        <option value="canceled">Canceled</option>
-                    </select>
-                </div>
-                <div>
-                    <label>Order date:</label>
-                    <input type="date" />
-                </div>
-            </div>
+            <!-- filter bar -->
+            <OrderFilterBar 
+                :orderstatus="state.orderStatus"
+                :ordernumber="state.orderNumber"
+                :orderdate="state.orderDate"
+                :onchangeordernumber="changeOrderNumber"
+                :onchangeorderstatus="changeOrderStatus"
+                />
 
             <div class="myorder-content-samples">
 
@@ -49,20 +126,25 @@ import Orders from '../assets/data/Orders';
 
                 <div class="myorder-content-samples-content">
 
-                    <OrderSample v-for="o in Orders" 
-                        :orderNumber="o.orderNumber"
-                        :deliveredDate="o.deliveredDate"
-                        :shippingCost="o.shippingCost"
-                        :orderDate="o.orderDate"
-                        :total="o.total"
-                        :items="o.items"
-                        :key="o.id"/>
+                    <OrderSample v-for="ord in getClientsOrders.slice((state.selectedSet * 3)-3,state.selectedSet*3)" 
+                        :orderNumber="ord.id"
+                        :deliveredDate="ord.deliveredDate"
+                        :shippingCost="ord.shippingCost"
+                        :purchases="ord.purchases"
+                        :orderDate="ord.orderDate"
+                        :status="ord.status"
+                        :total="ord.total"
+                        :key="ord.id"
+                        />
 
                 </div>
 
             </div>
 
-            <PaginationVue :sets="3" />
+            <Pagination
+                :sets="getOrdersSets"
+                :selectedset="state.selectedSet" 
+                :onchangeselectedset="changeSelectedSet" />
 
         </div>
 
@@ -78,58 +160,6 @@ import Orders from '../assets/data/Orders';
     margin: 60px auto;
 }
 
-/* ////////////////////////////////////////////////////// */
-/* ///              myorder content filter            /// */ 
-/* ////////////////////////////////////////////////////// */
-.myorder-content-filter{
-    width: 100%;
-    box-sizing: border-box;
-    margin-bottom: 20px;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.myorder-content-filter div{
-    width: fit-content;
-    box-sizing: border-box;
-    position: relative;
-}
-.myorder-content-filter div label{
-    font-family: "raleway-regular", sans-serif;
-    font-size: 16px;
-    color: #333333;
-    margin-right: 5px;
-}
-.myorder-content-filter div input,
-.myorder-content-filter div select{
-    box-sizing: border-box;
-    border: 1px solid #dddddd;
-    border-radius: 6px;
-    margin-right: 5px;
-
-    font-family: "raleway-regular", sans-serif;
-    font-size: 16px;
-    color: #333333;
-    padding: 4px 8px;
-}
-.myorder-content-filter div button{
-    padding: 4px 10px;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-
-    border-radius: 3px;
-    font-family: "raleway-regular", sans-serif;
-    font-size: 15px;
-    color: #333333;
-    background-color: #f1f1f1;
-    border: 1px solid #dddddd;
-}
-
-/* ////////////////////////////////////////////////////// */
-/* ///              myorder content samples           /// */ 
-/* ////////////////////////////////////////////////////// */
 .myorder-content-samples{
     width: 100%;
     box-sizing: border-box;
@@ -156,9 +186,6 @@ import Orders from '../assets/data/Orders';
     width: 40%;
 }
 
-/* ////////////////////////////////////////////////////// */
-/* ///         myorder content samples content        /// */ 
-/* ////////////////////////////////////////////////////// */
 .myorder-content-samples-content{
     width: 100%;
     box-sizing: border-box;
@@ -171,29 +198,7 @@ import Orders from '../assets/data/Orders';
         width: 90%;
         margin: 40px auto;
     }
-    
-    /* ////////////////////////////////////////////////////// */
-    /* ///              myorder content filter            /// */ 
-    /* ////////////////////////////////////////////////////// */
-    .myorder-content-filter{
-        margin-bottom: 15px;
-    }
-    .myorder-content-filter div label{
-        font-size: 13px;
-    }
-    .myorder-content-filter div input,
-    .myorder-content-filter div select{
-        font-size: 13px;
-        padding: 4px 6px;
-    }
-    .myorder-content-filter div button{
-        padding: 4px 8px;
-        font-size: 13px;
-    }
-  
-    /* ////////////////////////////////////////////////////// */
-    /* ///              myorder content samples           /// */ 
-    /* ////////////////////////////////////////////////////// */
+
     .myorder-content-samples{
         margin-bottom: 10px;
     }
@@ -213,39 +218,10 @@ import Orders from '../assets/data/Orders';
         margin: 20px auto;
     }
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///              myorder content filter            /// */ 
-    /* ////////////////////////////////////////////////////// */
-    .myorder-content-filter{
-        margin-bottom: 15px;
-        flex-wrap: wrap;
-    }
-    .myorder-content-filter div:nth-child(1){
-        width: 100%;
-        margin-bottom: 10px;
-    }
-    .myorder-content-filter div:nth-child(1) input{
-        width: 58%;
-    }
-    .myorder-content-filter div label{
-        font-size: 11px;
-    }
-    .myorder-content-filter div input,
-    .myorder-content-filter div select{
-        font-size: 11px;
-        padding: 2px 4px;
-    }
-    .myorder-content-filter div button{
-        padding: 2px 14px;
-        font-size: 11px;
-    }
-
-    /* ////////////////////////////////////////////////////// */
-    /* ///              myorder content samples           /// */ 
-    /* ////////////////////////////////////////////////////// */
     .myorder-content-samples{
         margin-bottom: 10px;
     }
+
     .myorder-content-samples-header{
         display: none;
     }

@@ -2,7 +2,7 @@
 import OrderDetailsStatus from '../components/OrderDetailsComponents/OrderDetailsStatus.vue';
 import RowMiniSample from '../components/OrderDetailsComponents/RowMiniSample.vue';
 import OrderDetailsInformation from '../components/OrderDetailsComponents/OrderDetailsInformation.vue';
-import Orders from '../assets/data/Orders';
+import { Orders } from '../assets/data/Orders';
 
 </script>
 <template>
