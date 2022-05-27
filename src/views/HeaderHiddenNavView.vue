@@ -65,7 +65,7 @@ const submitClientsLanguageCurrancy = () => {
                     </div>
                     <RouterLink to="/myProfile" class="header-hidden-menu-content-bottom-accordion-panel-links">My
                         Profile</RouterLink>
-                    <RouterLink to="/myOrders" class="header-hidden-menu-content-bottom-accordion-panel-links">My Orders
+                    <RouterLink to="/orders" class="header-hidden-menu-content-bottom-accordion-panel-links">My Orders
                     </RouterLink>
                     <RouterLink to="/chatCenter" class="header-hidden-menu-content-bottom-accordion-panel-links">Help
                         Center</RouterLink>

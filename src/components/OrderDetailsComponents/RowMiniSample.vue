@@ -17,14 +17,14 @@ const props = defineProps({
     <div class="row-mini-samples">
         <div>
             <RouterLink to="">
-                <img :src="props.images[0]" />
+                <img :src="props.images[0]" alt="" />
             </RouterLink>
             <div>
                 <h6>{{ props.title }}.</h6>
-                <p><strong>Size:</strong> {{ props.specifications.size }},
+                <!-- <p><strong>Size:</strong> {{ props.specifications.size }},
                     <strong>Capacity:</strong> {{ props.specifications.capacity }},
                     <strong>Color:</strong> {{ props.specifications.color }}
-                </p>
+                </p> -->
                 <p><strong>Precio:</strong> ${{ props.precio }}</p>
                 <p><strong>Amount:</strong> {{ props.amount }}</p>
                 <article>
@@ -46,10 +46,6 @@ const props = defineProps({
 </template>
 <style>
 
-
-/* ////////////////////////////////////////////////////// */
-/* ///     order details content samples content      /// */ 
-/* ////////////////////////////////////////////////////// */
 .row-mini-samples{
     width: 100%;
     box-sizing: border-box;
@@ -140,9 +136,6 @@ const props = defineProps({
 
 @media screen and (max-width: 834px) {
     
-    /* ////////////////////////////////////////////////////// */
-    /* ///     order details content samples content      /// */ 
-    /* ////////////////////////////////////////////////////// */
     .row-mini-samples{
         width: 100%;
         margin: 5px auto;
@@ -190,9 +183,6 @@ const props = defineProps({
 
 @media screen and (max-width: 414px) {
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///     order details content samples content      /// */ 
-    /* ////////////////////////////////////////////////////// */
     .row-mini-samples{
         width: 100%;
         margin: 5px auto;

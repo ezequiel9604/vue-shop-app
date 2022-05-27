@@ -47,12 +47,12 @@ const router = createRouter({
       children: [{ path: "", component: WishListView }]
     },
     {
-      path: '/myOrders',
+      path: '/orders',
       component: Layout,
       children: [{ path: "", component: OrderView }]
     },
     {
-      path: '/orderDetails',
+      path: '/orders/orderDetails',
       component: Layout,
       children: [{ path: "", component: OrderDetailsView }]
     },
@@ -84,7 +84,7 @@ router.beforeEach((to, from, next) => {
   if(isClientLoggedIn == false && to.path == "/myProfile"){
     next({ path : "/login" });
   }
-  else if(isClientLoggedIn == false && to.path == "/myOrders"){
+  else if(isClientLoggedIn == false && to.path == "/orders"){
     next({ path: "/login"});
   }
   else{

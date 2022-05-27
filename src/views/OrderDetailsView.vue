@@ -1,8 +1,43 @@
 <script setup>
+import { reactive, computed } from 'vue';
 import OrderDetailsStatus from '../components/OrderDetailsComponents/OrderDetailsStatus.vue';
 import RowMiniSample from '../components/OrderDetailsComponents/RowMiniSample.vue';
 import OrderDetailsInformation from '../components/OrderDetailsComponents/OrderDetailsInformation.vue';
-import { Orders } from '../assets/data/Orders';
+import router from '../router/index';
+import { Purchases } from '../assets/data/Orders';
+import { Items } from '../assets/data/Items';
+
+const state = reactive({
+    pathQuery: router.currentRoute.value.query
+})
+
+
+const getOrdersItems = computed(() => {
+
+    const arr = [...Purchases.filter((current) => {
+        if(current.orderId == state.pathQuery.orderNumber)
+            return current;
+    })];
+
+    arr.forEach((current) => {
+        current['item'] = {};
+    });
+
+    arr.forEach((current) => {
+        for (let i = 0; i < Items.length; i++) {
+            if(Items[i].id == current.itemId)
+                current.item = (Items[i]);
+        }
+    });
+
+    return arr;
+
+})
+
+const calculateSubtotal = (price, amount, descount) => {
+    let subtotal = price * amount;
+    return subtotal - subtotal * (descount / 100)
+}
 
 </script>
 <template>
@@ -18,10 +53,12 @@ import { Orders } from '../assets/data/Orders';
                 <div class="order-details-content-samples-options">
 
                     <div>
-                        <h4>Order number: <strong>ORD-025456813</strong></h4>
+                        <h4>Order number: <strong>{{ state.pathQuery.orderNumber }}</strong></h4>
                     </div>
                     <div>
-                        <button><i class="bi bi-receipt"></i>&nbsp;Download receipt</button>
+                        <button>
+                            <i class="bi bi-receipt"></i>&nbsp;Download receipt
+                        </button>
                         <button id="cancel-order-btn">
                             Cancel order
                         </button>
@@ -37,27 +74,27 @@ import { Orders } from '../assets/data/Orders';
 
                 <div class="order-details-content-samples-content">
 
-                    <RowMiniSample v-for="i in Orders[0].items"
-                        :images="i.images"
-                        :title="i.title"
+                    <RowMiniSample v-for="i in getOrdersItems"
+                        :images="i.item.images"
+                        :title="i.item.title"
                         :specifications="i.specifications"
-                        :precio="i.precio"
+                        :precio="i.item.price"
                         :amount="i.amount"
                         :condition="i.condition"
-                        :subtotal="i.subtotal" 
+                        :subtotal="calculateSubtotal(i.item.price, i.amount, i.item.descount)" 
                         :key="i.id" />
 
                 </div>
 
             </div>
 
-            <OrderDetailsInformation 
+            <!-- <OrderDetailsInformation 
                 :name="Orders[0].client.name"
                 :email="Orders[0].client.email"
                 :address="Orders[0].client.address"
                 :phone="Orders[0].client.phone"
                 :shippingCost="Orders[0].shippingCost"
-                :items="Orders[0].items" />
+                :items="Orders[0].items" /> -->
 
         </div>
 
@@ -81,9 +118,6 @@ import { Orders } from '../assets/data/Orders';
     margin: 0px auto;
 }
 
-/* ////////////////////////////////////////////////////// */
-/* ///          order details content samples         /// */ 
-/* ////////////////////////////////////////////////////// */
 .order-details-content-samples{
     width: 90%;
     box-sizing: border-box;

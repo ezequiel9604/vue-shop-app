@@ -89,7 +89,7 @@ const handleSubmitForm = () => {
                     
                     <RouterLink to="/myProfile" 
                         class="main-header-content-top-dropdowns-content-option-links">My profile</RouterLink>
-                    <RouterLink to="/myOrders" 
+                    <RouterLink to="/orders" 
                         class="main-header-content-top-dropdowns-content-option-links">My orders</RouterLink>
                     <RouterLink to="/chatCenter" 
                         class="main-header-content-top-dropdowns-content-option-links">Chat center</RouterLink>

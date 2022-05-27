@@ -36,7 +36,7 @@ const calculateSubtotal = (price, amount, descount) => {
                 <p><strong>Order date:</strong> {{ props.orderDate }}</p>
             </div>
             <div>
-                <RouterLink to="/orderDetails">See details order</RouterLink>
+                <RouterLink :to="'/orders/orderDetails?orderNumber='+props.orderNumber">See details order</RouterLink>
             </div>
             <div>
                 <p class="total"><strong>Total:</strong> ${{ props.total }}</p>
