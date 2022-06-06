@@ -1,6 +1,6 @@
 <script setup>
-import SignUpFormHeader from '../components/SignUpComponents/SignUpFormHeader.vue';
-import SignUpFormFooter from '../components/SignUpComponents/SignUpFormFooter.vue';
+import SignUpFormHeader from '../components/SignUp/SignUpFormHeader.vue';
+import SignUpFormFooter from '../components/SignUp/SignUpFormFooter.vue';
 
 </script>
 <template>

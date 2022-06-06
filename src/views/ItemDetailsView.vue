@@ -1,23 +1,39 @@
 <script setup>
-import { ref } from 'vue';
-import TopItemDetails from '../components/ItemDetailsComponents/TopItemDetails.vue';
-import ColumnMediumSample from '../components/SearchResultsComponents/ColumnMediumSample.vue';
+import { reactive } from 'vue';
+import router from '../router/index';
+import TopItemDetails from '../components/ItemDetails/TopItemDetails.vue';
+import ColumnMediumSample from '../components/SearchResults/ColumnMediumSample.vue';
 import ManImage from '../assets/imgs/users/placeholder-man.png';
-import { Items } from '../assets/data/Items';
 import Comments from '../assets/data/Comments';
+import { GetItemById } from '../services/Item';
 
-const selectedSection = ref(0);
+const url = router.currentRoute.value.query;
+
+const props = defineProps({ items: Array });
+
+const state = reactive({
+    selectedItem: GetItemById(props.items, url.itemId),
+    selectedSection: 0,
+})
 
 const changeSelectedSection = (num) => {
-    selectedSection.value = num;
+    state.selectedSection = num;
 }
+
 
 </script>
 <template>
 
     <div class="item-details">
 
-        <TopItemDetails />
+        <TopItemDetails 
+            :items="props.items"
+            :title="state.selectedItem.title"
+            :images="state.selectedItem.images"
+            :quality="state.selectedItem.quality"
+            :category="state.selectedItem.category"
+            :subitems="state.selectedItem.subitems"
+            />
 
         <div class="bottom-item-details">
 
@@ -26,20 +42,20 @@ const changeSelectedSection = (num) => {
                 <div class="item-details-description-comment">
                     <div class="item-details-description-comment-header">
 
-                        <button v-if="selectedSection === 0" @click="() => changeSelectedSection(0)" 
+                        <button v-if="state.selectedSection == 0" @click="() => changeSelectedSection(0)" 
                             class="item-details-description-comment-header-button 
                             item-details-description-comment-header-button-active">Description</button>
-                        <button v-if="selectedSection === 1" @click="() => changeSelectedSection(0)" 
+                        <button v-if="state.selectedSection == 1" @click="() => changeSelectedSection(0)" 
                             class="item-details-description-comment-header-button">Description</button>
 
-                        <button v-if="selectedSection === 1" @click="() => changeSelectedSection(1)" 
+                        <button v-if="state.selectedSection == 1" @click="() => changeSelectedSection(1)" 
                             class="item-details-description-comment-header-button 
                             item-details-description-comment-header-button-active">Comments ({{ Comments.length }})</button>
-                        <button v-if="selectedSection === 0" @click="() => changeSelectedSection(1)" 
+                        <button v-if="state.selectedSection == 0" @click="() => changeSelectedSection(1)" 
                             class="item-details-description-comment-header-button">Comments ({{ Comments.length }})</button>
                     </div>
 
-                    <div :style="{ display: selectedSection === 0? 'block':'none'}" class="item-details-description-content">
+                    <div :style="{ display: state.selectedSection == 0? 'block':'none'}" class="item-details-description-content">
 
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates totam itaque ipsam qui 
                             molestiae eveniet deleniti debitis possimus culpa suscipit id, quas eius provident iusto 
@@ -69,7 +85,7 @@ const changeSelectedSection = (num) => {
 
                     </div>
 
-                    <div :style="{ display: selectedSection === 1? 'block':'none'}" class="item-details-comment-content">
+                    <div :style="{ display: state.selectedSection == 1? 'block':'none'}" class="item-details-comment-content">
 
                         <div class="item-details-comment-content-addcomment">
                             <figure>
@@ -100,7 +116,7 @@ const changeSelectedSection = (num) => {
 
                     <div class="item-details-items-recommendations-content">
 
-                        <ColumnMediumSample v-for="item in Items.slice(0,3)" 
+                        <ColumnMediumSample v-for="item in props.items.slice(0,3)" 
                             :descount="item.descount"
                             :title="item.title"
                             :price="item.price"
@@ -137,9 +153,6 @@ const changeSelectedSection = (num) => {
     align-items: flex-start;
 }
 
-/* ////////////////////////////////////////////////////// */
-/* ///       item details description comment         /// */ 
-/* ////////////////////////////////////////////////////// */
 .item-details-description-comment{
     width: 80%;
     box-sizing: border-box;
@@ -219,9 +232,6 @@ const changeSelectedSection = (num) => {
     font-weight: bold;
 }
 
-/* ////////////////////////////////////////////////////// */
-/* ///       item details items recommendation        /// */ 
-/* ////////////////////////////////////////////////////// */
 .item-details-items-recommendations{
     background-color: #ffffff;
     width: 18%;
@@ -234,10 +244,6 @@ const changeSelectedSection = (num) => {
     width: fit-content;
     margin: 30px auto;
 }
-
-/* ////////////////////////////////////////////////////// */
-/* ///         item details comment content           /// */ 
-/* ////////////////////////////////////////////////////// */
 .item-details-comment-content{
     width: 90%;
     margin: 40px auto;
@@ -368,16 +374,10 @@ const changeSelectedSection = (num) => {
         display: block;
     }
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///            column medium samples               /// */ 
-    /* ////////////////////////////////////////////////////// */
     .column-medium-samples:last-child{
         display: block;
     }
     
-    /* ////////////////////////////////////////////////////// */
-    /* ///       item details description comment         /// */ 
-    /* ////////////////////////////////////////////////////// */
     .item-details-description-comment{
         width: 100%;
     }
@@ -401,9 +401,6 @@ const changeSelectedSection = (num) => {
         font-size: 13px;
     }
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///       item details items recommendation        /// */ 
-    /* ////////////////////////////////////////////////////// */
     .item-details-items-recommendations{
         width: 100%;
         margin:10px 0;
@@ -417,9 +414,6 @@ const changeSelectedSection = (num) => {
         align-self: center;
     }
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///         item details comment content           /// */ 
-    /* ////////////////////////////////////////////////////// */
     .item-details-comment-content{
         width: 92%;
         margin: 30px auto;
@@ -464,16 +458,10 @@ const changeSelectedSection = (num) => {
 
 @media screen and (max-width: 414px) {
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///            column medium samples               /// */ 
-    /* ////////////////////////////////////////////////////// */
     .column-medium-samples:last-child{
         display: none;
     }
     
-    /* ////////////////////////////////////////////////////// */
-    /* ///       item details description comment         /// */ 
-    /* ////////////////////////////////////////////////////// */
     .item-details-description-comment-header button{
         width: 50%;
         font-size: 12px;
@@ -499,16 +487,10 @@ const changeSelectedSection = (num) => {
         font-size: 12px;
     }
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///       item details items recommendation        /// */ 
-    /* ////////////////////////////////////////////////////// */
     .item-details-items-recommendations-content{
         width:75%;
     }
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///         item details comment content           /// */ 
-    /* ////////////////////////////////////////////////////// */
     .item-details-comment-content{
         width: 95%;
         margin: 20px auto;

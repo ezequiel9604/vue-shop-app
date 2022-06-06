@@ -1,14 +1,11 @@
 <script setup>
 import { reactive } from 'vue';
-import CategorySlider from '../components/HomeComponents/CategorySlider.vue';
-import ItemsInOffer from '../components/HomeComponents/ItemsInOffer.vue';
-import Poster from '../components/HomeComponents/Poster.vue';
-import MostSoldItems from '../components/HomeComponents/MostSoldItems.vue';
-import { Items } from '../assets/data/Items';
+import CategorySlider from '../components/Home/CategorySlider.vue';
+import ItemsInOffer from '../components/Home/ItemsInOffer.vue';
+import Poster from '../components/Home/Poster.vue';
+import MostSoldItems from '../components/Home/MostSoldItems.vue';
 
-const state = reactive({
-  items: Items
-});
+const props = defineProps({ items: Array });
 
 </script>
 <template>
@@ -16,11 +13,11 @@ const state = reactive({
   <div>
     <CategorySlider />
 
-    <ItemsInOffer :items="state.items" />
+    <ItemsInOffer :items="props.items" />
 
     <Poster />
 
-    <MostSoldItems :items="state.items" />
+    <MostSoldItems :items="props.items" />
   </div>
 
 </template>

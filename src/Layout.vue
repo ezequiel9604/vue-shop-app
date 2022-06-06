@@ -1,49 +1,27 @@
 <script setup>
-import { RouterView } from "vue-router";
-import { reactive, onMounted } from "vue";
-import PromoBannerView from "./views/PromoBannerView.vue";
-import HeaderView from "./views/HeaderView.vue";
-import HeaderHiddenNavView from "./views/HeaderHiddenNavView.vue";
-import FooterView from "./views/FooterView.vue";
-import Clients from "./assets/data/Clients";
+import { RouterView } from 'vue-router';
+import { reactive, onMounted } from 'vue';
+import PromoBannerView from './views/PromoBannerView.vue';
+import HeaderView from './views/HeaderView.vue';
+import HeaderHiddenNavView from './views/HeaderHiddenNavView.vue';
+import FooterView from './views/FooterView.vue';
+import { getLoggedClient } from './services/Client';
+import { GetAllItems } from './services/Item';
+//import Clients from './assets/data/Clients';
 
-
-const getCurrentClient = () => {
-
-    if(JSON.parse(localStorage.getItem("loggedClient"))){
-        return JSON.parse(localStorage.getItem("loggedClient"));
-    }
-    else if(JSON.parse(localStorage.getItem("guestClient"))){
-        return JSON.parse(localStorage.getItem("guestClient"));
-    }
-    else{
-        localStorage.setItem("guestClient", JSON.stringify({   
-            id: "00000",
-            characteristics:{
-                language: "SPANISH",
-                appearance: "light",
-                currancy: "USA / DOLLARS"
-            }
-        }));
-
-        return JSON.parse(localStorage.getItem("guestClient"));
-    }
-
-}
 
 const state = reactive({
-    client: getCurrentClient(),
+    items: GetAllItems(),
+    client: getLoggedClient(),
     isHeaderHiddenNavOpen: false
 })
 
-
 onMounted(()=>{
-
     //localStorage.setItem("loggedClient", JSON.stringify(Clients[0]));
-
+    //localStorage.removeItem("guestClient")
 });
 
-const changeHeaderHiddenNavStatus = () => {
+const changeHeaderHiddenNav = () => {
     state.isHeaderHiddenNavOpen = !state.isHeaderHiddenNavOpen;
 }
 
@@ -53,18 +31,21 @@ const changeHeaderHiddenNavStatus = () => {
     <div>
         <HeaderHiddenNavView 
             :client="state.client" 
-            :onHeaderHiddenNavStatus="state.isHeaderHiddenNavOpen"
-            :onChangeHeaderHiddenNavStatus="changeHeaderHiddenNavStatus" 
+            :onHeaderHiddenNavOpen="state.isHeaderHiddenNavOpen"
+            :onChangeHeaderHiddenNav="changeHeaderHiddenNav" 
             />
 
         <PromoBannerView />
         <HeaderView 
             :client="state.client"
-            :onChangeHeaderHiddenNavStatus="changeHeaderHiddenNavStatus" 
+            :onChangeHeaderHiddenNav="changeHeaderHiddenNav" 
             />
 
         <main>
-            <RouterView :clientid="state.client.id" />
+            <RouterView 
+                :items="state.items" 
+                :client="state.client" 
+                />
         </main>
 
         <FooterView />

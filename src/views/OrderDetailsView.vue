@@ -1,43 +1,27 @@
 <script setup>
-import { reactive, computed } from 'vue';
-import OrderDetailsStatus from '../components/OrderDetailsComponents/OrderDetailsStatus.vue';
-import RowMiniSample from '../components/OrderDetailsComponents/RowMiniSample.vue';
-import OrderDetailsInformation from '../components/OrderDetailsComponents/OrderDetailsInformation.vue';
+import { computed } from 'vue';
+import OrderDetailsStatus from '../components/OrderDetails/OrderDetailsStatus.vue';
+import RowMiniSample from '../components/OrderDetails/RowMiniSample.vue';
+import OrderDetailsInformation from '../components/OrderDetails/OrderDetailsInformation.vue';
 import router from '../router/index';
-import { Purchases } from '../assets/data/Orders';
-import { Items } from '../assets/data/Items';
+import { getItemsByOrderNumber, getOrderByOrderNumber } from '../services/Order';
 
-const state = reactive({
-    pathQuery: router.currentRoute.value.query
+const props = defineProps({ client: Object,  items: Array });
+
+const url= router.currentRoute.value.query
+
+const getOrderById = computed(()=>{
+    const result = getOrderByOrderNumber((url.orderNumber != undefined)? url.orderNumber:"");
+    if(result.length != 0)
+        return result[0];
+    else
+        return {};
 })
 
-
-const getOrdersItems = computed(() => {
-
-    const arr = [...Purchases.filter((current) => {
-        if(current.orderId == state.pathQuery.orderNumber)
-            return current;
-    })];
-
-    arr.forEach((current) => {
-        current['item'] = {};
-    });
-
-    arr.forEach((current) => {
-        for (let i = 0; i < Items.length; i++) {
-            if(Items[i].id == current.itemId)
-                current.item = (Items[i]);
-        }
-    });
-
-    return arr;
-
+const getItemsByOrder = computed(() => {
+    return getItemsByOrderNumber((url.orderNumber != undefined)? url.orderNumber:"", 
+        props.items);
 })
-
-const calculateSubtotal = (price, amount, descount) => {
-    let subtotal = price * amount;
-    return subtotal - subtotal * (descount / 100)
-}
 
 </script>
 <template>
@@ -46,14 +30,18 @@ const calculateSubtotal = (price, amount, descount) => {
 
         <div class="order-details-content">
 
-            <OrderDetailsStatus />
+            <OrderDetailsStatus 
+                :orderStatus="getOrderById.status"
+                :orderDate="new Date(getOrderById.orderDate)"
+                :deliveredorder="new Date(getOrderById.deliveredDate)"
+                />
 
             <div class="order-details-content-samples">
 
                 <div class="order-details-content-samples-options">
 
                     <div>
-                        <h4>Order number: <strong>{{ state.pathQuery.orderNumber }}</strong></h4>
+                        <h4>Order number: <strong>{{ url.orderNumber }}</strong></h4>
                     </div>
                     <div>
                         <button>
@@ -74,27 +62,30 @@ const calculateSubtotal = (price, amount, descount) => {
 
                 <div class="order-details-content-samples-content">
 
-                    <RowMiniSample v-for="i in getOrdersItems"
+                    <RowMiniSample v-for="i in getItemsByOrder"
+                        :id="i.item.id"
                         :images="i.item.images"
                         :title="i.item.title"
                         :specifications="i.specifications"
-                        :precio="i.item.price"
+                        :price="i.item.price"
                         :amount="i.amount"
+                        :descount="i.item.descount"
                         :condition="i.condition"
-                        :subtotal="calculateSubtotal(i.item.price, i.amount, i.item.descount)" 
                         :key="i.id" />
 
                 </div>
 
             </div>
 
-            <!-- <OrderDetailsInformation 
-                :name="Orders[0].client.name"
-                :email="Orders[0].client.email"
-                :address="Orders[0].client.address"
-                :phone="Orders[0].client.phone"
-                :shippingCost="Orders[0].shippingCost"
-                :items="Orders[0].items" /> -->
+            <OrderDetailsInformation 
+                :name="props.client.name"
+                :email="props.client.email"
+                :address="props.client.address"
+                :phone="props.client.phone"
+                :shippingCost="getOrderById.shippingCost"
+                :total="getOrderById.total"
+                :items="getItemsByOrder"
+                />
 
         </div>
 
@@ -194,9 +185,6 @@ button#cancel-order-btn:hover .tooltip{
     display: block;
 }
 
-/* ////////////////////////////////////////////////////// */
-/* ///      order details content samples header      /// */ 
-/* ////////////////////////////////////////////////////// */
 .order-details-content-samples-header{
     width: 100%;
     box-sizing: border-box;
@@ -231,9 +219,6 @@ button#cancel-order-btn:hover .tooltip{
         margin: 20px auto;
     }
     
-    /* ////////////////////////////////////////////////////// */
-    /* ///          order details content samples         /// */ 
-    /* ////////////////////////////////////////////////////// */
     .order-details-content-samples{
         width: 100%;
         margin-bottom: 25px;
@@ -258,9 +243,6 @@ button#cancel-order-btn:hover .tooltip{
         line-height: 15px;
     }
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///      order details content samples header      /// */ 
-    /* ////////////////////////////////////////////////////// */
     .order-details-content-samples-header{
         width: 100%;
         margin: 5px auto;
@@ -285,9 +267,6 @@ button#cancel-order-btn:hover .tooltip{
         margin: 20px auto;
     }
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///          order details content samples         /// */ 
-    /* ////////////////////////////////////////////////////// */
     .order-details-content-samples{
         width: 100%;
         margin-bottom: 25px;
@@ -302,9 +281,6 @@ button#cancel-order-btn:hover .tooltip{
         font-size: 10px;
     }
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///      order details content samples header      /// */ 
-    /* ////////////////////////////////////////////////////// */
     .order-details-content-samples-header{
         width: 100%;
         margin: 5px auto;

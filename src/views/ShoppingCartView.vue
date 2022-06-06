@@ -1,10 +1,10 @@
 <script setup>
 import { RouterLink } from 'vue-router';
-import RowMediumSample from '../components/ShoppingCartComponents/RowMediumSample.vue';
-import ColumnMediumSample from '../components/SearchResultsComponents/ColumnMediumSample.vue';
-import OrderSummaryRightSidebar from '../components/ShoppingCartComponents/OrderSummaryRightSidebar.vue';
-import HiddenOrderSummary from '../components/ShoppingCartComponents/HiddenOrderSummary.vue';
-import ShoppingCartContentEmpty from '../components/ShoppingCartComponents/ShoppingCartContentEmpty.vue';
+import RowMediumSample from '../components/ShoppingCart/RowMediumSample.vue';
+import ColumnMediumSample from '../components/SearchResults/ColumnMediumSample.vue';
+import OrderSummaryRightSidebar from '../components/ShoppingCart/OrderSummaryRightSidebar.vue';
+import HiddenOrderSummary from '../components/ShoppingCart/HiddenOrderSummary.vue';
+import ShoppingCartContentEmpty from '../components/ShoppingCart/ShoppingCartContentEmpty.vue';
 import { Items } from '../assets/data/Items';
 
 </script>

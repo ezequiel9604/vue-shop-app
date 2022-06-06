@@ -1,18 +1,17 @@
 <script setup>
-import { reactive } from 'vue';
-import LeftProfileContentSidebar from '../components/ProfileComponents/LeftProfileContentSidebar.vue';
-import RightProfileContentSidebar from '../components/ProfileComponents/RightProfileContentSidebar.vue';
-import ProfilePersonalForm from '../components/ProfileComponents/ProfilePersonalForm.vue';
-import ProfileAccountForm from '../components/ProfileComponents/ProfileAccountForm.vue';
-import ProfileMyWalletForm from '../components/ProfileComponents/ProfileMyWalletForm.vue';
+import { ref } from 'vue';
+import LeftProfileContentSidebar from '../components/Profile/LeftProfileContentSidebar.vue';
+import RightProfileContentSidebar from '../components/Profile/RightProfileContentSidebar.vue';
+import ProfilePersonalForm from '../components/Profile/ProfilePersonalForm.vue';
+import ProfileAccountForm from '../components/Profile/ProfileAccountForm.vue';
+import ProfileMyWalletForm from '../components/Profile/ProfileMyWalletForm.vue';
 
-const state = reactive({
-    client: JSON.parse(localStorage.getItem("loggedClient")),
-    selectedProfileForm: 0
-});
+const props = defineProps({ client: Object });
+
+const selectedProfileForm = ref(0);
 
 const changeSelectedProfileForm = (value) => {
-    state.selectedProfileForm = value;
+    selectedProfileForm.value = value;
 }
 
 </script>
@@ -25,8 +24,8 @@ const changeSelectedProfileForm = (value) => {
             <div class="left-my-profile-content">
 
                 <LeftProfileContentSidebar 
-                    :clientId="state.client.id"
-                    :appearance="state.client.characteristics.appearance"
+                    :clientId="props.client.id"
+                    :appearance="props.client.characteristics.appearance"
                     :onChangeSelectedProfileForm="changeSelectedProfileForm" />
 
             </div>
@@ -35,34 +34,34 @@ const changeSelectedProfileForm = (value) => {
 
                 <RightProfileContentSidebar :onChangeSelectedProfileForm="changeSelectedProfileForm" />
 
-                <div v-if="state.selectedProfileForm === 0" class="right-my-profile-content-form">
+                <div v-if="selectedProfileForm === 0" class="right-my-profile-content-form">
                     <ProfilePersonalForm 
-                        :clientId="state.client.id"
-                        :firstname="state.client.firstname"
-                        :lastname="state.client.lastname"
-                        :image="state.client.image" 
-                        :firstphone="state.client.firstphone"
-                        :secondphone="state.client.secondphone"
-                        :dateofbirth="new Date(state.client.dateOfBirth)" 
-                        :genre="state.client.genre"
-                        :address="state.client.address" 
+                        :clientId="props.client.id"
+                        :firstname="props.client.firstname"
+                        :lastname="props.client.lastname"
+                        :image="props.client.image" 
+                        :firstphone="props.client.firstphone"
+                        :secondphone="props.client.secondphone"
+                        :dateofbirth="new Date(props.client.dateOfBirth)" 
+                        :genre="props.client.genre"
+                        :address="props.client.address" 
                         />
                 </div>
 
-                <div v-else-if="state.selectedProfileForm === 1" class="right-my-profile-content-form-accountInfo">
+                <div v-else-if="selectedProfileForm === 1" class="right-my-profile-content-form-accountInfo">
                     <ProfileAccountForm 
-                        :clientId="state.client.id"
-                        :email="state.client.email" 
+                        :clientId="props.client.id"
+                        :email="props.client.email" 
                         />
                 </div>
 
-                <div v-else-if="state.selectedProfileForm === 2" class="right-my-profile-content-form-myWallet">
+                <div v-else-if="selectedProfileForm === 2" class="right-my-profile-content-form-myWallet">
                     <ProfileMyWalletForm
-                        :clientId="state.client.id"
-                        :creditCardNumber="state.client.wallets[0].creditCardNumber"
-                        :creditCardOwner="state.client.wallets[0].creditCardOwner"
-                        :expirationDate="state.client.wallets[0].expirationDate"
-                        :securityCode="state.client.wallets[0].securityCode" 
+                        :clientId="props.client.id"
+                        :creditCardNumber="props.client.wallets[0].creditCardNumber"
+                        :creditCardOwner="props.client.wallets[0].creditCardOwner"
+                        :expirationDate="props.client.wallets[0].expirationDate"
+                        :securityCode="props.client.wallets[0].securityCode" 
                         />
                 </div>
 

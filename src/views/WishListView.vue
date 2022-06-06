@@ -1,6 +1,6 @@
 <script setup>
-import Pagination from '../components/SearchResultsComponents/Pagination.vue';
-import RowExtraLargeSample from '../components/WishListComponents/RowExtraLargeSample.vue';
+import Pagination from '../components/SearchResults/Pagination.vue';
+import RowExtraLargeSample from '../components/WishList/RowExtraLargeSample.vue';
 import { Items } from '../assets/data/Items';
 
 </script>

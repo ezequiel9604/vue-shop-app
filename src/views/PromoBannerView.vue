@@ -1,5 +1,4 @@
 <script setup>
-
 import { ref, onMounted } from 'vue';
 
 const promotionSlider = ref(null);
@@ -96,6 +95,5 @@ onMounted(() => {
         font-size: 12px;
     }
 }
-
 
 </style>

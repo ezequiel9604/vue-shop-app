@@ -1,9 +1,9 @@
 <script setup>
 import { ref } from 'vue';
-import ColumnMediumSample from '../components/SearchResultsComponents/ColumnMediumSample.vue';
-import ChatCenterToggleButton from '../components/ChatCenterComponents/ChatCenterToggleButton.vue';
-import ChatCenterMessage from '../components/ChatCenterComponents/ChatCenterMessage.vue';
-import ChatCenterSubmit from '../components/ChatCenterComponents/ChatCenterSubmit.vue';
+import ColumnMediumSample from '../components/SearchResults/ColumnMediumSample.vue';
+import ChatCenterToggleButton from '../components/ChatCenter/ChatCenterToggleButton.vue';
+import ChatCenterMessage from '../components/ChatCenter/ChatCenterMessage.vue';
+import ChatCenterSubmit from '../components/ChatCenter/ChatCenterSubmit.vue';
 import { Items } from '../assets/data/Items';
 import Admins from '../assets/data/Admins';
 import Clients from '../assets/data/Clients';

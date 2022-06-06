@@ -1,29 +1,20 @@
 <script setup>
 import { RouterLink } from 'vue-router';
-import { ref } from 'vue';
-import AccordionPanel from '../components/HeaderHiddenNavComponents/AccordionPanel.vue';
+import { reactive } from 'vue';
+import AccordionPanel from '../components/HeaderHiddenNav/AccordionPanel.vue';
+import { Departments, submitAllCharacteristics } from '../services/Client';
 
 const props = defineProps({
-    onHeaderHiddenNavStatus: Boolean,
-    onChangeHeaderHiddenNavStatus: Function,
     client: Object,
+    onHeaderHiddenNavOpen: Boolean,
+    onChangeHeaderHiddenNav: Function,
 });
 
-const departments = [
-    "clothing", "Accessories", "Shoes", "Offices", "Home", "Technology"
-];
-
-const languageInput = ref(
-    props.client != null? props.client.characteristics.language : "english"
-);
-
-const currancyInput = ref(
-    props.client != null? props.client.characteristics.curranty : "dollar"
-);
-
-const isClientLoggedIn = ref(
-    props.client != null? true : false
-);
+const state = reactive({
+    isClientLoggedIn: props.client != null? true : false,
+    language: (props.client != null)? props.client.characteristics.language : "english",
+    currancy: (props.client != null)? props.client.characteristics.curranty : "dollar",
+})
 
 
 const changeLanguageInput = (ev) => {
@@ -33,8 +24,8 @@ const changeCurrancyInput = (ev) => {
     currancyInput.value = ev.target.value;
 }
 
-const submitClientsLanguageCurrancy = () => {
-    console.log(languageInput.value, currancyInput.value)
+const handleSubmitForm = () => {
+   submitAllCharacteristics(props.client.id, state.language, state.currancy);
 }
 
 </script>
@@ -53,10 +44,10 @@ const submitClientsLanguageCurrancy = () => {
             <div class="header-hidden-menu-content-bottom">
 
                 <AccordionPanel title="Account" icon="bi-person">
-                    <p v-if="isClientLoggedIn">Welcome <strong>{{ props.client.name }}</strong></p>
+                    <p v-if="state.isClientLoggedIn">Welcome <strong>{{ props.client.name }}</strong></p>
                     <p v-else>Welcome to ShopApp</p>
 
-                    <div v-if="isClientLoggedIn" class="main-header-content-top-dropdowns-content-sign-btns">
+                    <div v-if="state.isClientLoggedIn" class="main-header-content-top-dropdowns-content-sign-btns">
                         <RouterLink to="" class="sign-btn sign-out-btn">Sign out</RouterLink>
                     </div>
                     <div v-else class="main-header-content-top-dropdowns-content-sign-btns">
@@ -75,7 +66,7 @@ const submitClientsLanguageCurrancy = () => {
                 <AccordionPanel title="English / Dollar" icon="bi-flag">
                     <div class="selection-language">
                         <label>Choose language:</label>
-                        <select @change="changeLanguageInput" v-if="languageInput == 'english'">
+                        <select @change="changeLanguageInput" v-if="state.language == 'english'">
                             <option value="english" selected>English</option>
                             <option value="spanish">Spanish</option>
                         </select>
@@ -87,7 +78,7 @@ const submitClientsLanguageCurrancy = () => {
 
                     <div class="selection-language">
                         <label>Choose currancy:</label>
-                        <select @change="changeCurrancyInput" v-if="currancyInput == 'dollar'">
+                        <select @change="changeCurrancyInput" v-if="state.currancy == 'dollar'">
                             <option value="dollar" selected>USA / Dollar</option>
                             <option value="pesos">DOM / Pesos</option>
                         </select>
@@ -97,13 +88,13 @@ const submitClientsLanguageCurrancy = () => {
                         </select>
                     </div>
                     <div class="accordion-language">
-                        <button @click="submitClientsLanguageCurrancy" type="button">Save Changes</button>
+                        <button @click="handleSubmitForm">Save Changes</button>
                     </div>
                 </AccordionPanel>
 
                 <AccordionPanel title="Categories" icon="bi-list">
 
-                    <RouterLink v-for="d in departments" to="" :key="d"
+                    <RouterLink v-for="d in Departments" to="" :key="d"
                         class="header-hidden-menu-content-bottom-accordion-panel-links">{{ d }}</RouterLink>
 
                 </AccordionPanel>
@@ -116,6 +107,7 @@ const submitClientsLanguageCurrancy = () => {
 
 </template>
 <style>
+
 .header-hidden-menu {
     width: 100%;
     height: 100%;
@@ -154,9 +146,6 @@ const submitClientsLanguageCurrancy = () => {
     animation-duration: 0.5s;
 }
 
-/* ////////////////////////////////////////////////////// */
-/* ///           header hidden menu content top       /// */
-/* ////////////////////////////////////////////////////// */
 .header-hidden-menu-content-top {
     width: 90%;
     box-sizing: border-box;
@@ -179,9 +168,6 @@ const submitClientsLanguageCurrancy = () => {
     font-size: 20px;
 }
 
-/* ////////////////////////////////////////////////////// */
-/* ///       header hidden menu content bottom        /// */
-/* ////////////////////////////////////////////////////// */
 .header-hidden-menu-content-bottom {
     width: 90%;
     box-sizing: border-box;
@@ -355,4 +341,5 @@ const submitClientsLanguageCurrancy = () => {
     }
 
 }
+
 </style>

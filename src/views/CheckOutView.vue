@@ -1,9 +1,9 @@
 <script setup>
 import { RouterLink } from 'vue-router';
-import CheckoutPersonalBlock from '../components/CheckOutComponents/CheckoutPersonalBlock.vue';
-import CheckoutPaymentBlock from '../components/CheckOutComponents/CheckoutPaymentBlock.vue';
-import CheckoutShipmentBlock from '../components/CheckOutComponents/CheckoutShipmentBlock.vue';
-import OrderSummaryRightSidebar from '../components/CheckOutComponents/OrderSummaryRightSidebar.vue';
+import CheckoutPersonalBlock from '../components/CheckOut/CheckoutPersonalBlock.vue';
+import CheckoutPaymentBlock from '../components/CheckOut/CheckoutPaymentBlock.vue';
+import CheckoutShipmentBlock from '../components/CheckOut/CheckoutShipmentBlock.vue';
+import OrderSummaryRightSidebar from '../components/CheckOut/OrderSummaryRightSidebar.vue';
 import Clients from '../assets/data/Clients';
 
 

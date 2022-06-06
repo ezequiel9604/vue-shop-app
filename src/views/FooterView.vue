@@ -1,6 +1,6 @@
 <script setup>
 import { RouterLink } from 'vue-router';
-import FooterTopList from '../components/FooterComponents/FooterTopList.vue';
+import FooterTopList from '../components/Footer/FooterTopList.vue';
 
 const topLists =[
     {

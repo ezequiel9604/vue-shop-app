@@ -1,40 +1,52 @@
 <script setup>
-import { ref, reactive, computed } from 'vue';
-import FilterResultSidebar from '../components/SearchResultsComponents/FilterResultSidebar.vue';
-import RowLargeSample from '../components/SearchResultsComponents/RowLargeSample.vue';
-import Pagination from '../components/SearchResultsComponents/Pagination.vue';
-import ColumnMediumSample from '../components/SearchResultsComponents/ColumnMediumSample.vue';
-import FilterHorizontalSidebar from '../components/SearchResultsComponents/FilterHorizontalSidebar.vue';
-import FilterResultHiddenSidebar from '../components/SearchResultsComponents/FilterResultHiddenSidebar.vue';
-import { Items } from "../assets/data/Items";
+import { reactive, computed } from 'vue';
+import router from '../router';
+import store from '../store';
+import FilterResultSidebar from '../components/SearchResults/FilterResultSidebar.vue';
+import RowLargeSample from '../components/SearchResults/RowLargeSample.vue';
+import Pagination from '../components/SearchResults/Pagination.vue';
+import ColumnMediumSample from '../components/SearchResults/ColumnMediumSample.vue';
+import FilterHorizontalSidebar from '../components/SearchResults/FilterHorizontalSidebar.vue';
+import FilterResultHiddenSidebar from '../components/SearchResults/FilterResultHiddenSidebar.vue';
+import Loading from '../components/SearchResults/Loading.vue';
+import { getAllColorsFromItems, filterItemsByAll, getSetsOfItems } from '../services/Item';
 
-const props = defineProps({ clientid: String });
+const url = router.currentRoute.value.query;
+
+const props = defineProps({ 
+    client: Object,
+    items: Array 
+});
 
 const state = reactive({
-    items: Items,
+    items: props.items,
     minPrice: null,
     maxPrice: null,
+    selectedSet: 1,
     quality: 5,
-    selectedColors: [],
-    isOffered: false,
-
+ 
     states: [],
     sizes: [],
     capacities: [],
     departments: [],
+    selectedColors: [],
 
-    selectedSet: 1,
-    isHiddenSidebarOpen: false
+    isHiddenSidebarOpen: false,
+
+    isOffered: url.offered == "yes"? true : false,
+    category: url.category == undefined? "all": url.category,
 });
 
 
 const getItemsColors = computed(() => {
-    let colors = new Set();
-    state.items.forEach((current) => {
-        colors.add(current.color);
-    });
-    return Array.from(colors);
+    return getAllColorsFromItems(state.items);
 });
+
+const getCategory = computed(()=>{
+    const cat = store.state.categoryItem;
+    return cat != undefined? cat.toLowerCase():"all";
+})
+
 
 const changeMaxAndMinPrice = (min, max) => {
     state.minPrice = min;
@@ -43,152 +55,81 @@ const changeMaxAndMinPrice = (min, max) => {
 
 const changeSelectedColors = (isChecked, value) => {
     let newSet = new Set(state.selectedColors);
-    if(isChecked)
-        newSet.add(value);
-    else
-        newSet.delete(value);
+    if(isChecked) newSet.add(value);
+    else newSet.delete(value);
     
     state.selectedColors = Array.from(newSet);
 }
 
-const changeQuality = (value) => {
-    state.quality= value;
-}
+const changeFilterSState = (type, value) => {
 
-const changeIsOffered = () => {
-    state.isOffered = !state.isOffered;
-}
+    if(type=="quality")
+        state.quality = value;
+    else if(type=="offer")
+        state.isOffered = !state.isOffered;
+    else if(type=="state")
+        state.states = value;
+    else if(type=="size")
+        state.sizes = value;
+    else if(type=="capacity")
+        state.capacities = value;
+    else if(type=="set")
+        state.selectedSet = value;
+    else if(type=="department")
+        state.departments = value; 
+    else if(type=="quality")
+        state.quality = value;
+    else if(type=="hiddenSidebar")
+       state.isHiddenSidebarOpen = !state.isHiddenSidebarOpen;
 
-const changeStates = (value) => {
-    state.states = value;
-}
-
-const changeSizes = (value) => {
-    state.sizes = value;
-}
-
-const changeCapacities = (value) => {
-    state.capacities = value;
-}
-
-const changeDepartments = (value) => {
-    state.departments = value;
-}
-
-const changeSelectedSet = (value) => {
-    state.selectedSet = value;
-}
-
-const changeHiddenSidebarStatus = () => {
-    state.isHiddenSidebarOpen = !state.isHiddenSidebarOpen;
 }
 
 const getFilteredItems = computed(() => {
-
-    let arr;
-
-    // adding state filter
-    arr = [...state.items].filter((current) => {
-        return (state.isOffered)? current.descount > 0 : current.descount >= 0;
-    });
-
-    // adding price filter
-    if(state.maxPrice > 0){
-        arr = [...arr].filter((current) => {
-            if(current.price >= 0 && current.price <= state.maxPrice)
-                return current;
-        });
-    }
-    
-    // adding quality filter
-    arr = [...arr].filter((current) => {
-        return current.quality <= state.quality;
-    });
-
-    // adding states filter
-    if(state.states.length != 0){
-        arr = [...arr].filter((current) => {
-        
-            for (let i = 0; i < state.states.length; i++) {
-                if(current.state == state.states[i])
-                    return current;
-            }
-        });
-    }
-
-    // adding color filter
-     if(state.selectedColors.length != 0){
-        arr = [...arr].filter((current) => {
-        
-            for (let i = 0; i < state.selectedColors.length; i++) {
-                if(current.color == state.selectedColors[i])
-                    return current;
-            }
-        });
-    }
-
-    return arr;
+    return filterItemsByAll(state.items, store.state.searchText, state.isOffered, state.maxPrice, state.quality,
+        state.states, state.selectedColors, store.state.categoryItem);
 });
-
 
 const getItemsSets = computed(() => {
-    let sets = getFilteredItems.value.length / 7;
-
-    if(sets < 1)
-        return 1;
-
-    if(sets > parseInt(sets))
-        return parseInt(sets) + 1;
-    
-    return parseInt(sets);
+    return getSetsOfItems(getFilteredItems.value, 7);
 });
-
 
 </script>
 <template>
 
     <FilterResultHiddenSidebar 
-        :onIsHiddenSidebarOpen="state.isHiddenSidebarOpen" 
-        :onChangeHiddenSidebarStatus="changeHiddenSidebarStatus"
-        :category="state.items[3].category" 
+        :onIsHiddenSidebarOpen="state.isHiddenSidebarOpen"
+        :category="state.category" 
         :state="state.states" 
         :size="state.sizes" 
         :capacity="state.capacities" 
         :department="state.departments"
-        :onChangeState="changeStates"
-        :onChangeSize="changeSizes"
-        :onChangeDepartment="changeDepartments"
-        :onChangeCapacity="changeCapacities"  
 
         :minPrice="state.minPrice" 
         :maxPrice="state.maxPrice" 
         :colors="getItemsColors"
+        :selectedColors="state.selectedColors"
         :offered="state.isOffered" 
         :quality="state.quality" 
         :onChangeMaxAndMinPrice="changeMaxAndMinPrice"
-        :onChangeOffered="changeIsOffered"
         :onChangeSelectedColors="changeSelectedColors"
-        :onChangeQuality="changeQuality"
+        :onChangeFilterSState="changeFilterSState"
         />
 
     <div class="category-search-results">
 
         <FilterResultSidebar 
-            :category="state.items[3].category" 
+            :category="getCategory" 
             :state="state.states" 
             :size="state.sizes" 
             :capacity="state.capacities" 
             :department="state.departments"
-            :onChangeState="changeStates"
-            :onChangeSize="changeSizes"
-            :onChangeDepartment="changeDepartments"
-            :onChangeCapacity="changeCapacities"
+            :onChangeFilterSState="changeFilterSState"
             />
 
         <div class="category-search-results-content">
 
             <div class="filter-results-hidden-sidebar-button">
-                <button @click="changeHiddenSidebarStatus">Open filter</button>
+                <button @click="() => changeFilterSState('hiddenSidebar', null)">Open filter</button>
             </div>
 
             <FilterHorizontalSidebar 
@@ -198,14 +139,18 @@ const getItemsSets = computed(() => {
                 :offered="state.isOffered" 
                 :quality="state.quality" 
                 :onChangeMaxAndMinPrice="changeMaxAndMinPrice"
-                :onChangeOffered="changeIsOffered"
                 :onChangeSelectedColors="changeSelectedColors"
-                :onChangeQuality="changeQuality"
+
+                :onChangeFilterSState="changeFilterSState"
                 />
 
             <div class="category-search-results-content-sample-content">
 
-                <RowLargeSample v-for="item in getFilteredItems.slice((state.selectedSet * 7)-7,state.selectedSet*7)" 
+                <Loading v-if="getFilteredItems.length == 0" />
+
+                <RowLargeSample v-for="item in getFilteredItems.slice((state.selectedSet * 7)-7,
+                    state.selectedSet*7)" 
+                    :id="item.id"
                     :descount="item.descount"
                     :images="item.images"
                     :title="item.title"
@@ -217,7 +162,8 @@ const getItemsSets = computed(() => {
                 <Pagination 
                     :sets="getItemsSets" 
                     :selectedset="state.selectedSet"
-                    :onchangeselectedset="changeSelectedSet" />
+                    :onChangeFilterSState="changeFilterSState" 
+                    />
 
             </div>
 
@@ -226,6 +172,7 @@ const getItemsSets = computed(() => {
                 <div class="category-search-results-most-sold-samples-content">
 
                     <ColumnMediumSample v-for="item in state.items.slice(0,4)" 
+                        :id="item.id"
                         :descount="item.descount"
                         :title="item.title"
                         :price="item.price"

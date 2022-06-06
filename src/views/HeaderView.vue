@@ -1,11 +1,11 @@
 <script setup>
 import { RouterLink } from 'vue-router';
-import HeaderTop from '../components/HeaderComponents/HeaderTop.vue';
-import HeaderBottom from '../components/HeaderComponents/HeaderBottom.vue';
+import HeaderTop from '../components/Header/HeaderTop.vue';
+import HeaderBottom from '../components/Header/HeaderBottom.vue';
 
 const props = defineProps({
     client: Object,
-    onChangeHeaderHiddenNavStatus: Function,
+    onChangeHeaderHiddenNav: Function,
 });
 
 </script>
@@ -31,7 +31,7 @@ const props = defineProps({
 
             <HeaderBottom 
                 :clientId="props.client.id"
-                :onChangeHeaderHiddenNavStatus="onChangeHeaderHiddenNavStatus" />
+                :onChangeHeaderHiddenNav="onChangeHeaderHiddenNav" />
         </div>
     </header>
 

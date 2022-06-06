@@ -1,97 +1,41 @@
 <script setup>
 import { reactive, computed } from 'vue';
-import OrderSample from '../components/OrderComponents/OrderSample.vue';
-import OrderFilterBar from '../components/OrderComponents/OrderFilterBar.vue';
-import Pagination from '../components/SearchResultsComponents/Pagination.vue';
-import { Orders, Purchases } from '../assets/data/Orders';
-import { Items } from '../assets/data/Items';
+import OrderSample from '../components/Order/OrderSample.vue';
+import OrderFilterBar from '../components/Order/OrderFilterBar.vue';
+import Pagination from '../components/SearchResults/Pagination.vue';
+import { getOrders, filterOrderByAll } from '../services/Order';
+import { getSetsOfItems } from '../services/Item';
 
-const props = defineProps({clientid: String});
+const props = defineProps({
+    client: Object,
+    items: Array
+});
 
 const state = reactive({
+    orders: getOrders(props.client.id),
+    orderStatus: "All",
     orderNumber: "",
     orderDate: "",
-    orderStatus: "All",
-
     selectedSet: 1
 });
 
 const changeOrderNumber = (value) => {
     state.orderNumber= value.toUpperCase();
-    console.log(state.orderNumber)
 }
-
 const changeOrderStatus = (value) => {
     state.orderStatus= value;
 }
-
 const changeSelectedSet = (value) => {
     state.selectedSet = value;
 }
 
 const getClientsOrders = computed(() => {
-
-    // returns all orders made by this client
-    let ords = Orders.filter((current) => {
-        if(current.clientId == props.clientid){
-            return current;
-        }
-    })
-
-    // adds an array field called 'purchases'
-    ords.forEach((current) => {
-        current['purchases'] = [];
-    })
-
-    // fill the array 'purchases' with objects that contains 'id', 'amount', 'condition', 'item'
-    ords.forEach((current) => {  
-        for (let i = 0; i < Purchases.length; i++) {     
-            if(Purchases[i].orderId == current.id){
-                let item;
-                Items.forEach((element) => {
-                    if(element.id == Purchases[i].itemId)
-                        item = element;
-                });
-
-                current.purchases.push({
-                    id: Purchases[i].id,
-                    amount: Purchases[i].amount,
-                    condition: Purchases[i].condition,
-                    item: item
-                });
-            }    
-        }
-    });
-
-    // filter orders by order number
-    if(state.orderNumber != ""){
-        ords = [...ords.filter((current) => {
-            if(current.id == state.orderNumber)
-                return current;    
-        })];
-    }
-
-    // filter orders by order status
-    if(state.orderStatus != "All"){
-        ords = [...ords.filter((current) => {
-            if(current.status == state.orderStatus)
-                return current;    
-        })]; 
-    }
-
-    return ords;
+    return filterOrderByAll(state.orders, props.items, 
+        state.orderStatus, state.orderNumber);
 });
 
 const getOrdersSets = computed(() => {
-    let sets = getClientsOrders.value.length / 3;
-
-    if(sets < 1)
-        return 1;
-
-    if(sets > parseInt(sets))
-        return parseInt(sets) + 1;
-    
-    return parseInt(sets);
+    return getSetsOfItems(getClientsOrders.value, 3);
 });
 
 
@@ -106,7 +50,6 @@ const getOrdersSets = computed(() => {
 
         <div class="myorder-content">
 
-            <!-- filter bar -->
             <OrderFilterBar 
                 :orderstatus="state.orderStatus"
                 :ordernumber="state.orderNumber"
