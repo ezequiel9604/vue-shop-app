@@ -20,7 +20,6 @@ const changeSelectedSection = (num) => {
     state.selectedSection = num;
 }
 
-
 </script>
 <template>
 
@@ -29,10 +28,10 @@ const changeSelectedSection = (num) => {
         <TopItemDetails 
             :items="props.items"
             :title="state.selectedItem.title"
-            :images="state.selectedItem.images"
+            :images="state.selectedItem.imageDtos"
             :quality="state.selectedItem.quality"
             :category="state.selectedItem.category"
-            :subitems="state.selectedItem.subitems"
+            :subitems="state.selectedItem.subItemDtos"
             />
 
         <div class="bottom-item-details">
@@ -117,10 +116,10 @@ const changeSelectedSection = (num) => {
                     <div class="item-details-items-recommendations-content">
 
                         <ColumnMediumSample v-for="item in props.items.slice(0,3)" 
-                            :descount="item.descount"
+                            :descount="item.subItemDtos[1].descount"
                             :title="item.title"
-                            :price="item.price"
-                            :images="item.images" 
+                            :price="item.subItemDtos[1].price"
+                            :images="item.imageDtos" 
                             :key="item.id" />
 
                     </div>              

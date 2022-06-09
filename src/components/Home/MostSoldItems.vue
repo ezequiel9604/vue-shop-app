@@ -8,8 +8,7 @@ const slider = ref(null);
 const sliderCounter = ref(0);
 
 const getMostSoldItems = (number) => {
-    const arr = [...props.items.slice(number, number + 3)];
-    return arr;
+    return props.items.slice(number, number + 3);
 }
 
 const handleLeftSliderButton = () => {
@@ -49,9 +48,9 @@ const handleRightSliderButton = () => {
                     <ColumnLargeSample v-for="item in getMostSoldItems(s)"
                         :id="item.id" 
                         :title="item.title" 
-                        :price="item.price"
-                        :images="item.images" 
-                        :descount="item.descount" 
+                        :price="item.subItemDtos[0].price"
+                        :images="item.imageDtos" 
+                        :descount="item.subItemDtos[0].descount" 
                         :key="item.id" 
                         />
 

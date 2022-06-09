@@ -1,12 +1,14 @@
 <script setup>
-import { reactive, computed } from 'vue';
 import { RouterLink } from 'vue-router';
-import { submitAllCharacteristics, Languages, Currancies } from '../../services/Client';
+import { reactive, computed } from 'vue';
+import { Languages, Currancies } from '../../services/Client';
+import { submitLogout, submitAllCharacteristics } from '../../apis/Clients';
 
 const props = defineProps({
     clientId: String,
     firstName: String,
     lastName: String,
+    email: String,
     currancy: String,
     language: String
 });
@@ -18,13 +20,16 @@ const state = reactive({
     language: props.language
 });
 
-
 const isClientLoggedIn = computed(()=>{
     return props.clientId != "00000"? true : false;
 })
 
 const handleSubmitForm = () => {
     submitAllCharacteristics(props.clientId, state.language, state.currancy);
+}
+
+const handleLogout = () => {
+    submitLogout(props.email);
 }
 
 </script>
@@ -36,10 +41,10 @@ const handleSubmitForm = () => {
 
             <li class="main-header-content-top-dropdowns-links language-link">
                 <i class="bi bi-flag"></i>
-                <p v-if="props.language == 'ENGLISH' && props.currancy == 'USA / DOLLARS'">English / Dollars</p>
-                <p v-else-if="props.language == 'SPANISH' && props.currancy == 'USA / DOLLARS'">Spanish / Dollars</p>
-                <p v-else-if="props.language == 'SPANISH' && props.currancy == 'DOM / PESOS'">Spanish / Pesos</p>
-                <p v-else-if="props.language == 'ENGLISH' && props.currancy == 'DOM / PESOS'">English / Pesos</p>
+                <p v-if="props.language == 'english' && props.currancy == 'usa / dollars'">English / Dollars</p>
+                <p v-else-if="props.language == 'spanish' && props.currancy == 'usa / dollars'">Spanish / Dollars</p>
+                <p v-else-if="props.language == 'spanish' && props.currancy == 'dom / pesos'">Spanish / Pesos</p>
+                <p v-else-if="props.language == 'english' && props.currancy == 'dom / pesos'">English / Pesos</p>
 
                 <i class="bi bi-caret-down-fill"></i>
 
@@ -80,7 +85,7 @@ const handleSubmitForm = () => {
                     <p v-else>Welcome to ShopApp</p>
                     
                     <div v-if="isClientLoggedIn" class="main-header-content-top-dropdowns-content-sign-btns">
-                        <RouterLink to="" class="sign-btn sign-out-btn">Sign out</RouterLink>
+                        <button @click="handleLogout" class="sign-btn sign-out-btn">Sign out</button>
                     </div>
                     <div v-else class="main-header-content-top-dropdowns-content-sign-btns">                      
                         <RouterLink to="/login" class="sign-btn">Log in</RouterLink>

@@ -1,6 +1,6 @@
 <script setup>
 import { reactive } from 'vue';
-import { submitAppearance } from '../../services/Client';
+import { submitAppearance } from '../../apis/Clients';
 
 const props = defineProps({
     clientId: String,
@@ -22,7 +22,6 @@ const changeAppearance = () => {
 
     console.log(state.appearance);
 }
-
 
 </script>
 <template>

@@ -14,6 +14,7 @@ const changeSelectedProfileForm = (value) => {
     selectedProfileForm.value = value;
 }
 
+
 </script>
 <template>
 
@@ -25,7 +26,7 @@ const changeSelectedProfileForm = (value) => {
 
                 <LeftProfileContentSidebar 
                     :clientId="props.client.id"
-                    :appearance="props.client.characteristics.appearance"
+                    :appearance="props.client.appearance"
                     :onChangeSelectedProfileForm="changeSelectedProfileForm" />
 
             </div>
@@ -37,14 +38,15 @@ const changeSelectedProfileForm = (value) => {
                 <div v-if="selectedProfileForm === 0" class="right-my-profile-content-form">
                     <ProfilePersonalForm 
                         :clientId="props.client.id"
-                        :firstname="props.client.firstname"
-                        :lastname="props.client.lastname"
-                        :image="props.client.image" 
-                        :firstphone="props.client.firstphone"
-                        :secondphone="props.client.secondphone"
-                        :dateofbirth="new Date(props.client.dateOfBirth)" 
+                        :firstname="props.client.firstName"
+                        :lastname="props.client.lastName"
+                        :image="props.client.imagePath" 
+                        :firstphone="props.client.phoneDtos[0].phoneNumber"
+                        :secondphone="props.client.phoneDtos[0].phoneNumber"
+                        :dateofbirth="new Date(props.client.yearOfBirth, props.client.monthOfBirth,
+                            props.client.dayOfBirth)" 
                         :genre="props.client.genre"
-                        :address="props.client.address" 
+                        :address="props.client.addressDtos[0]" 
                         />
                 </div>
 

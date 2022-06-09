@@ -1,7 +1,24 @@
 <script setup>
+import { reactive } from 'vue';
 import { RouterLink } from 'vue-router';
 import SignUpFormHeader from '../components/SignUp/SignUpFormHeader.vue';
 import SignUpFormFooter from '../components/SignUp/SignUpFormFooter.vue';
+import { submitLogin } from '../apis/Clients'; 
+
+const state = reactive({
+    emailInput: "bryanmay@gmail.com",
+    passwordInput: "bryanmay123",
+})
+
+
+const handleSubmitForm = () => {
+
+    submitLogin(state.emailInput, state.passwordInput);
+
+}
+
+
+
 
 </script>
 <template>
@@ -10,20 +27,20 @@ import SignUpFormFooter from '../components/SignUp/SignUpFormFooter.vue';
 
     <SignUpFormHeader title="Log in form" />
 
-    <form class="signup-login-form-content login-form-content">
+    <div class="signup-login-form-content login-form-content">
         
         <div class="signup-login-form-content-single-input">
             <strong>Email address:</strong>         
-            <input type="text" />
+            <input v-model="state.emailInput" type="text" placeholder="Email address..." />
         </div>
         <div class="signup-login-form-content-single-input">
             <strong>Password:</strong>
-            <input type="text" />
+            <input v-model="state.passwordInput" type="text" placeholder="Password..." />
         </div>
 
         <div class="signup-login-form-content-submit-btn">
 
-            <button type="button">Log in</button>
+            <button @click="handleSubmitForm" type="button">Log in</button>
 
             <div class="login-form-content-submit-options">
                 <label for="remember">
@@ -34,7 +51,7 @@ import SignUpFormFooter from '../components/SignUp/SignUpFormFooter.vue';
             </div>
 
         </div>
-    </form>
+    </div>
 
     <SignUpFormFooter title="Don't have an account yet?" desc="Sign up" link="signup" />
 

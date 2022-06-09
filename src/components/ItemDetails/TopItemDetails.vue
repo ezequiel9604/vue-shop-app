@@ -17,9 +17,9 @@ const props = defineProps({
 });
 
 const state = reactive({
-    color: props.subitems[0],
-    capacity: props.subitems[0],
-    size: props.subitems[0],
+    color: props.subitems[0].color,
+    capacity: props.subitems[0].color,
+    size: props.subitems[0].color,
 
     selectedSubitem: 0,
     amount: 1,

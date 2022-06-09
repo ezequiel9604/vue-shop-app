@@ -22,7 +22,7 @@ const selectedImage = ref(0);
         </div>
         <RouterLink :to="'/itemDetails?itemId='+props.id" class="column-large-samples-img">
             <img @mouseenter="selectedImage=1" @mouseleave="selectedImage=0" 
-                :src="props.images[selectedImage]" alt="" />
+                src="" alt="" />
         </RouterLink>
         <h3>{{ props.title }}</h3>
         <h4>

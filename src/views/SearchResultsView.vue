@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, computed } from 'vue';
+import { reactive, computed, onMounted } from 'vue';
 import router from '../router';
 import store from '../store';
 import FilterResultSidebar from '../components/SearchResults/FilterResultSidebar.vue';
@@ -10,6 +10,7 @@ import FilterHorizontalSidebar from '../components/SearchResults/FilterHorizonta
 import FilterResultHiddenSidebar from '../components/SearchResults/FilterResultHiddenSidebar.vue';
 import Loading from '../components/SearchResults/Loading.vue';
 import { getAllColorsFromItems, filterItemsByAll, getSetsOfItems } from '../services/Item';
+import { getAllItems } from '../apis/Items';
 
 const url = router.currentRoute.value.query;
 
@@ -19,7 +20,7 @@ const props = defineProps({
 });
 
 const state = reactive({
-    items: props.items,
+    items: [],
     minPrice: null,
     maxPrice: null,
     selectedSet: 1,
@@ -37,6 +38,15 @@ const state = reactive({
     category: url.category == undefined? "all": url.category,
 });
 
+onMounted(async () => {
+    if(props.items.length != 0)
+        state.items = props.items;
+    else
+        state.items = await getAllItems();
+        
+})
+
+console.log(state.quality);
 
 const getItemsColors = computed(() => {
     return getAllColorsFromItems(state.items);
@@ -92,6 +102,7 @@ const getFilteredItems = computed(() => {
 const getItemsSets = computed(() => {
     return getSetsOfItems(getFilteredItems.value, 7);
 });
+
 
 </script>
 <template>
@@ -151,10 +162,10 @@ const getItemsSets = computed(() => {
                 <RowLargeSample v-for="item in getFilteredItems.slice((state.selectedSet * 7)-7,
                     state.selectedSet*7)" 
                     :id="item.id"
-                    :descount="item.descount"
-                    :images="item.images"
+                    :descount="item.subItemDtos[1].descount"
+                    :images="item.imageDtos"
                     :title="item.title"
-                    :price="item.price"
+                    :price="item.subItemDtos[1].price"
                     :quality="item.quality"
                     :key="item.id" 
                     />
@@ -173,10 +184,10 @@ const getItemsSets = computed(() => {
 
                     <ColumnMediumSample v-for="item in state.items.slice(0,4)" 
                         :id="item.id"
-                        :descount="item.descount"
+                        :descount="item.subItemDtos[1].descount"
                         :title="item.title"
-                        :price="item.price"
-                        :images="item.images" 
+                        :price="item.subItemDtos[1].price"
+                        :images="item.imageDtos" 
                         :key="item.id" 
                         />
             

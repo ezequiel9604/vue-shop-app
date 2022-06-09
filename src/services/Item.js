@@ -1,9 +1,11 @@
 import { Items } from '../assets/data/Items';
+import { getAllItems } from '../apis/Items';
 
-export function GetAllItems(searchtext){
+/*export function GetAllItems(searchtext){
 
-    return Items;
-}
+    return getAllItems();
+
+}*/
 
 export function GetItemById(items, id){
 
@@ -24,8 +26,8 @@ export function GetItemById(items, id){
 export function getAllColorsFromItems(items){
     let colors = new Set();
     items.forEach((current) => {
-        for (let i = 0; i < current.subitems.length; i++) {
-            colors.add(current.subitems[i].color);
+        for (let i = 0; i < current.subItemDtos.length; i++) {
+            colors.add(current.subItemDtos[i].color);
         }
     });
     return Array.from(colors);
@@ -35,44 +37,49 @@ export function filterItemsByAll(items, searchtext, isOffered, maxPrice, quality
    
     let arr = [...items];
 
-    if(searchtext == ""){
-        return [];
+    if(searchtext != ""){
+        // adding search text filter
+        arr = arr.filter((current) => {
+            if(current.title.search(searchtext) != -1){
+                return current;
+            }     
+        });
     }
 
-    arr = [...arr].filter((current) => {
-        if(current.title.search(searchtext) != -1){
-            return current;
-        }     
-    });
-
+    // adding category filter
     if(category != "all"){
-        arr = [...arr].filter((current)=>{
+        arr = arr.filter((current)=>{
             if(current.category == category)
                 return current;
         });
     }
 
     // adding state filter
-    arr = [...arr].filter((current) => {
-        return (isOffered)? current.descount > 0 : current.descount >= 0;
+    arr = arr.filter((current) => {
+
+        if(isOffered)
+            return current.subItemDtos[0].descount > 0;
+        else
+            return current.subItemDtos[0].descount >= 0;
+
     });
 
     // adding price filter
     if(maxPrice > 0){
-        arr = [...arr].filter((current) => {
-            if(current.price >= 0 && current.price <= maxPrice)
+        arr = arr.filter((current) => {
+            if(current.subItemDtos[0].price >= 0 && current.subItemDtos[0].price <= maxPrice)
                 return current;
         });
     }
     
     // adding quality filter
-    arr = [...arr].filter((current) => {
+    arr = arr.filter((current) => {
         return current.quality <= quality;
     });
 
     // adding states filter
     if(states.length != 0){
-        arr = [...arr].filter((current) => {
+        arr = arr.filter((current) => {
         
             for (let i = 0; i < states.length; i++) {
                 if(current.state == states[i])
@@ -83,7 +90,7 @@ export function filterItemsByAll(items, searchtext, isOffered, maxPrice, quality
 
     // adding color filter
      if(colors.length != 0){
-        arr = [...arr].filter((current) => {
+        arr = arr.filter((current) => {
         
             for (let i = 0; i < colors.length; i++) {
                 if(current.color == colors[i])
@@ -109,9 +116,9 @@ export function getCharacteriscFromSubitems(subitems, charac){
 export function getAllElementsFromItems(items, charac, categ){
     let elements = new Set();
     items.forEach((current) => {
-        for (let i = 0; i < current.subitems.length; i++) {
-            if(current.subitems[i][charac] != null && current.category == categ)
-                elements.add(current.subitems[i][charac]);
+        for (let i = 0; i < current.subItemDtos.length; i++) {
+            if(current.subItemDtos[i][charac] != null && current.category == categ)
+                elements.add(current.subItemDtos[i][charac]);
         }
     });
 

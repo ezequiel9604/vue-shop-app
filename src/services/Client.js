@@ -11,11 +11,11 @@ export function getLoggedClient(){
     }
     else{
         localStorage.setItem("guestClient", JSON.stringify({   
-            id: "00000",
-            characteristics:{
-                language: "SPANISH",
+            user:{
+                id: "00000",
+                language: "english",
                 appearance: "light",
-                currancy: "USA / DOLLARS"
+                currancy: "usa / dollars"
             }
         }));
 
@@ -24,100 +24,17 @@ export function getLoggedClient(){
 
 }
 
-export function submitAllCharacteristics(id, lang, curr) {
-
-    if(JSON.parse(localStorage.getItem("loggedClient"))){
-        // submit to the api
-        console.log("ho")
-    }
-    else {
-        console.log("hi")
-        const obj = JSON.parse(localStorage.getItem("guestClient"));
-
-        obj.characteristics.currancy= curr;
-        obj.characteristics.language= lang;
-
-        localStorage.setItem("guestClient", JSON.stringify(obj));
-
-        window.location.assign("http://localhost:3000/");
-
-        console.log(JSON.parse(localStorage.getItem("guestClient")));
-
-    }
-
-}
-
-export function submitPersonalInformation(id, firstname, lastname, img, firstphone, secondphone, gender,
-    streetname, apartment, city, zipcode, state, year, month, day){
-
-    if(JSON.parse(localStorage.getItem("loggedClient"))){
-        
-        // submit to the api
-
-    }
-
-}
-
-export function submitAccountInformation(id, email, password){
-
-    if(JSON.parse(localStorage.getItem("loggedClient"))){
-        
-        // submit to the api
-
-    }
-}
-
-export function submitWalletInformation(id, creditcard, creditcardowner, 
-    expdate, securitycode){
-
-    if(JSON.parse(localStorage.getItem("loggedClient"))){
-        
-        // submit to the api
-
-    }
-}
-
-export function submitDeleteAccount(id, email, password){
-
-    if(JSON.parse(localStorage.getItem("loggedClient"))){
-        
-        // submit to the api
-
-    }
-}
-
-export function submitAppearance(id, appe){
-
-    if(JSON.parse(localStorage.getItem("loggedClient"))){
-        // submit to the api
-
-    }
-    else {
-        const obj = JSON.parse(localStorage.getItem("guestClient"));
-
-        obj.characteristics.appearance= appe;
-
-        localStorage.setItem("guestClient", JSON.stringify(obj));
-
-        window.location.assign("http://localhost:3000/");
-
-        console.log(JSON.parse(localStorage.getItem("guestClient")));
-
-    }
-}
-
-
 
 export const Departments = [
     "all", "clothing", "accessories", "shoes", "offices", "home", "technology"
 ];
 
 export const Languages = [
-    "ENGLISH", "SPANISH"
+    "english", "spanish"
 ]
 
 export const Currancies = [
-    "USA / DOLLARS", "DOM / PESOS"
+    "usa / dollars", "dom / pesos"
 ]
 
 export const Days = [
@@ -129,7 +46,9 @@ export const Months = [
     [6, "July"], [7, "Augost"], [8, "September"], [9, "October"], [10, "November"], [11, "December"]
 ]
 export const Years = [
-    1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999
+    1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990,
+    1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000,
+    2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010
 ]
 export const States = [
     "Florida", "New York", "Georgia", "Texas"

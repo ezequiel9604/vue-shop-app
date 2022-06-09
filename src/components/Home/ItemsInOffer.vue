@@ -7,9 +7,12 @@ const props = defineProps({ items: Array });
 
 const getItemsInOffer = computed(() => {
     const itemsInOffer = [...props.items.filter((current) => {
-        return current.descount > 0;
-    })];
+        for (let i = 0; i < current.subItemDtos.length; i++) {
 
+            if(current.subItemDtos[i].descount > 0)
+                return current;
+        }
+    })];
     return itemsInOffer.slice(0, 6);
 });
 
@@ -22,9 +25,9 @@ const getItemsInOffer = computed(() => {
             <ColumnLargeSample v-for="item in getItemsInOffer" 
                 :id="item.id"
                 :title="item.title" 
-                :price="item.price" 
-                :images="item.images" 
-                :descount="item.descount"
+                :price="item.subItemDtos[0].price" 
+                :images="item.imageDtos" 
+                :descount="item.subItemDtos[0].descount"
                 :key="item.id" 
                 />
         </div>

@@ -1,8 +1,9 @@
 <script setup>
-import { RouterLink } from 'vue-router';
 import { reactive } from 'vue';
+import { RouterLink } from 'vue-router';
+import { Departments } from '../services/Client';
+import { submitAllCharacteristics } from '../apis/Clients';
 import AccordionPanel from '../components/HeaderHiddenNav/AccordionPanel.vue';
-import { Departments, submitAllCharacteristics } from '../services/Client';
 
 const props = defineProps({
     client: Object,
@@ -12,8 +13,8 @@ const props = defineProps({
 
 const state = reactive({
     isClientLoggedIn: props.client != null? true : false,
-    language: (props.client != null)? props.client.characteristics.language : "english",
-    currancy: (props.client != null)? props.client.characteristics.curranty : "dollar",
+    language: (props.client != null)? props.client.language : "english",
+    currancy: (props.client != null)? props.client.curranty : "dollar",
 })
 
 

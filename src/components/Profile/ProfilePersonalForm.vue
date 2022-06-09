@@ -1,6 +1,7 @@
 <script setup>
 import { reactive } from 'vue';
-import { submitPersonalInformation, Days, Months, Years, States, Cities } from '../../services/Client';
+import { submitPersonalInformation } from '../../apis/Clients';
+import { Days, Months, Years, States, Cities } from '../../services/Client';
 
 const props = defineProps({
     clientId: String,
@@ -28,7 +29,7 @@ const state = reactive({
     zipcode: props.address.zipCode,
     yearofbirth: props.dateofbirth.getFullYear(),
     monthofbirth: props.dateofbirth.getMonth(),
-    dayofbirth: props.dateofbirth.getDay()
+    dayofbirth: props.dateofbirth.getDate()
 });
 
 const handleSubmitForm = () => {
@@ -58,13 +59,13 @@ const handleSubmitForm = () => {
 
             <div class="right-my-profile-content-form-double-box">
                 <h6>Full name:</h6>
-                <input type="text" v-model="state.firstname" />
-                <input type="text" v-model="state.lastname" />
+                <input v-model="state.firstname" type="text" />
+                <input v-model="state.lastname" type="text" />
             </div>
             <div class="right-my-profile-content-form-double-box">
                 <h6>Phone:</h6>
-                <input type="text" v-model="state.firstphone" />
-                <input type="text" v-model="state.secondphone" />
+                <input v-model="state.firstphone" type="text" />
+                <input v-model="state.secondphone" type="text" />
             </div>
             <div class="right-my-profile-content-form-triple-box">
                 <h6>Date of birth:</h6>
@@ -80,8 +81,8 @@ const handleSubmitForm = () => {
             </div>
             <div class="right-my-profile-content-form-mix-box">
                 <h6>Address:</h6>
-                <input type="text" style="width:68%" v-model="state.streetname" />
-                <input type="text" style="width:30%" v-model="state.apartment" />
+                <input v-model="state.streetname" type="text" style="width:68%" />
+                <input v-model="state.apartment" type="text" style="width:30%" />
                 <select v-model="state.city">
                     <option v-for="c in Cities" :value="c" :selected="c == state.city" :key="c">{{ c }}</option>
                 </select>

@@ -1,6 +1,6 @@
 <script setup>
 import { reactive } from 'vue';
-import { submitAccountInformation } from '../../services/Client';
+import { submitAccountInformation } from '../../apis/Clients';
 
 const props = defineProps({
     clientId: String,

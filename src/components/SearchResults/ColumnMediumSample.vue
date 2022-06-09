@@ -20,7 +20,7 @@ const selectedImage = ref(0);
         <div class="descount">{{ props.descount }}%
         </div>
         <RouterLink :to="'/itemDetails?itemId='+props.id">
-            <img :src="props.images[0]" alt="" />
+            <img src="" alt="" />
         </RouterLink>
         <h3>{{ props.title }}</h3>
         <h4>

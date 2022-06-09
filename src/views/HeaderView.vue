@@ -16,17 +16,18 @@ const props = defineProps({
             <HeaderTop 
                 v-if="props.client != null"
                 :clientId="props.client.id"
-                :firstName="props.client.firstname"
-                :lastName="props.client.lastname" 
-                :currancy="props.client.characteristics.currancy"
-                :language="props.client.characteristics.language"
+                :firstName="props.client.firstName"
+                :lastName="props.client.lastName" 
+                :email="props.client.email"
+                :currancy="props.client.currancy"
+                :language="props.client.language"
                 />
 
             <HeaderTop 
                 v-else
                 :clientId="props.client.id"
-                :currancy="props.client.characteristics.currancy"
-                :language="props.client.characteristics.language"
+                :currancy="props.client.currancy"
+                :language="props.client.language"
                 />
 
             <HeaderBottom 
