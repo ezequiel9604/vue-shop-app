@@ -1,19 +1,30 @@
 <script setup>
-import { reactive } from 'vue';
+import { reactive, onMounted } from 'vue';
 import router from '../router/index';
 import TopItemDetails from '../components/ItemDetails/TopItemDetails.vue';
 import ColumnMediumSample from '../components/SearchResults/ColumnMediumSample.vue';
 import ManImage from '../assets/imgs/users/placeholder-man.png';
 import Comments from '../assets/data/Comments';
 import { GetItemById } from '../services/Item';
+import { getAllItems } from '../apis/Items';
 
 const url = router.currentRoute.value.query;
 
 const props = defineProps({ items: Array });
 
 const state = reactive({
-    selectedItem: GetItemById(props.items, url.itemId),
+    items: [],
+    selectedItem: null,
     selectedSection: 0,
+})
+
+onMounted(async () => {
+
+    if(props.items.length != 0)
+        state.selectedItem = GetItemById(props.items, url.itemId);
+    else
+        state.selectedItem = GetItemById(await getAllItems(), url.itemId);
+        
 })
 
 const changeSelectedSection = (num) => {
@@ -26,11 +37,12 @@ const changeSelectedSection = (num) => {
     <div class="item-details">
 
         <TopItemDetails 
+            v-if="state.selectedItem != null"
             :items="props.items"
             :title="state.selectedItem.title"
-            :images="state.selectedItem.imageDtos"
             :quality="state.selectedItem.quality"
             :category="state.selectedItem.category"
+            :images="state.selectedItem.imageDtos"
             :subitems="state.selectedItem.subItemDtos"
             />
 
@@ -116,6 +128,7 @@ const changeSelectedSection = (num) => {
                     <div class="item-details-items-recommendations-content">
 
                         <ColumnMediumSample v-for="item in props.items.slice(0,3)" 
+                            :id="item.id"
                             :descount="item.subItemDtos[1].descount"
                             :title="item.title"
                             :price="item.subItemDtos[1].price"

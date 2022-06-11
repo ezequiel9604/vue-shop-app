@@ -228,6 +228,7 @@ const changeStoreCategoryItem= (value) => {
     width: 70%;
     box-sizing: border-box;
     font-family: "raleway-regular", sans-serif;
+    background: transparent;
     font-size: 14px;
     padding: 6px 10px;
 }

@@ -117,7 +117,8 @@ export function getAllElementsFromItems(items, charac, categ){
     let elements = new Set();
     items.forEach((current) => {
         for (let i = 0; i < current.subItemDtos.length; i++) {
-            if(current.subItemDtos[i][charac] != null && current.category == categ)
+            if(current.subItemDtos[i][charac] != null && current.category == categ &&
+                current.subItemDtos[i][charac] != "")
                 elements.add(current.subItemDtos[i][charac]);
         }
     });

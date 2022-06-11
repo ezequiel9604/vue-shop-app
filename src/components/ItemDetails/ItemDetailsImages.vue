@@ -1,15 +1,28 @@
 <script setup>
-import { ref } from 'vue';
+import { reactive } from 'vue';
 
 const props = defineProps({
     images: Array
 });
 
-const selectedImg = ref(0);
+const state = reactive({
+    image: "",
+    selected: 0,
+})
 
 const changeSeletedImg = (number) => {
-    selectedImg.value = number;
+    state.selected = number;
 }
+
+import('../../assets/imgs/samples/'+props.images[state.selected].path)
+    .then((value)=>{
+        state.image = value.default;
+        console.log(value.default)
+    })
+    .catch((error)=>{
+        console.log("Not able to locate the image!");
+    })
+
 
 </script>
 <template>
@@ -20,18 +33,18 @@ const changeSeletedImg = (number) => {
             <button class="add-to-list-button">
                 <i class="bi bi-heart"></i>
             </button>
-            <img :src="props.images[selectedImg]" alt="" />
+            <img :src="state.image" alt="" />
         </div>
 
         <div class="top-item-details-min-images">
 
-            <figure v-for="n in 5" :key="n">
-                <img :src="props.images[n-1]" 
-                    v-if="(n-1) === selectedImg" 
+            <figure v-for="n in 4" :key="n">
+                <img src="" 
+                    v-if="(n-1) === state.selected" 
                     id="item-details-min-img-active" 
                     @click="() => changeSeletedImg(n-1)"
                     alt="" />
-                <img v-else :src="props.images[n-1]"
+                <img v-else src="" 
                     @click="() => changeSeletedImg(n-1)" 
                     alt="" />
             </figure>
@@ -106,9 +119,6 @@ img#item-details-min-img-active{
 
 @media screen and (max-width: 834px) {
     
-    /* ////////////////////////////////////////////////////// */
-    /* ///             top item details images            /// */ 
-    /* ////////////////////////////////////////////////////// */
     .top-item-details-images{
         width: 49%;
     }
@@ -129,10 +139,7 @@ img#item-details-min-img-active{
 }
 
 @media screen and (max-width: 414px) {
- 
-    /* ////////////////////////////////////////////////////// */
-    /* ///            top item details images            /// */ 
-    /* ////////////////////////////////////////////////////// */
+
     .top-item-details-images{
         width: 95%;
         margin: 0 auto;

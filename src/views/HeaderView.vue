@@ -42,7 +42,7 @@ const props = defineProps({
 .main-header {
     width: 100%;
     box-sizing: border-box;
-    background-color: #ffffff;
+    background-color: #fafafa;
     border-bottom: 1px solid #dddddd;
     border-top: 1px solid #dddddd;
     z-index: 60;

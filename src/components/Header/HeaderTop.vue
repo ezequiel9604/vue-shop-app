@@ -20,12 +20,13 @@ const state = reactive({
     language: props.language
 });
 
+
 const isClientLoggedIn = computed(()=>{
     return props.clientId != "00000"? true : false;
 })
 
-const handleSubmitForm = () => {
-    submitAllCharacteristics(props.clientId, state.language, state.currancy);
+const handleSubmitForm = async () => {
+    await submitAllCharacteristics(state.language, state.currancy);
 }
 
 const handleLogout = () => {

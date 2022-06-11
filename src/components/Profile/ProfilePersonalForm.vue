@@ -18,7 +18,7 @@ const props = defineProps({
 const state = reactive({
     firstname: props.firstname,
     lastname: props.lastname,
-    image: props.image,
+    image: "",
     firstphone: props.firstphone,
     secondphone: props.secondphone,
     genre: props.genre,
@@ -31,6 +31,14 @@ const state = reactive({
     monthofbirth: props.dateofbirth.getMonth(),
     dayofbirth: props.dateofbirth.getDate()
 });
+
+import("../../assets/imgs/users/"+props.image)
+    .then((value)=>{
+        state.image = value.default;
+    })
+    .catch((error)=>{
+        console.log("Not able to locate the image!");
+    })
 
 const handleSubmitForm = () => {
 

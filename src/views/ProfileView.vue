@@ -41,12 +41,12 @@ const changeSelectedProfileForm = (value) => {
                         :firstname="props.client.firstName"
                         :lastname="props.client.lastName"
                         :image="props.client.imagePath" 
-                        :firstphone="props.client.phoneDtos[0].phoneNumber"
-                        :secondphone="props.client.phoneDtos[0].phoneNumber"
+                        :firstphone="props.client.phoneDtos > 0? props.client.phoneDtos[0].phoneNumber:''"
+                        :secondphone="props.client.phoneDtos > 0? props.client.phoneDtos[1].phoneNumber:''"
                         :dateofbirth="new Date(props.client.yearOfBirth, props.client.monthOfBirth,
                             props.client.dayOfBirth)" 
                         :genre="props.client.genre"
-                        :address="props.client.addressDtos[0]" 
+                        :address="props.client.addressDtos > 0?props.client.addressDtos[0]:{}" 
                         />
                 </div>
 

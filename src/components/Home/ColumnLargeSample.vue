@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { reactive } from 'vue';
 import { RouterLink } from 'vue-router';
 import { formatedNumber, calculateDescountPrice } from '../../services/Item';
 
@@ -11,7 +11,17 @@ const props = defineProps({
     descount: Number
 });
 
-const selectedImage = ref(0);
+const state = reactive({
+    image: "",
+})
+
+import("../../assets/imgs/samples/"+props.images[0].path)
+    .then((value)=>{
+        state.image = value.default;
+    })
+    .catch((error)=>{
+        console.log("Not able to locate the image!");
+    })
 
 </script>
 <template>
@@ -21,8 +31,7 @@ const selectedImage = ref(0);
             {{ props.descount}}%
         </div>
         <RouterLink :to="'/itemDetails?itemId='+props.id" class="column-large-samples-img">
-            <img @mouseenter="selectedImage=1" @mouseleave="selectedImage=0" 
-                src="" alt="" />
+            <img :src="state.image" alt="" />
         </RouterLink>
         <h3>{{ props.title }}</h3>
         <h4>

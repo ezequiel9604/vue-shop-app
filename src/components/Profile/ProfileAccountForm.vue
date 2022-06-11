@@ -1,6 +1,6 @@
 <script setup>
 import { reactive } from 'vue';
-import { submitAccountInformation } from '../../apis/Clients';
+import { submitAccountInformation, submitDeleteAccount } from '../../apis/Clients';
 
 const props = defineProps({
     clientId: String,
@@ -9,16 +9,18 @@ const props = defineProps({
 
 const state = reactive({
     email: props.email,
-    password: "123456789",
-    repeatedPassword: "123456789"
+    password: "roggertaylor123",
+    repeatedPassword: "roggertaylor123"
 });
 
-const handleSubmitForm = () => {
-    submitAccountInformation(props.clientId, state.email, state.password);
+const handleSubmitForm = async () => {
+    await submitAccountInformation(state.email, state.password);
 }
 
-const handleDeleteAccount = () => {
-    submitDeleteAccount(props.clientId, state.email, state.password);
+const handleDeleteAccount = async () => {
+    // add confirm code
+    const res = await submitDeleteAccount(state.email);
+    console.log(res);
 }
 
 </script>

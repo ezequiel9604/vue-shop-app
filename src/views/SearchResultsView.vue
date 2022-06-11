@@ -46,8 +46,6 @@ onMounted(async () => {
         
 })
 
-console.log(state.quality);
-
 const getItemsColors = computed(() => {
     return getAllColorsFromItems(state.items);
 });

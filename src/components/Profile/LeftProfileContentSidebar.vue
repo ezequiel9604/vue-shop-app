@@ -10,17 +10,19 @@ const props = defineProps({
 
 const state = reactive({
     appearance: props.appearance
-});
+})
 
-const changeAppearance = () => {
-    if(state.appearance == 'light')
-        state.appearance = 'dark';
-    else
-        state.appearance = 'light';
+const changeAppearance = async () => {
+
+    if(state.appearance == "light"){
+        state.appearance = "dark";
+        await submitAppearance(state.appearance);
+    }
+    else{
+        state.appearance = "light";
+        await submitAppearance(state.appearance);
+    }
     
-    submitAppearance(props.clientId, state.appearance);
-
-    console.log(state.appearance);
 }
 
 </script>
@@ -43,7 +45,7 @@ const changeAppearance = () => {
             <p><i class="bi bi-palette"></i><strong>Appearance</strong></p>
             <p>
                 <label class="left-my-profile-content-sidebar-toggle">
-                    <input type="checkbox" @change="changeAppearance" :checked="state.appearance == 'dark'" />
+                    <input type="checkbox" @change="changeAppearance" :checked="props.appearance == 'dark'" />
                     <span class="left-my-profile-content-sidebar-toggle-slider"></span>
                 </label>
             </p>
