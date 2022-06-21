@@ -7,6 +7,7 @@ import brandImage2 from "../../assets/imgs/brands/brand-2.png";
 import brandImage3 from "../../assets/imgs/brands/brand-3.png";
 import { checkingInputChecks } from '../../services/Item'; 
 import { Departments } from '../../services/Client'; 
+import store from '../../store';
 
 const props = defineProps({
     onIsHiddenSidebarOpen: Boolean,
@@ -60,6 +61,10 @@ const changeInputs = (ev, input) =>{
     props.onChangeFilterSState(input, Array.from(arr));
 }
 
+const changeStoreCategoryItem= (value) => {
+    store.commit("changeCategoryItem", value);
+}
+
 </script>
 <template>
 
@@ -74,7 +79,9 @@ const changeInputs = (ev, input) =>{
             <div class="bottom-filter-results-hidden-sidebar">
 
                 <AccordionPanel v-if="props.category == 'all'" :title="props.category" icon="">
-                    <RouterLink v-for="d in Departments" :to="'/searchResults?category='+d" 
+                    <RouterLink v-for="d in Departments"
+                        @click="()=> changeStoreCategoryItem(d)"  
+                        :to="'/searchResults?category='+d" 
                         class="accordion-links" :key="d">{{ d }}</RouterLink>
                 </AccordionPanel>
 

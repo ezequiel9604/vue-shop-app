@@ -1,28 +1,46 @@
 <script setup>
 import { reactive } from 'vue';
+import image1 from '../../assets/imgs/samples/smart-tv-2.png';
+import image2 from '../../assets/imgs/samples/smart-tv-3.png';
+import image3 from '../../assets/imgs/samples/tablet-2.png';
+import image4 from '../../assets/imgs/samples/tablet.png';
 
 const props = defineProps({
     images: Array
 });
 
 const state = reactive({
-    image: "",
+    imagePath: "",
     selected: 0,
 })
 
-const changeSeletedImg = (number) => {
-    state.selected = number;
-}
+/*const changeSeletedImg = (value) => {
+    state.selected = value;
+}*/
 
-import('../../assets/imgs/samples/'+props.images[state.selected].path)
+const getImagePath = (num) => {
+    console.log(allImages[num-1])
+    let result = "";
+
+   /*import(`../../assets/imgs/samples/${allImages[num-1]}`)
     .then((value)=>{
-        state.image = value.default;
-        console.log(value.default)
+        result = value.default;
+        //console.log(result);
     })
     .catch((error)=>{
         console.log("Not able to locate the image!");
-    })
+    });*/
 
+    return result;
+} 
+
+import(`../../assets/imgs/samples/${props.images[state.selected].path}`)
+    .then((value)=>{
+        state.imagePath = value.default;
+    })
+    .catch((error)=>{
+        console.log("Not able to locate the image!");
+    });
 
 </script>
 <template>
@@ -33,20 +51,22 @@ import('../../assets/imgs/samples/'+props.images[state.selected].path)
             <button class="add-to-list-button">
                 <i class="bi bi-heart"></i>
             </button>
-            <img :src="state.image" alt="" />
+            <img :src="state.imagePath" alt="" />
         </div>
 
         <div class="top-item-details-min-images">
 
-            <figure v-for="n in 4" :key="n">
-                <img src="" 
-                    v-if="(n-1) === state.selected" 
-                    id="item-details-min-img-active" 
-                    @click="() => changeSeletedImg(n-1)"
-                    alt="" />
-                <img v-else src="" 
-                    @click="() => changeSeletedImg(n-1)" 
-                    alt="" />
+            <figure>
+                <img :src="image1" id="item-details-min-img-active" alt="" />
+            </figure>
+            <figure>
+                <img :src="image2" alt="" />
+            </figure>
+            <figure>
+                <img :src="image3" alt="" />
+            </figure>
+            <figure>
+                <img :src="image4" alt="" />
             </figure>
 
 

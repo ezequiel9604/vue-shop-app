@@ -6,11 +6,6 @@ import { shoppingCart } from '../../assets/data/ShoppingCarts';
 import { wishList } from '../../assets/data/WishLists';
 import store from '../../store';
 
-const props = defineProps({
-    clientId: String,
-    onChangeHeaderHiddenNav: Function,
-});
-
 const state = reactive({
     searchInput: store.state.searchText,
     categoryInput: store.state.categoryItem,
@@ -18,14 +13,14 @@ const state = reactive({
 
 const cartListLength = computed(() => {
     const arr = shoppingCart.filter((current) => {
-        return current.clientId == props.clientId;
+        return current.clientId == store.state.client.user.id;
     });
     return arr.length;
 })
 
 const wishListLength = computed(() => {
     const arr = wishList.filter((current) => {
-        return current.clientId == props.clientId;
+        return current.clientId == store.state.client.user.id;
     });
     return arr.length;
 })
@@ -43,7 +38,7 @@ const changeStoreCategoryItem= (value) => {
 <template>
     <div class="main-header-content-bottom">
 
-        <button @click="onChangeHeaderHiddenNav"
+        <button @click="() => store.commit('changeHeaderHiddenStatus')"
              class="main-header-content-bottom-hidden-menu">
             <i class="bi bi-justify"></i>
         </button>

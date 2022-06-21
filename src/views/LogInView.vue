@@ -9,15 +9,13 @@ const state = reactive({
     emailInput: "bryanmay@gmail.com",
     passwordInput: "bryanmay123",
     message: "",
-})
+});
 
 const handleSubmitForm = async () => {
     state.message = await submitLogin(state.emailInput, state.passwordInput);
 }
 
-const closeMessageAlert = () => {
-    state.message = '';
-}
+const closeMessageAlert = () => { state.message = ''; }
 
 </script>
 <template>

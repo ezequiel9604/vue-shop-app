@@ -14,10 +14,7 @@ import { getAllItems } from '../apis/Items';
 
 const url = router.currentRoute.value.query;
 
-const props = defineProps({ 
-    client: Object,
-    items: Array 
-});
+const props = defineProps({ items: Array });
 
 const state = reactive({
     items: [],

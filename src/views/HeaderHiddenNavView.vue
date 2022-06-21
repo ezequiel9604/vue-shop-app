@@ -1,22 +1,14 @@
 <script setup>
-import { reactive } from 'vue';
+import { computed } from 'vue';
 import { RouterLink } from 'vue-router';
 import { Departments } from '../services/Client';
-import { submitAllCharacteristics } from '../apis/Clients';
+import { submitLogout, submitAllCharacteristics } from '../apis/Clients';
 import AccordionPanel from '../components/HeaderHiddenNav/AccordionPanel.vue';
+import store from '../store';
 
-const props = defineProps({
-    client: Object,
-    onHeaderHiddenNavOpen: Boolean,
-    onChangeHeaderHiddenNav: Function,
+const isClientLoggedIn = computed(()=>{
+    return store.state.client.user.id != "00000"? true : false;
 });
-
-const state = reactive({
-    isClientLoggedIn: props.client != null? true : false,
-    language: (props.client != null)? props.client.language : "english",
-    currancy: (props.client != null)? props.client.curranty : "dollar",
-})
-
 
 const changeLanguageInput = (ev) => {
     languageInput.value = ev.target.value;
@@ -25,19 +17,27 @@ const changeCurrancyInput = (ev) => {
     currancyInput.value = ev.target.value;
 }
 
-const handleSubmitForm = () => {
-   submitAllCharacteristics(props.client.id, state.language, state.currancy);
+const handleSubmitForm = async () => {
+    await submitAllCharacteristics(store.state.client.user.language, store.state.client.use.currancy);
+}
+
+const handleLogout = () => {
+    submitLogout(store.state.client.user.email);
+}
+
+const changeStoreCategoryItem= (value) => {
+    store.commit("changeCategoryItem", value);
 }
 
 </script>
 <template>
 
-    <div class="header-hidden-menu" :style="{ display: props.onHeaderHiddenNavStatus ? 'block' : 'none' }">
+    <div class="header-hidden-menu" :style="{ display: store.state.headerHiddenStatus ? 'block' : 'none' }">
 
         <div class="header-hidden-menu-content">
 
             <div class="header-hidden-menu-content-top">
-                <button @click="props.onChangeHeaderHiddenNavStatus">
+                <button @click="() => store.commit('changeHeaderHiddenStatus')">
                     <i class="bi bi-x"></i>
                 </button>
             </div>
@@ -45,11 +45,12 @@ const handleSubmitForm = () => {
             <div class="header-hidden-menu-content-bottom">
 
                 <AccordionPanel title="Account" icon="bi-person">
-                    <p v-if="state.isClientLoggedIn">Welcome <strong>{{ props.client.name }}</strong></p>
+                    <p v-if="isClientLoggedIn">Welcome 
+                        <strong>{{ store.state.client.user.firstName+" "+store.state.client.user.firstName }}</strong></p>
                     <p v-else>Welcome to ShopApp</p>
 
-                    <div v-if="state.isClientLoggedIn" class="main-header-content-top-dropdowns-content-sign-btns">
-                        <RouterLink to="" class="sign-btn sign-out-btn">Sign out</RouterLink>
+                    <div v-if="isClientLoggedIn" class="main-header-content-top-dropdowns-content-sign-btns">
+                        <button @click="handleLogout" class="sign-btn sign-out-btn">Sign out</button>
                     </div>
                     <div v-else class="main-header-content-top-dropdowns-content-sign-btns">
                         <RouterLink to="/login" class="sign-btn">Log in</RouterLink>
@@ -67,7 +68,7 @@ const handleSubmitForm = () => {
                 <AccordionPanel title="English / Dollar" icon="bi-flag">
                     <div class="selection-language">
                         <label>Choose language:</label>
-                        <select @change="changeLanguageInput" v-if="state.language == 'english'">
+                        <select @change="changeLanguageInput" v-if="store.state.client.user.language == 'english'">
                             <option value="english" selected>English</option>
                             <option value="spanish">Spanish</option>
                         </select>
@@ -79,7 +80,7 @@ const handleSubmitForm = () => {
 
                     <div class="selection-language">
                         <label>Choose currancy:</label>
-                        <select @change="changeCurrancyInput" v-if="state.currancy == 'dollar'">
+                        <select @change="changeCurrancyInput" v-if="store.state.client.user.currancy == 'dollar'">
                             <option value="dollar" selected>USA / Dollar</option>
                             <option value="pesos">DOM / Pesos</option>
                         </select>
@@ -95,7 +96,9 @@ const handleSubmitForm = () => {
 
                 <AccordionPanel title="Categories" icon="bi-list">
 
-                    <RouterLink v-for="d in Departments" to="" :key="d"
+                    <RouterLink v-for="d in Departments"
+                        @click="()=> changeStoreCategoryItem(d)" 
+                        :to="'/searchResults?category='+d" :key="d"
                         class="header-hidden-menu-content-bottom-accordion-panel-links">{{ d }}</RouterLink>
 
                 </AccordionPanel>

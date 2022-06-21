@@ -18,7 +18,7 @@ const props = defineProps({
 const state = reactive({
     firstname: props.firstname,
     lastname: props.lastname,
-    image: "",
+    imagePath: "",
     firstphone: props.firstphone,
     secondphone: props.secondphone,
     genre: props.genre,
@@ -32,9 +32,9 @@ const state = reactive({
     dayofbirth: props.dateofbirth.getDate()
 });
 
-import("../../assets/imgs/users/"+props.image)
+import("../../assets/imgs/users/placeholder-man.png")
     .then((value)=>{
-        state.image = value.default;
+        state.imagePath = value.default;
     })
     .catch((error)=>{
         console.log("Not able to locate the image!");
@@ -42,7 +42,7 @@ import("../../assets/imgs/users/"+props.image)
 
 const handleSubmitForm = () => {
 
-    submitPersonalInformation(props.clientId, state.firstname, state.lastname, state.image, 
+    submitPersonalInformation(props.clientId, state.firstname, state.lastname, state.imagePath, 
         state.firstphone, state.secondphone, state.genre, state.streetname, state.apartment, 
         state.city, state.zipcode, state.state, state.yearofbirth, state.monthofbirth, 
         state.dayofbirth);
@@ -55,7 +55,7 @@ const handleSubmitForm = () => {
         <div class="right-my-profile-content-form-header">
             <h2>{{ props.name }}</h2>
             <figure>
-                <img :src="state.image" alt="" />
+                <img :src="state.imagePath" alt="" />
             </figure>
             <label for="image-file">
                 <input type="file" id="image-file" />

@@ -1,8 +1,10 @@
 import Axios from "axios";
 
+const baseUrl = "https:/localhost:7227";
+
 export async function submitLogin(email_input, password_input){
 
-    const response = await Axios.post("https://localhost:7227/api/Client/Login",{
+    const response = await Axios.post(`${baseUrl}/api/Client/Login`,{
         email: email_input,
         password: password_input
     })
@@ -24,7 +26,7 @@ export async function submitLogin(email_input, password_input){
 
 export async function submitLogout(email_input){
 
-    await Axios.post("https://localhost:7227/api/Client/Logout",{
+    await Axios.post(`${baseUrl}/api/Client/Logout`,{
         email: email_input,
     })
     .then((result)=>{
@@ -40,10 +42,11 @@ export async function submitLogout(email_input){
 
 }
 
-export async function submitSignup(firstname, lastname, email, password, dayofbirth, monthofbirth, 
-    yearofbirth, gender) {
+export async function submitSignup(
+    firstname, lastname, email, password, 
+    dayofbirth, monthofbirth, yearofbirth, gender) {
     
-    const response = await Axios.post("https://localhost:7227/api/Client/Signup",{
+    const response = await Axios.post(`${baseUrl}/api/Client/Signup`,{
         firstname: firstname,
         lastname: lastname,
         email: email,
@@ -83,7 +86,7 @@ export async function submitAllCharacteristics(lang, curr) {
         
         const obj = JSON.parse(localStorage.getItem("loggedClient"));
 
-        await Axios.put("https://localhost:7227/api/Client/Edit", {
+        await Axios.put(`${baseUrl}/api/Client/Edit`, {
             id: obj.user.id,
             currancy: curr,
             language: lang
@@ -125,7 +128,7 @@ export async function submitAccountInformation(email, password){
         
         const obj = JSON.parse(localStorage.getItem("loggedClient"));
 
-        await Axios.put("https://localhost:7227/api/Client/Edit", {
+        await Axios.put(`${baseUrl}/api/Client/Edit`, {
             id: obj.user.id,
             email: email,
             password: password
@@ -160,7 +163,7 @@ export async function submitDeleteAccount(email){
 
     if(JSON.parse(localStorage.getItem("loggedClient"))){
         
-        const response = await Axios.post("https://localhost:7227/api/Client/Signout",{
+        const response = await Axios.post(`${baseUrl}/api/Client/Signout`,{
             email: email
         })
         .then((result)=> {
@@ -186,12 +189,11 @@ export async function submitAppearance(appearance){
         
         const obj = JSON.parse(localStorage.getItem("loggedClient"));
 
-        await Axios.put("https://localhost:7227/api/Client/Edit", {
+        await Axios.put(`${baseUrl}/api/Client/Edit`, {
             id: obj.user.id,
             appearance: appearance,
         })
         .then((result)=>{
-            
             
             obj.user.appearance= appearance;
 
@@ -212,8 +214,6 @@ export async function submitAppearance(appearance){
         localStorage.setItem("guestClient", JSON.stringify(obj));
 
         window.location.assign("http://localhost:3000/");
-
-        console.log(JSON.parse(localStorage.getItem("guestClient")));
 
     }
 }

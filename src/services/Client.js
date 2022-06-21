@@ -1,5 +1,4 @@
-//import Clients from '../apis/Clients.js';
-import Clients from '../assets/data/Clients';
+
 
 export function getLoggedClient(){
 
@@ -23,7 +22,6 @@ export function getLoggedClient(){
     }
 
 }
-
 
 export const Departments = [
     "all", "clothing", "accessories", "shoes", "offices", "home", "technology"

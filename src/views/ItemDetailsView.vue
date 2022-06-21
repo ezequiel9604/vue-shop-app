@@ -1,9 +1,12 @@
 <script setup>
 import { reactive, onMounted } from 'vue';
 import router from '../router/index';
+import store from '../store';
 import TopItemDetails from '../components/ItemDetails/TopItemDetails.vue';
 import ColumnMediumSample from '../components/SearchResults/ColumnMediumSample.vue';
-import ManImage from '../assets/imgs/users/placeholder-man.png';
+import ItemButtonSelection from '../components/ItemDetails/ItemButtonSelection.vue';
+import ItemAddComment from '../components/ItemDetails/ItemAddComment.vue';
+import ItemDisplayComments from '../components/ItemDetails/ItemDisplayComments.vue';
 import Comments from '../assets/data/Comments';
 import { GetItemById } from '../services/Item';
 import { getAllItems } from '../apis/Items';
@@ -16,7 +19,7 @@ const state = reactive({
     items: [],
     selectedItem: null,
     selectedSection: 0,
-})
+});
 
 onMounted(async () => {
 
@@ -25,10 +28,10 @@ onMounted(async () => {
     else
         state.selectedItem = GetItemById(await getAllItems(), url.itemId);
         
-})
+});
 
-const changeSelectedSection = (num) => {
-    state.selectedSection = num;
+const changeSelectedSection = (value) => {
+    state.selectedSection = value;
 }
 
 </script>
@@ -51,20 +54,12 @@ const changeSelectedSection = (num) => {
             <div class="bottom-item-details-content">
 
                 <div class="item-details-description-comment">
-                    <div class="item-details-description-comment-header">
 
-                        <button v-if="state.selectedSection == 0" @click="() => changeSelectedSection(0)" 
-                            class="item-details-description-comment-header-button 
-                            item-details-description-comment-header-button-active">Description</button>
-                        <button v-if="state.selectedSection == 1" @click="() => changeSelectedSection(0)" 
-                            class="item-details-description-comment-header-button">Description</button>
-
-                        <button v-if="state.selectedSection == 1" @click="() => changeSelectedSection(1)" 
-                            class="item-details-description-comment-header-button 
-                            item-details-description-comment-header-button-active">Comments ({{ Comments.length }})</button>
-                        <button v-if="state.selectedSection == 0" @click="() => changeSelectedSection(1)" 
-                            class="item-details-description-comment-header-button">Comments ({{ Comments.length }})</button>
-                    </div>
+                    <ItemButtonSelection 
+                        :selected="state.selectedSection" 
+                        :changeSelected="changeSelectedSection"
+                        :commentsLength="Comments.length"
+                        />
 
                     <div :style="{ display: state.selectedSection == 0? 'block':'none'}" class="item-details-description-content">
 
@@ -98,26 +93,13 @@ const changeSelectedSection = (num) => {
 
                     <div :style="{ display: state.selectedSection == 1? 'block':'none'}" class="item-details-comment-content">
 
-                        <div class="item-details-comment-content-addcomment">
-                            <figure>
-                                <img :src="ManImage" alt="" />
-                            </figure>
-                            <input type="text" placeholder="Add a comment" />
-                            <button>Comment</button>
-                        </div>
+                        <ItemAddComment 
+                            :image="store.state.client.user.imagePath"
+                            :clientId="store.state.client.user.id"
+                            :itemId="url.itemId"
+                            />
 
-                        <div v-for="comment in Comments" 
-                            class="item-details-comment-content-comments" 
-                            :key="comment.id">
-                            <figure>
-                                <img :src="comment.image" alt="" />
-                            </figure>
-                            <div>
-                                <h5>{{ comment.name }}</h5>
-                                <h6>{{ comment.pubdate.toLocaleDateString() }}</h6>
-                            </div>
-                            <p>{{ comment.text }}</p>
-                        </div>
+                        <ItemDisplayComments :comments="Comments" />
 
                     </div>
                     
@@ -172,47 +154,7 @@ const changeSelectedSection = (num) => {
     border-radius: 4px;
     overflow: hidden;
 }
-.item-details-description-comment-header{
-    width: 100%;
-    box-sizing: border-box;
-    background-color: #dddddd;
 
-    display: flex;
-}
-.item-details-description-comment-header-button{
-    width: fit-content;
-    box-sizing:border-box ;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    font-family: "raleway-semibold", sans-serif;
-    font-size: 14px;
-    padding: 15px 25px;
-    color: #333333;
-
-    background-color: #dddddd;
-    border: 2px solid #dddddd;
-}
-.item-details-description-comment-header-button:last-child{
-    border-right:2px solid #808080 ;
-    border-left: 2px solid #808080;
-}
-.item-details-description-comment-header-button:hover{
-    background-color: #ffffff;
-    border-left: 2px solid #333333;
-    border-top: 2px solid #333333;
-    border-right: 2px solid #333333;
-    border-bottom: 2px solid #ffffff;
-}
-.item-details-description-comment-header-button-active{
-    background-color: #ffffff;
-    border-left: 2px solid #333333;
-    border-top: 2px solid #333333;
-    border-right: 2px solid #333333;
-    border-bottom: 2px solid #ffffff;
-}
 .item-details-description-content{
     width: 90%;
     margin: 40px auto;
@@ -262,120 +204,6 @@ const changeSelectedSection = (num) => {
     box-sizing: border-box;
     overflow: hidden;
 }
-.item-details-comment-content-addcomment{
-    width: 95%;
-    box-sizing: border-box;
-    margin-bottom: 40px;
-
-    display: flex;
-    align-items: center;
-}
-.item-details-comment-content-addcomment figure{
-    width: 50px;
-    height: 48px;
-    box-sizing: border-box;
-    margin-right: 2%;
-
-    background-color: #dddddd;
-    border-radius: 50%;
-}
-.item-details-comment-content-addcomment figure img{
-    display: block;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    overflow: hidden;
-}
-.item-details-comment-content-addcomment input{
-    width: 80%;
-    box-sizing: border-box;
-    margin-right: 3%;
-
-    font-family: "raleway-regular", sans-serif;
-    font-size: 14px;
-    color: #333333;
-    padding: 6px 8px;
-
-    border: 1px solid #dddddd;
-    border-radius: 4px;
-}
-.item-details-comment-content-addcomment button{
-    width: fit-content;
-    box-sizing: border-box;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    font-family: "raleway-regular", sans-serif;
-    font-size: 14px;
-    color: #333333;
-    padding: 6px 16px;
-
-    border: 1px solid #999999;
-    background-color: #fafafa;
-    border-radius: 4px;
-}
-
-.item-details-comment-content-comments{
-    width: 90%;
-    box-sizing: border-box;
-    margin: 20px 0;
-    margin-left: 6%;
-
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.item-details-comment-content-comments figure{
-    width: 45px;
-    height: 45px;
-    box-sizing: border-box;
-    margin-right: 2%;
-
-    background-color: #dddddd;
-    border-radius: 50%;
-
-}
-.item-details-comment-content-comments figure img{
-    display: block;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    overflow: hidden;
-}
-.item-details-comment-content-comments div{
-    width: 90%;
-    box-sizing: border-box;
-
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-}
-.item-details-comment-content-comments div h5,
-.item-details-comment-content-comments div h6{
-    width: 70%;
-    box-sizing: border-box;
-
-    font-family: "raleway-regular", sans-serif;
-    font-size: 14px;
-    color: #333333;
-    cursor: default;
-}
-.item-details-comment-content-comments div h5{
-   
-    font-family: "raleway-semibold", sans-serif;
-}
-.item-details-comment-content-comments p{
-    width: 100%;
-    box-sizing: border-box;
-    margin: 15px 0;
-
-    font-family: "raleway-regular", sans-serif;
-    font-size: 14px;
-    color: #333333;
-    line-height: 20px;
-}
 
 @media screen and (max-width: 834px) {
     
@@ -393,10 +221,7 @@ const changeSelectedSection = (num) => {
     .item-details-description-comment{
         width: 100%;
     }
-    .item-details-description-comment-header button{
-        font-size: 13px;
-        padding: 8px 30px;
-    }
+
     .item-details-description-content{
         margin: 15px auto;
     }
@@ -430,41 +255,6 @@ const changeSelectedSection = (num) => {
         width: 92%;
         margin: 30px auto;
     }
-    .item-details-comment-content-addcomment{
-        width: 95%;
-        margin-bottom:30px;
-    }
-    .item-details-comment-content-addcomment figure{
-        width: 45px;
-        height: 42px;
-    }
-    .item-details-comment-content-addcomment input{
-        font-size: 13px;
-        padding: 4px 6px;
-    }
-    .item-details-comment-content-addcomment button{
-        font-size: 13px;
-        padding: 4px 12px;
-    }
-    .item-details-comment-content-comments{
-        width: 90%;
-        margin: 20px 0;
-        margin-left: 5%;
-    }
-    .item-details-comment-content-comments figure{
-        width: 40px;
-        height: 40px;
-    }
-    .item-details-comment-content-comments div h5,
-    .item-details-comment-content-comments div h6{
-        width: 70%;
-        font-size: 13px;
-    }
-    .item-details-comment-content-comments p{
-        margin: 10px 0;
-        font-size: 13px;
-        line-height: 18px;
-    }
 
 }
 
@@ -474,14 +264,6 @@ const changeSelectedSection = (num) => {
         display: none;
     }
     
-    .item-details-description-comment-header button{
-        width: 50%;
-        font-size: 12px;
-        padding: 8px 0px;
-    }
-    .item-details-description-comment-header button:last-child{
-        border-right-color: transparent;
-    }
     .item-details-description-content{
         width: 85%;
         margin: 20px auto;
@@ -507,42 +289,7 @@ const changeSelectedSection = (num) => {
         width: 95%;
         margin: 20px auto;
     }
-    .item-details-comment-content-addcomment{
-        width: 100%;
-        margin-bottom: 20px;
-    }
-    .item-details-comment-content-addcomment figure{
-        width: 30px;
-        height: 30px;
-    }
-    .item-details-comment-content-addcomment input{
-        width: 65%;
-        font-size: 11px;
-        padding: 2px 4px;
-    }
-    .item-details-comment-content-addcomment button{
-        font-size: 11px;
-        padding: 2px 8px;
-    }
-    .item-details-comment-content-comments{
-        width: 95%;
-        margin: 15px auto;
-        margin-left: 0%;
-    }
-    .item-details-comment-content-comments figure{
-        width: 25px;
-        height: 25px;
-    }
-    .item-details-comment-content-comments div h5,
-    .item-details-comment-content-comments div h6{
-        width: 70%;
-        font-size: 12px;
-    }
-    .item-details-comment-content-comments p{
-        margin: 8px 0;
-        font-size: 11px;
-        line-height: 16px;
-    }
+
 }
 
 </style>

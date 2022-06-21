@@ -3,36 +3,13 @@ import { RouterLink } from 'vue-router';
 import HeaderTop from '../components/Header/HeaderTop.vue';
 import HeaderBottom from '../components/Header/HeaderBottom.vue';
 
-const props = defineProps({
-    client: Object,
-    onChangeHeaderHiddenNav: Function,
-});
-
 </script>
 <template>
 
     <header class="main-header">
         <div class="main-header-content">
-            <HeaderTop 
-                v-if="props.client != null"
-                :clientId="props.client.id"
-                :firstName="props.client.firstName"
-                :lastName="props.client.lastName" 
-                :email="props.client.email"
-                :currancy="props.client.currancy"
-                :language="props.client.language"
-                />
-
-            <HeaderTop 
-                v-else
-                :clientId="props.client.id"
-                :currancy="props.client.currancy"
-                :language="props.client.language"
-                />
-
-            <HeaderBottom 
-                :clientId="props.client.id"
-                :onChangeHeaderHiddenNav="onChangeHeaderHiddenNav" />
+            <HeaderTop />
+            <HeaderBottom />
         </div>
     </header>
 

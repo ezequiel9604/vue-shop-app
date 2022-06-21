@@ -1,36 +1,20 @@
 <script setup>
 import { RouterLink } from 'vue-router';
-import { reactive, computed } from 'vue';
+import { computed } from 'vue';
 import { Languages, Currancies } from '../../services/Client';
 import { submitLogout, submitAllCharacteristics } from '../../apis/Clients';
-
-const props = defineProps({
-    clientId: String,
-    firstName: String,
-    lastName: String,
-    email: String,
-    currancy: String,
-    language: String
-});
-
-const state = reactive({
-    firstname: props.firstName,
-    lastname: props.lastName,
-    currancy: props.currancy,
-    language: props.language
-});
-
+import store from '../../store';
 
 const isClientLoggedIn = computed(()=>{
-    return props.clientId != "00000"? true : false;
-})
+    return store.state.client.user.id != "00000"? true : false;
+});
 
 const handleSubmitForm = async () => {
-    await submitAllCharacteristics(state.language, state.currancy);
+    await submitAllCharacteristics(store.state.client.user.language, store.state.client.use.currancy);
 }
 
 const handleLogout = () => {
-    submitLogout(props.email);
+    submitLogout(store.state.client.user.email);
 }
 
 </script>
@@ -42,10 +26,10 @@ const handleLogout = () => {
 
             <li class="main-header-content-top-dropdowns-links language-link">
                 <i class="bi bi-flag"></i>
-                <p v-if="props.language == 'english' && props.currancy == 'usa / dollars'">English / Dollars</p>
-                <p v-else-if="props.language == 'spanish' && props.currancy == 'usa / dollars'">Spanish / Dollars</p>
-                <p v-else-if="props.language == 'spanish' && props.currancy == 'dom / pesos'">Spanish / Pesos</p>
-                <p v-else-if="props.language == 'english' && props.currancy == 'dom / pesos'">English / Pesos</p>
+                <p v-if="store.state.client.user.language == 'english' && store.state.client.user.currancy == 'usa / dollars'">English / Dollars</p>
+                <p v-else-if="store.state.client.user.language == 'spanish' && store.state.client.user.currancy == 'usa / dollars'">Spanish / Dollars</p>
+                <p v-else-if="store.state.client.user.language == 'spanish' && store.state.client.user.currancy == 'dom / pesos'">Spanish / Pesos</p>
+                <p v-else-if="store.state.client.user.language == 'english' && store.state.client.user.currancy == 'dom / pesos'">English / Pesos</p>
 
                 <i class="bi bi-caret-down-fill"></i>
 
@@ -53,16 +37,16 @@ const handleLogout = () => {
 
                     <div class="selection-language">
                         <label>Choose language:</label>
-                        <select v-model="state.language" >
-                            <option v-for="l in Languages" :selected="l == state.language" 
+                        <select v-model="store.state.client.user.language" >
+                            <option v-for="l in Languages" :selected="l == store.state.client.user.language" 
                                 :key="l">{{ l }}</option>
                         </select>
                     </div>
 
                     <div class="selection-language">
                         <label>Choose currancy:</label>
-                        <select v-model="state.currancy">
-                            <option v-for="c in Currancies" :selected="c == state.currancy" 
+                        <select v-model="store.state.client.user.currancy">
+                            <option v-for="c in Currancies" :selected="c == store.state.client.user.currancy" 
                                 :key="c">{{ c }}</option>
                         </select>
                     </div>
@@ -82,7 +66,7 @@ const handleLogout = () => {
                 <div class="main-header-content-top-dropdowns-content">
                     
                     <p v-if="isClientLoggedIn">Welcome 
-                        <strong>{{ state.firstname+" "+state.lastname }}</strong></p>
+                        <strong>{{ store.state.client.user.firstName+" "+store.state.client.user.lastName }}</strong></p>
                     <p v-else>Welcome to ShopApp</p>
                     
                     <div v-if="isClientLoggedIn" class="main-header-content-top-dropdowns-content-sign-btns">

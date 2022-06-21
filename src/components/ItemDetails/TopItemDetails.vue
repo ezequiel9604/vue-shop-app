@@ -36,7 +36,6 @@ const getSize = computed(() => {
     return getAllElementsFromItems(props.items, "size", props.category);
 })
 
-
 const changeAmountIncrease = () => {
     if(state.amount < props.subitems[state.selectedSubitem].stock)
         state.amount++;
@@ -109,7 +108,6 @@ const changeAmountDecrease = () => {
 
 </template>
 <style>
-
 
 .top-item-details{
     width: 100%;
@@ -258,7 +256,6 @@ const changeAmountDecrease = () => {
         font-size: 12px;
         margin-left: 10px;
     }
-
 }
 
 @media screen and (max-width: 414px) {
@@ -315,7 +312,6 @@ const changeAmountDecrease = () => {
     .top-item-details-details-amount p{
         font-size: 11px;
     }
-   
 }
 
 </style>
