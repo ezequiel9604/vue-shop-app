@@ -1,40 +1,35 @@
-import { Items } from '../assets/data/Items';
-import { getAllItems } from '../apis/Items';
+import { get_all, get_by_id } from '../apis/Items';
 
-/*export function GetAllItems(searchtext){
+export async function GetAll(){
 
-    return getAllItems();
+    const items = await get_all();
 
-}*/
-
-export function GetItemById(items, id){
-
-    id = id!=undefined? id: "";
-
-    const arr = [...items].filter((current) => {
-        if(current.id == id)
-            return current;
-    });
-    
-    if(arr.length != 0)
-        return arr[0];
-    else
-        return {}
+    return items;
 
 }
 
-export function getAllColorsFromItems(items){
+export async function GetById(id){
+
+    const item = await get_by_id(id);
+
+    return item;
+}
+
+export function GetAllColors(items){
+
     let colors = new Set();
+
     items.forEach((current) => {
         for (let i = 0; i < current.subItemDtos.length; i++) {
             colors.add(current.subItemDtos[i].color);
         }
     });
+
     return Array.from(colors);
 }
 
-export function filterItemsByAll(items, searchtext, isOffered, maxPrice, quality, states, colors, category){
-   
+export function GetItemsFilterByAll(items, searchtext, isOffered, maxPrice, quality, states, colors, category) {
+
     let arr = [...items];
 
     if(searchtext != ""){
@@ -103,7 +98,7 @@ export function filterItemsByAll(items, searchtext, isOffered, maxPrice, quality
 
 }
 
-export function getCharacteriscFromSubitems(subitems, charac){
+export function GetCharacteriscFromSubitems(subitems, charac){
 
     let set = new Set();
     [...subitems].forEach((current)=>{
@@ -113,7 +108,7 @@ export function getCharacteriscFromSubitems(subitems, charac){
 
 }
 
-export function getAllElementsFromItems(items, charac, categ){
+export function GetAllElementsFromItems(items, charac, categ){
     let elements = new Set();
     items.forEach((current) => {
         for (let i = 0; i < current.subItemDtos.length; i++) {
@@ -126,7 +121,7 @@ export function getAllElementsFromItems(items, charac, categ){
     return Array.from(elements);
 }
 
-export function getSetsOfItems(items, num){
+export function GetSetsOfItems(items, num){
     let sets = items.length / num;
 
     if(sets < 1)

@@ -1,9 +1,7 @@
 import { createStore } from "vuex";
-import { getLoggedClient } from '../services/Client';
 
 const store = createStore({
     state: {
-        client: getLoggedClient(),
         searchText: "",
         categoryItem: "all",
         headerHiddenStatus: false,

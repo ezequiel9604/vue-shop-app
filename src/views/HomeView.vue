@@ -11,6 +11,7 @@ const props = defineProps({ items: Array });
 <template>
 
   <div>
+    
     <CategorySlider />
 
     <ItemsInOffer :items="props.items" />
@@ -18,6 +19,7 @@ const props = defineProps({ items: Array });
     <Poster />
 
     <MostSoldItems :items="props.items" />
+
   </div>
 
 </template>

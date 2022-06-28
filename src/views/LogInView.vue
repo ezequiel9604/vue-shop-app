@@ -3,16 +3,16 @@ import { reactive } from 'vue';
 import { RouterLink } from 'vue-router';
 import SignUpFormHeader from '../components/SignUp/SignUpFormHeader.vue';
 import SignUpFormFooter from '../components/SignUp/SignUpFormFooter.vue';
-import { submitLogin } from '../apis/Clients';
+import { Login } from '../services/Client';
 
 const state = reactive({
-    emailInput: "bryanmay@gmail.com",
-    passwordInput: "bryanmay123",
+    emailInput: "brianmay@gmail.com",
+    passwordInput: "brianmay123",
     message: "",
 });
 
-const handleSubmitForm = async () => {
-    state.message = await submitLogin(state.emailInput, state.passwordInput);
+const handleSubmitLogin = async () => {
+    state.message = await Login(state.emailInput, state.passwordInput);
 }
 
 const closeMessageAlert = () => { state.message = ''; }
@@ -42,7 +42,7 @@ const closeMessageAlert = () => { state.message = ''; }
 
             <div class="signup-login-form-content-submit-btn">
 
-                <button @click="handleSubmitForm" type="button">Log in</button>
+                <button @click="handleSubmitLogin" type="button">Log in</button>
 
                 <div class="login-form-content-submit-options">
                     <label for="remember">

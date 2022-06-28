@@ -4,14 +4,14 @@ import OrderDetailsStatus from '../components/OrderDetails/OrderDetailsStatus.vu
 import RowMiniSample from '../components/OrderDetails/RowMiniSample.vue';
 import OrderDetailsInformation from '../components/OrderDetails/OrderDetailsInformation.vue';
 import router from '../router/index';
-import { getItemsByOrderNumber, getOrderByOrderNumber } from '../services/Order';
+import { GetItemsByOrderNumber, GetOrderByOrderNumber } from '../services/Order';
 
 const props = defineProps({ client: Object,  items: Array });
 
 const url= router.currentRoute.value.query
 
 const getOrderById = computed(()=>{
-    const result = getOrderByOrderNumber((url.orderNumber != undefined)? url.orderNumber:"");
+    const result = GetOrderByOrderNumber((url.orderNumber != undefined)? url.orderNumber:"");
     if(result.length != 0)
         return result[0];
     else
@@ -19,7 +19,7 @@ const getOrderById = computed(()=>{
 })
 
 const getItemsByOrder = computed(() => {
-    return getItemsByOrderNumber((url.orderNumber != undefined)? url.orderNumber:"", 
+    return GetItemsByOrderNumber((url.orderNumber != undefined)? url.orderNumber:"", 
         props.items);
 })
 

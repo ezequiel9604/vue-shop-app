@@ -1,6 +1,6 @@
 <script setup>
 import { reactive } from 'vue';
-import { submitAppearance } from '../../apis/Clients';
+import { SubmitAppearence } from '../../services/Client';
 
 const props = defineProps({
     clientId: String,
@@ -16,13 +16,12 @@ const changeAppearance = async () => {
 
     if(state.appearance == "light"){
         state.appearance = "dark";
-        await submitAppearance(state.appearance);
+        await SubmitAppearence(state.appearance);
     }
     else{
         state.appearance = "light";
-        await submitAppearance(state.appearance);
+        await SubmitAppearence(state.appearance);
     }
-    
 }
 
 </script>

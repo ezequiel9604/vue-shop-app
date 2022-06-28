@@ -1,5 +1,5 @@
 <script setup>
-import { reactive } from 'vue';
+import { reactive, computed } from 'vue';
 import image1 from '../../assets/imgs/samples/smart-tv-2.png';
 import image2 from '../../assets/imgs/samples/smart-tv-3.png';
 import image3 from '../../assets/imgs/samples/tablet-2.png';
@@ -14,25 +14,10 @@ const state = reactive({
     selected: 0,
 })
 
-/*const changeSeletedImg = (value) => {
+const changeSeletedImg = (value) => {
     state.selected = value;
-}*/
-
-const getImagePath = (num) => {
-    console.log(allImages[num-1])
-    let result = "";
-
-   /*import(`../../assets/imgs/samples/${allImages[num-1]}`)
-    .then((value)=>{
-        result = value.default;
-        //console.log(result);
-    })
-    .catch((error)=>{
-        console.log("Not able to locate the image!");
-    });*/
-
-    return result;
-} 
+    console.log(state.selected)
+}
 
 import(`../../assets/imgs/samples/${props.images[state.selected].path}`)
     .then((value)=>{
@@ -57,18 +42,17 @@ import(`../../assets/imgs/samples/${props.images[state.selected].path}`)
         <div class="top-item-details-min-images">
 
             <figure>
-                <img :src="image1" id="item-details-min-img-active" alt="" />
+                <img :src="image1" @click="()=>changeSeletedImg(0)" id="item-details-min-img-active" alt="" />
             </figure>
             <figure>
-                <img :src="image2" alt="" />
+                <img :src="image2" @click="()=>changeSeletedImg(1)" alt="" />
             </figure>
             <figure>
-                <img :src="image3" alt="" />
+                <img :src="image3" @click="()=>changeSeletedImg(2)" alt="" />
             </figure>
             <figure>
-                <img :src="image4" alt="" />
+                <img :src="image4" @click="()=>changeSeletedImg(3)" alt="" />
             </figure>
-
 
         </div>
 

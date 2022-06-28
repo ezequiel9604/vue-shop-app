@@ -1,6 +1,6 @@
 import { Orders, Purchases } from '../assets/data/Orders';
 
-export function getOrders(clientid){
+export function GetOrders(clientid){
 
     // returns all orders made by this client
     let ords = [...Orders].filter((current) => {
@@ -12,7 +12,7 @@ export function getOrders(clientid){
     return ords;
 }
 
-export function getOrderByOrderNumber(ordernumber){
+export function GetOrderByOrderNumber(ordernumber){
 
     // returns all orders made by this client
     let ords = [...Orders].filter((current) => {
@@ -24,7 +24,19 @@ export function getOrderByOrderNumber(ordernumber){
     return ords;
 }
 
-export function filterOrderByAll(orders, items, orderstatus, ordernumber){
+export function GetSetsOfItems(items, num){
+    let sets = items.length / num;
+
+    if(sets < 1)
+        return 1;
+
+    if(sets > parseInt(sets))
+        return parseInt(sets) + 1;
+    
+    return parseInt(sets);
+}
+
+export function GetOrdersFilterByAll(orders, items, orderstatus, ordernumber){
 
     let ords = [...orders];
 
@@ -73,7 +85,7 @@ export function filterOrderByAll(orders, items, orderstatus, ordernumber){
 
 }
 
-export function getItemsByOrderNumber(ordernumber, items){
+export function GetItemsByOrderNumber(ordernumber, items){
 
     const arr = [...Purchases.filter((current) => {
         if(current.orderId == ordernumber)

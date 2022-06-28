@@ -2,8 +2,7 @@
 import { reactive } from 'vue';
 import SignUpFormHeader from '../components/SignUp/SignUpFormHeader.vue';
 import SignUpFormFooter from '../components/SignUp/SignUpFormFooter.vue';
-import { Days, Months, Years } from '../services/Client';
-import { submitSignup } from '../apis/Clients';
+import { Signup, Days, Months, Years } from '../services/Client';
 
 const state = reactive({
     firstname: "Rogger",
@@ -20,8 +19,10 @@ const state = reactive({
 
 const handleSubmitForm = async () => {
 
-    state.message = await submitSignup(state.firstname, state.lastname, state.email, state.password, state.dayofbirth,
-        state.monthofbirth, state.yearofbirth, state.gender);
+    state.message = await Signup(
+        state.firstname, state.lastname, state.email, 
+        state.password, state.dayofbirth, state.monthofbirth, 
+        state.yearofbirth, state.gender);
     
 }
 

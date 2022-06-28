@@ -5,7 +5,8 @@ import RightProfileContentSidebar from '../components/Profile/RightProfileConten
 import ProfilePersonalForm from '../components/Profile/ProfilePersonalForm.vue';
 import ProfileAccountForm from '../components/Profile/ProfileAccountForm.vue';
 import ProfileMyWalletForm from '../components/Profile/ProfileMyWalletForm.vue';
-import store from '../store';
+
+const props = defineProps({ client: Object });
 
 const selectedProfileForm = ref(0);
 
@@ -23,8 +24,8 @@ const changeSelectedProfileForm = (value) => {
             <div class="left-my-profile-content">
 
                 <LeftProfileContentSidebar 
-                    :clientId="store.state.client.user.id"
-                    :appearance="store.state.client.user.appearance"
+                    :clientId="props.client.id"
+                    :appearance="props.client.appearance"
                     :onChangeSelectedProfileForm="changeSelectedProfileForm" />
 
             </div>
@@ -35,33 +36,33 @@ const changeSelectedProfileForm = (value) => {
 
                 <div v-if="selectedProfileForm === 0" class="right-my-profile-content-form">
                     <ProfilePersonalForm 
-                        :clientId="store.state.client.user.id"
-                        :firstname="store.state.client.user.firstName"
-                        :lastname="store.state.client.user.lastName"
-                        :image="store.state.client.user.imagePath" 
-                        :firstphone="store.state.client.user.phoneDtos > 0? store.state.client.user.phoneDtos[0].phoneNumber:''"
-                        :secondphone="store.state.client.user.phoneDtos > 0? store.state.client.user.phoneDtos[1].phoneNumber:''"
-                        :dateofbirth="new Date(store.state.client.user.yearOfBirth, store.state.client.user.monthOfBirth,
-                            store.state.client.user.dayOfBirth)" 
-                        :genre="store.state.client.user.genre"
-                        :address="store.state.client.user.addressDtos > 0?store.state.client.user.addressDtos[0]:{}" 
+                        :clientId="props.client.id"
+                        :firstname="props.client.firstName"
+                        :lastname="props.client.lastName"
+                        :image="props.client.imagePath" 
+                        :firstphone="props.client.phoneDtos[0]? props.client.phoneDtos[0].phoneNumber:''"
+                        :secondphone="props.client.phoneDtos[1]? props.client.phoneDtos[1].phoneNumber:''"
+                        :dateofbirth="new Date(props.client.yearOfBirth, props.client.monthOfBirth,
+                            props.client.dayOfBirth)" 
+                        :genre="props.client.genre"
+                        :address="props.client.addressDtos[0]? props.client.addressDtos[0]:{}" 
                         />
                 </div>
 
                 <div v-else-if="selectedProfileForm === 1" class="right-my-profile-content-form-accountInfo">
                     <ProfileAccountForm 
-                        :clientId="store.state.client.user.id"
-                        :email="store.state.client.user.email" 
+                        :clientId="props.client.id"
+                        :email="props.client.email" 
                         />
                 </div>
 
                 <div v-else-if="selectedProfileForm === 2" class="right-my-profile-content-form-myWallet">
                     <ProfileMyWalletForm
-                        :clientId="store.state.client.user.id"
-                        :creditCardNumber="store.state.client.user.wallets[0].creditCardNumber"
-                        :creditCardOwner="store.state.client.user.wallets[0].creditCardOwner"
-                        :expirationDate="store.state.client.user.wallets[0].expirationDate"
-                        :securityCode="store.state.client.user.wallets[0].securityCode" 
+                        :clientId="props.client.id"
+                        :creditCardNumber="props.client.wallets[0].creditCardNumber"
+                        :creditCardOwner="props.client.wallets[0].creditCardOwner"
+                        :expirationDate="props.client.wallets[0].expirationDate"
+                        :securityCode="props.client.wallets[0].securityCode" 
                         />
                 </div>
 

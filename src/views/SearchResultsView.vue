@@ -1,7 +1,5 @@
 <script setup>
 import { reactive, computed, onMounted } from 'vue';
-import router from '../router';
-import store from '../store';
 import FilterResultSidebar from '../components/SearchResults/FilterResultSidebar.vue';
 import RowLargeSample from '../components/SearchResults/RowLargeSample.vue';
 import Pagination from '../components/SearchResults/Pagination.vue';
@@ -9,12 +7,13 @@ import ColumnMediumSample from '../components/SearchResults/ColumnMediumSample.v
 import FilterHorizontalSidebar from '../components/SearchResults/FilterHorizontalSidebar.vue';
 import FilterResultHiddenSidebar from '../components/SearchResults/FilterResultHiddenSidebar.vue';
 import Loading from '../components/SearchResults/Loading.vue';
-import { getAllColorsFromItems, filterItemsByAll, getSetsOfItems } from '../services/Item';
-import { getAllItems } from '../apis/Items';
+import { GetAll, GetAllColors, GetItemsFilterByAll, GetSetsOfItems } from '../services/Item';
+import router from '../router';
+import store from '../store';
 
 const url = router.currentRoute.value.query;
 
-const props = defineProps({ items: Array });
+const props = defineProps({ items: Array, client: Object });
 
 const state = reactive({
     items: [],
@@ -39,12 +38,13 @@ onMounted(async () => {
     if(props.items.length != 0)
         state.items = props.items;
     else
-        state.items = await getAllItems();
+        state.items = await GetAll();
         
 })
 
 const getItemsColors = computed(() => {
-    return getAllColorsFromItems(state.items);
+    const colors =  GetAllColors(state.items);
+    return colors;
 });
 
 const getCategory = computed(()=>{
@@ -90,12 +90,12 @@ const changeFilterSState = (type, value) => {
 }
 
 const getFilteredItems = computed(() => {
-    return filterItemsByAll(state.items, store.state.searchText, state.isOffered, state.maxPrice, state.quality,
-        state.states, state.selectedColors, store.state.categoryItem);
+    return GetItemsFilterByAll(state.items, store.state.searchText, state.isOffered, 
+    state.maxPrice, state.quality, state.states, state.selectedColors, store.state.categoryItem);
 });
 
 const getItemsSets = computed(() => {
-    return getSetsOfItems(getFilteredItems.value, 7);
+    return GetSetsOfItems(getFilteredItems.value, 7);
 });
 
 

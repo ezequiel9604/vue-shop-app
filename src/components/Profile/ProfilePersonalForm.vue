@@ -1,7 +1,6 @@
 <script setup>
 import { reactive } from 'vue';
-import { submitPersonalInformation } from '../../apis/Clients';
-import { Days, Months, Years, States, Cities } from '../../services/Client';
+import { SubmitPersonalInfo, Days, Months, Years, States, Cities } from '../../services/Client';
 
 const props = defineProps({
     clientId: String,
@@ -23,7 +22,7 @@ const state = reactive({
     secondphone: props.secondphone,
     genre: props.genre,
     streetname: props.address.streetName,
-    apartment: props.address.apartment,
+    apartment: props.address.department?props.address.department:"",
     city: props.address.city,
     state: props.address.state,
     zipcode: props.address.zipCode,
@@ -40,9 +39,10 @@ import("../../assets/imgs/users/placeholder-man.png")
         console.log("Not able to locate the image!");
     })
 
-const handleSubmitForm = () => {
 
-    submitPersonalInformation(props.clientId, state.firstname, state.lastname, state.imagePath, 
+const handleSubmitForm = async () => {
+
+    await SubmitPersonalInfo(props.clientId, state.firstname, state.lastname, state.imagePath, 
         state.firstphone, state.secondphone, state.genre, state.streetname, state.apartment, 
         state.city, state.zipcode, state.state, state.yearofbirth, state.monthofbirth, 
         state.dayofbirth);

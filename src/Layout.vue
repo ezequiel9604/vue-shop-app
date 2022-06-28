@@ -5,29 +5,32 @@ import PromoBannerView from './views/PromoBannerView.vue';
 import HeaderView from './views/HeaderView.vue';
 import HeaderHiddenNavView from './views/HeaderHiddenNavView.vue';
 import FooterView from './views/FooterView.vue';
-import { getLoggedClient } from './services/Client';
-import { getAllItems } from './apis/Items';
+import { GetAll } from './services/Item';
+import { GetLoggedClient } from './services/Client';
 
 const state = reactive({
     items: [],
+    client: null,
 })
 
 onMounted(async () => {
-    state.items = await getAllItems();
+    state.items = await GetAll();
+    state.client = GetLoggedClient();
 });
 
 </script>
 <template>
 
-    <div>
-        <HeaderHiddenNavView />
+    <div v-if="state.client">
+
+        <HeaderHiddenNavView :client="state.client.user" />
 
         <PromoBannerView />
         
-        <HeaderView />
+        <HeaderView :client="state.client.user" />
 
         <main>
-            <RouterView :items="state.items" />
+            <RouterView :items="state.items" :client="state.client.user" />
         </main>
 
         <FooterView />

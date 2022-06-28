@@ -14,7 +14,7 @@ import { RouterLink } from 'vue-router';
         </div>
         <div>
             <button class="top-item-details-details-action-addtocart-button
-                        top-item-details-details-action-addtocart-button-active">
+                top-item-details-details-action-addtocart-button-active">
                 <!-- Added to cart -->
                 Add to cart
             </button>
@@ -24,7 +24,7 @@ import { RouterLink } from 'vue-router';
         </div>
         <div>
             <button class="top-item-details-details-action-addtolist-button
-                        top-item-details-details-action-addtolist-button-active">
+                top-item-details-details-action-addtolist-button-active">
                 <!-- <i class="bi bi-heart-fill"></i>-->
                 <i class="bi bi-heart"></i>
             </button>

@@ -1,33 +1,38 @@
 <script setup>
 import { reactive, onMounted } from 'vue';
 import router from '../router/index';
-import store from '../store';
 import TopItemDetails from '../components/ItemDetails/TopItemDetails.vue';
 import ColumnMediumSample from '../components/SearchResults/ColumnMediumSample.vue';
 import ItemButtonSelection from '../components/ItemDetails/ItemButtonSelection.vue';
 import ItemAddComment from '../components/ItemDetails/ItemAddComment.vue';
 import ItemDisplayComments from '../components/ItemDetails/ItemDisplayComments.vue';
+import { GetById } from '../services/Item';
 import Comments from '../assets/data/Comments';
-import { GetItemById } from '../services/Item';
-import { getAllItems } from '../apis/Items';
+import { GetCommentsByItemId } from '../apis/Comments';
 
 const url = router.currentRoute.value.query;
 
-const props = defineProps({ items: Array });
+const props = defineProps({ items: Array, client: Object });
 
 const state = reactive({
     items: [],
+    comments: [],
     selectedItem: null,
     selectedSection: 0,
 });
 
 onMounted(async () => {
 
-    if(props.items.length != 0)
-        state.selectedItem = GetItemById(props.items, url.itemId);
-    else
-        state.selectedItem = GetItemById(await getAllItems(), url.itemId);
-        
+    if(props.items.length != 0){
+        state.selectedItem = await GetById(url.itemId);
+    } 
+    else{
+        state.selectedItem = await GetById(url.itemId);
+    }
+    
+    //state.comments = await GetCommentsByItemId(url.itemId);
+    state.comments = Comments;
+
 });
 
 const changeSelectedSection = (value) => {
@@ -37,10 +42,9 @@ const changeSelectedSection = (value) => {
 </script>
 <template>
 
-    <div class="item-details">
+    <div class="item-details" v-if="state.selectedItem != null">
 
         <TopItemDetails 
-            v-if="state.selectedItem != null"
             :items="props.items"
             :title="state.selectedItem.title"
             :quality="state.selectedItem.quality"
@@ -61,7 +65,8 @@ const changeSelectedSection = (value) => {
                         :commentsLength="Comments.length"
                         />
 
-                    <div :style="{ display: state.selectedSection == 0? 'block':'none'}" class="item-details-description-content">
+                    <div :style="{ display: state.selectedSection == 0? 'block':'none'}" 
+                        class="item-details-description-content">
 
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates totam itaque ipsam qui 
                             molestiae eveniet deleniti debitis possimus culpa suscipit id, quas eius provident iusto 
@@ -94,10 +99,8 @@ const changeSelectedSection = (value) => {
                     <div :style="{ display: state.selectedSection == 1? 'block':'none'}" class="item-details-comment-content">
 
                         <ItemAddComment 
-                            :image="store.state.client.user.imagePath"
-                            :clientId="store.state.client.user.id"
-                            :itemId="url.itemId"
-                            />
+                            :image="props.client.imagePath"
+                            :itemId="url.itemId" />
 
                         <ItemDisplayComments :comments="Comments" />
 

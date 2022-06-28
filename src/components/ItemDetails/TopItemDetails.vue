@@ -4,8 +4,8 @@ import { RouterLink } from 'vue-router';
 import ItemDetailsSelection from '../ItemDetails/ItemDetailsSelection.vue';
 import ItemDetailsImages from '../ItemDetails/ItemDetailsImages.vue';
 import ItemDetailsAction from '../ItemDetails/ItemDetailsAction.vue';
-import { formatedNumber, calculateDescountPrice, getAllElementsFromItems, 
-    getCharacteriscFromSubitems } from '../../services/Item';
+import { formatedNumber, calculateDescountPrice, GetAllElementsFromItems, 
+    GetCharacteriscFromSubitems } from '../../services/Item';
 
 const props = defineProps({ 
     title: String,
@@ -15,6 +15,7 @@ const props = defineProps({
     category: String,
     items: Array,
 });
+
 
 const state = reactive({
     color: props.subitems[0].color,
@@ -27,13 +28,13 @@ const state = reactive({
 
 
 const getColors = computed(() => {
-    return getAllElementsFromItems(props.items, "color", props.category);
+    return GetAllElementsFromItems(props.items, "color", props.category);
 })
 const getCapacity = computed(() => {
-    return getAllElementsFromItems(props.items, "capacity", props.category);
+    return GetAllElementsFromItems(props.items, "capacity", props.category);
 })
 const getSize = computed(() => {
-    return getAllElementsFromItems(props.items, "size", props.category);
+    return GetAllElementsFromItems(props.items, "size", props.category);
 })
 
 const changeAmountIncrease = () => {
@@ -73,21 +74,21 @@ const changeAmountDecrease = () => {
                 <ItemDetailsSelection v-if="props.subitems[state.selectedSubitem].color != ''" 
                     title="Color" 
                     :allelements="getColors"
-                    :subitemselements="getCharacteriscFromSubitems(props.subitems, 'color')"
+                    :subitemselements="GetCharacteriscFromSubitems(props.subitems, 'color')"
                     :currentelement="props.subitems[state.selectedSubitem].color"
                     />
                 
                 <ItemDetailsSelection v-if="props.subitems[state.selectedSubitem].capacity != ''" 
                     title="Capacity" 
                     :allelements="getCapacity"
-                    :subitemselements="getCharacteriscFromSubitems(props.subitems, 'capacity')"
+                    :subitemselements="GetCharacteriscFromSubitems(props.subitems, 'capacity')"
                     :currentelement="props.subitems[state.selectedSubitem].capacity"
                     />
 
                 <ItemDetailsSelection v-if="props.subitems[state.selectedSubitem].size != ''" 
                     title="Size" 
                     :allelements="getSize"
-                    :subitemselements="getCharacteriscFromSubitems(props.subitems, 'size')"
+                    :subitemselements="GetCharacteriscFromSubitems(props.subitems, 'size')"
                     :currentelement="props.subitems[state.selectedSubitem].size"
                     /> 
 

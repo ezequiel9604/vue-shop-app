@@ -1,13 +1,14 @@
 <script setup>
 import { computed } from 'vue';
 import { RouterLink } from 'vue-router';
-import { Departments } from '../services/Client';
-import { submitLogout, submitAllCharacteristics } from '../apis/Clients';
 import AccordionPanel from '../components/HeaderHiddenNav/AccordionPanel.vue';
+import { SubmitCharacteristics, Logout, Departments } from '../services/Client';
 import store from '../store';
 
+const props = defineProps({ client: Object });
+
 const isClientLoggedIn = computed(()=>{
-    return store.state.client.user.id != "00000"? true : false;
+    return props.client.id != "00000"? true : false;
 });
 
 const changeLanguageInput = (ev) => {
@@ -18,11 +19,11 @@ const changeCurrancyInput = (ev) => {
 }
 
 const handleSubmitForm = async () => {
-    await submitAllCharacteristics(store.state.client.user.language, store.state.client.use.currancy);
+    await SubmitCharacteristics(props.client.language, props.client.currancy);
 }
 
-const handleLogout = () => {
-    submitLogout(store.state.client.user.email);
+const handleLogout = async () => {
+    await Logout(props.client.email);
 }
 
 const changeStoreCategoryItem= (value) => {
@@ -46,7 +47,7 @@ const changeStoreCategoryItem= (value) => {
 
                 <AccordionPanel title="Account" icon="bi-person">
                     <p v-if="isClientLoggedIn">Welcome 
-                        <strong>{{ store.state.client.user.firstName+" "+store.state.client.user.firstName }}</strong></p>
+                        <strong>{{ props.client.firstName+" "+props.client.firstName }}</strong></p>
                     <p v-else>Welcome to ShopApp</p>
 
                     <div v-if="isClientLoggedIn" class="main-header-content-top-dropdowns-content-sign-btns">
@@ -68,7 +69,7 @@ const changeStoreCategoryItem= (value) => {
                 <AccordionPanel title="English / Dollar" icon="bi-flag">
                     <div class="selection-language">
                         <label>Choose language:</label>
-                        <select @change="changeLanguageInput" v-if="store.state.client.user.language == 'english'">
+                        <select @change="changeLanguageInput" v-if="props.client.language == 'english'">
                             <option value="english" selected>English</option>
                             <option value="spanish">Spanish</option>
                         </select>
@@ -80,7 +81,7 @@ const changeStoreCategoryItem= (value) => {
 
                     <div class="selection-language">
                         <label>Choose currancy:</label>
-                        <select @change="changeCurrancyInput" v-if="store.state.client.user.currancy == 'dollar'">
+                        <select @change="changeCurrancyInput" v-if="props.client.currancy == 'dollar'">
                             <option value="dollar" selected>USA / Dollar</option>
                             <option value="pesos">DOM / Pesos</option>
                         </select>
@@ -124,13 +125,8 @@ const changeStoreCategoryItem= (value) => {
 }
 
 @keyframes header-hidden-menu-content-animation {
-    from {
-        left: -50%;
-    }
-
-    to {
-        left: 0;
-    }
+    from {left: -50%;}
+    to {left: 0;}
 }
 
 .header-hidden-menu-content {
@@ -286,13 +282,8 @@ const changeStoreCategoryItem= (value) => {
 @media screen and (max-width: 414px) {
 
     @keyframes header-hidden-menu-content-animation {
-        from {
-            left: -75%;
-        }
-
-        to {
-            left: 0;
-        }
+        from {left: -75%;}
+        to {left: 0;}
     }
 
     .header-hidden-menu-content {

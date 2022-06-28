@@ -1,11 +1,11 @@
 <script setup>
 import { reactive } from 'vue';
+import { SaveComment } from '../../apis/Comments';
 import ManImage from '../../assets/imgs/users/placeholder-man.png';
 
 const props = defineProps({
     image: String,
     itemId: String,
-    clientId: String,
 })
 
 const state = reactive({
@@ -13,23 +13,27 @@ const state = reactive({
     imagePath: ""
 });
 
-import(`../../assets/imgs/users/${props.image}`)
+if(props.image != undefined){
+    import(`../../assets/imgs/users/${props.image}`)
     .then((value)=>{
         state.imagePath = value.default;
     })
     .catch((error)=>{
         console.log(error);
     })
+}
 
-const submitComment = () => {
+const submitComment = async () => {
     console.log("submitting the comment.")
+    //await SaveComment(props.itemId, state.inputComment);
 }
 
 </script>
 <template>
     <div class="item-details-comment-content-addcomment">
         <figure>
-            <img :src="state.imagePath" alt="" />
+            <img v-if="props.image" :src="state.imagePath" alt="" />
+            <img v-else :src="ManImage" alt="" />
         </figure>
         <input v-model="state.inputComment" type="text" placeholder="Add a comment" />
         <button @click="submitComment">Comment</button>

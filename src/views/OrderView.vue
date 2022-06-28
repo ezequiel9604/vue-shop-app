@@ -3,8 +3,7 @@ import { reactive, computed } from 'vue';
 import OrderSample from '../components/Order/OrderSample.vue';
 import OrderFilterBar from '../components/Order/OrderFilterBar.vue';
 import Pagination from '../components/SearchResults/Pagination.vue';
-import { getOrders, filterOrderByAll } from '../services/Order';
-import { getSetsOfItems } from '../services/Item';
+import { GetOrders, GetOrdersFilterByAll, GetSetsOfItems } from '../services/Order';
 
 const props = defineProps({
     client: Object,
@@ -12,7 +11,7 @@ const props = defineProps({
 });
 
 const state = reactive({
-    orders: getOrders(props.client.id),
+    orders: GetOrders(props.client.id),
     orderStatus: "All",
     orderNumber: "",
     orderDate: "",
@@ -30,12 +29,12 @@ const changeSelectedSet = (value) => {
 }
 
 const getClientsOrders = computed(() => {
-    return filterOrderByAll(state.orders, props.items, 
+    return GetOrdersFilterByAll(state.orders, props.items, 
         state.orderStatus, state.orderNumber);
 });
 
 const getOrdersSets = computed(() => {
-    return getSetsOfItems(getClientsOrders.value, 3);
+    return GetSetsOfItems(getClientsOrders.value, 3);
 });
 
 

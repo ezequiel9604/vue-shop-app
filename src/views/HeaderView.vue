@@ -3,14 +3,21 @@ import { RouterLink } from 'vue-router';
 import HeaderTop from '../components/Header/HeaderTop.vue';
 import HeaderBottom from '../components/Header/HeaderBottom.vue';
 
+const props = defineProps({ client: Object })
+
 </script>
 <template>
 
     <header class="main-header">
+
         <div class="main-header-content">
-            <HeaderTop />
-            <HeaderBottom />
+
+            <HeaderTop :client="props.client" />
+            
+            <HeaderBottom :client="props.client" />
+
         </div>
+        
     </header>
 
 </template>

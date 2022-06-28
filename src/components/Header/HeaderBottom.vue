@@ -6,6 +6,8 @@ import { shoppingCart } from '../../assets/data/ShoppingCarts';
 import { wishList } from '../../assets/data/WishLists';
 import store from '../../store';
 
+const props = defineProps({ client: Object })
+
 const state = reactive({
     searchInput: store.state.searchText,
     categoryInput: store.state.categoryItem,
@@ -13,14 +15,14 @@ const state = reactive({
 
 const cartListLength = computed(() => {
     const arr = shoppingCart.filter((current) => {
-        return current.clientId == store.state.client.user.id;
+        return current.clientId == props.client.id;
     });
     return arr.length;
 })
 
 const wishListLength = computed(() => {
     const arr = wishList.filter((current) => {
-        return current.clientId == store.state.client.user.id;
+        return current.clientId == props.client.id;
     });
     return arr.length;
 })
@@ -63,8 +65,8 @@ const changeStoreCategoryItem= (value) => {
             <input v-model="state.searchInput" type="text" class="main-header-content-bottom-search-field"
                 placeholder="What are you looking for?" />
 
-            <RouterLink @click="changeStoreSearchText" :to="'http://localhost:3000/searchResults?searchText='+state.searchInput"
-                class="main-header-content-bottom-search-btn">
+            <RouterLink @click="changeStoreSearchText" class="main-header-content-bottom-search-btn"
+                :to="'http://localhost:3000/searchResults?searchText='+state.searchInput">
                 <i class="bi bi-search"></i>
             </RouterLink>
         </div>
@@ -110,7 +112,6 @@ const changeStoreCategoryItem= (value) => {
     border-radius: 50%;
 
     display: none;
-    /* this will change*/
 }
 
 .main-header-content-bottom-hidden-menu i {
@@ -172,15 +173,8 @@ const changeStoreCategoryItem= (value) => {
 }
 
 @keyframes main-header-content-bottom-search-dropdown-content-animation {
-    from {
-        top: 140%;
-        opacity: 0;
-    }
-
-    to {
-        top: 100%;
-        opacity: 1;
-    }
+    from {top: 140%; opacity: 0;}
+    to { top: 100%; opacity: 1; }
 }
 .main-header-content-bottom-search-dropdown-content {
     width: 220px;
