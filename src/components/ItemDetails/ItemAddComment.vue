@@ -1,11 +1,12 @@
 <script setup>
 import { reactive } from 'vue';
-import { SaveComment } from '../../apis/Comments';
+import { SaveComment } from '../../services/Comment';
 import ManImage from '../../assets/imgs/users/placeholder-man.png';
 
 const props = defineProps({
     image: String,
-    itemId: String,
+    itemid: String,
+    clientid: String
 })
 
 const state = reactive({
@@ -24,8 +25,11 @@ if(props.image != undefined){
 }
 
 const submitComment = async () => {
-    console.log("submitting the comment.")
-    //await SaveComment(props.itemId, state.inputComment);
+
+    if(state.inputComment.length > 0){
+        await SaveComment(props.clientid, props.itemid, state.inputComment);
+    }
+    
 }
 
 </script>

@@ -1,9 +1,9 @@
 <script setup>
-import { reactive, computed } from 'vue';
+import { reactive, computed, onMounted } from 'vue';
 import OrderSample from '../components/Order/OrderSample.vue';
 import OrderFilterBar from '../components/Order/OrderFilterBar.vue';
 import Pagination from '../components/SearchResults/Pagination.vue';
-import { GetOrders, GetOrdersFilterByAll, GetSetsOfItems } from '../services/Order';
+import { GetOrdersByClientId, GetOrders, GetOrdersFilterByAll , GetSetsOfItems } from '../services/Order';
 
 const props = defineProps({
     client: Object,
@@ -11,11 +11,17 @@ const props = defineProps({
 });
 
 const state = reactive({
-    orders: GetOrders(props.client.id),
+    orders: [],
     orderStatus: "All",
     orderNumber: "",
     orderDate: "",
     selectedSet: 1
+});
+
+onMounted( async () => {
+
+    //state.orders = await GetOrdersByClientId(props.client.id);
+    state.orders = GetOrders(props.client.id);
 });
 
 const changeOrderNumber = (value) => {
@@ -24,17 +30,17 @@ const changeOrderNumber = (value) => {
 const changeOrderStatus = (value) => {
     state.orderStatus= value;
 }
-const changeSelectedSet = (value) => {
+const changeFilterSState = (type, value) => {
     state.selectedSet = value;
 }
 
-const getClientsOrders = computed(() => {
+const getFilteredClientsOrders = computed(() => {
     return GetOrdersFilterByAll(state.orders, props.items, 
         state.orderStatus, state.orderNumber);
 });
 
 const getOrdersSets = computed(() => {
-    return GetSetsOfItems(getClientsOrders.value, 3);
+    return GetSetsOfItems(getFilteredClientsOrders.value, 3);
 });
 
 
@@ -68,16 +74,20 @@ const getOrdersSets = computed(() => {
 
                 <div class="myorder-content-samples-content">
 
-                    <OrderSample v-for="ord in getClientsOrders.slice((state.selectedSet * 3)-3,state.selectedSet*3)" 
-                        :orderNumber="ord.id"
-                        :deliveredDate="ord.deliveredDate"
-                        :shippingCost="ord.shippingCost"
-                        :purchases="ord.purchases"
-                        :orderDate="ord.orderDate"
-                        :status="ord.status"
-                        :total="ord.total"
-                        :key="ord.id"
-                        />
+                    <div v-if="state.orders.length">
+
+                        <OrderSample v-for="ord in getFilteredClientsOrders.slice((state.selectedSet * 3)-3,state.selectedSet*3)" 
+                            :orderNumber="ord.id"
+                            :deliveredDate="ord.deliveredDate"
+                            :shippingCost="ord.shippingCost"
+                            :purchases="ord.purchases"
+                            :orderDate="ord.orderDate"
+                            :status="ord.status"
+                            :total="ord.total"
+                            :key="ord.id"
+                            />
+
+                    </div>
 
                 </div>
 
@@ -86,7 +96,7 @@ const getOrdersSets = computed(() => {
             <Pagination
                 :sets="getOrdersSets"
                 :selectedset="state.selectedSet" 
-                :onchangeselectedset="changeSelectedSet" />
+                :onChangeFilterSState="changeFilterSState" />
 
         </div>
 

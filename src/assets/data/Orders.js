@@ -9,7 +9,7 @@ export const Orders = [
     shippingCost: 150,
     total: 6155.91,
     status: "Received",
-    clientId: "USR-025671",
+    clientId: "CLT-1134",
   },
   {
     id: "ORD-025036",
@@ -17,8 +17,8 @@ export const Orders = [
     deliveredDate: "2021-05-09",
     shippingCost: 150,
     total: 5155.91,
-    status: "Received",
-    clientId: "USR-025642",
+    status: "Canceled",
+    clientId: "CLT-1134",
   },
   {
     id: "ORD-025011",
@@ -27,7 +27,16 @@ export const Orders = [
     shippingCost: 150,
     total: 5155.91,
     status: "On its way",
-    clientId: "USR-025671",
+    clientId: "CLT-1134",
+  },
+  {
+    id: "ORD-025000",
+    orderDate: "2021-05-10",
+    deliveredDate: "2021-05-11",
+    shippingCost: 150,
+    total: 5155.91,
+    status: "On its way",
+    clientId: "CLT-1134",
   },
 ];
 
@@ -37,7 +46,7 @@ export const Purchases = [
     amount: 2,
     condition: "None",
     orderId: "ORD-025984",
-    itemId: "ART-0002"
+    itemId: "ART-0254"
   },
   {
     id: 2,
@@ -51,21 +60,35 @@ export const Purchases = [
     amount: 4,
     condition: "None",
     orderId: "ORD-025984",
-    itemId: "ART-0001"
+    itemId: "ART-0254"
   },
   {
     id: 4,
     amount: 2,
     condition: "None",
     orderId: "ORD-025036",
-    itemId: "ART-0005"
+    itemId: "ART-0254"
   },
-  
   {
     id: 5,
     amount: 3,
     condition: "None",
     orderId: "ORD-025011",
-    itemId: "ART-0005"
+    itemId: "ART-3215"
+  },
+
+  {
+    id: 6,
+    amount: 3,
+    condition: "None",
+    orderId: "ORD-025000",
+    itemId: "ART-0254"
+  },
+  {
+    id: 7,
+    amount: 3,
+    condition: "None",
+    orderId: "ORD-025000",
+    itemId: "ART-0254"
   },
 ];

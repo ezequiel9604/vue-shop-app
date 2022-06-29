@@ -1,33 +1,33 @@
-import { Axios } from "axios";
+import { Axios } from 'axios';
 
 const baseUrl = "https:/localhost:7227";
 
-export async function GetCommentsByItemId(itemid) {
+export async function get_by_item_id(itemid) {
     
     const response = await Axios.get(`${baseUrl}/api/Comment/GetByItemId/${itemid}`);
 
     return response.data;
 }
 
-export async function SaveComment(itemid, commentText) {
+export async function save_comment(clientid, itemid, commentText) {
     
     if(JSON.parse(localStorage.getItem("loggedClient"))){
-        
-        const obj = JSON.parse(localStorage.getItem("loggedClient"));
 
-        await Axios.put(`${baseUrl}/api/Comment/Save`, {
-            clientid: obj.user.id,
+        const response = await Axios.post(`${baseUrl}/api/Comment/Save`, {
+            clientid: clientid,
             itemid: itemid,
             text: commentText,
-            date: new Date()
         })
-        .then((result)=>{
-
+        .then((result) => {
             console.log('comment saved!');
         })
-        .catch((error)=>{
-            console.log(error);
-        })
+        .catch((error) => {
+            if(error.response.status == 400){
+                return error.response.data;
+            }
+        });
+
+        return response;
 
     }
 

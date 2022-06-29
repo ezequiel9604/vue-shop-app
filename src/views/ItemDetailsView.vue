@@ -8,11 +8,14 @@ import ItemAddComment from '../components/ItemDetails/ItemAddComment.vue';
 import ItemDisplayComments from '../components/ItemDetails/ItemDisplayComments.vue';
 import { GetById } from '../services/Item';
 import Comments from '../assets/data/Comments';
-import { GetCommentsByItemId } from '../apis/Comments';
+import { GetByItemId } from '../services/Comment';
 
 const url = router.currentRoute.value.query;
 
-const props = defineProps({ items: Array, client: Object });
+const props = defineProps({ 
+    items: Array, 
+    client: Object 
+});
 
 const state = reactive({
     items: [],
@@ -30,8 +33,8 @@ onMounted(async () => {
         state.selectedItem = await GetById(url.itemId);
     }
     
-    //state.comments = await GetCommentsByItemId(url.itemId);
-    state.comments = Comments;
+    //state.comments = await GetByItemId(url.itemId);
+    state.comments = Comment;
 
 });
 
@@ -99,8 +102,9 @@ const changeSelectedSection = (value) => {
                     <div :style="{ display: state.selectedSection == 1? 'block':'none'}" class="item-details-comment-content">
 
                         <ItemAddComment 
-                            :image="props.client.imagePath"
-                            :itemId="url.itemId" />
+                            :itemid="url.itemId"
+                            :clientid="props.client.id"
+                            :image="props.client.imagePath" />
 
                         <ItemDisplayComments :comments="Comments" />
 

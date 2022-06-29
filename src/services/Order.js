@@ -1,5 +1,15 @@
 import { Orders, Purchases } from '../assets/data/Orders';
 
+import { get_by_client_id } from '../apis/Orders';
+
+export async function GetOrdersByClientId(clientid){
+
+    const res = await get_by_client_id(clientid);
+
+    return res;
+
+}
+
 export function GetOrders(clientid){
 
     // returns all orders made by this client
@@ -10,6 +20,61 @@ export function GetOrders(clientid){
     });
 
     return ords;
+}
+
+export function GetOrdersFilterByAll(orders, allitems, orderstatus, ordernumber){
+
+    let ords = [...orders];
+
+    // adds an array field called 'purchases', this array will contains the purchased allitems.
+    ords.forEach((current) => {
+        current['purchases'] = [];
+    });
+
+    // fill the array 'purchases' with objects that contains 'id', 'amount', 'condition', 'item'
+    ords.forEach((current) => {  
+
+        for (let i = 0; i < Purchases.length; i++) {    
+
+            if(Purchases[i].orderId == current.id){
+    
+                for (let j = 0; j < allitems.length; j++) {
+
+                    if(allitems[j].id == Purchases[i].itemId){
+
+                        current.purchases.push({
+                            id: Purchases[i].id,
+                            amount: Purchases[i].amount,
+                            condition: Purchases[i].condition,
+                            item: allitems[j]
+                        });
+
+                    }
+                }
+
+                
+            }    
+        }
+    });
+
+    // filter orders by order number
+    if(ordernumber != ""){
+        ords = [...ords.filter((current) => {
+            if(current.id == ordernumber)
+                return current;    
+        })];
+    }
+
+    // filter orders by order status
+    if(orderstatus != "All"){
+        ords = [...ords.filter((current) => {
+            if(current.status == orderstatus)
+                return current;    
+        })]; 
+    }
+
+    return ords;
+
 }
 
 export function GetOrderByOrderNumber(ordernumber){
@@ -34,55 +99,6 @@ export function GetSetsOfItems(items, num){
         return parseInt(sets) + 1;
     
     return parseInt(sets);
-}
-
-export function GetOrdersFilterByAll(orders, items, orderstatus, ordernumber){
-
-    let ords = [...orders];
-
-    // adds an array field called 'purchases'
-    ords.forEach((current) => {
-        current['purchases'] = [];
-    });
-
-    // fill the array 'purchases' with objects that contains 'id', 'amount', 'condition', 'item'
-    ords.forEach((current) => {  
-        for (let i = 0; i < Purchases.length; i++) {     
-            if(Purchases[i].orderId == current.id){
-                let item;
-                [...items].forEach((element) => {
-                    if(element.id == Purchases[i].itemId)
-                        item = element;
-                });
-
-                current.purchases.push({
-                    id: Purchases[i].id,
-                    amount: Purchases[i].amount,
-                    condition: Purchases[i].condition,
-                    item: item
-                });
-            }    
-        }
-    });
-
-    // filter orders by order number
-    if(ordernumber != ""){
-        ords = [...ords.filter((current) => {
-            if(current.id == ordernumber)
-                return current;    
-        })];
-    }
-
-    // filter orders by order status
-    if(orderstatus != "All"){
-        ords = [...ords.filter((current) => {
-            if(current.status == orderstatus)
-                return current;    
-        })]; 
-    }
-
-    return ords;
-
 }
 
 export function GetItemsByOrderNumber(ordernumber, items){

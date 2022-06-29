@@ -1,10 +1,11 @@
 <script setup>
+import { reactive } from 'vue';
 import { RouterLink } from 'vue-router';
 import { formatedNumber, calculateSubtotal } from '../../services/Item';
 
 const props = defineProps({
     id: String,
-    images: Array,
+    image: String,
     title: String,
     price: Number,
     amount: Number,
@@ -13,13 +14,26 @@ const props = defineProps({
     descount: Number
 });
 
+const state = reactive({
+    imagePath: ""
+});
+
+import(`../../assets/imgs/samples/${props.image}`)
+    .then((value)=>{
+        state.imagePath = value.default;
+    })
+    .catch((error)=>{
+        console.log(error);
+    });
+
+
 </script>
 <template>
 
     <div class="myorder-samples-content">
             <div class="myorder-mini-samples">
                 <RouterLink :to="'/itemDetails?itemId='+props.id">
-                    <img :src="props.images[0]" alt="" />
+                    <img :src="state.imagePath" alt="" />
                 </RouterLink>
                 <div>
                     <h6>{{ props.title }}.</h6>
