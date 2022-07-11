@@ -9,42 +9,46 @@ import { checkingInputChecks } from '../../services/Item';
 import { Departments } from '../../services/Client';
 
 const props = defineProps({
-    category: String,
-    subCategory: Array,
-    state: Array,
-    size: Array,
-    capacity: Array,
-    department: Array,
+  category: String,
+  subCategory: Array,
+  state: Array,
+  size: Array,
+  capacity: Array,
+  department: Array,
 
-    onChangeFilterSState: Function
+  onChangeFilterSState: Function
 });
 
-const brandImages = [ brandImage1, brandImage2, brandImage3 ];
+const brandImages = [brandImage1, brandImage2, brandImage3];
 
-const changeInputs = (ev, input) =>{
+const changeInputs = (ev, input) => {
+  let arr;
+  if (input === 'state') {
+    arr = new Set([...props.state]);
+  }
+  else if (input === 'size') {
+    arr = new Set([...props.size]);
+  }
+  else if (input === 'capacity') {
+    arr = new Set([...props.capacity]);
+  }
+  else if (input === 'department') {
+    arr = new Set([...props.department]);
+  }
     
-    let arr;
-    if(input == "state")
-        arr = new Set([...props.state]);
-    else if(input == "size")
-        arr = new Set([...props.size]);
-    else if(input == "capacity")
-        arr = new Set([...props.capacity]);
-    else if(input == "department")
-        arr = new Set([...props.department]);
-    
-    if(ev.target.checked)
-        arr.add(ev.target.value);
-    else
-        arr.delete(ev.target.value);
+  if (ev.target.checked) {
+    arr.add(ev.target.value);
+  }
+  else {
+    arr.delete(ev.target.value);
+  }
 
-    props.onChangeFilterSState(input, Array.from(arr));
+  props.onChangeFilterSState(input, Array.from(arr));
+};
 
-}
-
-const changeStoreCategoryItem= (value) => {
-    store.commit("changeCategoryItem", value);
-}
+const changeStoreCategoryItem = (value) => {
+  store.commit('changeCategoryItem', value);
+};
 
 </script>
 <template>
@@ -246,6 +250,5 @@ const changeStoreCategoryItem= (value) => {
     }
 
 }
-
 
 </style>

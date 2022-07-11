@@ -1,27 +1,27 @@
 <script setup>
-import { reactive} from 'vue';
+import { reactive } from 'vue';
 import { RouterLink } from 'vue-router';
 import { formatedNumber, calculateDescountPrice } from '../../services/Item';
 
 const props = defineProps({
-    id: String,
-    descount: Number,
-    images: Array,
-    title: String,
-    price: Number,
+  id: String,
+  descount: Number,
+  images: Array,
+  title: String,
+  price: Number
 });
 
 const state = reactive({
-    image: "",
+  image: ''
 });
 
-import("../../assets/imgs/samples/"+props.images[0].path)
-    .then((value)=>{
-        state.image = value.default;
-    })
-    .catch((error)=>{
-        console.log("Not able to locate the image!");
-    })
+import('../../assets/imgs/samples/' + props.images[0].path)
+  .then((value) => {
+    state.image = value.default;
+  })
+  .catch((error) => {
+    //console.log('Not able to locate the image!');
+  });
 
 </script>
 <template>
@@ -115,7 +115,6 @@ import("../../assets/imgs/samples/"+props.images[0].path)
     color: #999999;
     text-decoration: line-through;
 }
-
 
 @media screen and (max-width: 834px) {
     

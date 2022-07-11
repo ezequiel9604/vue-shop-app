@@ -3,26 +3,25 @@ import { reactive } from 'vue';
 import { SubmitAppearence } from '../../services/Client';
 
 const props = defineProps({
-    clientId: String,
-    appearance: String,
-    onChangeSelectedProfileForm: Function
+  clientId: String,
+  appearance: String,
+  onChangeSelectedProfileForm: Function
 });
 
 const state = reactive({
-    appearance: props.appearance
-})
+  appearance: props.appearance
+});
 
 const changeAppearance = async () => {
-
-    if(state.appearance == "light"){
-        state.appearance = "dark";
-        await SubmitAppearence(state.appearance);
-    }
-    else{
-        state.appearance = "light";
-        await SubmitAppearence(state.appearance);
-    }
-}
+  if (state.appearance === 'light') {
+    state.appearance = 'dark';
+    await SubmitAppearence(state.appearance);
+  }
+  else {
+    state.appearance = 'light';
+    await SubmitAppearence(state.appearance);
+  }
+};
 
 </script>
 <template>

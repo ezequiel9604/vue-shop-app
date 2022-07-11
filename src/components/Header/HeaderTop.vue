@@ -1,21 +1,25 @@
 <script setup>
-import { computed } from 'vue';
-import { RouterLink } from 'vue-router';
+import { computed, reactive } from 'vue';
 import { Logout, SubmitCharacteristics, Languages, Currancies } from '../../services/Client';
 
 const props = defineProps({ client: Object });
 
-const isClientLoggedIn = computed(()=>{
-    return props.client.id != "00000"? true : false;
+const state = reactive({
+  language: props.client.language,
+  currancy: props.client.currancy
+});
+
+const isClientLoggedIn = computed(() => {
+  return props.client.id !== '00000';
 });
 
 const handleSubmitForm = async () => {
-    await SubmitCharacteristics(props.client.language, props.client.currancy);
-}
+  await SubmitCharacteristics(props.client.language, props.client.currancy);
+};
 
 const handleLogout = async () => {
-    await Logout(props.client.email);
-}
+  await Logout(props.client.email);
+};
 
 </script>
 <template>
@@ -37,7 +41,7 @@ const handleLogout = async () => {
 
                     <div class="selection-language">
                         <label>Choose language:</label>
-                        <select v-model="props.client.language" >
+                        <select v-model="state.language" >
                             <option v-for="l in Languages" :selected="l == props.client.language" 
                                 :key="l">{{ l }}</option>
                         </select>
@@ -45,7 +49,7 @@ const handleLogout = async () => {
 
                     <div class="selection-language">
                         <label>Choose currancy:</label>
-                        <select v-model="props.client.currancy">
+                        <select v-model="state.currancy">
                             <option v-for="c in Currancies" :selected="c == props.client.currancy" 
                                 :key="c">{{ c }}</option>
                         </select>

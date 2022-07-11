@@ -3,12 +3,12 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import Slides from './Slides.vue';
 
 const departments = [
-    { title: "Clothing", color: "gainsboro" },
-    { title: "Accessories", color: "red" },
-    { title: "Shoes", color: "green" },
-    { title: "Offices", color: "blue" },
-    { title: "Home", color: "purple" },
-    { title: "Technology", color: "brown" },
+  { title: 'Clothing', color: 'gainsboro' },
+  { title: 'Accessories', color: 'red' },
+  { title: 'Shoes', color: 'green' },
+  { title: 'Offices', color: 'blue' },
+  { title: 'Home', color: 'purple' },
+  { title: 'Technology', color: 'brown' }
 ];
 
 const sliderTimer = ref(null);
@@ -16,58 +16,56 @@ const categorySlider = ref(null);
 const sliderCounter = ref(0);
 
 onMounted(() => {
-
-    sliderTimer.value= setInterval(() => {
-        if(categorySlider.value.scrollLeft == 0){
-            categorySlider.value.style.scrollBehavior= "smooth";
-            categorySlider.value.scrollTo(categorySlider.value.offsetWidth, 0);
-            sliderCounter.value=1;
-        }
-        else if(categorySlider.value.scrollLeft == categorySlider.value.offsetWidth){
-            categorySlider.value.scrollTo(categorySlider.value.offsetWidth*2, 0);
-            sliderCounter.value=2;
-        }
-        else if(categorySlider.value.scrollLeft == (categorySlider.value.offsetWidth*2)){
-            categorySlider.value.scrollTo(categorySlider.value.offsetWidth*3, 0);
-            sliderCounter.value=3;
-        }
-        else if(categorySlider.value.scrollLeft ==(categorySlider.value.offsetWidth*3)){
-            categorySlider.value.scrollTo(categorySlider.value.offsetWidth*4, 0);
-            sliderCounter.value=4;
-        }
-        else if(categorySlider.value.scrollLeft == (categorySlider.value.offsetWidth*4)){
-            categorySlider.value.scrollTo(categorySlider.value.offsetWidth*5, 0);
-            sliderCounter.value=5;
-        }
-        else {
-            categorySlider.value.style.scrollBehavior= "initial";
-            categorySlider.value.scrollTo(0, 0);
-        }
-    }, 5000);
-
+  sliderTimer.value = setInterval(() => {
+    if (categorySlider.value.scrollLeft === 0) {
+      categorySlider.value.style.scrollBehavior = 'smooth';
+      categorySlider.value.scrollTo(categorySlider.value.offsetWidth, 0);
+      sliderCounter.value = 1;
+    }
+    else if (categorySlider.value.scrollLeft === categorySlider.value.offsetWidth) {
+      categorySlider.value.scrollTo(categorySlider.value.offsetWidth * 2, 0);
+      sliderCounter.value = 2;
+    }
+    else if (categorySlider.value.scrollLeft === (categorySlider.value.offsetWidth * 2)) {
+      categorySlider.value.scrollTo(categorySlider.value.offsetWidth * 3, 0);
+      sliderCounter.value = 3;
+    }
+    else if (categorySlider.value.scrollLeft === (categorySlider.value.offsetWidth * 3)) {
+      categorySlider.value.scrollTo(categorySlider.value.offsetWidth * 4, 0);
+      sliderCounter.value = 4;
+    }
+    else if (categorySlider.value.scrollLeft === (categorySlider.value.offsetWidth * 4)) {
+      categorySlider.value.scrollTo(categorySlider.value.offsetWidth * 5, 0);
+      sliderCounter.value = 5;
+    }
+    else {
+      categorySlider.value.style.scrollBehavior = 'initial';
+      categorySlider.value.scrollTo(0, 0);
+    }
+  }, 5000);
 });
 
 onUnmounted(() => {
-    clearInterval(sliderTimer.value);
+  clearInterval(sliderTimer.value);
 });
 
 const handleLeftSliderButton = () => {
-    if(categorySlider.value.scrollLeft > 0){
-        clearInterval(sliderTimer.value);
-        categorySlider.value.style.scrollBehavior= "smooth";
-        sliderCounter.value--;
-        categorySlider.value.scrollTo(categorySlider.value.offsetWidth*sliderCounter.value, 0);
-    }
-}
+  if (categorySlider.value.scrollLeft > 0) {
+    clearInterval(sliderTimer.value);
+    categorySlider.value.style.scrollBehavior = 'smooth';
+    sliderCounter.value--;
+    categorySlider.value.scrollTo(categorySlider.value.offsetWidth * sliderCounter.value, 0);
+  }
+};
 
 const handleRightSliderButton = () => {
-    if(categorySlider.value.scrollLeft < (categorySlider.value.scrollWidth-categorySlider.value.offsetWidth)){
-        clearInterval(sliderTimer.value);
-        categorySlider.value.style.scrollBehavior= "smooth";
-        sliderCounter.value++;
-        categorySlider.value.scrollTo(categorySlider.value.offsetWidth*sliderCounter.value, 0);
-    }
-}
+  if (categorySlider.value.scrollLeft < (categorySlider.value.scrollWidth - categorySlider.value.offsetWidth)) {
+    clearInterval(sliderTimer.value);
+    categorySlider.value.style.scrollBehavior = 'smooth';
+    sliderCounter.value++;
+    categorySlider.value.scrollTo(categorySlider.value.offsetWidth * sliderCounter.value, 0);
+  }
+};
 
 </script>
 <template>
@@ -108,9 +106,6 @@ const handleRightSliderButton = () => {
     z-index: 0;
 }
 
-/* ////////////////////////////////////////////////////// */
-/* ///            category slider button              /// */ 
-/* ////////////////////////////////////////////////////// */
 .category-slider-button{
     background-color: transparent;
     border: 0;
@@ -132,9 +127,6 @@ const handleRightSliderButton = () => {
     right: 3%;
 }
 
-/* ////////////////////////////////////////////////////// */
-/* ///               category slider                  /// */ 
-/* ////////////////////////////////////////////////////// */
 .category-slider{
     width: 100%;
     height: fit-content;
@@ -170,6 +162,5 @@ const handleRightSliderButton = () => {
     }
 
 }
-
 
 </style>

@@ -1,12 +1,10 @@
 <script setup>
-import { computed } from 'vue';
-
 const props = defineProps({
-    title: String,
-    allelements: Array,
-    currentelement: String,
-    subitemselements: Array,
-})
+  title: String,
+  allelements: Array,
+  currentelement: String,
+  subitemselements: Array
+});
 
 </script>
 <template>
@@ -113,7 +111,6 @@ const props = defineProps({
 }
 
 @media screen and (max-width: 414px) {
-    
     
     .top-item-details-details-selection{
         width: 90%;

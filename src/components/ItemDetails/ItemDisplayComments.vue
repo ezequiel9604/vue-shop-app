@@ -1,8 +1,8 @@
 <script setup>
 
 const props = defineProps({
-    comments: Array
-})
+  comments: Array
+});
 
 </script>
 <template>

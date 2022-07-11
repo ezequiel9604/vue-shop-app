@@ -2,17 +2,17 @@
 import { RouterLink } from 'vue-router';
 
 const props = defineProps({
-    title: String,
-    images: Array,
-    descount: Number,
-    quality: Number,
-    price: Number,
-    stock: Number,
+  title: String,
+  images: Array,
+  descount: Number,
+  quality: Number,
+  price: Number,
+  stock: Number
 });
 
 const calculateDescount = (price, descount) => {
-    return price - (price * (descount/100));
-}
+  return price - (price * (descount / 100));
+};
 
 </script>
 <template>

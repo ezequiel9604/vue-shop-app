@@ -6,7 +6,6 @@ import CheckoutShipmentBlock from '../components/CheckOut/CheckoutShipmentBlock.
 import OrderSummaryRightSidebar from '../components/CheckOut/OrderSummaryRightSidebar.vue';
 import Clients from '../assets/data/Clients';
 
-
 </script>
 <template>
 

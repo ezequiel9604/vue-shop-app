@@ -8,39 +8,37 @@ import ItemAddComment from '../components/ItemDetails/ItemAddComment.vue';
 import ItemDisplayComments from '../components/ItemDetails/ItemDisplayComments.vue';
 import { GetById } from '../services/Item';
 import Comments from '../assets/data/Comments';
-import { GetByItemId } from '../services/Comment';
+//import { GetByItemId } from '../services/Comment';
 
 const url = router.currentRoute.value.query;
 
 const props = defineProps({ 
-    items: Array, 
-    client: Object 
+  items: Array, 
+  client: Object 
 });
 
 const state = reactive({
-    items: [],
-    comments: [],
-    selectedItem: null,
-    selectedSection: 0,
+  items: [],
+  comments: [],
+  selectedItem: null,
+  selectedSection: 0
 });
 
 onMounted(async () => {
-
-    if(props.items.length != 0){
-        state.selectedItem = await GetById(url.itemId);
-    } 
-    else{
-        state.selectedItem = await GetById(url.itemId);
-    }
+  if (props.items.length !== 0) {
+    state.selectedItem = await GetById(url.itemId);
+  }
+  else {
+    state.selectedItem = await GetById(url.itemId);
+  }
     
-    //state.comments = await GetByItemId(url.itemId);
-    state.comments = Comment;
-
+  //state.comments = await GetByItemId(url.itemId);
+  state.comments = Comment;
 });
 
 const changeSelectedSection = (value) => {
-    state.selectedSection = value;
-}
+  state.selectedSection = value;
+};
 
 </script>
 <template>

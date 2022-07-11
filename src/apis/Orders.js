@@ -1,8 +1,9 @@
-import Axios from "axios";
+import Axios from 'axios';
 
-export async function get_by_client_id(clientid) {
-    
-    const response = await Axios.get(`${baseUrl}/api/Order/GetByClientId/${clientid}`);
+const baseUrl = 'https:/localhost:7227';
 
-    return response.data;
+export async function getByClientIdApi (clientid) {
+  const response = await Axios.get(`${baseUrl}/api/Order/GetByClientId/${clientid}`);
+
+  return response.data;
 }

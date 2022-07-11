@@ -4,24 +4,24 @@ import { RouterLink } from 'vue-router';
 import { formatedNumber, calculateDescountPrice } from '../../services/Item';
 
 const props = defineProps({
-    id: String,
-    title: String,
-    price: Number,
-    images: Array,
-    descount: Number
+  id: String,
+  title: String,
+  price: Number,
+  images: Array,
+  descount: Number
 });
 
 const state = reactive({
-    image: "",
-})
+  image: ''
+});
 
-import("../../assets/imgs/samples/"+props.images[0].path)
-    .then((value)=>{
-        state.image = value.default;
-    })
-    .catch((error)=>{
-        console.log("Not able to locate the image!");
-    })
+import('../../assets/imgs/samples/' + props.images[0].path)
+  .then((value) => {
+    state.image = value.default;
+  })
+  .catch((error) => {
+    //console.log('Not able to locate the image!');
+  });
 
 </script>
 <template>
@@ -161,9 +161,6 @@ import("../../assets/imgs/samples/"+props.images[0].path)
 
 @media screen and (max-width: 834px) {
     
-    /* ////////////////////////////////////////////////////// */
-    /* ///              column large samples              /// */ 
-    /* ////////////////////////////////////////////////////// */
     .column-large-samples{
         width: 200px;
         margin: 20px 40px;
@@ -208,9 +205,6 @@ import("../../assets/imgs/samples/"+props.images[0].path)
 
 @media screen and (max-width: 414px) {
     
-    /* ////////////////////////////////////////////////////// */
-    /* ///              column large samples              /// */ 
-    /* ////////////////////////////////////////////////////// */
     .column-large-samples{
         width: 120px;
         margin: 20px 10px;

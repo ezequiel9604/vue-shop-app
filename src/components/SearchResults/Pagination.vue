@@ -1,9 +1,9 @@
 <script setup>
 
 const props = defineProps({
-    sets: Number,
-    selectedset: Number,
-    onChangeFilterSState: Function
+  sets: Number,
+  selectedset: Number,
+  onChangeFilterSState: Function
 });
 
 </script>

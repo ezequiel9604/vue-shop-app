@@ -4,28 +4,27 @@ import { RouterLink } from 'vue-router';
 import { formatedNumber, calculateSubtotal } from '../../services/Item';
 
 const props = defineProps({
-    id: String,
-    image: String,
-    title: String,
-    price: Number,
-    amount: Number,
-    condition: String,
-    status: String,
-    descount: Number
+  id: String,
+  image: String,
+  title: String,
+  price: Number,
+  amount: Number,
+  condition: String,
+  status: String,
+  descount: Number
 });
 
 const state = reactive({
-    imagePath: ""
+  imagePath: ''
 });
 
 import(`../../assets/imgs/samples/${props.image}`)
-    .then((value)=>{
-        state.imagePath = value.default;
-    })
-    .catch((error)=>{
-        console.log(error);
-    });
-
+  .then((value) => {
+    state.imagePath = value.default;
+  })
+  .catch((error) => {
+    //console.log(error);
+  });
 
 </script>
 <template>

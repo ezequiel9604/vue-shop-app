@@ -2,8 +2,8 @@
 import { RouterLink } from 'vue-router';
 
 const props = defineProps({
-    title: String,
-    color: String
+  title: String,
+  color: String
 });
 
 </script>
@@ -30,9 +30,6 @@ const props = defineProps({
     position: relative;
 }
 
-/* ////////////////////////////////////////////////////// */
-/* ///            category slides links               /// */ 
-/* ////////////////////////////////////////////////////// */
 .category-slides-links-content{
     width: 160px;
     height: 50px;

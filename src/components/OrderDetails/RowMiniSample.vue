@@ -3,16 +3,15 @@ import { RouterLink } from 'vue-router';
 import { formatedNumber, calculateSubtotal } from '../../services/Item';
 
 const props = defineProps({
-    id: String,
-    images: Array,
-    title: String,
-    specifications: Object,
-    price: Number,
-    amount: Number,
-    descount: Number,
-    condition: String,
+  id: String,
+  images: Array,
+  title: String,
+  specifications: Object,
+  price: Number,
+  amount: Number,
+  descount: Number,
+  condition: String
 });
-
 
 </script>
 <template>

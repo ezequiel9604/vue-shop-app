@@ -6,16 +6,18 @@ import SignUpFormFooter from '../components/SignUp/SignUpFormFooter.vue';
 import { Login } from '../services/Client';
 
 const state = reactive({
-    emailInput: "brianmay@gmail.com",
-    passwordInput: "brianmay123",
-    message: "",
+  emailInput: 'brianmay@gmail.com',
+  passwordInput: 'brianmay123',
+  message: ''
 });
 
 const handleSubmitLogin = async () => {
-    state.message = await Login(state.emailInput, state.passwordInput);
-}
+  state.message = await Login(state.emailInput, state.passwordInput);
+};
 
-const closeMessageAlert = () => { state.message = ''; }
+const closeMessageAlert = () => {
+  state.message = ''; 
+};
 
 </script>
 <template>

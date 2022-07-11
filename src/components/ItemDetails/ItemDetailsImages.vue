@@ -1,31 +1,31 @@
 <script setup>
-import { reactive, computed } from 'vue';
+import { reactive } from 'vue';
 import image1 from '../../assets/imgs/samples/smart-tv-2.png';
 import image2 from '../../assets/imgs/samples/smart-tv-3.png';
 import image3 from '../../assets/imgs/samples/tablet-2.png';
 import image4 from '../../assets/imgs/samples/tablet.png';
 
 const props = defineProps({
-    images: Array
+  images: Array
 });
 
 const state = reactive({
-    imagePath: "",
-    selected: 0,
-})
+  imagePath: '',
+  selected: 0
+});
 
 const changeSeletedImg = (value) => {
-    state.selected = value;
-    console.log(state.selected)
-}
+  state.selected = value;
+  //console.log(state.selected);
+};
 
 import(`../../assets/imgs/samples/${props.images[state.selected].path}`)
-    .then((value)=>{
-        state.imagePath = value.default;
-    })
-    .catch((error)=>{
-        console.log("Not able to locate the image!");
-    });
+  .then((value) => {
+    state.imagePath = value.default;
+  })
+  .catch((error) => {
+    //console.log('Not able to locate the image!');
+  });
 
 </script>
 <template>

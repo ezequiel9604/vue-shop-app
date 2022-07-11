@@ -2,8 +2,8 @@
 import { RouterLink } from 'vue-router';
 
 const props = defineProps({
-    title: String,
-    links: Array
+  title: String,
+  links: Array
 });
 
 </script>

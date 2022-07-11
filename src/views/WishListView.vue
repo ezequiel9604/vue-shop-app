@@ -44,16 +44,12 @@ import { Items } from '../assets/data/Items';
 </template>
 <style>
 
-
 .wish-list-content{
     width: 80%;
     box-sizing: border-box;
     margin: 60px auto;
 }
 
-/* ////////////////////////////////////////////////////// */
-/* ///            wish list content filter            /// */ 
-/* ////////////////////////////////////////////////////// */
 .wish-list-content-filter{
     width: 100%;
     box-sizing: border-box;
@@ -119,9 +115,6 @@ import { Items } from '../assets/data/Items';
         margin: 40px auto;
     }
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///            wish list content filter            /// */ 
-    /* ////////////////////////////////////////////////////// */
     .wish-list-content-filter{
         margin-bottom: 20px;
     }
@@ -160,9 +153,6 @@ import { Items } from '../assets/data/Items';
         margin: 20px auto;
     }
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///            wish list content filter            /// */ 
-    /* ////////////////////////////////////////////////////// */
     .wish-list-content-filter{
         margin-bottom: 20px;
     }

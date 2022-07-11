@@ -1,28 +1,27 @@
 <script setup>
 import { reactive } from 'vue';
-import { status } from '../../assets/data/DummyData';
 
 const props = defineProps({
-    orderstatus: String,
-    ordernumber: String,
-    orderdate: String,
-    onchangeordernumber: Function,
-    onchangeorderstatus: Function,
-})
+  orderstatus: String,
+  ordernumber: String,
+  orderdate: String,
+  onchangeordernumber: Function,
+  onchangeorderstatus: Function
+});
 
 const state = reactive({
-    orderStatus: props.orderstatus,
-    orderNumber: props.ordernumber,
-    orderDate: props.orderdate,
-})
+  orderStatus: props.orderstatus,
+  orderNumber: props.ordernumber,
+  orderDate: props.orderdate
+});
 
 const changeOrderNumberState = () => {
-    props.onchangeordernumber(state.orderNumber)
-}
+  props.onchangeordernumber(state.orderNumber);
+};
 
 const changeOrderStatus = (e) => {
-    props.onchangeorderstatus(e.target.value);
-}
+  props.onchangeorderstatus(e.target.value);
+};
 
 </script>
 <template>

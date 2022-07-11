@@ -6,35 +6,35 @@ import { shoppingCart } from '../../assets/data/ShoppingCarts';
 import { wishList } from '../../assets/data/WishLists';
 import store from '../../store';
 
-const props = defineProps({ client: Object })
+const props = defineProps({ client: Object });
 
 const state = reactive({
-    searchInput: store.state.searchText,
-    categoryInput: store.state.categoryItem,
+  searchInput: store.state.searchText,
+  categoryInput: store.state.categoryItem
 });
 
 const cartListLength = computed(() => {
-    const arr = shoppingCart.filter((current) => {
-        return current.clientId == props.client.id;
-    });
-    return arr.length;
-})
+  const arr = shoppingCart.filter((current) => {
+    return current.clientId === props.client.id;
+  });
+  return arr.length;
+});
 
 const wishListLength = computed(() => {
-    const arr = wishList.filter((current) => {
-        return current.clientId == props.client.id;
-    });
-    return arr.length;
-})
+  const arr = wishList.filter((current) => {
+    return current.clientId === props.client.id;
+  });
+  return arr.length;
+});
 
 const changeStoreSearchText = () => {
-    store.commit("changeSearchText", state.searchInput);
-}
+  store.commit('changeSearchText', state.searchInput);
+};
 
-const changeStoreCategoryItem= (value) => {
-    state.categoryInput = value;
-    store.commit("changeCategoryItem", state.categoryInput);
-}
+const changeStoreCategoryItem = (value) => {
+  state.categoryInput = value;
+  store.commit('changeCategoryItem', state.categoryInput);
+};
 
 </script>
 <template>

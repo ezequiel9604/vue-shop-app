@@ -2,26 +2,26 @@
 import { reactive } from 'vue';
 
 const props = defineProps({
-    minPrice: Number,
-    maxPrice: Number,
-    colors: Array,
-    quality: Number,
-    offered: Boolean,
-    onChangeMaxAndMinPrice: Function,
-    onChangeSelectedColors: Function,
+  minPrice: Number,
+  maxPrice: Number,
+  colors: Array,
+  quality: Number,
+  offered: Boolean,
+  onChangeMaxAndMinPrice: Function,
+  onChangeSelectedColors: Function,
 
-    onChangeFilterSState: Function
+  onChangeFilterSState: Function
 });
 
 const state = reactive({
-   minPriceInput: props.minPrice,
-   maxPriceInput: props.maxPrice, 
+  minPriceInput: props.minPrice,
+  maxPriceInput: props.maxPrice 
 });
 
 const changeMinAndMaxPrice = () => {
-    props.onChangeMaxAndMinPrice(parseInt(state.minPriceInput), 
-        parseInt(state.maxPriceInput));
-}
+  props.onChangeMaxAndMinPrice(parseInt(state.minPriceInput), 
+    parseInt(state.maxPriceInput));
+};
 
 </script>
 <template>

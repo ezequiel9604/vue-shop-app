@@ -1,7 +1,7 @@
 <script setup>
 
 const props = defineProps({
-    image: String
+  image: String
 });
 
 </script>

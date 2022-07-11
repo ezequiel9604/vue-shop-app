@@ -1,8 +1,8 @@
 <script setup>
 
 const props = defineProps({
-    title: String,
-    class: String
+  title: String,
+  class: String
 });
 
 </script>
@@ -28,9 +28,6 @@ const props = defineProps({
 </template>
 <style>
 
-/* ////////////////////////////////////////////////////// */
-/* ///             checkout content blocks            /// */ 
-/* ////////////////////////////////////////////////////// */
 .checkout-content-left-blocks-rows{
     width: 100%;
     margin-bottom: 10px;
@@ -58,12 +55,8 @@ const props = defineProps({
     box-sizing: border-box;
 }
 
-
 @media screen and (max-width: 834px) {
     
-    /* ////////////////////////////////////////////////////// */
-    /* ///             checkout content blocks            /// */ 
-    /* ////////////////////////////////////////////////////// */
     .checkout-content-left-blocks-rows{
         width: 100%;
         margin-bottom: 10px;
@@ -83,9 +76,6 @@ const props = defineProps({
 
 @media screen and (max-width: 414px) {
     
-    /* ////////////////////////////////////////////////////// */
-    /* ///             checkout content blocks            /// */ 
-    /* ////////////////////////////////////////////////////// */
     .checkout-content-left-blocks-rows{
         margin-bottom: 10px;
     }
@@ -98,7 +88,6 @@ const props = defineProps({
         width: 96%;
         margin: 10px auto;
     }
-
 }
 
 </style>

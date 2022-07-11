@@ -1,11 +1,11 @@
 <script setup>
 
 const props = defineProps({
-    id: String,
-    text: String,
-    date: String,
-    sender: String,
-    image: String
+  id: String,
+  text: String,
+  date: String,
+  sender: String,
+  image: String
 });
 
 </script>

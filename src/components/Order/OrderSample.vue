@@ -4,19 +4,19 @@ import OrderMiniSample from './OrderMiniSample.vue';
 import { formatedNumber } from '../../services/Item';
 
 const props = defineProps({
-    orderNumber: String,
-    deliveredDate: String,
-    shippingCost: Number,
-    orderDate: String,
-    total: Number,
-    purchases: Array,
-    status: String
+  orderNumber: String,
+  deliveredDate: String,
+  shippingCost: Number,
+  orderDate: String,
+  total: Number,
+  purchases: Array,
+  status: String
 });
 
 const calculateSubtotal = (price, amount, descount) => {
-    let subtotal = price * amount;
-    return subtotal - subtotal * (descount / 100)
-}
+  const subtotal = price * amount;
+  return subtotal - subtotal * (descount / 100);
+};
 
 </script>
 <template>

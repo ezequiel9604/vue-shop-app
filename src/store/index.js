@@ -1,30 +1,30 @@
-import { createStore } from "vuex";
+import { createStore } from 'vuex';
 
 const store = createStore({
-    state: {
-        searchText: "",
-        categoryItem: "all",
-        headerHiddenStatus: false,
+  state: {
+    searchText: '',
+    categoryItem: 'all',
+    headerHiddenStatus: false
+  },
+
+  mutations: {
+    changeSearchText (state, text) {
+      state.searchText = text;
     },
 
-    mutations: {
-        changeSearchText(state, text){
-            state.searchText = text;
-        },
+    changeCategoryItem (state, text) {
+      state.categoryItem = text;
+    },
 
-        changeCategoryItem(state, text){
-            state.categoryItem = text;
-        },
+    changeClient (state, value) {
+      state.client = value;
+    },
 
-        changeClient(state, value){
-            state.client = value;
-        },
-
-        changeHeaderHiddenStatus(state){
-            state.headerHiddenStatus = !state.headerHiddenStatus;
-        }
+    changeHeaderHiddenStatus (state) {
+      state.headerHiddenStatus = !state.headerHiddenStatus;
     }
+  }
 
-})
+});
 
 export default store;

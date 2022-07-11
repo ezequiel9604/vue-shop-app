@@ -16,88 +16,94 @@ const url = router.currentRoute.value.query;
 const props = defineProps({ items: Array, client: Object });
 
 const state = reactive({
-    items: [],
-    minPrice: null,
-    maxPrice: null,
-    selectedSet: 1,
-    quality: 5,
+  items: [],
+  minPrice: null,
+  maxPrice: null,
+  selectedSet: 1,
+  quality: 5,
  
-    states: [],
-    sizes: [],
-    capacities: [],
-    departments: [],
-    selectedColors: [],
+  states: [],
+  sizes: [],
+  capacities: [],
+  departments: [],
+  selectedColors: [],
 
-    isHiddenSidebarOpen: false,
+  isHiddenSidebarOpen: false,
 
-    isOffered: url.offered == "yes"? true : false,
-    category: url.category == undefined? "all": url.category,
+  isOffered: url.offered === 'yes',
+  category: url.category === undefined ? 'all' : url.category
 });
 
 onMounted(async () => {
-    if(props.items.length != 0)
-        state.items = props.items;
-    else
-        state.items = await GetAll();
-        
-})
-
-const getItemsColors = computed(() => {
-    const colors =  GetAllColors(state.items);
-    return colors;
+  if (props.items.length !== 0) { 
+    state.items = props.items; 
+  } 
+  else { 
+    state.items = await GetAll(); 
+  }
 });
 
-const getCategory = computed(()=>{
-    const cat = store.state.categoryItem;
-    return cat != undefined? cat.toLowerCase():"all";
-})
+const getItemsColors = computed(() => {
+  const colors = GetAllColors(state.items);
+  return colors;
+});
 
+const getCategory = computed(() => {
+  const cat = store.state.categoryItem;
+  return cat !== undefined ? cat.toLowerCase() : 'all';
+});
 
 const changeMaxAndMinPrice = (min, max) => {
-    state.minPrice = min;
-    state.maxPrice = max;
-}
+  state.minPrice = min;
+  state.maxPrice = max;
+};
 
 const changeSelectedColors = (isChecked, value) => {
-    let newSet = new Set(state.selectedColors);
-    if(isChecked) newSet.add(value);
-    else newSet.delete(value);
+  const newSet = new Set(state.selectedColors);
+  if (isChecked) newSet.add(value);
+  else newSet.delete(value);
     
-    state.selectedColors = Array.from(newSet);
-}
+  state.selectedColors = Array.from(newSet);
+};
 
 const changeFilterSState = (type, value) => {
-
-    if(type=="quality")
-        state.quality = value;
-    else if(type=="offer")
-        state.isOffered = !state.isOffered;
-    else if(type=="state")
-        state.states = value;
-    else if(type=="size")
-        state.sizes = value;
-    else if(type=="capacity")
-        state.capacities = value;
-    else if(type=="set")
-        state.selectedSet = value;
-    else if(type=="department")
-        state.departments = value; 
-    else if(type=="quality")
-        state.quality = value;
-    else if(type=="hiddenSidebar")
-       state.isHiddenSidebarOpen = !state.isHiddenSidebarOpen;
-
-}
+  if (type === 'quality') { 
+    state.quality = value; 
+  } 
+  else if (type === 'offer') {
+    state.isOffered = !state.isOffered; 
+  } 
+  else if (type === 'state') { 
+    state.states = value; 
+  } 
+  else if (type === 'size') { 
+    state.sizes = value; 
+  } 
+  else if (type === 'capacity') { 
+    state.capacities = value; 
+  } 
+  else if (type === 'set') { 
+    state.selectedSet = value; 
+  } 
+  else if (type === 'department') { 
+    state.departments = value; 
+  } 
+  else if (type === 'quality') { 
+    state.quality = value; 
+  } 
+  else if (type === 'hiddenSidebar') { 
+    state.isHiddenSidebarOpen = !state.isHiddenSidebarOpen; 
+  }
+};
 
 const getFilteredItems = computed(() => {
-    return GetItemsFilterByAll(state.items, store.state.searchText, state.isOffered, 
+  return GetItemsFilterByAll(state.items, store.state.searchText, state.isOffered, 
     state.maxPrice, state.quality, state.states, state.selectedColors, store.state.categoryItem);
 });
 
 const getItemsSets = computed(() => {
-    return GetSetsOfItems(getFilteredItems.value, 7);
+  return GetSetsOfItems(getFilteredItems.value, 7);
 });
-
 
 </script>
 <template>

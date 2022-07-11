@@ -19,78 +19,74 @@ const router = createRouter({
     {
       path: '/',
       component: Layout,
-      children: [{ path: "", component: HomeView }]
+      children: [{ path: '', component: HomeView }]
     },
     {
       path: '/searchResults',
       component: Layout,
-      children: [{ path: "", component: SearchResultsView }]
+      children: [{ path: '', component: SearchResultsView }]
     },
     {
       path: '/itemDetails',
       component: Layout,
-      children: [{ path: "", component: ItemDetailsView }]
+      children: [{ path: '', component: ItemDetailsView }]
     },
     {
       path: '/shoppingCart',
       component: Layout,
-      children: [{ path: "", component: ShoppingCartView }]
+      children: [{ path: '', component: ShoppingCartView }]
     },
     {
       path: '/myProfile',
       component: Layout,
-      children: [{ path: "", component: ProfileView }]
+      children: [{ path: '', component: ProfileView }]
     },
     {
       path: '/wishList',
       component: Layout,
-      children: [{ path: "", component: WishListView }]
+      children: [{ path: '', component: WishListView }]
     },
     {
       path: '/orders',
       component: Layout,
-      children: [{ path: "", component: OrderView }]
+      children: [{ path: '', component: OrderView }]
     },
     {
       path: '/orders/orderDetails',
       component: Layout,
-      children: [{ path: "", component: OrderDetailsView }]
+      children: [{ path: '', component: OrderDetailsView }]
     },
     {
       path: '/checkout',
       component: Layout,
-      children: [{ path: "", component: CheckOutView }]
+      children: [{ path: '', component: CheckOutView }]
     },
     {
       path: '/chatCenter',
       component: Layout,
-      children: [{ path: "", component: ChatCenterView }]
+      children: [{ path: '', component: ChatCenterView }]
     },
     {
       path: '/signup',
-      component: SignUpView,
+      component: SignUpView
     },
     {
       path: '/login',
-      component: LogInView,
+      component: LogInView
     }
   ]
 });
 
 router.beforeEach((to, from, next) => {
+  const isClientLoggedIn = (JSON.parse(localStorage.getItem('loggedClient')) != null); 
   
-  const isClientLoggedIn = (JSON.parse(localStorage.getItem("loggedClient")) != null)? true:false; 
-  
-  if(isClientLoggedIn == false && to.path == "/myProfile"){
-    next({ path : "/login" });
-  }
-  else if(isClientLoggedIn == false && to.path == "/orders"){
-    next({ path: "/login"});
-  }
-  else{
+  if (isClientLoggedIn === false && to.path === '/myProfile') {
+    next({ path: '/login' });
+  } else if (isClientLoggedIn === false && to.path === '/orders') {
+    next({ path: '/login' });
+  } else {
     next();
   }
+});
 
-})
-
-export default router
+export default router;

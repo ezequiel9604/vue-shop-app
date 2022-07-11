@@ -11,8 +11,8 @@ const props = defineProps({ client: Object });
 const selectedProfileForm = ref(0);
 
 const changeSelectedProfileForm = (value) => {
-    selectedProfileForm.value = value;
-}
+  selectedProfileForm.value = value;
+};
 
 </script>
 <template>

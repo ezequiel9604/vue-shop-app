@@ -1,11 +1,11 @@
 <script setup>
 
 const props = defineProps({
-    id: String,
-    name: String,
-    image: String,
-    selected: String,
-    onChangeSelectedAdmin: Function
+  id: String,
+  name: String,
+  image: String,
+  selected: String,
+  onChangeSelectedAdmin: Function
 });
 
 </script>

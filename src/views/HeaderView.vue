@@ -1,9 +1,8 @@
 <script setup>
-import { RouterLink } from 'vue-router';
 import HeaderTop from '../components/Header/HeaderTop.vue';
 import HeaderBottom from '../components/Header/HeaderBottom.vue';
 
-const props = defineProps({ client: Object })
+const props = defineProps({ client: Object });
 
 </script>
 <template>

@@ -1,10 +1,10 @@
 <script setup>
 
 const props = defineProps({
-    selected: Number,
-    commentsLength:Number,
-    changeSelected: Function,
-})
+  selected: Number,
+  commentsLength: Number,
+  changeSelected: Function
+});
 
 </script>
 <template>

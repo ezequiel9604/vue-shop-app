@@ -2,11 +2,11 @@
 import CheckoutBlockContent from './CheckoutBlockContent.vue';
 
 const props = defineProps({
-    name: String,
-    email: String,
-    phone: String,
-    address: String,
-    note: String
+  name: String,
+  email: String,
+  phone: String,
+  address: String,
+  note: String
 });
 
 </script>
@@ -30,10 +30,6 @@ const props = defineProps({
 </template>
 <style>
 
-
-/* ////////////////////////////////////////////////////// */
-/* ///        checkout content blocks personal        /// */ 
-/* ////////////////////////////////////////////////////// */
 .checkout-content-left-blocks-rows-personal{
     display: flex;
     justify-content: space-between;
@@ -75,9 +71,6 @@ const props = defineProps({
 
 @media screen and (max-width: 834px) {
     
-    /* ////////////////////////////////////////////////////// */
-    /* ///        checkout content blocks personal        /// */ 
-    /* ////////////////////////////////////////////////////// */
     .checkout-content-left-blocks-rows-personal div:first-child{
         width: 70%;
     }
@@ -102,9 +95,6 @@ const props = defineProps({
 
 @media screen and (max-width: 414px) {
     
-    /* ////////////////////////////////////////////////////// */
-    /* ///        checkout content blocks personal        /// */ 
-    /* ////////////////////////////////////////////////////// */
     .checkout-content-left-blocks-rows-personal{
         display: block;
     }
@@ -127,7 +117,6 @@ const props = defineProps({
         line-height: 14px;
         margin-bottom: 0px;
     }
-
 }
 
 </style>

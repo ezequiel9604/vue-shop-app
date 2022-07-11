@@ -3,50 +3,48 @@ import { reactive } from 'vue';
 import { SubmitPersonalInfo, Days, Months, Years, States, Cities } from '../../services/Client';
 
 const props = defineProps({
-    clientId: String,
-    firstname: String,
-    lastname: String,
-    image: String,  
-    firstphone: String,
-    secondphone: String,
-    dateofbirth: Date,
-    genre: String,
-    address: Object
+  clientId: String,
+  firstname: String,
+  lastname: String,
+  image: String,  
+  firstphone: String,
+  secondphone: String,
+  dateofbirth: Date,
+  genre: String,
+  address: Object
 });
 
 const state = reactive({
-    firstname: props.firstname,
-    lastname: props.lastname,
-    imagePath: "",
-    firstphone: props.firstphone,
-    secondphone: props.secondphone,
-    genre: props.genre,
-    streetname: props.address.streetName,
-    apartment: props.address.department?props.address.department:"",
-    city: props.address.city,
-    state: props.address.state,
-    zipcode: props.address.zipCode,
-    yearofbirth: props.dateofbirth.getFullYear(),
-    monthofbirth: props.dateofbirth.getMonth(),
-    dayofbirth: props.dateofbirth.getDate()
+  firstname: props.firstname,
+  lastname: props.lastname,
+  imagePath: '',
+  firstphone: props.firstphone,
+  secondphone: props.secondphone,
+  genre: props.genre,
+  streetname: props.address.streetName,
+  apartment: props.address.department ? props.address.department : '',
+  city: props.address.city,
+  state: props.address.state,
+  zipcode: props.address.zipCode,
+  yearofbirth: props.dateofbirth.getFullYear(),
+  monthofbirth: props.dateofbirth.getMonth(),
+  dayofbirth: props.dateofbirth.getDate()
 });
 
-import("../../assets/imgs/users/placeholder-man.png")
-    .then((value)=>{
-        state.imagePath = value.default;
-    })
-    .catch((error)=>{
-        console.log("Not able to locate the image!");
-    })
-
+import('../../assets/imgs/users/placeholder-man.png')
+  .then((value) => {
+    state.imagePath = value.default;
+  })
+  .catch((error) => {
+    //console.log('Not able to locate the image!');
+  });
 
 const handleSubmitForm = async () => {
-
-    await SubmitPersonalInfo(props.clientId, state.firstname, state.lastname, state.imagePath, 
-        state.firstphone, state.secondphone, state.genre, state.streetname, state.apartment, 
-        state.city, state.zipcode, state.state, state.yearofbirth, state.monthofbirth, 
-        state.dayofbirth);
-}
+  await SubmitPersonalInfo(props.clientId, state.firstname, state.lastname, state.imagePath, 
+    state.firstphone, state.secondphone, state.genre, state.streetname, state.apartment, 
+    state.city, state.zipcode, state.state, state.yearofbirth, state.monthofbirth, 
+    state.dayofbirth);
+};
 
 </script>
 <template>

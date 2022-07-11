@@ -1,69 +1,74 @@
 <script setup>
 import { RouterLink } from 'vue-router';
 import { reactive } from 'vue';
-import AccordionPanel from "../HeaderHiddenNav/AccordionPanel.vue";
-import brandImage1 from "../../assets/imgs/brands/brand-1.png";
-import brandImage2 from "../../assets/imgs/brands/brand-2.png";
-import brandImage3 from "../../assets/imgs/brands/brand-3.png";
+import AccordionPanel from '../HeaderHiddenNav/AccordionPanel.vue';
+import brandImage1 from '../../assets/imgs/brands/brand-1.png';
+import brandImage2 from '../../assets/imgs/brands/brand-2.png';
+import brandImage3 from '../../assets/imgs/brands/brand-3.png';
 import { checkingInputChecks } from '../../services/Item'; 
 import { Departments } from '../../services/Client'; 
 import store from '../../store';
 
 const props = defineProps({
-    onIsHiddenSidebarOpen: Boolean,
-    onChangeHiddenSidebarStatus: Function,
+  onIsHiddenSidebarOpen: Boolean,
+  onChangeHiddenSidebarStatus: Function,
 
-    category: String,
-    subCategory: Array,
-    state: Array,
-    size: Array,
-    capacity: Array,
-    department: Array,
+  category: String,
+  subCategory: Array,
+  state: Array,
+  size: Array,
+  capacity: Array,
+  department: Array,
 
-    minPrice: Number,
-    maxPrice: Number,
-    colors: Array,
-    quality: Number,
-    offered: Boolean,
-    onChangeMaxAndMinPrice: Function,
-    onChangeSelectedColors: Function,
+  minPrice: Number,
+  maxPrice: Number,
+  colors: Array,
+  quality: Number,
+  offered: Boolean,
+  onChangeMaxAndMinPrice: Function,
+  onChangeSelectedColors: Function,
 
-    onChangeFilterSState: Function
+  onChangeFilterSState: Function
 });
 
 const state = reactive({
-   minPriceInput: props.minPrice,
-   maxPriceInput: props.maxPrice, 
+  minPriceInput: props.minPrice,
+  maxPriceInput: props.maxPrice 
 });
 
 const changeMinAndMaxPrice = () => {
-    props.onChangeMaxAndMinPrice(parseInt(state.minPriceInput), 
-        parseInt(state.maxPriceInput));
-}
+  props.onChangeMaxAndMinPrice(parseInt(state.minPriceInput), 
+    parseInt(state.maxPriceInput));
+};
 
-const changeInputs = (ev, input) =>{
+const changeInputs = (ev, input) => {
+  let arr;
+  if (input === 'state') {
+    arr = new Set([...props.state]);
+  }
+  else if (input === 'size') {
+    arr = new Set([...props.size]);
+  }
+  else if (input === 'capacity') {
+    arr = new Set([...props.capacity]);
+  }
+  else if (input === 'department') {
+    arr = new Set([...props.department]);
+  }
     
-    let arr;
-    if(input == "state")
-        arr = new Set([...props.state]);
-    else if(input == "size")
-        arr = new Set([...props.size]);
-    else if(input == "capacity")
-        arr = new Set([...props.capacity]);
-    else if(input == "department")
-        arr = new Set([...props.department]);
-    
-    if(ev.target.checked)
-        arr.add(ev.target.value);
-    else
-        arr.delete(ev.target.value);
+  if (ev.target.checked) {
+    arr.add(ev.target.value);
+  }
+  else {
+    arr.delete(ev.target.value);
+  }
 
-    props.onChangeFilterSState(input, Array.from(arr));
-}
+  props.onChangeFilterSState(input, Array.from(arr));
+};
 
-const changeStoreCategoryItem= (value) => {
-    store.commit("changeCategoryItem", value);
-}
+const changeStoreCategoryItem = (value) => {
+  store.commit('changeCategoryItem', value);
+};
 
 </script>
 <template>

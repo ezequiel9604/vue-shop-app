@@ -3,25 +3,25 @@ import { reactive } from 'vue';
 import { SubmitAccountInfo, SubmitDeleteAccount } from '../../services/Client';
 
 const props = defineProps({
-    clientId: String,
-    email: String,
+  clientId: String,
+  email: String
 });
 
 const state = reactive({
-    email: props.email,
-    password: "password123",
-    repeatedPassword: "password123"
+  email: props.email,
+  password: 'password123',
+  repeatedPassword: 'password123'
 });
 
 const handleSubmitForm = async () => {
-    await SubmitAccountInfo(props.clientId, state.email, state.password);
-}
+  await SubmitAccountInfo(props.clientId, state.email, state.password);
+};
 
 const handleDeleteAccount = async () => {
-    // add confirm code
-    const res = await SubmitDeleteAccount(state.email);
-    console.log(res);
-}
+  // add confirm code
+  const res = await SubmitDeleteAccount(state.email);
+  //console.log(res);
+};
 
 </script>
 <template>

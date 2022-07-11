@@ -6,22 +6,24 @@ import OrderDetailsInformation from '../components/OrderDetails/OrderDetailsInfo
 import router from '../router/index';
 import { GetItemsByOrderNumber, GetOrderByOrderNumber } from '../services/Order';
 
-const props = defineProps({ client: Object,  items: Array });
+const props = defineProps({ client: Object, items: Array });
 
-const url= router.currentRoute.value.query
+const url = router.currentRoute.value.query;
 
-const getOrderById = computed(()=>{
-    const result = GetOrderByOrderNumber((url.orderNumber != undefined)? url.orderNumber:"");
-    if(result.length != 0)
-        return result[0];
-    else
-        return {};
-})
+const getOrderById = computed(() => {
+  const result = GetOrderByOrderNumber((url.orderNumber !== undefined) ? url.orderNumber : '');
+  if (result.length !== 0) {
+    return result[0]; 
+  }
+  else {
+    return {}; 
+  }
+});
 
 const getItemsByOrder = computed(() => {
-    return GetItemsByOrderNumber((url.orderNumber != undefined)? url.orderNumber:"", 
-        props.items);
-})
+  return GetItemsByOrderNumber((url.orderNumber !== undefined) ? url.orderNumber : '', 
+    props.items);
+});
 
 </script>
 <template>
@@ -93,7 +95,6 @@ const getItemsByOrder = computed(() => {
 
 </template>
 <style>
-
 
 .order-details{
     width: 100%;

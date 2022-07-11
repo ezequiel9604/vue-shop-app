@@ -2,9 +2,9 @@
 import { RouterLink } from 'vue-router';
 
 const props = defineProps({
-    title: String,
-    link: String,
-    desc: String
+  title: String,
+  link: String,
+  desc: String
 });
 
 </script>

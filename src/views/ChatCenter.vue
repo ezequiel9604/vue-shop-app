@@ -12,29 +12,28 @@ import Chats from '../assets/data/Chats';
 const selectedAdmin = ref(Admins[0].id);
 
 const changeSeletedAdmin = (id) => {
-    selectedAdmin.value = id;
-}
+  selectedAdmin.value = id;
+};
 
 const getImageOfSender = (sender, adminId, clientId) => {
+  let image;
 
-    let image;
-
-    if(sender == "client")
-    {
-        Clients.forEach((current) => {
-            if(current.id == clientId)
-                image = current.image;
-        });
-        return image;
-    }
-
-    Admins.forEach((current) => {
-        if(current.id == adminId)
-            image = current.image;
+  if (sender === 'client') {
+    Clients.forEach((current) => {
+      if (current.id === clientId) {
+        image = current.image; 
+      }
     });
     return image;
+  }
 
-}
+  Admins.forEach((current) => {
+    if (current.id === adminId) {
+      image = current.image; 
+    }
+  });
+  return image;
+};
 
 </script>
 <template>
@@ -142,17 +141,11 @@ const getImageOfSender = (sender, adminId, clientId) => {
     align-self: flex-start;
 }
 
-/* ////////////////////////////////////////////////////// */
-/* ///            chat center content left            /// */ 
-/* ////////////////////////////////////////////////////// */
 .chat-center-content-left{
     width: 75%;
     box-sizing: border-box;
 }
 
-/* ////////////////////////////////////////////////////// */
-/* ///                        chat app                /// */ 
-/* ////////////////////////////////////////////////////// */
 .chat-app{
     width: 100%;
     height: 600px;
@@ -190,9 +183,6 @@ const getImageOfSender = (sender, adminId, clientId) => {
     box-sizing: border-box;
 }
 
-/* ////////////////////////////////////////////////////// */
-/* ///                chat app messages               /// */ 
-/* ////////////////////////////////////////////////////// */
 .chat-app-messages{
     width: 70%;
     box-sizing: border-box;
@@ -200,9 +190,6 @@ const getImageOfSender = (sender, adminId, clientId) => {
     overflow: hidden;
 }
 
-/* ////////////////////////////////////////////////////// */
-/* ///        chat app messages hidden admins         /// */ 
-/* ////////////////////////////////////////////////////// */
 .chat-app-messages-hidden-admins{
     width: 100%;
     min-height: 8%;
@@ -228,9 +215,6 @@ const getImageOfSender = (sender, adminId, clientId) => {
     border-radius: 4px;
 }
 
-/* ////////////////////////////////////////////////////// */
-/* ///            chat app messages content           /// */ 
-/* ////////////////////////////////////////////////////// */
 .chat-app-messages-content{
     width: 100%;
     height: 82%;
@@ -241,9 +225,6 @@ const getImageOfSender = (sender, adminId, clientId) => {
     overflow: auto;
 }
 
-/* ////////////////////////////////////////////////////// */
-/* ///             chat center content right          /// */ 
-/* ////////////////////////////////////////////////////// */
 .chat-center-content-right{
     width: 18%;
     box-sizing: border-box;
@@ -254,17 +235,11 @@ const getImageOfSender = (sender, adminId, clientId) => {
 }
 
 @media screen and (max-width: 834px) {
-    
-    /* ////////////////////////////////////////////////////// */
-    /* ///            chat center content left            /// */ 
-    /* ////////////////////////////////////////////////////// */
+
     .chat-center-content-left{
         width: 100%;
     }
     
-    /* ////////////////////////////////////////////////////// */
-    /* ///                        chat app                /// */ 
-    /* ////////////////////////////////////////////////////// */
     .chat-app{
         height: 500px;
     }
@@ -277,24 +252,15 @@ const getImageOfSender = (sender, adminId, clientId) => {
         font-size: 14px;
     }
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///                chat app messages               /// */ 
-    /* ////////////////////////////////////////////////////// */
     .chat-app-messages{
         width: 75%;
     }
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///            chat app messages content           /// */ 
-    /* ////////////////////////////////////////////////////// */
     .chat-app-messages-content{
         height: 82%;
         padding: 15px 0;
     }
     
-    /* ////////////////////////////////////////////////////// */
-    /* ///             chat center content right          /// */ 
-    /* ////////////////////////////////////////////////////// */
     .chat-center-content-right{
         display: none;
     }
@@ -309,9 +275,6 @@ const getImageOfSender = (sender, adminId, clientId) => {
         margin-bottom: 100px;
     }
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///                        chat app                /// */ 
-    /* ////////////////////////////////////////////////////// */
     .chat-app{
         height: 500px;
     }
@@ -324,25 +287,16 @@ const getImageOfSender = (sender, adminId, clientId) => {
         font-size: 12px;
     }
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///        chat app messages hidden admins         /// */
-    /* ////////////////////////////////////////////////////// */
     .chat-app-messages-hidden-admins {
         display: flex;
         /* this will change */
     }
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///                chat app messages               /// */ 
-    /* ////////////////////////////////////////////////////// */
     .chat-app-messages{
         width: 100%;
         border-left: 0;
     }
-
-    /* ////////////////////////////////////////////////////// */
-    /* ///            chat app messages content           /// */ 
-    /* ////////////////////////////////////////////////////// */
+    
     .chat-app-messages-content{
         height: 76%;
     }

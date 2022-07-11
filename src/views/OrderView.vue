@@ -3,46 +3,44 @@ import { reactive, computed, onMounted } from 'vue';
 import OrderSample from '../components/Order/OrderSample.vue';
 import OrderFilterBar from '../components/Order/OrderFilterBar.vue';
 import Pagination from '../components/SearchResults/Pagination.vue';
-import { GetOrdersByClientId, GetOrders, GetOrdersFilterByAll , GetSetsOfItems } from '../services/Order';
+import { GetOrdersByClientId, GetOrders, GetOrdersFilterByAll, GetSetsOfItems } from '../services/Order';
 
 const props = defineProps({
-    client: Object,
-    items: Array
+  client: Object,
+  items: Array
 });
 
 const state = reactive({
-    orders: [],
-    orderStatus: "All",
-    orderNumber: "",
-    orderDate: "",
-    selectedSet: 1
+  orders: [],
+  orderStatus: 'All',
+  orderNumber: '',
+  orderDate: '',
+  selectedSet: 1
 });
 
-onMounted( async () => {
-
-    //state.orders = await GetOrdersByClientId(props.client.id);
-    state.orders = GetOrders(props.client.id);
+onMounted(async () => {
+  //state.orders = await GetOrdersByClientId(props.client.id);
+  state.orders = GetOrders(props.client.id);
 });
 
 const changeOrderNumber = (value) => {
-    state.orderNumber= value.toUpperCase();
-}
+  state.orderNumber = value.toUpperCase();
+};
 const changeOrderStatus = (value) => {
-    state.orderStatus= value;
-}
+  state.orderStatus = value;
+};
 const changeFilterSState = (type, value) => {
-    state.selectedSet = value;
-}
+  state.selectedSet = value;
+};
 
 const getFilteredClientsOrders = computed(() => {
-    return GetOrdersFilterByAll(state.orders, props.items, 
-        state.orderStatus, state.orderNumber);
+  return GetOrdersFilterByAll(state.orders, props.items, 
+    state.orderStatus, state.orderNumber);
 });
 
 const getOrdersSets = computed(() => {
-    return GetSetsOfItems(getFilteredClientsOrders.value, 3);
+  return GetSetsOfItems(getFilteredClientsOrders.value, 3);
 });
-
 
 </script>
 <template>
@@ -99,7 +97,6 @@ const getOrdersSets = computed(() => {
                 :onChangeFilterSState="changeFilterSState" />
 
         </div>
-
 
     </div>
 

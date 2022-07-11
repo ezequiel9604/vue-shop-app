@@ -1,8 +1,8 @@
 <script setup>
 
 const props = defineProps({
-    onChangeSelectedProfileForm: Function
-})
+  onChangeSelectedProfileForm: Function
+});
 
 </script>
 <template>

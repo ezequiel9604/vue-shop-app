@@ -3,27 +3,27 @@ import { computed } from 'vue';
 import { formatedNumber } from '../../services/Item';
 
 const props = defineProps({
-    name: String,
-    email: String,
-    phone: String,
-    address: Object,
-    items: Array,
-    shippingCost: Number,
-    total: Number,
+  name: String,
+  email: String,
+  phone: String,
+  address: Object,
+  items: Array,
+  shippingCost: Number,
+  total: Number
 });
 
 const calculateSubtotalAllItems = computed(() => {
-    let sum = 0;
-    props.items.forEach((current) => {
-        sum+= current.item.price;
-    });
-    return sum;
-})
+  let sum = 0;
+  props.items.forEach((current) => {
+    sum += current.item.price;
+  });
+  return sum;
+});
 
 const getFormatedAddress = computed(() => {
-    return props.address.streetName+", "+props.address.apartment+", "+
-        props.address.city+", "+props.address.state+", "+props.address.zipCode 
-})
+  return props.address.streetName + ', ' + props.address.apartment + ', ' +
+        props.address.city + ', ' + props.address.state + ', ' + props.address.zipCode; 
+});
 
 </script>
 <template>

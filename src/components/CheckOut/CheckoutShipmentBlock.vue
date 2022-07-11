@@ -30,10 +30,6 @@ import CheckoutBlockContent from './CheckoutBlockContent.vue';
 </template>
 <style>
 
-
-/* ////////////////////////////////////////////////////// */
-/* ///          checkout content blocks shipment      /// */ 
-/* ////////////////////////////////////////////////////// */
 .checkout-content-left-blocks-rows-shipment{
     width: 90%;
     padding: 5px;
@@ -106,10 +102,6 @@ import CheckoutBlockContent from './CheckoutBlockContent.vue';
 }
 
 @media screen and (max-width: 834px) {
-    
-    /* ////////////////////////////////////////////////////// */
-    /* ///          checkout content blocks shipment      /// */ 
-    /* ////////////////////////////////////////////////////// */
     .checkout-content-left-blocks-rows-shipment{
         width: 90%;
     }
@@ -132,9 +124,6 @@ import CheckoutBlockContent from './CheckoutBlockContent.vue';
 
 @media screen and (max-width: 414px) {
     
-    /* ////////////////////////////////////////////////////// */
-    /* ///          checkout content blocks shipment      /// */ 
-    /* ////////////////////////////////////////////////////// */
     .checkout-content-left-blocks-rows-shipment{
         width: 90%;
     }

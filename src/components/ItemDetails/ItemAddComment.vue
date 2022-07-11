@@ -4,33 +4,31 @@ import { SaveComment } from '../../services/Comment';
 import ManImage from '../../assets/imgs/users/placeholder-man.png';
 
 const props = defineProps({
-    image: String,
-    itemid: String,
-    clientid: String
-})
-
-const state = reactive({
-    inputComment: "",
-    imagePath: ""
+  image: String,
+  itemid: String,
+  clientid: String
 });
 
-if(props.image != undefined){
-    import(`../../assets/imgs/users/${props.image}`)
-    .then((value)=>{
-        state.imagePath = value.default;
+const state = reactive({
+  inputComment: '',
+  imagePath: ''
+});
+
+if (props.image !== undefined) {
+  import(`../../assets/imgs/users/${props.image}`)
+    .then((value) => {
+      state.imagePath = value.default;
     })
-    .catch((error)=>{
-        console.log(error);
-    })
+    .catch((error) => {
+      //console.log(error);
+    });
 }
 
 const submitComment = async () => {
-
-    if(state.inputComment.length > 0){
-        await SaveComment(props.clientid, props.itemid, state.inputComment);
-    }
-    
-}
+  if (state.inputComment.length > 0) {
+    await SaveComment(props.clientid, props.itemid, state.inputComment);
+  }
+};
 
 </script>
 <template>

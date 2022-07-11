@@ -1,5 +1,4 @@
 <script setup>
-import { RouterLink } from 'vue-router';
 import RowMediumSample from '../components/ShoppingCart/RowMediumSample.vue';
 import ColumnMediumSample from '../components/SearchResults/ColumnMediumSample.vue';
 import OrderSummaryRightSidebar from '../components/ShoppingCart/OrderSummaryRightSidebar.vue';
@@ -84,18 +83,11 @@ import { Items } from '../assets/data/Items';
     justify-content: space-between;
     align-self: flex-start;
 }
-
-/* ////////////////////////////////////////////////////// */
-/* ///          shopping cart content left            /// */ 
-/* ////////////////////////////////////////////////////// */
 .shopping-cart-content-left{
     width: 72%;
     box-sizing: border-box;
 }
 
-/* ////////////////////////////////////////////////////// */
-/* ///         shopping cart content checkall         /// */ 
-/* ////////////////////////////////////////////////////// */
 .shopping-cart-content-checkall{
     width: 95%;
     margin: 0 auto;
@@ -126,9 +118,6 @@ import { Items } from '../assets/data/Items';
     box-sizing: border-box;
 }
 
-/* ////////////////////////////////////////////////////// */
-/* ///          shopping cart content banner          /// */ 
-/* ////////////////////////////////////////////////////// */
 .shopping-cart-content-banner{
     width: 90%;
     margin: 40px auto;
@@ -137,10 +126,6 @@ import { Items } from '../assets/data/Items';
     background-color: #dddddd;
     border-radius: 6px;
 }
-
-/* ////////////////////////////////////////////////////// */
-/* ///      shopping cart content recommendation      /// */ 
-/* ////////////////////////////////////////////////////// */
 .shopping-cart-content-recommendation{
     width: 85%;
     box-sizing: border-box;
@@ -158,24 +143,15 @@ import { Items } from '../assets/data/Items';
         margin: 20px auto;
     }
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///            column medium samples               /// */ 
-    /* ////////////////////////////////////////////////////// */
     .column-medium-samples:last-child{
         display: block;
     }
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///          shopping cart content left            /// */ 
-    /* ////////////////////////////////////////////////////// */
     .shopping-cart-content-left{
         width: 100%;
         box-sizing: border-box;
     }
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///         shopping cart content checkall         /// */ 
-    /* ////////////////////////////////////////////////////// */
     .shopping-cart-content-checkall{
         margin: 10px auto;
         border-bottom: 1px solid transparent;
@@ -189,9 +165,6 @@ import { Items } from '../assets/data/Items';
         font-size: 14px;
     }
   
-    /* ////////////////////////////////////////////////////// */
-    /* ///          shopping cart content banner          /// */ 
-    /* ////////////////////////////////////////////////////// */
     .shopping-cart-content-banner{
         width: 90%;
         margin: 10px auto;
@@ -199,10 +172,6 @@ import { Items } from '../assets/data/Items';
         box-sizing: border-box;
         background-color: #dddddd;
     }
-
-    /* ////////////////////////////////////////////////////// */
-    /* ///      shopping cart content recommendation      /// */ 
-    /* ////////////////////////////////////////////////////// */
     .shopping-cart-content-recommendation{
         width: 85%;
         margin: 20px auto;
@@ -217,16 +186,10 @@ import { Items } from '../assets/data/Items';
         margin: 10px auto;
     }
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///            column medium samples               /// */ 
-    /* ////////////////////////////////////////////////////// */
     .column-medium-samples:last-child{
         display: none;
     }
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///         shopping cart content checkall         /// */ 
-    /* ////////////////////////////////////////////////////// */
     .shopping-cart-content-checkall{
         margin: 5px auto;
         padding-bottom: 15px;
@@ -239,18 +202,12 @@ import { Items } from '../assets/data/Items';
         font-size: 12px;
     }
         
-    /* ////////////////////////////////////////////////////// */
-    /* ///          shopping cart content banner          /// */ 
-    /* ////////////////////////////////////////////////////// */
     .shopping-cart-content-banner{
         width: 90%;
         height: 60px;
         margin: 20px auto;
     }
 
-    /* ////////////////////////////////////////////////////// */
-    /* ///      shopping cart content recommendation      /// */ 
-    /* ////////////////////////////////////////////////////// */
     .shopping-cart-content-recommendation{
         width: 90%;
         margin: 10px auto;

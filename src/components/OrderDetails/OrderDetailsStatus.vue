@@ -2,16 +2,17 @@
 import { computed } from 'vue';
 
 const props = defineProps({
-    orderDate: Date,
-    orderStatus: String,
-    deliveredOrder: Date,
-})
+  orderDate: Date,
+  orderStatus: String,
+  deliveredOrder: Date
+});
 
 const informStatusOrder = computed(() => {
-    if(props.orderStatus == "Received"){
-        return "Received at "+props.orderDate.toDateString();
-    }
-})
+  if (props.orderStatus === 'Received') {
+    return 'Received at ' + props.orderDate.toDateString();
+  }
+  return 'Canceled';
+});
 
 </script>
 <template>

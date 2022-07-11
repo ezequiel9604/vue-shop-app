@@ -4,24 +4,21 @@ import { ref, onMounted } from 'vue';
 const promotionSlider = ref(null);
 
 onMounted(() => {
-
-    setInterval(function(){
-
-        let scroll_position = promotionSlider.value.offsetWidth;
+  setInterval(function () {
+    const scrollPosition = promotionSlider.value.offsetWidth;
         
-        if(promotionSlider.value.scrollLeft == 0){
-            promotionSlider.value.scrollTo(scroll_position, 0);
-        } 
-        else if(promotionSlider.value.scrollLeft == scroll_position){
-            promotionSlider.value.scrollTo(scroll_position*2, 0);
-        } else{
-            promotionSlider.value.style.scrollBehavior = "initial";
-            promotionSlider.value.scrollTo(0, 0);
-            promotionSlider.value.style.scrollBehavior = "smooth";
-        }
-    
-    }, 5000);
-
+    if (promotionSlider.value.scrollLeft === 0) {
+      promotionSlider.value.scrollTo(scrollPosition, 0);
+    }
+    else if (promotionSlider.value.scrollLeft === scrollPosition) {
+      promotionSlider.value.scrollTo(scrollPosition * 2, 0);
+    }
+    else {
+      promotionSlider.value.style.scrollBehavior = 'initial';
+      promotionSlider.value.scrollTo(0, 0);
+      promotionSlider.value.style.scrollBehavior = 'smooth';
+    }
+  }, 5000);
 });
 
 </script>
@@ -41,7 +38,6 @@ onMounted(() => {
     </div>
 </template>
 <style>
-
 
 .promotion-banner{
     width: 100%;
@@ -64,7 +60,7 @@ onMounted(() => {
     background-color: transparent;
 }
 .promotion-slider::-webkit-scrollbar{
-	display: none;
+    display: none;
 }
 
 .promotion-slides{

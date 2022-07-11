@@ -2,28 +2,28 @@
 import { ref } from 'vue';
 import ColumnLargeSample from './ColumnLargeSample.vue';
 
-const props = defineProps({ items : Array });
+const props = defineProps({ items: Array });
 
 const slider = ref(null);
 const sliderCounter = ref(0);
 
 const getMostSoldItems = (number) => {
-    return props.items.slice(number, number + 3);
-}
+  return props.items.slice(number, number + 3);
+};
 
 const handleLeftSliderButton = () => {
-    if (sliderCounter.value == 1) {
-        sliderCounter.value--;
-        slider.value.scrollTo(slider.value.offsetWidth * sliderCounter.value, 0);
-    } 
-}
+  if (sliderCounter.value === 1) {
+    sliderCounter.value--;
+    slider.value.scrollTo(slider.value.offsetWidth * sliderCounter.value, 0);
+  } 
+};
 
 const handleRightSliderButton = () => {
-    if (sliderCounter.value == 0) {
-        sliderCounter.value++;
-        slider.value.scrollTo(slider.value.offsetWidth * sliderCounter.value, 0);
-    }
-}
+  if (sliderCounter.value === 0) {
+    sliderCounter.value++;
+    slider.value.scrollTo(slider.value.offsetWidth * sliderCounter.value, 0);
+  }
+};
 
 </script>
 <template>
@@ -55,7 +55,6 @@ const handleRightSliderButton = () => {
                         />
 
                 </div>
-
 
             </div>
 

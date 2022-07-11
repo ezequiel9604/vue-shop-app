@@ -9,13 +9,13 @@ import { GetAll } from './services/Item';
 import { GetLoggedClient } from './services/Client';
 
 const state = reactive({
-    items: [],
-    client: null,
-})
+  items: [],
+  client: null
+});
 
 onMounted(async () => {
-    state.items = await GetAll();
-    state.client = GetLoggedClient();
+  state.items = await GetAll();
+  state.client = GetLoggedClient();
 });
 
 </script>

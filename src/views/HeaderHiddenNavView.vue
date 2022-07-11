@@ -7,28 +7,28 @@ import store from '../store';
 
 const props = defineProps({ client: Object });
 
-const isClientLoggedIn = computed(()=>{
-    return props.client.id != "00000"? true : false;
+const isClientLoggedIn = computed(() => {
+  return props.client.id !== '00000';
 });
 
-const changeLanguageInput = (ev) => {
-    languageInput.value = ev.target.value;
-}
+/*const changeLanguageInput = (ev) => {
+  languageInput.value = ev.target.value;
+};
 const changeCurrancyInput = (ev) => {
-    currancyInput.value = ev.target.value;
-}
+  currancyInput.value = ev.target.value;
+};*/
 
 const handleSubmitForm = async () => {
-    await SubmitCharacteristics(props.client.language, props.client.currancy);
-}
+  await SubmitCharacteristics(props.client.language, props.client.currancy);
+};
 
 const handleLogout = async () => {
-    await Logout(props.client.email);
-}
+  await Logout(props.client.email);
+};
 
-const changeStoreCategoryItem= (value) => {
-    store.commit("changeCategoryItem", value);
-}
+const changeStoreCategoryItem = (value) => {
+  store.commit('changeCategoryItem', value);
+};
 
 </script>
 <template>

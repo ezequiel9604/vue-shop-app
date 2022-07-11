@@ -1,295 +1,254 @@
-import Axios from "axios";
-import { Months } from "../services/Client";
+import Axios from 'axios';
 
-const baseUrl = "https:/localhost:7227";
+const baseUrl = 'https:/localhost:7227';
 
-export async function submit_login(email_input, password_input){
+export async function submitLoginApi (emailInput, passwordInput) {
+  const response = await Axios.post(`${baseUrl}/api/Client/Login`, {
+    email: emailInput,
+    password: passwordInput
+  })
+    .then((result) => {
+      localStorage.setItem('loggedClient', JSON.stringify(result.data));
 
-    const response = await Axios.post(`${baseUrl}/api/Client/Login`,{
-        email: email_input,
-        password: password_input
+      window.location.href = 'http://localhost:3000';
     })
-    .then((result)=>{
-
-        localStorage.setItem("loggedClient", JSON.stringify(result.data));
-
-        window.location.href = "http://localhost:3000";
-    })
-    .catch((error)=> {
-        if(error.response.status == 400){
-            return error.response.data;
-        }
+    .catch((error) => {
+      if (error.response.status === 400) {
+        return error.response.data;
+      }
     });
 
-    return response;
-
+  return response;
 }
 
-export async function submit_logout(email_input){
+export async function submitLogoutApi (emailInput) {
+  await Axios.post(`${baseUrl}/api/Client/Logout`, {
+    email: emailInput
+  })
+    .then((result) => {
+      localStorage.removeItem('loggedClient');
 
-    await Axios.post(`${baseUrl}/api/Client/Logout`,{
-        email: email_input,
+      window.location.href = 'http://localhost:3000';
     })
-    .then((result)=>{
-
-        localStorage.removeItem("loggedClient");
-
-        window.location.href = "http://localhost:3000";
-
-    })
-    .catch((error)=>{
-        console.log(error.response.data);
-    })
-
+    .catch((error) => {
+      //console.log(error.response.data)
+    });
 }
 
-export async function submit_signup(
-    firstname, lastname, email, password, 
-    dayofbirth, monthofbirth, yearofbirth, gender) {
-    
-    const response = await Axios.post(`${baseUrl}/api/Client/Signup`,{
-        firstname: firstname,
-        lastname: lastname,
-        email: email,
-        password: password,
-        genre: gender,
-        yearofbirth: yearofbirth,
-        monthofbirth: monthofbirth,
-        dayofbirth: dayofbirth
+export async function submitSignupApi (
+  firstnameInput, lastnameInput, emailInput, passwordInput,
+  dayofbirthInput, monthofbirthInput, yearofbirthInput, genderInput) {
+  const response = await Axios.post(`${baseUrl}/api/Client/Signup`, {
+    firstname: firstnameInput,
+    lastname: lastnameInput,
+    email: emailInput,
+    password: passwordInput,
+    genre: genderInput,
+    yearofbirth: yearofbirthInput,
+    monthofbirth: monthofbirthInput,
+    dayofbirth: dayofbirthInput
+  })
+    .then((result) => {
+      window.location.href = 'http://localhost:3000';
     })
-    .then((result)=> {
-        window.location.href = "http://localhost:3000";
-    })
-    .catch((error)=> {
-        if(error.response.status == 400){
-            return error.response.data;
-        }
+    .catch((error) => {
+      if (error.response.status === 400) {
+        return error.response.data;
+      }
     });
 
+  return response;
+}
+
+export async function submitCharacteristicsApi (languageInput, currencyInput) {
+  if (JSON.parse(localStorage.getItem('loggedClient'))) {
+    const obj = JSON.parse(localStorage.getItem('loggedClient'));
+
+    const response = await Axios.put(`${baseUrl}/api/Client/Edit`, {
+      id: obj.user.id,
+      currancy: currencyInput,
+      language: languageInput
+    })
+      .then((result) => {
+        obj.user.currancy = currencyInput;
+        obj.user.language = languageInput;
+
+        localStorage.setItem('loggedClient', JSON.stringify(obj));
+
+        window.location.href = 'http://localhost:3000';
+      })
+      .catch((error) => {
+        if (error.response.status === 400) {
+          return error.response.data;
+        }
+      });
+
     return response;
+  } else {
+    const obj = JSON.parse(localStorage.getItem('guestClient'));
 
+    obj.user.currancy = currencyInput;
+    obj.user.language = languageInput;
+
+    localStorage.setItem('guestClient', JSON.stringify(obj));
+
+    window.location.assign('http://localhost:3000/');
+  }
 }
 
-export async function submit_characteristics(lang, curr) {
+export async function submitAccountInfoApi (idInput, emailInput, passwordInput) {
+  if (JSON.parse(localStorage.getItem('loggedClient'))) {
+    const response = await Axios.put(`${baseUrl}/api/Client/Edit`, {
+      id: idInput,
+      email: emailInput,
+      password: passwordInput
+    })
+      .then((result) => {
+        const obj = JSON.parse(localStorage.getItem('loggedClient'));
 
-    if(JSON.parse(localStorage.getItem("loggedClient"))){
-        
-        const obj = JSON.parse(localStorage.getItem("loggedClient"));
+        obj.user.email = emailInput;
 
-        const response = await Axios.put(`${baseUrl}/api/Client/Edit`, {
-            id: obj.user.id,
-            currancy: curr,
-            language: lang
-        })
-        .then((result)=>{
+        localStorage.setItem('loggedClient', JSON.stringify(obj));
 
-            obj.user.currancy= curr;
-            obj.user.language= lang;
+        window.location.href = 'http://localhost:3000/myProfile';
+      })
+      .catch((error) => {
+        if (error.response.status === 400) {
+          return error.response.data;
+        }
+      });
 
-            localStorage.setItem("loggedClient", JSON.stringify(obj));
-
-            window.location.href = "http://localhost:3000";
-        })
-        .catch((error)=>{
-            if(error.response.status == 400){
-                return error.response.data;
-            }
-        })
-
-        return response;
-
-    }
-    else {
-
-        const obj = JSON.parse(localStorage.getItem("guestClient"));
-
-        obj.user.currancy= curr;
-        obj.user.language= lang;
-
-        localStorage.setItem("guestClient", JSON.stringify(obj));
-
-        window.location.assign("http://localhost:3000/");
-
-        console.log(JSON.parse(localStorage.getItem("guestClient")));
-
-    }
-
+    return response;
+  }
 }
 
-export async function submit_account_info(id, email, password){
+export async function submitPersonalInfoApi (
+  idInput, firstnameInput, lastnameInput, imgeInput, firstphoneInput, 
+  secondphoneInput, genderInput, streetnameInput, apartmentInput, cityInput, 
+  zipcodeInput, stateInput, yearInput, monthInput, dayInput) {
+  if (JSON.parse(localStorage.getItem('loggedClient'))) {
+    const response = await Axios.put(`${baseUrl}/api/Client/Edit`, {
+      id: idInput,
+      firstName: firstnameInput,
+      lastName: lastnameInput,
+      genre: genderInput,
+      yearOfBirth: yearInput,
+      monthOfBirth: monthInput,
+      dayOfBirth: dayInput,
 
-    if(JSON.parse(localStorage.getItem("loggedClient"))){
-        
-        const response = await Axios.put(`${baseUrl}/api/Client/Edit`, {
-            id: id,
-            email: email,
-            password: password
-        })
-        .then((result)=>{
+      phoneDtos: [
+        {
+          phoneNumber: firstphoneInput,
+          clientId: idInput
+        },
+        {
+          phoneNumber: secondphoneInput,
+          clientId: idInput
+        }
+      ],
+      addressDtos: [
+        {
+          streetName: streetnameInput,
+          city: cityInput,
+          zipCode: zipcodeInput,
+          state: stateInput,
+          department: apartmentInput,
+          clientId: idInput
+        }
+      ]
 
-            const obj = JSON.parse(localStorage.getItem("loggedClient"));
+    })
+      .then((result) => {
+        const obj = JSON.parse(localStorage.getItem('loggedClient'));
 
-            obj.user.email= email;
+        obj.user.firstName = firstnameInput;
+        obj.user.lastName = lastnameInput;
+        // obj.user.imagepath= img;
+        obj.user.genre = genderInput;
+        obj.user.yearOfBirth = yearInput;
+        obj.user.monthOfBirth = monthInput;
+        obj.user.dayOfBirth = dayInput;
 
-            localStorage.setItem("loggedClient", JSON.stringify(obj));
+        obj.user.addressDtos[0].streetName = streetnameInput;
+        obj.user.addressDtos[0].city = cityInput;
+        obj.user.addressDtos[0].state = stateInput;
+        obj.user.addressDtos[0].zipCode = zipcodeInput;
+        obj.user.addressDtos[0].department = apartmentInput;
 
-            window.location.href = "http://localhost:3000/myProfile";
-        })
-        .catch((error)=>{
-            if(error.response.status == 400){
-                return error.response.data;
-            }
-        });
+        obj.user.phoneDtos[0].phoneNumber = firstphoneInput;
 
-        return response;
+        localStorage.setItem('loggedClient', JSON.stringify(obj));
 
-    }
+        window.location.href = 'http://localhost:3000/myProfile';
+      })
+      .catch((error) => {
+        if (error.response.status === 400) {
+          return error.response.data;
+        }
+      });
+
+    return response;
+  }
 }
 
-export async function submit_personal_info(
-    id, fn, ln, img, firstphone, secondphone, gender,
-    streetname, apartment, city, zipcode, state, year, month, day){
+export function submitWalletInformationApi (id, creditcard, creditcardowner,
+  expdate, securitycode) {
+  if (JSON.parse(localStorage.getItem('loggedClient'))) {
 
-    if(JSON.parse(localStorage.getItem("loggedClient"))){
-    
-        const response = await Axios.put(`${baseUrl}/api/Client/Edit`, {
-            id: id,
-            firstName: fn,
-            lastName: ln,
-            genre: gender,
-            yearOfBirth: year,
-            monthOfBirth: month,
-            dayOfBirth: day,
+    // submit to the api
 
-            phoneDtos: [
-                {
-                    phoneNumber: firstphone,
-                    clientId: id,
-                },
-                {
-                    phoneNumber: secondphone,
-                    clientId: id,
-                },
-            ],
-            addressDtos:[
-                {
-                    streetName: streetname,
-                    city: city,
-                    zipCode: zipcode,
-                    state: state,
-                    department: apartment,
-                    clientId: id
-                }
-            ]
-
-        })
-        .then((result)=>{
-
-            const obj = JSON.parse(localStorage.getItem("loggedClient"));
-
-            obj.user.firstName= fn;
-            obj.user.lastName= ln;
-            //obj.user.imagepath= img;
-            obj.user.genre = gender;
-            obj.user.yearOfBirth= year;
-            obj.user.monthOfBirth = month;
-            obj.user.dayOfBirth= day;
-
-            obj.user.addressDtos[0].streetName = streetname,
-            obj.user.addressDtos[0].city = city,
-            obj.user.addressDtos[0].state = state,
-            obj.user.addressDtos[0].zipCode = zipcode,
-            obj.user.addressDtos[0].department = apartment,
-
-            obj.user.phoneDtos[0].phoneNumber = firstphone,
-            
-            localStorage.setItem("loggedClient", JSON.stringify(obj));
-
-            window.location.href = "http://localhost:3000/myProfile";
-        })
-        .catch((error)=>{
-            console.log(error)
-            if(error.response.status == 400){
-                return error.response.data;
-            }
-        });
-
-        return response;
-
-    }
-
+  }
 }
 
-export function submitWalletInformation(id, creditcard, creditcardowner, 
-    expdate, securitycode){
+export async function submitDeleteAccountApi (emailInput) {
+  if (JSON.parse(localStorage.getItem('loggedClient'))) {
+    const response = await Axios.post(`${baseUrl}/api/Client/Signout`, {
+      email: emailInput
+    })
+      .then((result) => {
+        localStorage.removeItem('loggedClient');
 
-    if(JSON.parse(localStorage.getItem("loggedClient"))){
-        
-        // submit to the api
+        window.location.href = 'http://localhost:3000';
+      })
+      .catch((error) => {
+        if (error.response.status === 400) {
+          return error.response.data;
+        }
+      });
 
-    }
+    return response;
+  }
 }
 
-export async function submit_delete_account(email){
+export async function submitAppearanceApi (appearanceInput) {
+  if (JSON.parse(localStorage.getItem('loggedClient'))) {
+    const obj = JSON.parse(localStorage.getItem('loggedClient'));
 
-    if(JSON.parse(localStorage.getItem("loggedClient"))){
-        
-        const response = await Axios.post(`${baseUrl}/api/Client/Signout`,{
-            email: email
-        })
-        .then((result)=> {
+    const response = await Axios.put(`${baseUrl}/api/Client/Edit`, {
+      id: obj.user.id,
+      appearance: appearanceInput
+    })
+      .then((result) => {
+        obj.user.appearance = appearanceInput;
 
-            localStorage.removeItem("loggedClient");
+        localStorage.setItem('loggedClient', JSON.stringify(obj));
 
-            window.location.href = "http://localhost:3000";
+        // window.location.href = "http://localhost:3000/myProfile";
+      })
+      .catch((error) => {
+        if (error.response.status === 400) {
+          return error.response.data;
+        }
+      });
 
-        })
-        .catch((error)=> {
-            if(error.response.status == 400){
-                return error.response.data;
-            }
-        });
+    return response;
+  } else {
+    const obj = JSON.parse(localStorage.getItem('guestClient'));
 
-        return response;
-    }
+    obj.characteristics.appearance = appearanceInput;
+
+    localStorage.setItem('guestClient', JSON.stringify(obj));
+
+    window.location.assign('http://localhost:3000/');
+  }
 }
-
-export async function submit_appearance(appearance){
-
-    if(JSON.parse(localStorage.getItem("loggedClient"))){
-        
-        const obj = JSON.parse(localStorage.getItem("loggedClient"));
-
-        const response = await Axios.put(`${baseUrl}/api/Client/Edit`, {
-            id: obj.user.id,
-            appearance: appearance,
-        })
-        .then((result)=>{
-            
-            obj.user.appearance= appearance;
-
-            localStorage.setItem("loggedClient", JSON.stringify(obj));
-
-            //window.location.href = "http://localhost:3000/myProfile";
-        })
-        .catch((error)=>{
-            if(error.response.status == 400){
-                return error.response.data;
-            }
-        })
-
-        return response;
-
-    }
-    else {
-        const obj = JSON.parse(localStorage.getItem("guestClient"));
-
-        obj.characteristics.appearance= appe;
-
-        localStorage.setItem("guestClient", JSON.stringify(obj));
-
-        window.location.assign("http://localhost:3000/");
-
-    }
-}
-

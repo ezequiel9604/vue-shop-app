@@ -6,14 +6,14 @@ import ColumnLargeSample from './ColumnLargeSample.vue';
 const props = defineProps({ items: Array });
 
 const getItemsInOffer = computed(() => {
-    const itemsInOffer = [...props.items.filter((current) => {
-        for (let i = 0; i < current.subItemDtos.length; i++) {
-
-            if(current.subItemDtos[i].descount > 0)
-                return current;
-        }
-    })];
-    return itemsInOffer.slice(0, 6);
+  const itemsInOffer = [...props.items.filter((current) => {
+    for (let i = 0; i < current.subItemDtos.length; i++) {
+      if (current.subItemDtos[i].descount > 0) {
+        return current;
+      }
+    }
+  })];
+  return itemsInOffer.slice(0, 6);
 });
 
 </script>

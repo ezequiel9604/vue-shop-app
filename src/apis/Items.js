@@ -1,29 +1,22 @@
-import Axios from "axios";
+import Axios from 'axios';
 
-const baseUrl = "https://localhost:7227";
+const baseUrl = 'https://localhost:7227';
 
+export async function getAllApi () {
+  const response = await Axios.get(`${baseUrl}/api/Item/GetAll`);
 
-export async function get_all(){
-
-    const response = await Axios.get(`${baseUrl}/api/Item/GetAll`);
-
-    return response.data;
-
+  return response.data;
 }
 
-export async function get_by_id(id){
+export async function getByIdApi (id) {
+  const response = await Axios.get(`${baseUrl}/api/Item/GetAll`);
 
-    const response = await Axios.get(`${baseUrl}/api/Item/GetAll`);
+  const arr = response.data;
 
-    const arr = response.data;
+  let item = null;
+  [...arr].forEach((current) => {
+    if (current.id === id) { item = current; }
+  });
 
-    let item = null;
-    [...arr].forEach((current)=>{
-        if(current.id == id)
-            item = current;
-    });
-
-    return item;
-
+  return item;
 }
-

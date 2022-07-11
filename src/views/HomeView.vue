@@ -1,5 +1,4 @@
 <script setup>
-import { reactive } from 'vue';
 import CategorySlider from '../components/Home/CategorySlider.vue';
 import ItemsInOffer from '../components/Home/ItemsInOffer.vue';
 import Poster from '../components/Home/Poster.vue';

@@ -5,30 +5,28 @@ import SignUpFormFooter from '../components/SignUp/SignUpFormFooter.vue';
 import { Signup, Days, Months, Years } from '../services/Client';
 
 const state = reactive({
-    firstname: "Rogger",
-    lastname: "Taylor",
-    email: "roggertaylor@gmail.com",
-    password: "roggertaylor123",
-    repeatedpassword: "roggertaylor123",
-    dayofbirth: 1,
-    monthofbirth: 0,
-    yearofbirth: 1990,
-    gender: "male",
-    message: "",
-})
+  firstname: 'Rogger',
+  lastname: 'Taylor',
+  email: 'roggertaylor@gmail.com',
+  password: 'roggertaylor123',
+  repeatedpassword: 'roggertaylor123',
+  dayofbirth: 1,
+  monthofbirth: 0,
+  yearofbirth: 1990,
+  gender: 'male',
+  message: ''
+});
 
 const handleSubmitForm = async () => {
+  state.message = await Signup(
+    state.firstname, state.lastname, state.email, 
+    state.password, state.dayofbirth, state.monthofbirth, 
+    state.yearofbirth, state.gender);
+};
 
-    state.message = await Signup(
-        state.firstname, state.lastname, state.email, 
-        state.password, state.dayofbirth, state.monthofbirth, 
-        state.yearofbirth, state.gender);
-    
-}
-
-const closeMessageAlert = ()=>{
-    state.message = '';
-}
+const closeMessageAlert = () => {
+  state.message = '';
+};
 
 </script>
 <template>

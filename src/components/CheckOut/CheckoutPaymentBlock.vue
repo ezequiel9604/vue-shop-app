@@ -2,10 +2,10 @@
 import CheckoutBlockContent from './CheckoutBlockContent.vue';
 
 const props = defineProps({
-    creditCardNumber: String,
-    creditCardOwner: String,
-    expirationDate: String,
-    securityCode: String
+  creditCardNumber: String,
+  creditCardOwner: String,
+  expirationDate: String,
+  securityCode: String
 });
 
 </script>
@@ -40,9 +40,6 @@ const props = defineProps({
 </template>
 <style>
 
-/* ////////////////////////////////////////////////////// */
-/* ///        checkout content blocks payment         /// */ 
-/* ////////////////////////////////////////////////////// */
 .checkout-content-left-blocks-rows-payment-method-btn{
     width: fit-content;
     box-sizing: border-box;
@@ -112,9 +109,6 @@ const props = defineProps({
 
 @media screen and (max-width: 834px) {
     
-     /* ////////////////////////////////////////////////////// */
-    /* ///        checkout content blocks payment         /// */ 
-    /* ////////////////////////////////////////////////////// */
     .checkout-content-left-blocks-rows-payment-method-btn p{
         font-size: 14px;
     }
@@ -140,9 +134,6 @@ const props = defineProps({
 
 @media screen and (max-width: 414px) {
     
-    /* ////////////////////////////////////////////////////// */
-    /* ///        checkout content blocks payment         /// */ 
-    /* ////////////////////////////////////////////////////// */
     .checkout-content-left-blocks-rows-payment-method-btn p{
         font-size: 12px;
     }

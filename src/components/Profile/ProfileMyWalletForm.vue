@@ -3,24 +3,24 @@ import { reactive } from 'vue';
 import { submitWalletInformation } from '../../apis/Clients';
 
 const props = defineProps({
-    clientId: String,
-    creditCardNumber: String,
-    creditCardOwner: String,
-    expirationDate: String,
-    securityCode: String
+  clientId: String,
+  creditCardNumber: String,
+  creditCardOwner: String,
+  expirationDate: String,
+  securityCode: String
 });
 
 const state = reactive({
-    ccnumber: props.creditCardNumber,
-    ccowner: props.creditCardOwner,
-    expdate: props.expirationDate,
-    cvv: props.securityCode 
+  ccnumber: props.creditCardNumber,
+  ccowner: props.creditCardOwner,
+  expdate: props.expirationDate,
+  cvv: props.securityCode 
 });
 
 const handleSubmitForm = () => {
-    submitWalletInformation(props.clientId, state.ccnumber, state.ccowner, 
-        state.expdate, state.cvv);
-}
+  submitWalletInformation(props.clientId, state.ccnumber, state.ccowner, 
+    state.expdate, state.cvv);
+};
 
 </script>
 <template>

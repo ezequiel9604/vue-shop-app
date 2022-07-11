@@ -2,23 +2,23 @@
 import { ref, computed } from 'vue';
 
 const props = defineProps({
-    title: String,
-    icon: String
+  title: String,
+  icon: String
 });
 
 const isAccordionPanelOpen = ref(false);
 
 const getAccordionPanelStatus = computed(() => {
+  if (isAccordionPanelOpen.value) {
+    return 'accordion-panel accordion-panel-open';
+  }
 
-    if (isAccordionPanelOpen.value)
-        return "accordion-panel accordion-panel-open";
-
-    return "accordion-panel";
+  return 'accordion-panel';
 });
 
-const  changeAccordionPanelStatus = () => {
-    isAccordionPanelOpen.value = !isAccordionPanelOpen.value;
-}
+const changeAccordionPanelStatus = () => {
+  isAccordionPanelOpen.value = !isAccordionPanelOpen.value;
+};
 
 </script>
 

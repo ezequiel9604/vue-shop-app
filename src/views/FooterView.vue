@@ -2,24 +2,24 @@
 import { RouterLink } from 'vue-router';
 import FooterTopList from '../components/Footer/FooterTopList.vue';
 
-const topLists =[
-    {
-        title: "Shop",
-        links: [ 
-            "Clothing", "Accesories", "Shoes", "Offices", 
-            "Home", "Technology", "Vehicles"]
-    },
-    {
-        title: "Help",
-        links: [ 
-            "Make an order", "Create an account", "Use a promotion code", 
-            "Return an item", "Cancel order"]
-    },
-    {
-        title: "Terms and policies",
-        links: [ 
-            "Condition of use", "Warranty", "Privacy", "Shipping"]
-    },
+const topLists = [
+  {
+    title: 'Shop',
+    links: [ 
+      'Clothing', 'Accesories', 'Shoes', 'Offices', 
+      'Home', 'Technology', 'Vehicles']
+  },
+  {
+    title: 'Help',
+    links: [ 
+      'Make an order', 'Create an account', 'Use a promotion code', 
+      'Return an item', 'Cancel order']
+  },
+  {
+    title: 'Terms and policies',
+    links: [ 
+      'Condition of use', 'Warranty', 'Privacy', 'Shipping']
+  }
 ];
 
 </script>  
@@ -84,7 +84,6 @@ const topLists =[
 </template>
 <style>
 
-
 .main-footer{
     width: 100%;
     box-sizing: border-box;
@@ -93,9 +92,6 @@ const topLists =[
     background-color: #333333;
 }
 
-/* /////////////////////////////////////////////////// */
-/* ///                main footer top              /// */ 
-/* /////////////////////////////////////////////////// */
 .main-footer-top{
     width: 90%;
     margin: 10px auto;
@@ -106,9 +102,6 @@ const topLists =[
     align-items: center;
 }
 
-/* /////////////////////////////////////////////////// */
-/* ///            main footer top lists            /// */ 
-/* /////////////////////////////////////////////////// */
 .main-footer-top-lists{
     width: 50%;
     box-sizing: border-box;
@@ -143,9 +136,6 @@ const topLists =[
     display: none;
 }
 
-/* /////////////////////////////////////////////////// */
-/* ///       main footer top social  lists         /// */ 
-/* /////////////////////////////////////////////////// */
 .main-footer-top-social-media{
     width: 30%;
     box-sizing: border-box;
@@ -191,9 +181,6 @@ const topLists =[
     margin-bottom: 10px;
 }
 
-/* /////////////////////////////////////////////////// */
-/* ///              main footer bottom             /// */ 
-/* /////////////////////////////////////////////////// */
 .main-footer-bottom{
     border-top: 1px solid #dddddd;
     width: 80%;
@@ -221,19 +208,12 @@ const topLists =[
     color: #ffffff;
 }
 
-
 @media screen and (max-width: 834px) {
     
-    /* /////////////////////////////////////////////////// */
-    /* ///                main footer top              /// */ 
-    /* /////////////////////////////////////////////////// */
     .main-footer-top{
         width: 95%;
     }
 
-    /* /////////////////////////////////////////////////// */
-    /* ///            main footer top lists            /// */ 
-    /* /////////////////////////////////////////////////// */
     .main-footer-top-lists{
         width: 60%;
     }
@@ -269,9 +249,6 @@ const topLists =[
         margin-bottom: 10px;
     }
 
-    /* /////////////////////////////////////////////////// */
-    /* ///              main footer bottom             /// */ 
-    /* /////////////////////////////////////////////////// */
     .main-footer-bottom-logo a{
         font-size: 20px;
     }
@@ -282,12 +259,8 @@ const topLists =[
 
 }
 
-
 @media screen and (max-width: 414px) {
 
-    /* /////////////////////////////////////////////////// */
-    /* ///                main footer top              /// */ 
-    /* /////////////////////////////////////////////////// */
     .main-footer-top{
         width: 100%;
         margin: 10px auto;
@@ -296,9 +269,6 @@ const topLists =[
         display: block;
     }
     
-    /* /////////////////////////////////////////////////// */
-    /* ///            main footer top lists            /// */ 
-    /* /////////////////////////////////////////////////// */
     .main-footer-top-lists{
         display: none;
     }
@@ -352,9 +322,6 @@ const topLists =[
         margin-left: 80px;
     }
 
-    /* /////////////////////////////////////////////////// */
-    /* ///              main footer bottom             /// */ 
-    /* /////////////////////////////////////////////////// */
     .main-footer-bottom-logo a{
         font-size: 18px;
     }

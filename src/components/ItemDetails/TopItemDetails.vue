@@ -1,51 +1,52 @@
 <script setup>
 import { reactive, computed } from 'vue';
-import { RouterLink } from 'vue-router';
 import ItemDetailsSelection from '../ItemDetails/ItemDetailsSelection.vue';
 import ItemDetailsImages from '../ItemDetails/ItemDetailsImages.vue';
 import ItemDetailsAction from '../ItemDetails/ItemDetailsAction.vue';
-import { formatedNumber, calculateDescountPrice, GetAllElementsFromItems, 
-    GetCharacteriscFromSubitems } from '../../services/Item';
+import {
+  formatedNumber, calculateDescountPrice, GetAllElementsFromItems, 
+  GetCharacteriscFromSubitems 
+} from '../../services/Item';
 
 const props = defineProps({ 
-    title: String,
-    images: Array,
-    subitems: Array,
-    quality: Number,
-    category: String,
-    items: Array,
+  title: String,
+  images: Array,
+  subitems: Array,
+  quality: Number,
+  category: String,
+  items: Array
 });
 
-
 const state = reactive({
-    color: props.subitems[0].color,
-    capacity: props.subitems[0].color,
-    size: props.subitems[0].color,
+  color: props.subitems[0].color,
+  capacity: props.subitems[0].color,
+  size: props.subitems[0].color,
 
-    selectedSubitem: 0,
-    amount: 1,
-})
-
+  selectedSubitem: 0,
+  amount: 1
+});
 
 const getColors = computed(() => {
-    return GetAllElementsFromItems(props.items, "color", props.category);
-})
+  return GetAllElementsFromItems(props.items, 'color', props.category);
+});
 const getCapacity = computed(() => {
-    return GetAllElementsFromItems(props.items, "capacity", props.category);
-})
+  return GetAllElementsFromItems(props.items, 'capacity', props.category);
+});
 const getSize = computed(() => {
-    return GetAllElementsFromItems(props.items, "size", props.category);
-})
+  return GetAllElementsFromItems(props.items, 'size', props.category);
+});
 
 const changeAmountIncrease = () => {
-    if(state.amount < props.subitems[state.selectedSubitem].stock)
-        state.amount++;
-}
+  if (state.amount < props.subitems[state.selectedSubitem].stock) {
+    state.amount++;
+  }
+};
 
 const changeAmountDecrease = () => {
-    if(state.amount > 1)
-        state.amount--;
-}
+  if (state.amount > 1) {
+    state.amount--;
+  }
+};
 
 </script>
 <template>
