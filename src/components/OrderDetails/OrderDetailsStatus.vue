@@ -2,14 +2,14 @@
 import { computed } from 'vue';
 
 const props = defineProps({
-  orderDate: Date,
-  orderStatus: String,
-  deliveredOrder: Date
+  orderdate: String,
+  orderstatus: String,
+  deliveredorder: String
 });
 
 const informStatusOrder = computed(() => {
-  if (props.orderStatus === 'Received') {
-    return 'Received at ' + props.orderDate.toDateString();
+  if (props.orderstatus === 'received') {
+    return 'Received at ' + new Date(props.orderdate).toDateString();
   }
   return 'Canceled';
 });
@@ -25,8 +25,8 @@ const informStatusOrder = computed(() => {
         <div class="order-details-content-status-section">
 
             <div class="order-details-content-status-section-date">
-                <p>{{ props.orderDate.toDateString() }}</p>
-                <p>{{ props.orderStatus }}</p>
+                <p>{{ new Date(props.orderdate).toDateString() }}</p>
+                <p>{{ props.orderstatus }}</p>
             </div>
             <div class="order-details-content-status-section-bar">
                 <div class="order-details-content-status-section-progress-bar">

@@ -8,13 +8,13 @@ const props = defineProps({
 <template>
 
     <ul class="right-my-profile-content-sidebar">
-        <button @click="() => onChangeSelectedProfileForm(0)" class="right-my-profile-content-sidebar-links">
+        <button @click="() => props.onChangeSelectedProfileForm(0)" class="right-my-profile-content-sidebar-links">
             <p><i class="bi bi-person"></i><strong>Personal Information</strong></p>
         </button>
-        <button @click="() => onChangeSelectedProfileForm(1)" class="right-my-profile-content-sidebar-links">
+        <button @click="() => props.onChangeSelectedProfileForm(1)" class="right-my-profile-content-sidebar-links">
             <p><i class="bi bi-info-circle"></i><strong>Account Information</strong></p>
         </button>
-        <button @click="() => onChangeSelectedProfileForm(2)" class="right-my-profile-content-sidebar-links">
+        <button @click="() => props.onChangeSelectedProfileForm(2)" class="right-my-profile-content-sidebar-links">
             <p><i class="bi bi-credit-card"></i><strong>My Wallet</strong></p>
         </button>
         <li class="right-my-profile-content-sidebar-links">

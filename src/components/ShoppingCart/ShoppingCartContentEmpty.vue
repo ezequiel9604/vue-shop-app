@@ -73,7 +73,6 @@ import CartImage from '../../assets/imgs/samples/shopping_cart.png';
         margin: 20px auto;
         font-size: 16px;
     }
-
 }
 
 @media screen and (max-width: 414px) {
@@ -96,7 +95,6 @@ import CartImage from '../../assets/imgs/samples/shopping_cart.png';
         margin: 10px auto;
         font-size: 12px;
     }
-    
 }
 
 </style>

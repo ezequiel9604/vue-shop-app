@@ -1,5 +1,6 @@
 <script setup>
 import { RouterLink } from 'vue-router';
+import { calculateDescountPrice } from '../../services/Item';
 
 const props = defineProps({
   title: String,
@@ -9,10 +10,6 @@ const props = defineProps({
   price: Number,
   stock: Number
 });
-
-const calculateDescount = (price, descount) => {
-  return price - (price * (descount / 100));
-};
 
 </script>
 <template>
@@ -37,7 +34,7 @@ const calculateDescount = (price, descount) => {
                 <label>Item added on February 7 2022</label>
             </div>
             <div class="row-extra-large-samples-details-price">
-                <span>${{ calculateDescount(props.price, props.descount) }}</span>
+                <span>${{ calculateDescountPrice(props.price, props.descount) }}</span>
                 <span>${{ props.price }}</span>
             </div>
             <div class="row-extra-large-samples-details-actions">

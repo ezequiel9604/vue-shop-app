@@ -11,8 +11,8 @@ const props = defineProps({
 });
 
 const state = reactive({
-  orders: [],
-  orderStatus: 'All',
+  orders: null,
+  orderStatus: 'all',
   orderNumber: '',
   orderDate: '',
   selectedSet: 1
@@ -34,8 +34,8 @@ const changeFilterSState = (type, value) => {
 };
 
 const getFilteredClientsOrders = computed(() => {
-  return GetOrdersFilterByAll(state.orders, props.items, 
-    state.orderStatus, state.orderNumber);
+  return GetOrdersFilterByAll(
+    state.orders, props.items, state.orderStatus, state.orderNumber);
 });
 
 const getOrdersSets = computed(() => {
@@ -72,7 +72,7 @@ const getOrdersSets = computed(() => {
 
                 <div class="myorder-content-samples-content">
 
-                    <div v-if="state.orders.length">
+                    <div v-if="state.orders">
 
                         <OrderSample v-for="ord in getFilteredClientsOrders.slice((state.selectedSet * 3)-3,state.selectedSet*3)" 
                             :orderNumber="ord.id"
@@ -92,6 +92,7 @@ const getOrdersSets = computed(() => {
             </div>
 
             <Pagination
+                v-if="state.orders"
                 :sets="getOrdersSets"
                 :selectedset="state.selectedSet" 
                 :onChangeFilterSState="changeFilterSState" />

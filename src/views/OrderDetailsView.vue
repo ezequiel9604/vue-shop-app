@@ -6,7 +6,10 @@ import OrderDetailsInformation from '../components/OrderDetails/OrderDetailsInfo
 import router from '../router/index';
 import { GetItemsByOrderNumber, GetOrderByOrderNumber } from '../services/Order';
 
-const props = defineProps({ client: Object, items: Array });
+const props = defineProps({ 
+  client: Object, 
+  items: Array 
+});
 
 const url = router.currentRoute.value.query;
 
@@ -33,10 +36,8 @@ const getItemsByOrder = computed(() => {
         <div class="order-details-content">
 
             <OrderDetailsStatus 
-                :orderStatus="getOrderById.status"
-                :orderDate="new Date(getOrderById.orderDate)"
-                :deliveredorder="new Date(getOrderById.deliveredDate)"
-                />
+                :orderdate="getOrderById.orderDate"
+                :orderstatus="getOrderById.status"  />
 
             <div class="order-details-content-samples">
 
@@ -66,12 +67,14 @@ const getItemsByOrder = computed(() => {
 
                     <RowMiniSample v-for="i in getItemsByOrder"
                         :id="i.item.id"
-                        :images="i.item.images"
+                        :images="i.item.imageDtos"
                         :title="i.item.title"
-                        :specifications="i.specifications"
-                        :price="i.item.price"
+                        :price="i.subitem.price"
                         :amount="i.amount"
-                        :descount="i.item.descount"
+                        :descount="i.subitem.descount"
+                        :color="i.subitem.color"
+                        :size="i.subitem.size"
+                        :capacity="i.subitem.capacity"
                         :condition="i.condition"
                         :key="i.id" />
 
@@ -80,14 +83,14 @@ const getItemsByOrder = computed(() => {
             </div>
 
             <OrderDetailsInformation 
-                :name="props.client.name"
+                :firstname="props.client.firstName"
+                :lastname="props.client.lastName"
                 :email="props.client.email"
-                :address="props.client.address"
-                :phone="props.client.phone"
+                :address="props.client.addressDtos[0]"
+                :phone="props.client.phoneDtos[0].phoneNumber"
                 :shippingCost="getOrderById.shippingCost"
                 :total="getOrderById.total"
-                :items="getItemsByOrder"
-                />
+                :items="getItemsByOrder" />
 
         </div>
 

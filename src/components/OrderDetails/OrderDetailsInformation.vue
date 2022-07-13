@@ -1,9 +1,10 @@
 <script setup>
 import { computed } from 'vue';
-import { formatedNumber } from '../../services/Item';
+import { formatedNumber, formatedAddress } from '../../services/Item';
 
 const props = defineProps({
-  name: String,
+  firstname: String,
+  lastname: String,
   email: String,
   phone: String,
   address: Object,
@@ -15,14 +16,15 @@ const props = defineProps({
 const calculateSubtotalAllItems = computed(() => {
   let sum = 0;
   props.items.forEach((current) => {
-    sum += current.item.price;
+    sum += current.subitem.price;
   });
   return sum;
 });
 
 const getFormatedAddress = computed(() => {
-  return props.address.streetName + ', ' + props.address.apartment + ', ' +
-        props.address.city + ', ' + props.address.state + ', ' + props.address.zipCode; 
+  return formatedAddress(
+    props.address.streetName, props.address.department, 
+    props.address.city, props.address.state, props.address.zipCode);
 });
 
 </script>
@@ -33,8 +35,8 @@ const getFormatedAddress = computed(() => {
         <div>
             <h4>Shipping to:</h4>
 
-            <p>{{ props.name }}</p>
-            <p>{{ getFormatedAddress}}</p>
+            <p>{{ props.firstname+' '+props.lastname }}</p>
+            <p>{{ getFormatedAddress }}</p>
             <p>{{ props.phone }}</p>
             <p>{{ props.email }}</p>
         </div>

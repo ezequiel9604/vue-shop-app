@@ -145,8 +145,7 @@ const handleRightSliderButton = () => {
 
     .category-slider-button i{
         font-size: 40px;
-    }
-    
+    } 
 }
 
 @media screen and (max-width: 414px) {
@@ -160,7 +159,6 @@ const handleRightSliderButton = () => {
     .category-slider-button:nth-child(2){
         right: 5%;
     }
-
 }
 
 </style>

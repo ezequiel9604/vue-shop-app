@@ -15,11 +15,11 @@ const state = reactive({
 const changeAppearance = async () => {
   if (state.appearance === 'light') {
     state.appearance = 'dark';
-    await SubmitAppearence(state.appearance);
+    await SubmitAppearence(props.clientId, state.appearance);
   }
   else {
     state.appearance = 'light';
-    await SubmitAppearence(state.appearance);
+    await SubmitAppearence(props.clientId, state.appearance);
   }
 };
 

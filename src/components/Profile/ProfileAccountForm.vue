@@ -19,8 +19,7 @@ const handleSubmitForm = async () => {
 
 const handleDeleteAccount = async () => {
   // add confirm code
-  const res = await SubmitDeleteAccount(state.email);
-  //console.log(res);
+  await SubmitDeleteAccount(props.clientId, state.email);
 };
 
 </script>

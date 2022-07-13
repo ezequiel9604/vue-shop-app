@@ -1,5 +1,3 @@
-import ItemImage1 from '../imgs/samples/tablet.png';
-import ItemImage2 from '../imgs/samples/tablet-2.png';
 
 export const Orders = [
   {
@@ -8,7 +6,7 @@ export const Orders = [
     deliveredDate: '2021-05-08',
     shippingCost: 150,
     total: 6155.91,
-    status: 'Received',
+    status: 'received',
     clientId: 'CLT-1134'
   },
   {
@@ -17,7 +15,7 @@ export const Orders = [
     deliveredDate: '2021-05-09',
     shippingCost: 150,
     total: 5155.91,
-    status: 'Canceled',
+    status: 'canceled',
     clientId: 'CLT-1134'
   },
   {
@@ -26,7 +24,7 @@ export const Orders = [
     deliveredDate: '2021-05-11',
     shippingCost: 150,
     total: 5155.91,
-    status: 'On its way',
+    status: 'on its way',
     clientId: 'CLT-1134'
   },
   {
@@ -35,7 +33,7 @@ export const Orders = [
     deliveredDate: '2021-05-11',
     shippingCost: 150,
     total: 5155.91,
-    status: 'On its way',
+    status: 'on its way',
     clientId: 'CLT-1134'
   }
 ];
@@ -46,35 +44,40 @@ export const Purchases = [
     amount: 2,
     condition: 'None',
     orderId: 'ORD-025984',
-    itemId: 'ART-0254'
+    itemId: 'ART-0254',
+    subItemId: 2
   },
   {
     id: 2,
     amount: 1,
     condition: 'None',
     orderId: 'ORD-025984',
-    itemId: 'ART-0003'
+    itemId: 'ART-7183',
+    subItemId: 7
   },
   {
     id: 3,
     amount: 4,
     condition: 'None',
     orderId: 'ORD-025984',
-    itemId: 'ART-0254'
+    itemId: 'ART-0254',
+    subItemId: 3
   },
   {
     id: 4,
     amount: 2,
     condition: 'None',
     orderId: 'ORD-025036',
-    itemId: 'ART-0254'
+    itemId: 'ART-0254',
+    subItemId: 2
   },
   {
     id: 5,
     amount: 3,
     condition: 'None',
     orderId: 'ORD-025011',
-    itemId: 'ART-3215'
+    itemId: 'ART-3215',
+    subItemId: 22
   },
 
   {
@@ -82,13 +85,15 @@ export const Purchases = [
     amount: 3,
     condition: 'None',
     orderId: 'ORD-025000',
-    itemId: 'ART-0254'
+    itemId: 'ART-0254',
+    subItemId: 1
   },
   {
     id: 7,
     amount: 3,
     condition: 'None',
     orderId: 'ORD-025000',
-    itemId: 'ART-0254'
+    itemId: 'ART-0254',
+    subItemId: 3
   }
 ];

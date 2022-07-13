@@ -1,6 +1,6 @@
 <script setup>
 import { reactive } from 'vue';
-import { submitWalletInformation } from '../../apis/Clients';
+import { submitWalletInformation } from '../../services/Client';
 
 const props = defineProps({
   clientId: String,
@@ -17,9 +17,9 @@ const state = reactive({
   cvv: props.securityCode 
 });
 
-const handleSubmitForm = () => {
-  submitWalletInformation(props.clientId, state.ccnumber, state.ccowner, 
-    state.expdate, state.cvv);
+const handleSubmitForm = async () => {
+  await submitWalletInformation(
+    props.clientId, state.ccnumber, state.ccowner, state.expdate, state.cvv);
 };
 
 </script>
@@ -62,7 +62,7 @@ const handleSubmitForm = () => {
                     Laboriosam neque vero sequi culpa nulla quis magnam sunt voluptatibus perspiciatis,
                     ex rem error omnis ea? Quisquam itaque impedit facilis! Commodi, facere.</p>
 
-                <button>Save changes</button>
+                <button @click="handleSubmitForm">Save changes</button>
 
             </div>
         </div>

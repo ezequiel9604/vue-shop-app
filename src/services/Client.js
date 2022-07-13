@@ -28,8 +28,8 @@ export async function Signup (
   return res;
 }
 
-export async function SubmitCharacteristics (language, currancy) {
-  const res = await submitCharacteristicsApi(language, currancy);
+export async function SubmitCharacteristics (id, language, currancy) {
+  const res = await submitCharacteristicsApi(id, language, currancy);
 
   return res;
 }
@@ -50,14 +50,23 @@ export async function SubmitAccountInfo (id, email, password) {
   return res;
 }
 
-export async function SubmitDeleteAccount (email) {
-  const res = await submitDeleteAccountApi(email);
+export async function SubmitDeleteAccount (id, email) {
+  const res = await submitDeleteAccountApi(id, email);
 
   return res;
 }
 
-export async function SubmitAppearence (appearance) {
-  const res = await submitAppearanceApi(appearance);
+export async function SubmitAppearence (id, appearance) {
+  const res = await submitAppearanceApi(id, appearance);
+
+  return res;
+}
+
+export async function submitWalletInformation (
+  id, creditcard, creditcardowner, expdate, securitycode) {
+  const res = await submitAppearanceApi(
+    id, creditcard, creditcardowner, expdate, securitycode
+  );
 
   return res;
 }
@@ -65,9 +74,11 @@ export async function SubmitAppearence (appearance) {
 export function GetLoggedClient () {
   if (JSON.parse(localStorage.getItem('loggedClient'))) {
     return JSON.parse(localStorage.getItem('loggedClient'));
-  } else if (JSON.parse(localStorage.getItem('guestClient'))) {
+  } 
+  else if (JSON.parse(localStorage.getItem('guestClient'))) {
     return JSON.parse(localStorage.getItem('guestClient'));
-  } else {
+  } 
+  else {
     localStorage.setItem('guestClient', JSON.stringify({   
       user: {
         id: '00000',
@@ -78,6 +89,21 @@ export function GetLoggedClient () {
     }));
 
     return JSON.parse(localStorage.getItem('guestClient'));
+  }
+}
+
+export function formatedLanguageCurrancy (language, currancy) {
+  if (language === 'english' && currancy === 'usa / dollars') {
+    return 'English / Dollars';
+  }
+  else if (language === 'spanish' && currancy === 'usa / dollars') {
+    return 'Spanish / Dollars';
+  }
+  else if (language === 'spanish' && currancy === 'dom / pesos') {
+    return 'Spanish / Pesos';
+  }
+  else if (language === 'english' && currancy === 'dom / pesos') {
+    return 'English / Pesos';
   }
 }
 

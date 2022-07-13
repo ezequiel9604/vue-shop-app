@@ -1,6 +1,6 @@
 <script setup>
 import { computed, reactive } from 'vue';
-import { Logout, SubmitCharacteristics, Languages, Currancies } from '../../services/Client';
+import { Logout, SubmitCharacteristics, Languages, Currancies, formatedLanguageCurrancy } from '../../services/Client';
 
 const props = defineProps({ client: Object });
 
@@ -14,7 +14,8 @@ const isClientLoggedIn = computed(() => {
 });
 
 const handleSubmitForm = async () => {
-  await SubmitCharacteristics(props.client.language, props.client.currancy);
+  await SubmitCharacteristics(
+    props.client.id, state.language, state.currancy);
 };
 
 const handleLogout = async () => {
@@ -30,10 +31,7 @@ const handleLogout = async () => {
 
             <li class="main-header-content-top-dropdowns-links language-link">
                 <i class="bi bi-flag"></i>
-                <p v-if="props.client.language == 'english' && props.client.currancy == 'usa / dollars'">English / Dollars</p>
-                <p v-else-if="props.client.language == 'spanish' && props.client.currancy == 'usa / dollars'">Spanish / Dollars</p>
-                <p v-else-if="props.client.language == 'spanish' && props.client.currancy == 'dom / pesos'">Spanish / Pesos</p>
-                <p v-else-if="props.client.language == 'english' && props.client.currancy == 'dom / pesos'">English / Pesos</p>
+                <p>{{formatedLanguageCurrancy(props.client.language, props.client.currancy)}}</p>
 
                 <i class="bi bi-caret-down-fill"></i>
 

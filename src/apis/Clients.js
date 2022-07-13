@@ -60,16 +60,16 @@ export async function submitSignupApi (
   return response;
 }
 
-export async function submitCharacteristicsApi (languageInput, currencyInput) {
+export async function submitCharacteristicsApi (idInput, languageInput, currencyInput) {
   if (JSON.parse(localStorage.getItem('loggedClient'))) {
-    const obj = JSON.parse(localStorage.getItem('loggedClient'));
-
     const response = await Axios.put(`${baseUrl}/api/Client/Edit`, {
-      id: obj.user.id,
+      id: idInput,
       currancy: currencyInput,
       language: languageInput
     })
       .then((result) => {
+        const obj = JSON.parse(localStorage.getItem('loggedClient'));
+
         obj.user.currancy = currencyInput;
         obj.user.language = languageInput;
 
@@ -84,7 +84,8 @@ export async function submitCharacteristicsApi (languageInput, currencyInput) {
       });
 
     return response;
-  } else {
+  } 
+  else {
     const obj = JSON.parse(localStorage.getItem('guestClient'));
 
     obj.user.currancy = currencyInput;
@@ -191,8 +192,9 @@ export async function submitPersonalInfoApi (
   }
 }
 
-export function submitWalletInformationApi (id, creditcard, creditcardowner,
-  expdate, securitycode) {
+export async function submitWalletInformationApi (
+  idInput, creditcardInput, creditcardownerInput,
+  expdateInput, securitycodeInput) {
   if (JSON.parse(localStorage.getItem('loggedClient'))) {
 
     // submit to the api
@@ -200,9 +202,10 @@ export function submitWalletInformationApi (id, creditcard, creditcardowner,
   }
 }
 
-export async function submitDeleteAccountApi (emailInput) {
+export async function submitDeleteAccountApi (idInput, emailInput) {
   if (JSON.parse(localStorage.getItem('loggedClient'))) {
     const response = await Axios.post(`${baseUrl}/api/Client/Signout`, {
+      id: idInput,
       email: emailInput
     })
       .then((result) => {
@@ -220,15 +223,14 @@ export async function submitDeleteAccountApi (emailInput) {
   }
 }
 
-export async function submitAppearanceApi (appearanceInput) {
+export async function submitAppearanceApi (idInput, appearanceInput) {
   if (JSON.parse(localStorage.getItem('loggedClient'))) {
-    const obj = JSON.parse(localStorage.getItem('loggedClient'));
-
     const response = await Axios.put(`${baseUrl}/api/Client/Edit`, {
-      id: obj.user.id,
+      id: idInput,
       appearance: appearanceInput
     })
       .then((result) => {
+        const obj = JSON.parse(localStorage.getItem('loggedClient'));
         obj.user.appearance = appearanceInput;
 
         localStorage.setItem('loggedClient', JSON.stringify(obj));
@@ -242,7 +244,8 @@ export async function submitAppearanceApi (appearanceInput) {
       });
 
     return response;
-  } else {
+  } 
+  else {
     const obj = JSON.parse(localStorage.getItem('guestClient'));
 
     obj.characteristics.appearance = appearanceInput;

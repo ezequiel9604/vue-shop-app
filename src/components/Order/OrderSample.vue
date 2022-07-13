@@ -13,11 +13,6 @@ const props = defineProps({
   status: String
 });
 
-const calculateSubtotal = (price, amount, descount) => {
-  const subtotal = price * amount;
-  return subtotal - subtotal * (descount / 100);
-};
-
 </script>
 <template>
 
@@ -48,8 +43,8 @@ const calculateSubtotal = (price, amount, descount) => {
             :id="p.item.id"
             :image="p.item.imageDtos[0].path"
             :title="p.item.title"
-            :price="p.item.subItemDtos[0].price" 
-            :descount="p.item.subItemDtos[0].descount"
+            :price="p.subitem.price" 
+            :descount="p.subitem.descount"
             :amount="p.amount"
             :condition="p.condition"
             :status="props.status"

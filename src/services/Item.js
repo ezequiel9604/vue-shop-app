@@ -40,19 +40,28 @@ export function GetItemsFilterByAll (
   // adding category filter
   if (category !== 'all') {
     arr = arr.filter((current) => {
-      if (current.category === category) { return current; }
+      if (current.category === category) {
+        return current; 
+      }
     });
   }
 
   // adding state filter
   arr = arr.filter((current) => {
-    if (isOffered) { return current.subItemDtos[0].descount > 0; } else { return current.subItemDtos[0].descount >= 0; }
+    if (isOffered) {
+      return current.subItemDtos[0].descount > 0; 
+    }
+    else {
+      return current.subItemDtos[0].descount >= 0; 
+    }
   });
 
   // adding price filter
   if (maxPrice > 0) {
     arr = arr.filter((current) => {
-      if (current.subItemDtos[0].price >= 0 && current.subItemDtos[0].price <= maxPrice) { return current; }
+      if (current.subItemDtos[0].price >= 0 && current.subItemDtos[0].price <= maxPrice) {
+        return current; 
+      }
     });
   }
     
@@ -65,7 +74,9 @@ export function GetItemsFilterByAll (
   if (states.length !== 0) {
     arr = arr.filter((current) => {
       for (let i = 0; i < states.length; i++) {
-        if (current.state === states[i]) { return current; }
+        if (current.state === states[i]) {
+          return current; 
+        }
       }
     });
   }
@@ -74,7 +85,9 @@ export function GetItemsFilterByAll (
   if (colors.length !== 0) {
     arr = arr.filter((current) => {
       for (let i = 0; i < colors.length; i++) {
-        if (current.color === colors[i]) { return current; }
+        if (current.color === colors[i]) {
+          return current; 
+        }
       }
     });
   }
@@ -95,7 +108,9 @@ export function GetAllElementsFromItems (items, charac, categ) {
   items.forEach((current) => {
     for (let i = 0; i < current.subItemDtos.length; i++) {
       if (current.subItemDtos[i][charac] != null && current.category === categ &&
-                current.subItemDtos[i][charac] !== '') { elements.add(current.subItemDtos[i][charac]); }
+                current.subItemDtos[i][charac] !== '') {
+        elements.add(current.subItemDtos[i][charac]); 
+      }
     }
   });
 
@@ -105,9 +120,13 @@ export function GetAllElementsFromItems (items, charac, categ) {
 export function GetSetsOfItems (items, num) {
   const sets = items.length / num;
 
-  if (sets < 1) { return 1; }
+  if (sets < 1) {
+    return 1; 
+  }
 
-  if (sets > parseInt(sets)) { return parseInt(sets) + 1; }
+  if (sets > parseInt(sets)) {
+    return parseInt(sets) + 1; 
+  }
     
   return parseInt(sets);
 }
@@ -115,7 +134,9 @@ export function GetSetsOfItems (items, num) {
 export function checkingInputChecks (arr, value) {
   const result = false;
   for (let i = 0; i < arr.length; i++) {  
-    if (arr[i] === value) { return true; }
+    if (arr[i] === value) {
+      return true; 
+    }
   }
   return result;
 }
@@ -133,7 +154,8 @@ export function formatedNumber (num) {
     }
   
     return formated;
-  } else if (num >= 10000) {
+  }
+  else if (num >= 10000) {
     const newNum = num + '';
     let formated = '';
   
@@ -157,4 +179,8 @@ export function calculateDescountPrice (price, descount) {
 export function calculateSubtotal (price, amount, descount) {
   const subtotal = price * amount;
   return subtotal - subtotal * (descount / 100);
+}
+
+export function formatedAddress (streetname, apartment, city, state, zipcode) {
+  return streetname + ', ' + apartment + ', ' + city + ', ' + state + ', ' + zipcode;
 }

@@ -1,4 +1,5 @@
 <script setup>
+import { reactive } from 'vue';
 import { RouterLink } from 'vue-router';
 import { formatedNumber, calculateSubtotal } from '../../services/Item';
 
@@ -6,12 +7,26 @@ const props = defineProps({
   id: String,
   images: Array,
   title: String,
-  specifications: Object,
   price: Number,
   amount: Number,
   descount: Number,
-  condition: String
+  condition: String,
+  size: String,
+  capacity: String,
+  color: String
 });
+
+const state = reactive({
+  imagePath: ''
+});
+
+import(`../../assets/imgs/samples/${props.images[0].path}`)
+  .then((value) => {
+    state.imagePath = value.default;
+  })
+  .catch((error) => {
+    //console.log(error);
+  });
 
 </script>
 <template>
@@ -19,14 +34,14 @@ const props = defineProps({
     <div class="row-mini-samples">
         <div>
             <RouterLink :to="'/itemDetails?itemId='+props.id">
-                <img :src="props.images[0]" alt="" />
+                <img :src="state.imagePath" alt="" />
             </RouterLink>
             <div>
                 <h6>{{ props.title }}.</h6>
-                <!-- <p><strong>Size:</strong> {{ props.specifications.size }},
-                    <strong>Capacity:</strong> {{ props.specifications.capacity }},
-                    <strong>Color:</strong> {{ props.specifications.color }}
-                </p> -->
+                <p><strong>Size:</strong> {{ props.size }},
+                    <strong>Capacity:</strong> {{ props.capacity }},
+                    <strong>Color:</strong> {{ props.color }}
+                </p>
                 <p><strong>Price:</strong> ${{ formatedNumber(props.price) }}</p>
                 <p><strong>Amount:</strong> {{ props.amount }}</p>
                 <article>

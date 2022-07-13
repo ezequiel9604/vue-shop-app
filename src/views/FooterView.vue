@@ -1,26 +1,7 @@
 <script setup>
 import { RouterLink } from 'vue-router';
 import FooterTopList from '../components/Footer/FooterTopList.vue';
-
-const topLists = [
-  {
-    title: 'Shop',
-    links: [ 
-      'Clothing', 'Accesories', 'Shoes', 'Offices', 
-      'Home', 'Technology', 'Vehicles']
-  },
-  {
-    title: 'Help',
-    links: [ 
-      'Make an order', 'Create an account', 'Use a promotion code', 
-      'Return an item', 'Cancel order']
-  },
-  {
-    title: 'Terms and policies',
-    links: [ 
-      'Condition of use', 'Warranty', 'Privacy', 'Shipping']
-  }
-];
+import { footerOptionLists } from '../services/Footer';
 
 </script>  
 <template>
@@ -31,7 +12,7 @@ const topLists = [
 
             <div class="main-footer-top-lists">
 
-                <FooterTopList v-for="list in topLists" 
+                <FooterTopList v-for="list in footerOptionLists" 
                     :title="list.title" 
                     :links="list.links" 
                     :key="list" />

@@ -1,5 +1,6 @@
 <script setup>
 import { reactive } from 'vue';
+import { Status } from '../../services/Order';
 
 const props = defineProps({
   orderstatus: String,
@@ -19,8 +20,8 @@ const changeOrderNumberState = () => {
   props.onchangeordernumber(state.orderNumber);
 };
 
-const changeOrderStatus = (e) => {
-  props.onchangeorderstatus(e.target.value);
+const changeOrderStatus = () => {
+  props.onchangeorderstatus(state.orderStatus);
 };
 
 </script>
@@ -34,8 +35,8 @@ const changeOrderStatus = (e) => {
 
         <div>
             <label>Status:</label>
-            <select @change="changeOrderStatus">
-                <option v-for="s in status" :selected="s == status.orderStatus" :value="s" :key="s">{{ s }}</option>
+            <select @change="changeOrderStatus" v-model="state.orderStatus">
+                <option v-for="s in Status" :selected="s == props.orderstatus" :value="s" :key="s">{{ s }}</option>
             </select>
         </div>
         <div>

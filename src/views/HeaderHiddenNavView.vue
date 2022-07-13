@@ -1,25 +1,27 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, reactive } from 'vue';
 import { RouterLink } from 'vue-router';
 import AccordionPanel from '../components/HeaderHiddenNav/AccordionPanel.vue';
-import { SubmitCharacteristics, Logout, Departments } from '../services/Client';
+import { 
+  SubmitCharacteristics, Logout, Departments, Languages, Currancies, 
+  formatedLanguageCurrancy 
+} from '../services/Client';
 import store from '../store';
 
 const props = defineProps({ client: Object });
+
+const state = reactive({
+  language: props.client.language,
+  currancy: props.client.currancy
+});
 
 const isClientLoggedIn = computed(() => {
   return props.client.id !== '00000';
 });
 
-/*const changeLanguageInput = (ev) => {
-  languageInput.value = ev.target.value;
-};
-const changeCurrancyInput = (ev) => {
-  currancyInput.value = ev.target.value;
-};*/
-
 const handleSubmitForm = async () => {
-  await SubmitCharacteristics(props.client.language, props.client.currancy);
+  await SubmitCharacteristics(
+    props.client.id, state.language, state.currancy);
 };
 
 const handleLogout = async () => {
@@ -66,28 +68,21 @@ const changeStoreCategoryItem = (value) => {
 
                 </AccordionPanel>
 
-                <AccordionPanel title="English / Dollar" icon="bi-flag">
+                <AccordionPanel 
+                    :title="formatedLanguageCurrancy(props.client.language, props.client.currancy)" icon="bi-flag">
                     <div class="selection-language">
                         <label>Choose language:</label>
-                        <select @change="changeLanguageInput" v-if="props.client.language == 'english'">
-                            <option value="english" selected>English</option>
-                            <option value="spanish">Spanish</option>
-                        </select>
-                        <select @change="changeLanguageInput" v-else>
-                            <option value="english">English</option>
-                            <option value="spanish" selected>Spanish</option>
+                        <select v-model="state.language" >
+                            <option v-for="l in Languages" :selected="l == props.client.language" 
+                                :key="l">{{ l }}</option>
                         </select>
                     </div>
 
                     <div class="selection-language">
                         <label>Choose currancy:</label>
-                        <select @change="changeCurrancyInput" v-if="props.client.currancy == 'dollar'">
-                            <option value="dollar" selected>USA / Dollar</option>
-                            <option value="pesos">DOM / Pesos</option>
-                        </select>
-                        <select @change="changeCurrancyInput" v-else>
-                            <option value="dollar">USA / Dollar</option>
-                            <option value="pesos" selected>DOM / Pesos</option>
+                        <select v-model="state.currancy">
+                            <option v-for="c in Currancies" :selected="c == props.client.currancy" 
+                                :key="c">{{ c }}</option>
                         </select>
                     </div>
                     <div class="accordion-language">
